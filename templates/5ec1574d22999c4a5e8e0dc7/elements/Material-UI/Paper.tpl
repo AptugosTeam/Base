@@ -1,0 +1,12 @@
+{% set bpr %}
+import Paper from '@material-ui/core/Paper'
+{% endset %}
+{{ save_delayed('bpr', bpr) }}
+<Paper
+{% if element.values.elevation %}elevation={ {{ element.values.elevation }} }{% endif %}
+{% if element.values.square %}square{% endif %}
+{% if element.values.variant %}variant='{{ element.values.variant }}'{% endif %}
+{% if element.values.className %}classes={ { root: {{ element.values.className }} } }{% endif %}
+>
+{{ content | raw }}
+</Paper>
