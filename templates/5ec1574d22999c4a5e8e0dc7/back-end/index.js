@@ -34,7 +34,7 @@ mongoose.connect(dbConfig.url, {
   // process.exit();
 })
 
-require('./app/routes/apiroutes.js')(app)
+require('./app/routes/apiRoutes.js')(app)
 {% for table in application.tables %}
 require('./app/routes/{{ table.name | friendly | lower }}.routes.js')(app)
 {% endfor %}
