@@ -4,6 +4,7 @@ import axios from 'axios'
 {{ save_delayed('bpr',bpr) }}
 
 const [{{ element.values.stateName }}, set{{ element.values.stateName }}] = React.useState(null)
+
 React.useEffect(() => {
   axios.post(`${process.env.APIURL}{{ element.values.endpoint }}`,
   {
@@ -11,6 +12,7 @@ React.useEffect(() => {
     dateTo: '{{ element.values.dateTo }}'
   }).then(res => {
     set{{ element.values.stateName }}(res.data.reports)
+  }).catch(e => {
+    console.error(e.response.data)
   })
 },[])
-
