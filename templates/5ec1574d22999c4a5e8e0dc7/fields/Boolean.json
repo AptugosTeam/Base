@@ -1,0 +1,7 @@
+{
+  "label": "Yes / No",
+  "value": "Boolean",
+  "dataType": "Boolean",
+  "initialValue": "false",
+  "options": ""
+}

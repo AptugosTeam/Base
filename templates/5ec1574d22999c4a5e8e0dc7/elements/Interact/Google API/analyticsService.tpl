@@ -3,40 +3,42 @@
   app.post('{{ parentElement.values.endpoint }}', (req, response) => {
     const { google } = require('googleapis')
     const path = require('path')
-    console.log(req.body)
 
     const analyticsreporting = google.analyticsreporting('v4')
+    const auth = new google.auth.GoogleAuth({
+      keyFile: path.join(__dirname, 'oauth2.keys.json'),
+      scopes: ['https://www.googleapis.com/auth/analytics'],
+    })
 
-    async function runSample() {
-      const auth = new google.auth.GoogleAuth({
-        keyFile: path.join(__dirname, 'oauth2.keys.json'),
-        scopes: ['https://www.googleapis.com/auth/analytics'],
-      })
+    google.options({ auth })
 
-      google.options({ auth })
+    analyticsreporting.reports.batchGet({
+      requestBody: {
+        reportRequests: [
+          {
+            viewId: '{{ parentElement.values.viewID }}',
+            dateRanges: [
+              {
+                startDate: req.body.dateFrom || 'Today',
+                endDate: req.body.dateTo || '7daysAgo',
+              },
+            ],
 
-      const res = await analyticsreporting.reports.batchGet({
-        requestBody: {
-          reportRequests: [
-            {
-              viewId: '{{ parentElement.values.viewID }}',
-              dateRanges: [
-                {
-                  startDate: req.body.dateFrom || 'Today',
-                  endDate: req.body.dateTo || '7daysAgo',
-                },
-              ],
-              metrics: [
-                {
-                  expression: '{{ element.values.metric }}',
-                },
-              ],
-            },
-          ],
-        },
-      })
+            metrics: [
+              {% for metric in parentElement.values.metric|split(';') %}
+              {
+                expression: '{{ metric }}',
+              },
+              {% endfor %}
+            ],
+          },
+        ],
+      },
+    }).catch(e => {
+      response.status(501)
+      response.send(e.errors[0].message)
+    }).then(res => {
       response.send(res.data)
-    }
-    runSample()
+    })
   })
 }

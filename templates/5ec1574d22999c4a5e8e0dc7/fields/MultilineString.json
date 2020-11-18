@@ -1,0 +1,6 @@
+{
+  "label": "Multiline text",
+  "value": "MultilineString",
+  "dataType": "String",
+  "initialValue": ""
+}

@@ -1,0 +1,1 @@
+{"_id":"StNQqyy4TAthzJtd","name":"New Template","desc":"Structure ran when a template is created","icon":"","type":"structure","parameters":"","afterRun":"","initScript":"","code":"const newTemplate = {\n    files: [],\n    name: 'Untitled Template'\n}\n\nreturn newTemplate","post_initScript":""}
