@@ -1,7 +1,7 @@
 {
   "label": "Number",
   "value": "Number",
-  "dataType": "Integer",
+  "dataType": "INTEGER",
   "initialValue": "null",
-  "options": ""
+  "options": null
 }

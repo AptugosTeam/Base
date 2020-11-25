@@ -1,3 +1,5 @@
+import { DocumentProvider } from "mongoose"
+
 {% for table in application.tables %}
 export interface I{{ table.name | friendly | capitalize }}Item {
   _id?: String
@@ -6,13 +8,14 @@ export interface I{{ table.name | friendly | capitalize }}Item {
     {% if fieldInfo.options.frontEndType %}
       {% set datatype = fieldInfo.options.frontEndType %}
     {% else %}
-      {% set datatype = fieldInfo.dataType | lower %}
+      {% set datatype = fieldInfo.dataType %}
     {% endif %}
     {% if field.reference %}
       {% set fieldInfoRef = field.reference | fieldData %}
       {% if fieldInfoRef.table.subtype == 'Aptugo' %}
         {{ field.column_name | friendly }}: I{{ fieldInfoRef.table.name | friendly | capitalize }}Item
       {% else %}
+      
         {{ field.column_name | friendly }}: {{ fieldInfoRef.dataType }}
       {% endif %}
     {% else %}

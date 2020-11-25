@@ -1,6 +1,6 @@
 {
   "label": "Text",
   "value": "String",
-  "dataType": "String",
+  "dataType": "string",
   "initialValue": "''"
 }

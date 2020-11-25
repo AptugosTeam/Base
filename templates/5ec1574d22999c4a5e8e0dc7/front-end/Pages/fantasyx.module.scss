@@ -113,6 +113,13 @@
 }
 
 .paper {
+  & .invitation {
+    margin: 2rem 4rem;
+    border: 1px solid black;
+    padding: 4rem;
+    box-shadow: 1px 1px 6px 2px #b9b9b936;
+  }
+  
   & .leagueTitle {
     text-align: center;
     width: 100%;
@@ -612,8 +619,21 @@
 }
 
 .emptyMessageScreen {
+  text-align: center;
+
   & h4 {
     padding: 5rem;
     text-align: center;
+  }
+
+  & h6 {
+    text-align: center;
+    margin-top: -3rem;
+    padding-bottom: 5rem;
+  }
+  & button {
+    margin: 0 auto;
+    margin-top: -3rem;
+    margin-bottom: 5rem;
   }
 }
