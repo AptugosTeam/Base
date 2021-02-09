@@ -1,0 +1,9 @@
+{
+  "label": "Wysiwyg",
+  "value": "Wysiwyg",
+  "dataType": "String",
+  "initialValue": "",
+  "options": {
+    "frontEndType": "string"
+  }
+}

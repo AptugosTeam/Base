@@ -1,0 +1,15 @@
+{
+  "name": "{{ application.settings.name | friendly | lower }}",
+  "scripts": {
+    "start": "nodemon --exec babel-node index.js"
+  },
+  "devDependencies": {
+    "nodemon": "latest"
+  },
+  "dependencies": {
+    "express": "latest",
+    "sequelize": "latest",
+    "mysql2": "latest",
+    "node-fetch": "latest"
+  }
+}

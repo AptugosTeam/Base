@@ -1,0 +1,1 @@
+{"_id":"mW7xWI1uLS99Odbo","name":"Remove Asset","desc":"","icon":"","type":"structure","parameters":"","afterRun":"","initScript":"console.log(Parameters.id)\nApplication.assets = Application.assets.filter(asset => asset.id !== Parameters.id)\nreturn Application","code":"","post_initScript":""}

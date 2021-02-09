@@ -1,0 +1,1 @@
+{"_id":"5ee4f8c74011a97e1dbbe02d","type":"structure","Created_date":{"$date":"2020-06-13T16:03:19.781Z"},"__v":0,"desc":"Creates a new field","initScript":" ","name":"New Field","code":"const newField = {\n    data_type: 'Integer',\n    column_name: 'New Field'\n}\n\nreturn newField"}

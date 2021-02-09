@@ -1,0 +1,18 @@
+
+.autocomplete {
+  :global(.MuiInputBase-root) {
+    display: block;
+  }
+
+  & .aptugoDropdown {
+    & :global(.aptugo__control) {
+      border-width: 0;
+      background-color: transparent;
+    }
+
+    & :global(.aptugo__control--is-focused) {
+      border-width: 0;
+      box-shadow: none;
+    }
+  }
+}
