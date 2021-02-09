@@ -60,7 +60,6 @@ html {
 }
 
 .flowBackground {
-  width: 100vw;
   height: 41rem;
   padding-bottom: 3rem;
   display: flex;
@@ -69,7 +68,6 @@ html {
   background-size: cover;
   background-color: #3c4a4c;
   background-position: 50% 50%;
-
   & div {
     h3 {
       text-align: left;
@@ -149,6 +147,7 @@ html {
       font-size: 1.0625rem;
       line-height: 1.406875rem;
       margin-top: 1.8125rem;
+      width: 50%;
     }
   }
 
@@ -377,7 +376,7 @@ html {
 
   & .imageBackground {
     background-image: url('/dist/img/aptugoImageBackground.webp');
-    width: 100vw;
+
     height: 46.4375rem;
     background-size: cover;
     background-position: 50% 50%;
@@ -402,6 +401,7 @@ html {
   }
 
   & .imageEasyBackground {
+    background-image: url('/dist/img/easyguy.jpg');
     width: 100vw;
     height: 44.25rem;
     background-size: cover;
@@ -1469,7 +1469,7 @@ html {
   background-color: #faf9f9;
   position: absolute;
   bottom: 0;
-  width: 100vw;
+  width: 100%;
   min-height: 24rem;
 
   .firstFooter {
@@ -1641,6 +1641,13 @@ html {
 }
 
 @media (max-width: 960px) {
+  .heroEncloser {
+    & .heroRightEncloser {
+      & p {
+        width: 100%;
+      }
+    }
+  }
   .body {
     padding-bottom: 37rem;
 
