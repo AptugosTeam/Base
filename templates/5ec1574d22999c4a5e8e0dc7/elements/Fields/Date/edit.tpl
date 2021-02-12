@@ -3,6 +3,10 @@
 import TextField from '@material-ui/core/TextField'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
+{% set bprB %}
+import moment from 'moment'
+{% endset %}
+{{ save_delayed('bpr', bprB ) }}
 <TextField
     {% if element.values.Autofocus %}autoFocus{% endif %}
     {% if element.values.DisableVariable %}disabled={ {{ element.values.DisableVariable }} }{% endif %}
@@ -12,6 +16,6 @@ import TextField from '@material-ui/core/TextField'
     type="date"
     fullWidth
     InputLabelProps={ { shrink: true } }
-    value={ {{ tableName }}data.{{ field.column_name | friendly }}}
+    value={ {{ tableName }}data.{{ field.column_name | friendly }}?.slice(0,10) || {% if field.defaultToToday == "1" %}moment().utc().format('YYYY-MM-DD'){% else %}''{% endif %}}
     onChange={handle{{ tableName }}Change("{{ field.column_name | friendly }}")}
 />
