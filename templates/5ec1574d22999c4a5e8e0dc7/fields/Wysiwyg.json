@@ -4,6 +4,23 @@
   "dataType": "String",
   "initialValue": "",
   "options": {
-    "frontEndType": "string"
+    "frontEndType": "string",
+    "extra": [
+      {
+        "display": "Use Editor",
+        "value": "editor",
+        "type": "select",
+        "options": [
+          {
+            "label": "Standard (react-quill)",
+            "value": "standard"
+          },
+          {
+            "label": "CKEditor",
+            "value": "ckeditor"
+          }
+        ]
+      }
+    ]
   }
 }

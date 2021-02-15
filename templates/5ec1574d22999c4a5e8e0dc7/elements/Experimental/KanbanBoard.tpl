@@ -1,3 +1,59 @@
+/*
+path: KanbanBoard.tpl
+type: file
+unique_id: glsvuPHA
+icon: ico-kanban-board
+options:
+  - name: Columns
+    display: Columns
+    type: text
+    options: ''
+  - name: ColumnName
+    display: Column Name
+    type: text
+    options: ''
+  - name: className
+    display: ClassName
+    type: text
+    options: ''
+  - name: RowData
+    display: Row Data
+    type: text
+    options: ''
+  - name: matchCondition
+    display: Match Condition
+    type: text
+    options: ''
+  - name: classNameList
+    display: ClassName (list)
+    type: text
+    options: ''
+  - name: onDrop
+    display: On Drop
+    type: text
+    options: ''
+  - name: data
+    display: Data
+    type: dropdown
+    options: >-
+      return aptugo.store.getState().application.tables.map(({ unique_id, name
+      }) => [unique_id, name])
+  - name: addRecords
+    display: Add Records
+    type: text
+    options: ''
+  - name: columnHeaderColor
+    display: Column Header Color
+    type: text
+    options: ''
+sourceType: javascript
+settings:
+  - name: Packages
+    value: |
+      "react-dnd": "latest",
+      "react-dnd-html5-backend": "latest",
+children: []
+*/
 {% if data %}{% set table = data | tableData %}{% else %}{% set table = element.values.data | tableData %}{% endif %}
 {% if element.values.addRecords %}
 {% set bpr %}

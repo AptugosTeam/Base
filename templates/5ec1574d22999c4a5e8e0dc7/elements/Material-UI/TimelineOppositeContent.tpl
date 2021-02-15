@@ -1,3 +1,11 @@
+/*
+path: TimelineOppositeContent.tpl
+type: file
+unique_id: iJ1XSZ6D
+icon: ico-timeline-opposite-content
+sourceType: javascript
+children: []
+*/
 {% set bpr %}
 import TimelineOppositeContent from '@material-ui/lab/TimelineOppositeContent'
 {% endset %}

@@ -1,3 +1,52 @@
+/*
+path: themeSelection.tpl
+type: file
+unique_id: rtGqPUwH
+icon: ico-theme-selection
+options:
+  - name: theme
+    display: Theme
+    type: dropdown
+    options: website;whatsapp;layout;fantasyx;crm
+  - name: useAsset
+    display: Use an Asset
+    type: dropdown
+    options: >-
+      return [['none', 'none'],
+      ...aptugo.assetUtils.stylesheets().map(stylesheet => [stylesheet.id,
+      stylesheet.name])]
+    settings:
+      aptugoOnChange: >-
+        element = arguments[0]
+
+        console.log(element)
+
+        //if (selectedAsset !== 'none') {
+
+        //  const assetInfo = aptugo.assetUtils.stylesheets().find(ss => ss.id
+        === //selectedAsset)
+
+        //  const currentPage =
+        //aptugo.pageUtils.findContainerPage(aptugo.variables.retrieveGlobalVariables('currentElement').unique_id).unique_id
+
+        //  aptugo.variables.setPageVariable(currentPage,{ theme: assetInfo })
+
+        //  console.log(assetInfo)
+
+        //}
+      aptugoOnLoad: |-
+        element = arguments[0]
+        selectedAsset = element.values.useAsset
+        if (selectedAsset !== 'none') {
+          const assetInfo = aptugo.assetUtils.stylesheets().find(ss => ss.id === selectedAsset)
+          const currentPage = aptugo.pageUtils.findContainerPage(element).unique_id
+          aptugo.variables.setPageVariable(currentPage,{ theme: assetInfo })
+          console.log(assetInfo)
+        }
+sourceType: javascript
+children: []
+*/
+// Theme selection
 {% if element.values.useAsset %}
   {% set asset = element.values.useAsset|assetData %}
   {% set theme = asset.name|friendly %}

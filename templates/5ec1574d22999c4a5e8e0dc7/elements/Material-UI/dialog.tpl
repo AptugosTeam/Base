@@ -1,3 +1,57 @@
+/*
+path: dialog.tpl
+type: file
+unique_id: Lcyk85fH
+icon: ico-dialogs
+sourceType: javascript
+options:
+  - name: title
+    display: Title
+    type: text
+    options: ''
+  - name: introText
+    display: Intro Text
+    type: text
+    options: ''
+  - name: addProcedure
+    display: Add Records
+    type: dropdown
+    options: >-
+      return [['No','None'],['Internal','Popup
+      Dialog'],...aptugo.pageUtils.plainpages.map(({unique_id, name }) =>
+      [unique_id, name])]
+  - name: color
+    display: Color
+    type: dropdown
+    options: warning;primary;danger;success
+  - name: table
+    display: Table
+    type: dropdown
+    options: >-
+      return aptugo.store.getState().application.tables.map(({ unique_id, name
+      }) => [unique_id, name])
+  - name: button
+    display: Button Text (add)
+    type: text
+    options: ''
+  - name: editButton
+    display: Button Text (edit)
+    type: text
+    options: ''
+  - name: editTitle
+    display: Title (edit)
+    type: text
+    options: ''
+  - name: editIntroText
+    display: Intro Text (edit)
+    type: text
+    options: ''
+  - name: hideButton
+    display: Hide Button
+    type: checkbox
+    options: ''
+children: []
+*/
 {% set table = element.values.table | tableData %}
 {% if element.children %}
 {% else %}

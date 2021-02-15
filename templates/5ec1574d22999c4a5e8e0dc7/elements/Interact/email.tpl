@@ -1,3 +1,87 @@
+/*
+path: email.tpl
+type: file
+unique_id: urGd2l4d
+icon: ico-email
+helpText: Allows you to send emails
+sourceType: javascript
+options:
+  - name: functionName
+    display: Function Name
+    type: text
+    options: ''
+  - name: smpthost
+    display: Host (smtp)
+    type: text
+    options: ''
+  - name: smptport
+    display: Port (smtp)
+    type: text
+    options: ''
+  - name: smptuser
+    display: User (smtp)
+    type: text
+    options: ''
+  - name: smptpass
+    display: Password (smtp)
+    type: text
+    options: ''
+  - name: subject
+    display: Email Subject
+    type: text
+    options: ''
+  - name: parameters
+    display: Email Parameters
+    type: text
+    options: ''
+settings:
+  - name: DevPackages
+    value: '"nodemailer": "^6.4.11","react-html-email": "^3.0.0",'
+  - name: ServerRoute
+    value: |
+      const nodemailer = require("nodemailer");
+      var transport = {
+        host: "{{ element.values.smpthost }}",
+        port: "{{ element.values.smptport }}",
+        auth: {
+          user: "{{ element.values.smptuser }}",
+          pass: "{{ element.values.smptpass }}",
+        },
+      };
+
+      var transporter = nodemailer.createTransport(transport);
+      transporter.verify((error, success) => {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log("All works fine, congratz!");
+        }
+      });
+      app.use(express.json());
+      app.post("/api/sendEmail", (req, res, next) => {
+        const name = req.body.name;
+        const email = req.body.email;
+        const message = req.body.messageHtml;
+        var mail = {
+          from: name,
+          to: email,
+          subject: req.body.subject,
+          html: message,
+        };
+        
+        transporter.sendMail(mail, (err, data) => {
+          if (err) {
+            res.json({ msg: "fail" });
+          } else {
+            res.json({ msg: "success" });
+          }
+        });
+      });
+childs:
+  - name: Email Content
+    element: emailContent
+children: []
+*/
 {% set bpr %}
 import axios from 'axios'
 {% endset %}

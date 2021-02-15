@@ -1,3 +1,20 @@
+/*
+path: ButtonWithIcon.tpl
+type: file
+unique_id: DXZgugbc
+icon: ico-icon-button
+helpText: Shows a button with an icon
+children: []
+options:
+  - name: texto
+    display: Texto del Boton
+    type: text
+    options: ''
+  - name: icon
+    display: Icono
+    type: dropdown
+    options: Delete;Add;Plus
+*/
 {% set bpr %}
 import Button from '@material-ui/core/Button'
 import {{ element.values.icon }}Icon from '@material-ui/icons/{{ element.values.icon }}'

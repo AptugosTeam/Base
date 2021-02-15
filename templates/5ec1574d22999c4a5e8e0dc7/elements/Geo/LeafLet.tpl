@@ -1,3 +1,13 @@
+/*
+path: LeafLet.tpl
+type: file
+unique_id: KshBgLpQ
+icon: ico-leaflet
+children: []
+settings:
+  - name: Packages
+    value: '"react-leaflet": "2.8.0","leaflet": "latest",'
+*/
 {% set bpr %}
 import LeafLet from '../components/LeafLet'
 {% endset %}

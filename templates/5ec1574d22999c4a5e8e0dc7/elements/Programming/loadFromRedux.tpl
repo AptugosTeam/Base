@@ -1,3 +1,42 @@
+/*
+path: loadFromRedux.tpl
+type: file
+unique_id: 2uzdPTtK
+icon: ico-load-redux
+sourceType: javascript
+options:
+  - name: data
+    display: Data
+    type: dropdown
+    options: >-
+      return aptugo.store.getState().application.tables.map(({ unique_id, name
+      }) => [unique_id, name])
+  - name: variableName
+    display: Variable Name
+    type: text
+    options: ''
+  - name: onload
+    display: Run code upon loading
+    type: text
+    options: ''
+  - name: searchString
+    display: Search String
+    type: text
+    options: ''
+  - name: fieldToSearch
+    display: Field To Search
+    type: text
+    options: ''
+  - name: sortColumn
+    display: Sort Column
+    type: text
+    options: ''
+  - name: sortMethod
+    display: Sort Method
+    type: dropdown
+    options: DESC;ASC
+children: []
+*/
 {% if data %}
   {% set table = data | tableData %}
 {% else %}

@@ -1,3 +1,11 @@
+/*
+path: TimelineContent.tpl
+type: file
+unique_id: z7tlw3DV
+icon: ico-timeline-content
+sourceType: javascript
+children: []
+*/
 {% set bpr %}
 import TimelineContent from '@material-ui/lab/TimelineContent'
 {% endset %}

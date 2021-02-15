@@ -1,3 +1,9 @@
+/*
+icon: ico-pie-chart
+path: pieChart.tpl
+sourceType: javascript
+unique_id: oOgmBJJQ
+*/
 {% set bpr %}
 import { ResponsivePie } from '@nivo/pie'
 {% endset %}

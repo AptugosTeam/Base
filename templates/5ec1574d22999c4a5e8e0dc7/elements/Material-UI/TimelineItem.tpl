@@ -1,3 +1,16 @@
+/*
+path: TimelineItem.tpl
+type: file
+unique_id: FKm6KFkt
+icon: ico-timeline-item
+sourceType: javascript
+options:
+  - name: onClick
+    display: On Click
+    type: text
+    options: ''
+children: []
+*/
 {% set bpr %}
 import TimelineItem from '@material-ui/lab/TimelineItem'
 {% endset %}

@@ -168,6 +168,7 @@ type TSearchOptions = {
   searchString?: string
   searchField?: string
   page?: number
+  limit?: number
   sort?: { 
     field: string,
     method?: 'ASC' | 'DESC' 

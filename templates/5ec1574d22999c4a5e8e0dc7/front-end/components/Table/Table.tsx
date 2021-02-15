@@ -1,3 +1,11 @@
+/*
+- path: Table.tsx
+- type: file
+- unique_id: cFXF9Jms
+- icon: ico-field
+- sourceType: typescript
+- children: 
+*/
 import React, { FunctionComponent } from 'react'
 
 import Table from '@material-ui/core/Table'
