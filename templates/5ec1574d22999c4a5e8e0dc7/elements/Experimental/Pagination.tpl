@@ -16,6 +16,9 @@ options:
     display: Total Items
     type: text
     options: ''
+  - name: variableToUse
+    display: Use Variable
+    type: text
   - name: table
     display: Table
     type: dropdown
@@ -30,18 +33,21 @@ import Pagination from '../components/Pagination'
 {{ save_delayed('bpr',bpr) }}
 {% set ph %}
 const [pagination, setPagination] = React.useState({
-    itemsPerPage: {{ element.values.itemsPerPage|default(10) }},
+    itemsPerPage: {{ element.values.elementsLimit|default(10) }},
     currentPage: {{ element.values.currentPage|default(1) }},
     totalItems: {{ element.values.totalItems|default(0) }}
 })
 
 React.useEffect(() => {
-  dispatch(load{{ (element.values.table|tableData).name | friendly | capitalize }}(pagination.currentPage))
+  setPagination({ ...pagination, totalItems: {{ element.values.variableToUse }}.totalDocs })
+}, [{{ element.values.variableToUse }}])
+
+React.useEffect(() => {
+  dispatch(load{{ (element.values.table|tableData).name | friendly | capitalize }}(pagination.currentPage,{{element.values.elementsLimit}}))
 }, [pagination.currentPage])
 
 {% endset %}
 {{ save_delayed('ph',ph) }}
-
 <Pagination
     itemsPerPage={pagination.itemsPerPage}
     currentPage={pagination.currentPage}

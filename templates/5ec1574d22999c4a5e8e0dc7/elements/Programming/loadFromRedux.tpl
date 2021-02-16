@@ -35,8 +35,17 @@ options:
     display: Sort Method
     type: dropdown
     options: DESC;ASC
+  - name: elementsLimit
+    display: Limit of Elements
+    type: text
+    options: ''
 children: []
 */
+{% if element.values.usePagination %}
+  {% set limit = element.values.elementsLimit %}
+{% else %}
+  {% set limit = 5000 %}
+{% endif %}
 {% if data %}
   {% set table = data | tableData %}
 {% else %}
@@ -85,7 +94,7 @@ const {{ table.name | friendly | lower }}Data = useSelector((state: IState) => 
           {% if element.values.fieldToSearch %}searchField: "{{ element.values.fieldToSearch }}",{% endif %}
         }))
       {% else %}
-        dispatch(load{{ table.name | friendly | capitalize }}())
+        dispatch(load{{ table.name | friendly | capitalize }}(1, {{ limit }}))
       {% endif %}
     } {% if element.values.onload %} else {
       {{ element.values.onload }}
@@ -116,7 +125,7 @@ const {{ table.name | friendly | lower }}Data = useSelector((state: IState) => 
         {{ table.name | friendly | lower }}Data.loadingStatus === 'notloaded' ||
         {{ table.name | friendly | lower }}Data.loadingStatus === 'failed'
       ) {
-        dispatch(load{{ table.name | friendly | capitalize }}())
+        dispatch(load{{ table.name | friendly | capitalize }}(1, {{ limit }}))
       } 
       {% if element.values.onload %} else {
       {{ element.values.onload }}
@@ -126,3 +135,4 @@ const {{ table.name | friendly | lower }}Data = useSelector((state: IState) => 
 {% endif %}
 {% endset %}
 {{ save_delayed('ph', ph ) }}
+
