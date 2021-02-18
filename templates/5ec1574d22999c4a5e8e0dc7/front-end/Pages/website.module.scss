@@ -82,6 +82,7 @@ html {
 
     p {
       color: #c0f2ff;
+      width: 30%;
     }
   }
 }
@@ -336,6 +337,13 @@ html {
 }
 
 // Real Website
+.awardsGrid {
+  display: flex;
+  flex-direction: row;
+  & picture {
+    margin: 0 25px;
+  }
+}
 
 .body {
   position: relative;
@@ -401,7 +409,7 @@ html {
   }
 
   & .imageEasyBackground {
-    background-image: url('/dist/img/easyguy.jpg');
+    //background-image: url('/dist/img/easyguy.jpg');
     width: 100vw;
     height: 44.25rem;
     background-size: cover;
@@ -481,6 +489,10 @@ html {
     display: flex;
     align-items: center;
     margin-bottom: 7.5rem;
+
+    & p {
+      width: 60%;
+    }
 
     & h2 {
       text-align: left;
@@ -612,6 +624,8 @@ html {
     & h3 {
       text-align: left;
       color: #c0f2ff;
+      padding-top: 60px;
+      padding-bottom: 20px;
     }
 
     & p {
@@ -621,6 +635,7 @@ html {
       font-size: 17px;
       line-height: 132.4%;
       color: #c0f2ff;
+      width: 85%;
     }
 
     & picture {
@@ -633,10 +648,15 @@ html {
 
   & .whatcanido {
     background: linear-gradient(180deg, #ffffff 0%, #e9faff 37.5%);
+    overflow-x: hidden;
 
     & h3 {
       padding-top: 6.875rem;
       margin-bottom: 2.5rem;
+    }
+
+    & p {
+      width: 60%;
     }
 
     & h6 {
@@ -696,9 +716,13 @@ html {
     flex: 100% 1 1;
     height: 469px;
 
+    & .whatCanIBuildGrid>div{
+      height: 100%;
+    }
+
     & .anything {
       box-sizing: border-box;
-      padding: 8.625rem 5rem 0 130px;
+      padding: 8.625rem 5rem 0 0;
       flex-grow: 0;
       //width: 50%;
       & h3 {
@@ -713,7 +737,10 @@ html {
 
     & .chips {
       position: relative;
-      width: 50%;
+      width: calc(100% + 84px);
+      height: 100%;
+      margin-left: -84px;
+      overflow-x: hidden;
       & .chip {
         position: absolute;
         line-height: 63px;
@@ -1207,6 +1234,7 @@ html {
       width: 11.875rem;
       height: 2.5rem;
       margin-left: 2.8125rem;
+      margin-top: 0px;
     }
 
     & h4 {
@@ -1486,6 +1514,9 @@ html {
     font-weight: normal;
     font-size: 12px;
     line-height: 5rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 
@@ -1648,6 +1679,21 @@ html {
       }
     }
   }
+  .flowBackground {
+    & div {
+      & p {
+        width: 100%;
+      }
+    }
+  }
+  .awardsGrid {
+    display: flex;
+    flex-direction: column;
+    & picture > img {
+      margin-top: 10px;
+      margin-bottom: 0px;
+    }
+  }
   .body {
     padding-bottom: 37rem;
 
@@ -1742,16 +1788,16 @@ html {
       height: 25.5rem;
 
       & h3 {
-        margin-left: 0;
         padding-top: 3rem;
         padding-bottom: 2rem;
-        max-width: 90%;
+        max-width: 100%;
         text-align: center;
       }
 
       & p {
         margin-left: auto;
         text-align: center;
+        width: 100%;
       }
 
       & picture {
@@ -1767,6 +1813,10 @@ html {
     }
 
     & .whatcanido {
+      & p {
+        width: 100%;
+      }
+
       & .flexy {
         flex-direction: column;
         margin-top: 8.25rem;
