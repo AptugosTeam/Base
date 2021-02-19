@@ -105,4 +105,5 @@ import AddDialog from '../components/Dialog/Dialog'
  {% set subvalues = { element: { values: { Field: field.unique_id, Type: 'edit' } }  } %}
  {% include includeTemplate('field.tpl') with subvalues %}
 {% endfor %}
+{{ content | raw }}
 </LocalAddDialog>

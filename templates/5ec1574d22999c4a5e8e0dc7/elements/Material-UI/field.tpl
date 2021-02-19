@@ -29,14 +29,14 @@ options:
     display: Disable Variable
     type: text
     options: ''
-  - name: Maximos
-    display: Maximos Caracteres
-    type: text
-    options: ''
   - name: DisableUnderline
     display: Disable Underline
     type: checkbox
     options: ''
+  - name: margin
+    display: margin
+    type: dropdown
+    options: dense;normal;none
 children: []
 */
 {% set bpr %}

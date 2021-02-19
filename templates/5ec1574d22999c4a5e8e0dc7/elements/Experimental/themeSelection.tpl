@@ -19,7 +19,9 @@ options:
       aptugoOnChange: >-
         element = arguments[0]
 
-        console.log(element)
+        var selectedAsset = element.values?.useAsset
+
+        console.log('onchange', element, selectedAsset)
 
         //if (selectedAsset !== 'none') {
 
@@ -34,15 +36,26 @@ options:
         //  console.log(assetInfo)
 
         //}
-      aptugoOnLoad: |-
+      aptugoOnLoad: >-
         element = arguments[0]
-        selectedAsset = element.values.useAsset
-        if (selectedAsset !== 'none') {
-          const assetInfo = aptugo.assetUtils.stylesheets().find(ss => ss.id === selectedAsset)
-          const currentPage = aptugo.pageUtils.findContainerPage(element).unique_id
-          aptugo.variables.setPageVariable(currentPage,{ theme: assetInfo })
-          console.log(assetInfo)
-        }
+
+        var selectedAsset = element.values?.useAsset
+
+        console.log('onload', element, selectedAsset)
+
+        //if (selectedAsset !== 'none') {
+
+        //  const assetInfo = aptugo.assetUtils.stylesheets().find(ss => ss.id
+        === selectedAsset)
+
+        //  const currentPage =
+        aptugo.pageUtils.findContainerPage(element).unique_id
+
+        //  aptugo.variables.setPageVariable(currentPage,{ theme: assetInfo })
+
+        //  console.log(assetInfo)
+
+        //}
 sourceType: javascript
 children: []
 */
