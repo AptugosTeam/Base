@@ -1,3 +1,10 @@
+/*
+path: pagination.tsx
+type: file
+unique_id: UgJmibXm
+icon: ico-field
+children: []
+*/
 import React, { FunctionComponent, ReactChild } from 'react'
 import Button from '@material-ui/core/Button'
 
@@ -13,7 +20,7 @@ interface paginationProps {
 const Pagination: FunctionComponent<paginationProps> = (props) => {
   return (
     <div className={classes.prevnext}>
-      {props.currentPage > 0 && (
+      {props.currentPage > 1 && (
         <Button
           onClickCapture={(params) => {
             props.setPage(props.currentPage - 1)

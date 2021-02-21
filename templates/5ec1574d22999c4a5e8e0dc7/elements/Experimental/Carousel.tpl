@@ -1,3 +1,24 @@
+/*
+path: Carousel.tpl
+type: file
+unique_id: oKi37bpk
+icon: ico-carousel
+sourceType: javascript
+options:
+  - name: height
+    display: Height
+    type: text
+    options: ''
+  - name: autoplay
+    display: Autoplay
+    type: checkbox
+    options: ''
+  - name: arrowsOrDotsMethod
+    display: Use Arrows or Dots?
+    type: dropdown
+    options: none;arrows;dots
+children: []
+*/
 {% set bpr %}
 import Carousel from '../components/Carousel/Carousel'
 {% endset %}

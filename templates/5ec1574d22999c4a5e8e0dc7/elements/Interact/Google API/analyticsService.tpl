@@ -1,3 +1,26 @@
+/*
+path: analyticsService.tpl
+type: file
+unique_id: hnIaridw
+icon: ico-field
+internalUse: true
+children: []
+renderpath: back-end/app/services/analytics.js
+settings:
+  - name: ExtraRoutes
+    value: analytics
+  - name: Packages
+    value: '"googleapis":"latest",'
+options:
+  - name: endpoint
+    display: Service URL
+    type: text
+    options: ''
+  - name: viewid
+    display: View ID (/admin/view/settings)
+    type: text
+    options: ''
+*/
 {% set parentElement = element.parent | elementData %}
   module.exports = (app) => {
   app.post('{{ parentElement.values.endpoint }}', (req, response) => {

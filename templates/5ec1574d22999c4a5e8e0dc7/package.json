@@ -1,5 +1,22 @@
+/*
+'0':
+  path: package.json
+'1':
+  unique_id: SitBkknS
+'2':
+  icon: ico-field
+'3':
+  sourceType: json
+'4':
+  children: null
+path: package.json
+unique_id: SitBkknS
+icon: ico-field
+sourceType: json
+children: []
+*/
 {
-  "name": "packagename9",
+  "name": "{{ application.settings.name | lower }}",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -39,7 +56,7 @@
     "redux-devtools-extension": "^2.13.8",
     "react-hot-loader": "^4.12.21",
     "source-map-loader": "^1.0.1",
-    "typescript": "^3.9.7",
+    "typescript": "^4.1.3",
     "webpack": "^4.44.1",
     "webpack-bundle-analyzer": "^3.8.0",
     "webpack-cli": "^3.3.12",
@@ -56,10 +73,11 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.30",
     "@fortawesome/free-solid-svg-icons": "^5.14.0",
     "@fortawesome/react-fontawesome": "^0.1.11",
-    "axios": "^0.19.2",
-    "@material-ui/core": "^4.9.7",
-    "@material-ui/icons": "^4.9.1",
-    "@material-ui/lab": "^4.0.0-alpha.56",
+    "axios": "latest",
+    "@material-ui/core": "latest",
+    "@emotion/styled": "latest",
+    "@material-ui/icons": "latest",
+    "@material-ui/lab": "latest",
     "react-select": "latest",
     "autoprefixer": "^9.8.6",
     "@types/node": "^14.0.27",
@@ -83,7 +101,9 @@
     "style-loader": "^1.2.1",
     "postcss-loader": "^3.0.0",
     {{ insert_setting('Packages') | raw }}
-    "typesafe-actions": "^5.1.0"
+    "typesafe-actions": "^5.1.0",
+    "@ckeditor/ckeditor5-build-balloon": "latest",
+    "@ckeditor/ckeditor5-react": "^3.0.1",
   },
   "babel": {
     "presets": [

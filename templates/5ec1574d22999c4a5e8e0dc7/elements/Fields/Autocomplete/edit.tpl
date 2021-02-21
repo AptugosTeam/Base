@@ -55,6 +55,7 @@ React.useEffect(() => {
   onType={ typeInSearch{{ referencedTable }} }
   onChange={(newValue) => handle{{ tableName }}Change('{{ columnName }}')(newValue?.length ? newValue.map(item => ({ _id: item.value !== 'new' ? item.value : null, {{ referencedField.column_name | friendly }}: item.label })) : [])}
   loading={ {{ referencedTable | lower }}Data.loadingStatus === 'loading' }
+  {% if field.placeholder %}placeholder="{{ field.placeholder }}"{% endif %}
   options={ {{ columnName }}Options }
   label="{{ field.column_name }}"
 />

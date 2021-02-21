@@ -1,3 +1,11 @@
+/*
+- path: index.js
+- type: file
+- unique_id: UkXBqfSH
+- icon: ico-field
+- sourceType: javascript
+- children: 
+*/
 const dotenv = require('dotenv')
 dotenv.config({ path: './config/.env.development' })
 

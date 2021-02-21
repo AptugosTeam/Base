@@ -11,6 +11,7 @@ export interface AutocompleteProps {
   value: any
   chips?: boolean
   onType: Function
+  placeholder: string
 }
 
 const AptugoAutocomplete: FunctionComponent<any> = (props: AutocompleteProps) => {
@@ -59,6 +60,7 @@ const AptugoAutocomplete: FunctionComponent<any> = (props: AutocompleteProps) =>
       </label>
       <div className="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-fullWidth MuiInput-fullWidth MuiInputBase-formControl MuiInput-formControl MuiInputBase-marginDense MuiInput-marginDense">
         <Select
+          placeholder={props.placeholder || props.label}
           className={classes.aptugoDropdown}
           classNamePrefix="aptugo"
           value={props.value || null}
