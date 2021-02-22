@@ -12,6 +12,10 @@ options:
     display: Column Name
     type: text
     options: ''
+  - name: Subtitle
+    display: Subtitle
+    type: text
+    options: ''
   - name: className
     display: ClassName
     type: text
@@ -123,7 +127,7 @@ const KanbanItem = ({ item, children }) => {
     return (
       <KanbanColumn channel={columnItem} key={columnIndex} >
           <div {% if element.values.columnHeaderColor %}style={ { backgroundColor: {{ element.values.columnHeaderColor }} } }{% endif %}>
-            <div>{columnItem.{{ element.values.ColumnName }} }</div>
+            <div className='kanbanHeader'>{{ element.values.ColumnName }}{% if element.values.Subtitle %}<span>{{ element.values.Subtitle }}</span>{% endif %}</div>
             <svg width="10" height="56"><path d="M1 0l8 28-8 28"></path></svg>
           </div>
           <div className={clsx(classes.list {% if element.values.classNameList %}, {{ element.values.classNameList }}{% endif %})}>
