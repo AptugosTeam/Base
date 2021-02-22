@@ -54,8 +54,8 @@ sourceType: javascript
 settings:
   - name: Packages
     value: |
-      "react-dnd": "latest",
-      "react-dnd-html5-backend": "latest",
+      "react-dnd": "11.1.3",
+      "react-dnd-html5-backend": "11.1.3",
 children: []
 */
 {% if data %}{% set table = data | tableData %}{% else %}{% set table = element.values.data | tableData %}{% endif %}
