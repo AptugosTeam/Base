@@ -1,3 +1,28 @@
+/*
+path: uncontrolledSelect.tpl
+type: file
+unique_id: KZo70Wel
+icon: ico-uncontrolled-select
+sourceType: javascript
+options:
+  - name: label
+    display: Label
+    type: text
+    options: ''
+  - name: value
+    display: Value
+    type: text
+    options: ''
+  - name: onChange
+    display: On Change
+    type: text
+    options: ''
+  - name: options
+    display: Options
+    type: text
+    options: ''
+children: []
+*/
 {% set bpr %}
 import TextField from '@material-ui/core/TextField'
 import MenuItem from '@material-ui/core/MenuItem'

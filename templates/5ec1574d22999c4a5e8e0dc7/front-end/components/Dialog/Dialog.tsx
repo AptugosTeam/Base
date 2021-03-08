@@ -77,6 +77,7 @@ const AddDialog: FunctionComponent<addDialogProps> = (props) => {
         </Tooltip>
       }
       <Dialog
+        disableEnforceFocus
         open={isOpen}
         onClose={handleClose}
         aria-labelledby='form-dialog-title'

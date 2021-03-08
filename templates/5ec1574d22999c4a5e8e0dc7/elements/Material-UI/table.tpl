@@ -1,3 +1,68 @@
+/*
+path: table.tpl
+type: file
+unique_id: IUyfyTiR
+icon: ico-table
+sourceType: javascript
+options:
+  - name: title
+    display: Title
+    type: text
+    options: ''
+  - name: addProcedure
+    display: Add Records
+    type: dropdown
+    options: >-
+      return [['No','None'],['Internal','Popup
+      Dialog'],...aptugo.pageUtils.plainpages.map(({unique_id, name }) =>
+      [unique_id, name])]
+  - name: table
+    display: Table
+    type: dropdown
+    options: >-
+      return [['var','Use a
+      variable'],...aptugo.store.getState().application.tables.map(({ unique_id,
+      name }) => [unique_id, name])]
+  - name: addTitle
+    display: Title for Add procedure
+    type: text
+    options: ''
+  - name: addText
+    display: Text for Add procedure
+    type: text
+    options: ''
+  - name: headerColor
+    display: Header Color
+    type: dropdown
+    options: warning;primary;danger;success;info;rose;gray
+  - name: searchString
+    display: Search String
+    type: text
+    options: ''
+  - name: variableToUse
+    display: Variable to use
+    type: text
+    options: ''
+    settings:
+      condition: var
+      propertyCondition: table
+  - name: usePagination
+    display: Use Pagination
+    type: checkbox
+    options: ''
+    settings:
+      default: 'true'
+  - name: elementsLimit
+    display: Elements Per Page
+    type: text
+    options: ''
+    settings:
+      default: '10'
+      propertyCondition: usePagination
+      condition: '"true"'
+      active: true
+children: []
+*/
 {% set tableFields = [] %}
 {% if element.values.table == 'var' %}
   {% for field in element.children %}
@@ -12,7 +77,7 @@
   {% set setEditDataFunctionName = 'set' ~ tableName ~ 'Data' %}
   {% set fields = table.fields %}
 
-  {% include includeTemplate('loadFromRedux.tpl') with { 'data': element.values.table, 'element': element } %}
+  {% include includeTemplate('loadFromRedux.tpl') with { 'data': element.values.table, 'element': element} %}
 
   {% if element.children %}
       {% for field in element.children %}
@@ -78,3 +143,7 @@
 </div>
 {% endif %}
 </Table>
+{% if element.values.usePagination %}
+{% set innerParams = { 'element': { 'unique_id': item.unique_id, values: { 'variableToUse': table.name | friendly | lower ~ 'Data', 'table': element.values.table, 'elementsLimit': element.values.elementsLimit, 'totalDocs': element.values.variableToUse.totalDocs } } } %}
+{% include includeTemplate('Pagination.tpl') with innerParams %}
+{% endif %}

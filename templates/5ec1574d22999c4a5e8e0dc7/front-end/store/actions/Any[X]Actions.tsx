@@ -1,3 +1,13 @@
+/*
+path: "{{ table.name | friendly |\_lower }}Actions.tsx"
+type: file
+unique_id: UTGQ0azc
+icon: ico-field
+modelRelated: true
+sourceType: typescript
+subtype: Any
+children: []
+*/
 import { I{{ table.name | friendly | capitalize }}Item, Ipaginated{{ table.name | friendly | capitalize }} } from "../models";
 
 export enum {{ table.name | friendly | capitalize }}ActionTypes {
@@ -57,10 +67,11 @@ export function searching{{ table.name | friendly | capitalize }}Failed(): ISear
   }
 }
 
-export function load{{ table.name | friendly | capitalize }}(page = 1): ILoad{{ table.name | friendly | capitalize }}Action {
+export function load{{ table.name | friendly | capitalize }}(page = 1, limit = 5000): ILoad{{ table.name | friendly | capitalize }}Action {
   return {
     type: {{ table.name | friendly | capitalize }}ActionTypes.LOAD_{{ table.name | friendly | upper }},
-    page: page
+    page: page,
+    limit: limit
   }
 }
 
@@ -168,6 +179,7 @@ type TSearchOptions = {
   searchString?: string
   searchField?: string
   page?: number
+  limit?: number
   sort?: { 
     field: string,
     method?: 'ASC' | 'DESC' 
@@ -198,7 +210,8 @@ export interface ISearching{{ table.name | friendly | capitalize }}FailedAction 
 
 export interface ILoad{{ table.name | friendly | capitalize }}Action {
   type: {{ table.name | friendly | capitalize }}ActionTypes.LOAD_{{ table.name | friendly | upper }}
-  page: number
+  page: number,
+  limit: number
 }
 
 export interface ILoading{{ table.name | friendly | capitalize }}Action {

@@ -6,7 +6,7 @@ import TextField from '@material-ui/core/TextField'
 <TextField
     {% if element.values.Autofocus %}autoFocus{% endif %}
     {% if element.values.DisableVariable %}disabled={ {{ element.values.DisableVariable }} }{% endif %}
-    margin="dense"
+    margin='{{ element.values.margin|default("dense") }}'
     label="{{ field.prompt|default(field.column_name) }}"
     {% if field.placeholder %}placeholder="{{ field.placeholder }}"{% endif %}
     type="text"

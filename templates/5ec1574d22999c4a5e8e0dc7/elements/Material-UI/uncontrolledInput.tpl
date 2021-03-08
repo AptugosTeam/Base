@@ -1,3 +1,32 @@
+/*
+path: uncontrolledInput.tpl
+type: file
+unique_id: EECbOrrq
+icon: ico-uncontrolled-input
+sourceType: javascript
+options:
+  - name: label
+    display: Label
+    type: text
+    options: ''
+  - name: value
+    display: Value
+    type: text
+    options: ''
+  - name: onChange
+    display: On Change
+    type: text
+    options: ''
+  - name: placeholder
+    display: Placeholder
+    type: text
+    options: ''
+  - name: variant
+    display: Variant
+    type: dropdown
+    options: standard;filled;outlined
+children: []
+*/
 {% set bpr %}
 import TextField from '@material-ui/core/TextField'
 {% endset %}

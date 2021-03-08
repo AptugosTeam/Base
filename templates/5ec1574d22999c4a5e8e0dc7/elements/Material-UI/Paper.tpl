@@ -1,3 +1,9 @@
+/*
+icon: ico-paper
+path: Paper.tpl
+sourceType: javascript
+unique_id: efavXTy7
+*/
 {% set bpr %}
 import Paper from '@material-ui/core/Paper'
 {% endset %}

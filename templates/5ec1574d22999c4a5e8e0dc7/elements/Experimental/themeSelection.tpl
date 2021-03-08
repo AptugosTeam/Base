@@ -1,3 +1,65 @@
+/*
+path: themeSelection.tpl
+type: file
+unique_id: rtGqPUwH
+icon: ico-theme-selection
+options:
+  - name: theme
+    display: Theme
+    type: dropdown
+    options: website;whatsapp;layout;fantasyx;crm
+  - name: useAsset
+    display: Use an Asset
+    type: dropdown
+    options: >-
+      return [['none', 'none'],
+      ...aptugo.assetUtils.stylesheets().map(stylesheet => [stylesheet.id,
+      stylesheet.name])]
+    settings:
+      aptugoOnChange: >-
+        element = arguments[0]
+
+        var selectedAsset = element.values?.useAsset
+
+        console.log('onchange', element, selectedAsset)
+
+        //if (selectedAsset !== 'none') {
+
+        //  const assetInfo = aptugo.assetUtils.stylesheets().find(ss => ss.id
+        === //selectedAsset)
+
+        //  const currentPage =
+        //aptugo.pageUtils.findContainerPage(aptugo.variables.retrieveGlobalVariables('currentElement').unique_id).unique_id
+
+        //  aptugo.variables.setPageVariable(currentPage,{ theme: assetInfo })
+
+        //  console.log(assetInfo)
+
+        //}
+      aptugoOnLoad: >-
+        element = arguments[0]
+
+        var selectedAsset = element.values?.useAsset
+
+        console.log('onload', element, selectedAsset)
+
+        //if (selectedAsset !== 'none') {
+
+        //  const assetInfo = aptugo.assetUtils.stylesheets().find(ss => ss.id
+        === selectedAsset)
+
+        //  const currentPage =
+        aptugo.pageUtils.findContainerPage(element).unique_id
+
+        //  aptugo.variables.setPageVariable(currentPage,{ theme: assetInfo })
+
+        //  console.log(assetInfo)
+
+        //}
+sourceType: javascript
+children: []
+*/
+// Theme selection
 {% if element.values.useAsset %}
   {% set asset = element.values.useAsset|assetData %}
   {% set theme = asset.name|friendly %}

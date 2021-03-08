@@ -1,3 +1,15 @@
+/*
+path: muiTable.tpl
+type: file
+unique_id: UoaaCs5K
+icon: ico-mui-table
+settings:
+  - name: Packages
+    value: |-
+      "mui-datatables": "latest",
+      "react-number-format": "latest",
+children: []
+*/
 {% set bpr %}
 import MUIDataTable, { Display, FilterType, MUIDataTableOptions, Responsive } from 'mui-datatables'
 import axios from 'axios'

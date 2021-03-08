@@ -1,3 +1,23 @@
+/*
+path: FlickSearch.tpl
+type: file
+unique_id: nZQBVwLf
+icon: ico-flick-search
+children: []
+options:
+  - name: apikey
+    display: API Key
+    type: text
+    options: ''
+  - name: hasgeo
+    display: Only pics with Geo Data
+    type: checkbox
+    options: ''
+  - name: radius
+    display: Radius in KM
+    type: text
+    options: ''
+*/
 {% set bpr %}
 import axios from 'axios'
 {% endset %}

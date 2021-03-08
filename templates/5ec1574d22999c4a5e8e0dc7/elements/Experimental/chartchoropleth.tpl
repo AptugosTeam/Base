@@ -1,3 +1,41 @@
+/*
+path: chartchoropleth.tpl
+type: file
+unique_id: 561unylU
+icon: ico-chart-choropleth
+helpText: Uses Nivo Charting library to draw a Map
+sourceType: javascript
+options:
+  - name: Responsive
+    display: Responsive
+    type: checkbox
+    options: ''
+  - name: Width
+    display: Width
+    type: text
+    options: ''
+  - name: Height
+    display: Height
+    type: text
+    options: ''
+  - name: Countries
+    display: Countries
+    type: dropdown
+    options: return aptugo.tableUtils.getAllFields()
+  - name: Values
+    display: Values
+    type: dropdown
+    options: return aptugo.tableUtils.getAllFields()
+  - name: Scheme
+    display: Scheme
+    type: dropdown
+    options: >-
+      nivo;BrBG;PRGn;PiYG;PuOrRdBu;RdGy;RdYlBu;RdYlGn;spectral;blues;greens;greys;oranges;purples;reds;BuGn;BuPu;GnBu;OrRd;PuBuGn;PuBu;PuRd;RdPu;YlGnBu;YlGn;YlOrBr;YlOrRd
+settings:
+  - name: Packages
+    value: '"@nivo/geo": "latest",'
+children: []
+*/
 {% set countries = element.values.Countries|fieldData %}
 {% set values = element.values.Values|fieldData %}
 {% set bpr %}

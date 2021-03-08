@@ -1,3 +1,44 @@
+/*
+path: field.tpl
+type: file
+unique_id: aqUmk84z
+icon: ico-field
+sourceType: javascript
+options:
+  - name: Field
+    display: Field
+    type: dropdown
+    options: return aptugo.tableUtils.getAllFields()
+  - name: Type
+    display: Type
+    type: dropdown
+    options: show;edit
+  - name: Cut
+    display: Cut after (n) chars
+    type: text
+    options: ''
+  - name: CutOnNewline
+    display: Cut on new line
+    type: checkbox
+    options: ''
+  - name: Autofocus
+    display: Auto Focus
+    type: checkbox
+    options: ''
+  - name: DisableVariable
+    display: Disable Variable
+    type: text
+    options: ''
+  - name: DisableUnderline
+    display: Disable Underline
+    type: checkbox
+    options: ''
+  - name: margin
+    display: margin
+    type: dropdown
+    options: dense;normal;none
+children: []
+*/
 {% set bpr %}
     {% if element.values.Type == 'edit' %}
         import TextField from '@material-ui/core/TextField'
