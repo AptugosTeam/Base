@@ -1,3 +1,10 @@
+/*
+path: website.module.scss
+type: file
+unique_id: J8e2ACps
+icon: sass.svg
+children: []
+*/
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;400;600&display=swap');
 $break-small: 520px;
 $break-large: 950px;
@@ -558,6 +565,10 @@ html {
         box-sizing: border-box;
         margin: 1rem;
 
+        & .managesoftwareleanandfast {
+          margin-left: -5px;
+        }
+
         & picture {
           display: inline-block;
           vertical-align: text-bottom;
@@ -665,7 +676,6 @@ html {
       font-weight: normal;
       font-size: 17px;
       line-height: 132.4%;
-      /* or 23px */
       max-width: 650px;
       margin: 0 auto;
       text-align: center;
@@ -716,7 +726,7 @@ html {
     flex: 100% 1 1;
     height: 469px;
 
-    & .whatCanIBuildGrid>div{
+    & .whatCanIBuildGrid > div {
       height: 100%;
     }
 
@@ -1658,8 +1668,6 @@ html {
     font-weight: bold;
     font-size: 20px;
     line-height: 132.8%;
-    /* identical to box height, or 27px */
-
     margin-bottom: 14px;
     color: #262626;
   }
@@ -1696,6 +1704,13 @@ html {
   }
   .body {
     padding-bottom: 37rem;
+
+    & .split {
+      & p {
+        max-width: 300px;
+        width: 100%;
+      }
+    }
 
     & :global(.MuiButton-contained) {
       box-shadow: none;
@@ -1764,6 +1779,7 @@ html {
     & .augmented {
       & picture {
         width: auto;
+        margin-top: 40px;
         & img {
           width: 90%;
           height: auto;
@@ -1853,6 +1869,7 @@ html {
 
           & h4 {
             max-width: calc(100% - 60px);
+            margin-left: 30px;
           }
         }
       }
