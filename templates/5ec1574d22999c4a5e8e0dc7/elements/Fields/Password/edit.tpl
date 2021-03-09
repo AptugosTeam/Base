@@ -7,7 +7,7 @@ import TextField from '@material-ui/core/TextField'
     {% if element.values.Autofocus %}autoFocus{% endif %}
     {% if element.values.DisableVariable %}disabled={ {{ element.values.DisableVariable }} }{% endif %}
     margin="dense"
-    label="{{ field.column_name }}"
+    label="{{ field.prompt|default(field.column_name) }}"
     type="password"
     fullWidth
     value={ {{ tableName }}data.{{ field.column_name | friendly }}}

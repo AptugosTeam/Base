@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom'
 
 {% for page in application.pages | plain('type','page')  %}
   {% if page.filename %}
-const {{ page.name | friendly }} = React.lazy(() => import ('./Pages/{{ page.filename | removeExtension }}'))
+    const {{ page.name | friendly }} = React.lazy(() => import ('./Pages/{{ page.filename | removeExtension }}'))
   {% endif %}
 {% endfor %}
 

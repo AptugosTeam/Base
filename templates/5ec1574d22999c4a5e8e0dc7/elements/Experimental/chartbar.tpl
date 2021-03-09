@@ -1,3 +1,57 @@
+/*
+path: chartbar.tpl
+type: file
+unique_id: I4IK8OXW
+icon: ico-chart-bar
+helpText: Uses Nivo Charting library to draw a chart
+sourceType: javascript
+settings:
+  - name: Packages
+    value: '"@nivo/bar": "latest",'
+options:
+  - name: Responsive
+    display: Responsive
+    type: checkbox
+    options: ''
+  - name: Width
+    display: Width
+    type: text
+    options: ''
+  - name: Height
+    display: Height
+    type: text
+    options: ''
+  - name: Scheme
+    display: Scheme
+    type: dropdown
+    options: >-
+      nivo;category10;accent;dark2;paired;pastel1;pastel2;set1;set2;set3;brown_blueGreen;purpleRed_green;pink_yellowGreen;purple_orange;red_blue;red_grey;red_yellow_blue;red_yellow_green;spectral;blues;greens;greys;oranges;purples;reds;blue_green;blue_purple;green_blue;orange_red;purple_blue_green;purple_blue;purple_red;red_purple;yellow_green_blue;yellow_green;yellow_orange_brown;yellow_orange_red
+  - name: Index
+    display: Index By
+    type: dropdown
+    options: return aptugo.tableUtils.getAllFields()
+  - name: Vak¡lues
+    display: Values
+    type: dropdown
+    options: return aptugo.tableUtils.getAllFields()
+  - name: Values
+    display: Values
+    type: dropdown
+    options: return aptugo.tableUtils.getAllFields()
+  - name: LeftAxisLegend
+    display: 'Left Axis: Legend'
+    type: text
+    options: ''
+  - name: Variable
+    display: Variable to Use
+    type: text
+    options: return aptugo.tableUtils.getAllFields()
+  - name: Code
+    display: Use Code instead
+    type: text
+    options: ''
+children: []
+*/
 {% set bpr %}
 import { {% if element.values.Responsive %}ResponsiveBar{% else %}Bar{% endif %} } from '@nivo/bar'
 {% endset %}

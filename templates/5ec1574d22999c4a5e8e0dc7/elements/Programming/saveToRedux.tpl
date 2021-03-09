@@ -1,3 +1,18 @@
+/*
+path: saveToRedux.tpl
+type: file
+unique_id: OhQu8og7
+icon: ico-save-to-redux
+sourceType: javascript
+options:
+  - name: data
+    display: Data
+    type: dropdown
+    options: >-
+      return aptugo.store.getState().application.tables.map(({ unique_id, name
+      }) => [unique_id, name])
+children: []
+*/
 {% if data %}{% set table = data | tableData %}{% else %}{% set table = element.values.data | tableData %}{% endif %}
 {% set bpr %}
 import { useDispatch } from 'react-redux'

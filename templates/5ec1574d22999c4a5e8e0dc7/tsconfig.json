@@ -1,3 +1,11 @@
+/*
+- path: tsconfig.json
+- type: file
+- unique_id: OF6JamkB
+- icon: ico-field
+- sourceType: json
+- children: 
+*/
 {
   "compilerOptions": {
     "target": "ES5",

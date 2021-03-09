@@ -56,8 +56,10 @@ exports.find = (req, res) => {
       findString = { [req.query.searchField]: ObjectId(req.query.searchString) }
     }
   }
+  if (typeof req.query.sort === 'string') req.query.sort = JSON.parse(req.query.sort)
+
   {{ table.name | friendly }}.find(findString)
-  .sort( { [req.query.sortColumn]: req.query.sortMethod === 'DESC' ? 1 : -1 })
+  .sort( req.query.sort && { [req.query.sort.field]: req.query.sort.method === 'DESC' ? 1 : -1 })
   {% for field in table.fields %}
     {% set fieldWithData = field | fieldData %}
     {% include includeTemplate(['Fields' ~ field.data_type ~'find.tpl', 'Fieldsfind.tpl']) %}

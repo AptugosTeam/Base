@@ -1,3 +1,11 @@
+/*
+path: edit.tpl
+type: file
+unique_id: uxhx3Vzb
+icon: ico-field
+sourceType: javascript
+children: []
+*/
 {% if field.displaytype == 'btngroup' %}
 {% include includeTemplate('FieldsDropdownbtngroup.tpl') with { 'field': field } %}
 {% else %}

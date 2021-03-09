@@ -1,3 +1,23 @@
+/*
+path: particleImage.tpl
+type: file
+unique_id: SLLIbhlu
+icon: ico-field
+children: []
+helpText: Converts my logo into particles
+settings:
+  - name: Packages
+    value: '"react-particle-image":"latest",'
+options:
+  - name: image
+    display: Image
+    type: text
+    options: ''
+  - name: useAsset
+    display: Use An Asset
+    type: dropdown
+    options: return aptugo.assetUtils.images().map(image => [image.id, image.name])
+*/
 {% if element.values.useAsset %}
   {% set path = '/img/' ~ (element.values.useAsset|assetData).name %}
 {% else %}
