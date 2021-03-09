@@ -86,10 +86,6 @@ children: []
 import axios from 'axios'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
-{% set bpr %}
-import { renderEmail } from 'react-html-email'
-{% endset %}
-{{ save_delayed('bpr',bpr) }}
 {% set ph %}
 {% if element.values.functionName %}
 {% set functionName = element.values.functionName %}
@@ -97,15 +93,15 @@ import { renderEmail } from 'react-html-email'
 {% set functionName = 'sendEmail' %}
 {% endif %}
 const {{ functionName }} = (to) => {
-    const messageHtml =  renderEmail(<InlineLink {% if element.values.parameters %}parameters={ {{ element.values.parameters }} }{% endif %} />)
+    const messageHtml = InlineLink({{ element.values.parameters }})
     axios({
       method: "POST", 
       url:"{{ settings.apiURL | raw }}/api/sendEmail",
       data: {
-        name: 'Gaston (email name) <gaston@aptugo.com>',
+        name: 'Gaston from Aptugo <gaston@aptugo.com>',
         email: to,
         messageHtml: messageHtml,
-        subject: {{ element.values.subject | textOrVariable }}
+        subject: {{ element.values.subject }}
       }
     }).then((response)=>{
       if (response.data.msg === 'success'){
