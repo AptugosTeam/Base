@@ -1,14 +1,20 @@
-const Dotenv = require('dotenv-webpack')
-const {GenerateSW} = require('workbox-webpack-plugin')
+// production config
+const { merge } = require('webpack-merge')
+const { resolve } = require('path')
 const CopyPlugin = require('copy-webpack-plugin')
+const { GenerateSW } = require('workbox-webpack-plugin')
+const commonConfig = require('./webpack.common')
 
-module.exports = {
+module.exports = merge(commonConfig, {
   mode: 'production',
+  entry: './front-end/index.tsx',
+  output: {
+    filename: 'js/bundle.[contenthash].min.js',
+    path: resolve(__dirname, '../', 'build'),
+    publicPath: '/',
+  },
   devtool: false,
   plugins: [
-    new Dotenv({
-      path: './config/.env.production',
-    }),
     new GenerateSW(),
     new CopyPlugin({
       patterns: [
@@ -16,16 +22,17 @@ module.exports = {
           from: 'dist/robots.txt',
         },
         {
-          from: 'dist/img', to: 'img'
-        }
+          from: 'dist/img',
+          to: 'img',
+        },
       ],
-    })
+    }),
   ],
   optimization: {
     minimize: true,
     splitChunks: {
       chunks: 'all',
       name: false,
-    }
-  }
-}
+    },
+  },
+})

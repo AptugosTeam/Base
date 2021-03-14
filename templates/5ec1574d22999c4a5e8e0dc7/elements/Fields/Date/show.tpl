@@ -11,6 +11,7 @@ settings:
       "moment": "latest",
       "react-moment": "latest",
 */
+
 {% set bpr %}
 import Field from '../components/Table/Field'
 {% endset %}
