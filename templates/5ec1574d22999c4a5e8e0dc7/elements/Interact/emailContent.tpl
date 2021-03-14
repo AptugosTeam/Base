@@ -10,7 +10,7 @@ children: []
 {% set bpr %}
 import _server from 'react-dom/server'
 
-function InlineLink(emailParameters) {
+function InlineLink(emailParameters = null) {
   var _server2 = _interopRequireDefault(_server)
   function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
