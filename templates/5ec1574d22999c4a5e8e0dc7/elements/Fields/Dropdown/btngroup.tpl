@@ -1,3 +1,11 @@
+/*
+path: btngroup.tpl
+type: file
+unique_id: dKPTPUtZ
+icon: ico-field
+sourceType: javascript
+children: []
+*/
 {% set tableName = ( field | fieldData ).table.name | friendly %}
 {% set bpr %}
 import Button from '@material-ui/core/Button'

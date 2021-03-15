@@ -7,7 +7,9 @@ import { useDispatch } from 'react-redux'
 const initialData{{ tableInfo.table.name | friendly }} = {
 {% for field in eifields %}
   {% set fieldValue = "''" %}
-  {% if (field | fieldData).initialValue %}
+  {% if (field | fieldData).defaultValue %}
+    {% set fieldValue = (field | fieldData).defaultValue %}
+  {% elseif (field | fieldData).initialValue %}
     {% set fieldValue = (field | fieldData).initialValue %}
   {% endif %}
   {% if (field | fieldData).reference %}
