@@ -1,3 +1,11 @@
+/*
+path: Autocomplete.tsx
+type: file
+unique_id: 1Ds72TH0
+icon: ico-field
+sourceType: typescript
+children: []
+*/
 import clsx from 'clsx'
 import React, { FunctionComponent } from 'react'
 import Select from 'react-select'

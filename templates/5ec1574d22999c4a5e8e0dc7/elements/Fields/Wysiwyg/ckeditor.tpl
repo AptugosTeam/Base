@@ -2,10 +2,16 @@
 path: ckeditor.tpl
 type: file
 unique_id: uarZVa9w
-icon: file.svg
+icon: ico-field
 internalUse: true
 children: []
+settings:
+  - name: Packages
+    value: >-
+      "@ckeditor/ckeditor5-react": "latest",
+      "@ckeditor/ckeditor5-build-balloon": "latest",
 */
+
 {% set tableName = ( field | fieldData ).table.name | friendly %}
 {% set bpr %}
 import { CKEditor } from '@ckeditor/ckeditor5-react'

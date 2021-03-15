@@ -1,3 +1,14 @@
+/*
+path: edit.tpl
+type: file
+unique_id: XLsE3nbG
+icon: ico-field
+sourceType: javascript
+settings:
+  - name: Packages
+    value: '"react-select": "^4.2.1",'
+children: []
+*/
 {% set tableName = ( field | fieldData ).table.name | friendly %}
 {% set referencedField = field.reference | fieldData %}
 {% if field.referencekey %}
