@@ -9,7 +9,7 @@ import TextField from '@material-ui/core/TextField'
     margin='{{ element.values.margin|default("dense") }}'
     label="{{ field.prompt|default(field.column_name) }}"
     {% if field.placeholder %}placeholder="{{ field.placeholder }}"{% endif %}
-    type="text"
+    type="number"
     value={ {{ tableName }}data.{{ field.column_name | friendly }} || ''}
     fullWidth
     onChange={handle{{ tableName }}Change("{{ field.column_name | friendly }}")}
