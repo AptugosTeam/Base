@@ -1,0 +1,9 @@
+{
+  "label": "Image",
+  "value": "Image",
+  "dataType": "String",
+  "initialValue": "",
+  "options": {
+    "frontEndType": "string"
+  }
+}
