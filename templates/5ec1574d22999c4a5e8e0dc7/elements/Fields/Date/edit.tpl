@@ -1,3 +1,16 @@
+/*
+path: edit.tpl
+type: file
+unique_id: pcy5ZgWy
+icon: ico-field
+sourceType: javascript
+children: []
+settings:
+  - name: Packages
+    value: |-
+      "moment": "latest",
+      "react-moment": "latest",
+*/
 {% set tableName = ( field | fieldData ).table.name | friendly %}
 {% set bpr %}
 import TextField from '@material-ui/core/TextField'

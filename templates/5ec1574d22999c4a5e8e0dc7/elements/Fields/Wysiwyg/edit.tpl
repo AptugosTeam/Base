@@ -9,6 +9,7 @@ settings:
     value: '"react-quill": "^1.3.5",'
 children: []
 */
+
 {% set bpr %}
 import FormControl from '@material-ui/core/FormControl'
 import InputLabel from '@material-ui/core/InputLabel'

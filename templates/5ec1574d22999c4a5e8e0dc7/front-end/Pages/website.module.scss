@@ -724,6 +724,7 @@ html {
     display: flex;
     flex: 100% 1 1;
     height: 469px;
+    overflow-x: hidden;
 
     & .whatCanIBuildGrid > div {
       height: 100%;

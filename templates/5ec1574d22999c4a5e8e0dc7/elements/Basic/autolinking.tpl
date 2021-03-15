@@ -1,3 +1,16 @@
+/*
+path: autolinking.tpl
+type: file
+unique_id: Gzc1T1q0
+icon: ico-autolinking
+sourceType: javascript
+options:
+  - name: fromLink
+    display: From Link
+    type: dropdown
+    options: return aptugo.pageUtils.getAllPages()
+children: []
+*/
 {% if element.values.fromLink %}
   {% set pageFrom = element.values.fromLink | elementData %}
 {% else %}

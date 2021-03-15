@@ -23,6 +23,7 @@
     "axios": "latest",
     "node_hash": "latest",
     "mongoose-paginate-v2": "latest",
-    "nodemailer": "nodemailer"
+    {{ insert_setting('BackendPackages') | raw }}
+    "mongodb": "latest",
   }
 }
