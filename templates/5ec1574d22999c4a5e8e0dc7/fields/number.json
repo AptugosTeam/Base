@@ -2,5 +2,14 @@
   "label": "Number",
   "value": "Number",
   "dataType": "Number",
-  "initialValue": null
+  "initialValue": "",
+  "options": {
+    "extra": [
+      {
+        "display": "Default Value",
+        "value": "defaultValue",
+        "type": "text"
+      }
+    ]
+  }
 }

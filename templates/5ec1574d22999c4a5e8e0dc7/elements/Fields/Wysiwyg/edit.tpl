@@ -25,6 +25,6 @@ import 'react-quill/dist/quill.snow.css'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
 <FormControl margin="dense" fullWidth>
-  <ReactQuill placeholder="{{ field.placeholder|default(field.prompt)|default(field.column_name) }}" theme="snow" value={ {{ tableName }}data.{{ field.column_name | friendly }}} onChange={e => handle{{ tableName }}Change('{{ field.column_name | friendly }}')(e.replace('<p><br></p><p><br></p>', '<p><br></p>'))}/>
+  <ReactQuill placeholder="{{ field.placeholder|default(field.prompt)|default(field.column_name) }}" theme="snow" value={ {{ tableName }}data.{{ field.column_name | friendly }} || ''} onChange={e => handle{{ tableName }}Change('{{ field.column_name | friendly }}')(e.replace('<p><br></p><p><br></p>', '<p><br></p>'))}/>
 </FormControl>
 {% endif %}
