@@ -86,6 +86,9 @@ const dispatch = useDispatch()
   {% if element.values.variableName %}
     const [{{ element.values.variableName }}Loading, set{{ element.values.variableName }}Loading] = React.useState(false)
     React.useEffect(() => {
+      {% if element.values.searchString %}
+      if ({{ element.values.searchString }}) {
+      {% endif %}
       if (!{{ element.values.variableName }}Loading && !{{ element.values.variableName }}.length {% if element.values.searchString %}|| {{ element.values.variableName }}searchString !== {{ element.values.searchString }}{% endif %}) {
         set{{ element.values.variableName }}Loading(true)
         {% if element.values.searchString %}
@@ -99,6 +102,9 @@ const dispatch = useDispatch()
       } {% if element.values.onload %} else {
         {{ element.values.onload }}
       }{% endif %}
+      {% if element.values.searchString %}
+      }
+      {% endif %}
     }, [{{ element.values.searchString }}])
   {% else %}
     {% if element.values.searchString %}

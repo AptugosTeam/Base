@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Montserrat:wght@400;700&family=Playfair+Display:ital,wght@0,900;1,700&family=Roboto:wght@100;300;400;500;700&display=swap');
 
 :root {
-  --ck-z-default: 10000
+  --ck-z-default: 10000;
 }
 
 a {
@@ -53,7 +53,6 @@ body {
 img {
   display: block;
 }
-
 
 :global(#app) {
   display: flex;
@@ -188,6 +187,19 @@ img {
   padding: 2rem;
   height: calc(100% - 51px);
   box-sizing: border-box;
+}
+
+.withSidebarOpen, .withSidebarClosed {
+  & .indentedDiv {
+    padding: 1rem 2rem;
+    border-bottom: 1px solid gainsboro;
+  }
+
+  & .actionArea {
+    text-align: right;
+    padding: 1rem;
+    background: #f5f5f5;
+  }
 }
 
 .bigHello {
