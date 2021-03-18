@@ -74,6 +74,8 @@ export default function {{ table.name | friendly | lower }}Reducer(state: I{{ t
       case {{ table.name | friendly | capitalize }}ActionTypes.EDITED_{{ table.name | friendly | upper }}:
         draft.{{ table.name | friendly | lower }}[draft.{{ table.name | friendly | lower }}.findIndex(
           ({{ table.singleName | friendly | lower }}) => {{ table.singleName | friendly | lower }}._id === action.payload._id)] = action.payload
+        draft.found{{ table.name | friendly | lower }}[draft.found{{ table.name | friendly | lower }}.findIndex(
+          ({{ table.singleName | friendly | lower }}) => {{ table.singleName | friendly | lower }}._id === action.payload._id)] = action.payload
         break
     }
   })
