@@ -1,0 +1,12 @@
+{
+  "_id": "5f1997f0c76f1f45054347d8",
+  "type": "structure",
+  "parameters": "User Table",
+  "afterRun": "",
+  "Created_date": {
+    "$date": "2020-07-23T14:00:16.549Z"
+  },
+  "__v": 0,
+  "desc": "Allows to quickly add authentication to your application",
+  "name": "User Authentication"
+}
