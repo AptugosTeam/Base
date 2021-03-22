@@ -1,4 +1,4 @@
-)}
+</React.Fragment>)}
 
 {% for delay in delayed %}
 {{ delay }}

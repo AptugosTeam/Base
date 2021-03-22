@@ -8,20 +8,16 @@ const page = {
 		"prevent_delete": true,
 		"cascades": false,
 		"children": [],
-		"unique_id": "Aw3113Li",
-		"parent": "D6wXZgLw",
 		"collapseStatus": "collapse"
 	}, {
-		"name": "Page Header",
+		"name": "Page Headerz",
 		"type": "element",
 		"value": "ph",
 		"prevent_delete": true,
 		"children": [{
-			"unique_id": "MOhS9b61",
 			"name": "Load Personas",
 			"prevent_delete": false,
 			"cascades": false,
-			"parent": "ZdEa1Trt",
 			"children": [],
 			"type": "element",
 			"value": "loadFromRedux",
@@ -33,17 +29,13 @@ const page = {
 				"fieldToSearch": "_id"
 			}
 		}, {
-			"unique_id": "0thGeM2y",
 			"name": "LoadedPersona",
 			"prevent_delete": false,
 			"cascades": false,
-			"parent": "ZdEa1Trt",
 			"children": [{
-				"unique_id": "QagObADu",
 				"name": "code",
 				"prevent_delete": false,
 				"cascades": false,
-				"parent": "0thGeM2y",
 				"children": [],
 				"type": "element",
 				"value": "code",
@@ -59,17 +51,13 @@ const page = {
 				"watchVariable": "loadedPersona"
 			}
 		}, {
-			"unique_id": "cpNVzm40",
 			"name": "function",
 			"prevent_delete": false,
 			"cascades": false,
-			"parent": "ZdEa1Trt",
 			"children": [{
-				"unique_id": "q0fTqtbx",
 				"name": "saveToRedux",
 				"prevent_delete": false,
 				"cascades": false,
-				"parent": "cpNVzm40",
 				"children": [],
 				"type": "element",
 				"value": "saveToRedux",
@@ -87,8 +75,6 @@ const page = {
 			}
 		}],
 		"cascades": false,
-		"unique_id": "ZdEa1Trt",
-		"parent": "D6wXZgLw",
 		"collapseStatus": "collapse"
 	}, {
 		"name": "Body",
@@ -97,29 +83,21 @@ const page = {
 		"prevent_delete": true,
 		"cascades": false,
 		"children": [{
-			"unique_id": "SRCOlwyv",
 			"name": "div",
 			"prevent_delete": false,
 			"cascades": false,
-			"parent": "7S4JCHFk",
 			"children": [{
-				"unique_id": "r81G2922",
 				"name": "Paper",
 				"prevent_delete": false,
 				"cascades": false,
-				"parent": "SRCOlwyv",
 				"children": [{
-					"unique_id": "TvW5piim",
 					"name": "typography",
 					"prevent_delete": false,
 					"cascades": false,
-					"parent": "r81G2922",
 					"children": [{
-						"unique_id": "3B2T8IPE",
 						"name": "text",
 						"prevent_delete": false,
 						"cascades": false,
-						"parent": "TvW5piim",
 						"children": [],
 						"type": "element",
 						"value": "text",
@@ -135,23 +113,17 @@ const page = {
 						"tag": "h2"
 					}
 				}, {
-					"unique_id": "7v1nSWVZ",
 					"name": "div",
 					"prevent_delete": false,
 					"cascades": false,
-					"parent": "r81G2922",
 					"children": [{
-						"unique_id": "K0EC8p6p",
 						"name": "Tipo",
 						"prevent_delete": false,
 						"cascades": false,
-						"parent": "7v1nSWVZ",
 						"children": [{
-							"unique_id": "SCPeWW61",
 							"name": "field",
 							"prevent_delete": false,
 							"cascades": false,
-							"parent": "K0EC8p6p",
 							"children": [],
 							"type": "element",
 							"value": "field",
@@ -166,23 +138,17 @@ const page = {
 						"value": "div",
 						"collapseStatus": "expand"
 					}, {
-						"unique_id": "JafClpCB",
 						"name": "Natural",
 						"prevent_delete": false,
 						"cascades": false,
-						"parent": "7v1nSWVZ",
 						"children": [{
-							"unique_id": "xsd3trEk",
 							"name": "Nombre",
 							"prevent_delete": false,
 							"cascades": false,
-							"parent": "JafClpCB",
 							"children": [{
-								"unique_id": "yD9lCWAQ",
 								"name": "field",
 								"prevent_delete": false,
 								"cascades": false,
-								"parent": "xsd3trEk",
 								"children": [],
 								"type": "element",
 								"value": "field",
@@ -196,17 +162,13 @@ const page = {
 							"value": "div",
 							"collapseStatus": "expand"
 						}, {
-							"unique_id": "kOFuBhuC",
 							"name": "Apellido",
 							"prevent_delete": false,
 							"cascades": false,
-							"parent": "JafClpCB",
 							"children": [{
-								"unique_id": "tTLvBg3R",
 								"name": "field",
 								"prevent_delete": false,
 								"cascades": false,
-								"parent": "kOFuBhuC",
 								"children": [],
 								"type": "element",
 								"value": "field",
@@ -220,17 +182,13 @@ const page = {
 							"value": "div",
 							"collapseStatus": "expand"
 						}, {
-							"unique_id": "L9D3Nl9h",
 							"name": "Apellido Materno",
 							"prevent_delete": false,
 							"cascades": false,
-							"parent": "JafClpCB",
 							"children": [{
-								"unique_id": "gD5y5pmI",
 								"name": "field",
 								"prevent_delete": false,
 								"cascades": false,
-								"parent": "L9D3Nl9h",
 								"children": [],
 								"type": "element",
 								"value": "field",
@@ -251,23 +209,17 @@ const page = {
 							"condition": "Personasdata.Tipo === 'Natural'"
 						}
 					}, {
-						"unique_id": "gK7mb39n",
 						"name": "Jurídica",
 						"prevent_delete": false,
 						"cascades": false,
-						"parent": "7v1nSWVZ",
 						"children": [{
-							"unique_id": "nlPi6HXr",
 							"name": "Razon Social",
 							"prevent_delete": false,
 							"cascades": false,
-							"parent": "gK7mb39n",
 							"children": [{
-								"unique_id": "pTGCNa7l",
 								"name": "field",
 								"prevent_delete": false,
 								"cascades": false,
-								"parent": "nlPi6HXr",
 								"children": [],
 								"type": "element",
 								"value": "field",
@@ -281,17 +233,13 @@ const page = {
 							"value": "div",
 							"collapseStatus": "expand"
 						}, {
-							"unique_id": "TahQ4Nzd",
 							"name": "div",
 							"prevent_delete": false,
 							"cascades": false,
-							"parent": "gK7mb39n",
 							"children": [{
-								"unique_id": "aS311kuA",
 								"name": "Nombre Fantasia",
 								"prevent_delete": false,
 								"cascades": false,
-								"parent": "TahQ4Nzd",
 								"children": [],
 								"type": "element",
 								"value": "field",
@@ -301,11 +249,9 @@ const page = {
 									"Type": "edit"
 								}
 							}, {
-								"unique_id": "KyKvMP5y",
 								"name": "RUT",
 								"prevent_delete": false,
 								"cascades": false,
-								"parent": "TahQ4Nzd",
 								"children": [],
 								"type": "element",
 								"value": "field",
@@ -315,11 +261,9 @@ const page = {
 									"Type": "edit"
 								}
 							}, {
-								"unique_id": "h9XJE4C9",
 								"name": "Representante Legal",
 								"prevent_delete": false,
 								"cascades": false,
-								"parent": "TahQ4Nzd",
 								"children": [],
 								"type": "element",
 								"value": "field",
@@ -333,17 +277,13 @@ const page = {
 							"value": "div",
 							"collapseStatus": "expand"
 						}, {
-							"unique_id": "iaWQLzKX",
 							"name": "Personas",
 							"prevent_delete": false,
 							"cascades": false,
-							"parent": "gK7mb39n",
 							"children": [{
-								"unique_id": "KZW3eD6k",
 								"name": "field",
 								"prevent_delete": false,
 								"cascades": false,
-								"parent": "iaWQLzKX",
 								"children": [],
 								"type": "element",
 								"value": "field",
@@ -371,17 +311,13 @@ const page = {
 						"class": "classes.indentedDiv"
 					}
 				}, {
-					"unique_id": "3DEBeDWx",
 					"name": "div",
 					"prevent_delete": false,
 					"cascades": false,
-					"parent": "r81G2922",
 					"children": [{
-						"unique_id": "9kFSIknI",
 						"name": "button",
 						"prevent_delete": false,
 						"cascades": false,
-						"parent": "3DEBeDWx",
 						"children": [],
 						"type": "element",
 						"value": "button",
@@ -411,8 +347,6 @@ const page = {
 				"class": "sidebarOpen ? classes.withSidebarOpen : classes.withSidebarClosed"
 			}
 		}],
-		"unique_id": "7S4JCHFk",
-		"parent": "D6wXZgLw",
 		"collapseStatus": "collapse"
 	}, {
 		"name": "Page Footer",
@@ -421,8 +355,6 @@ const page = {
 		"prevent_delete": true,
 		"cascades": false,
 		"children": [],
-		"unique_id": "Onr9RvrU",
-		"parent": "D6wXZgLw",
 		"collapseStatus": "expand"
 	}, {
 		"name": "After Page Render",
@@ -431,13 +363,9 @@ const page = {
 		"prevent_delete": true,
 		"cascades": false,
 		"children": [],
-		"unique_id": "v6OUX0ee",
-		"parent": "D6wXZgLw",
 		"collapseStatus": "collapse"
 	}],
-	"unique_id": "D6wXZgLw",
 	"path": "/Personas/edit/:id?",
-	"parent": "rrTqBh0G",
 	"collapseStatus": "collapse",
 	"filename": "personas_edit.tsx",
 	"priority": 5
