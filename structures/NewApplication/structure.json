@@ -8,6 +8,13 @@
   "desc": "Start with an empty application ",
   "icon": "public/img/database.png",
   "type": "template",
-  "parameters": "Name",
+  "parameters": [
+    {
+      "name": "Name",
+      "display": "New Application Name",
+      "type": "text",
+      "helpText": "Type the name of your Application"
+    }
+  ],
   "afterRun": "/DbDesigner"
 }
