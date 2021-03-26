@@ -8,7 +8,7 @@ if (existing) {
     Application.assets[foundIndex] = Parameters.asset
 } else {
     const newAsset = {
-        type: 'image',
+        type: Parameters.type,
         id: Parameters.asset._id,
         name: Parameters.asset.source.name
     } 
