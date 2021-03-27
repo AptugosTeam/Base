@@ -17,8 +17,8 @@ const newTable = {
 		"data_type": "String",
 		"column_name": "Name"
 	}],
-	"beforeCreate": "const response = userService.jwtVerify(req.headers.authorization)\nif (response.error) res.status(401).json(response)\nif (req.body.Password) req.body.Password = userService.cryptPassword(req.body.Password)",
-	"beforeUpdate": "const response = userService.jwtVerify(req.headers.authorization)\nif (response.error) res.status(401).json(response)\nif (req.body.Password) req.body.Password = userService.cryptPassword(req.body.Password)",
+	"beforeCreate": "const response = userService.jwtVerify(req.headers.authorization)\nif (response.error) res.status(401).json(response)\nif (req.body.Password) req.body.Password = userService.cryptPassword(req.body.Password)\n",
+	"beforeUpdate": "const response = userService.jwtVerify(req.headers.authorization)\nif (response.error) res.status(401).json(response)\nif (req.body.Password) req.body.Password = userService.cryptPassword(req.body.Password)\n",
 	"extraRoutes": "// Authenticate User\n  app.post(\"/api/users/authenticate\", function (req, res) {\n    userService.authenticate(req.body)\n      .then(user => {\n        res.json(user)\n      })\n      .catch(next => {\n        console.log(next)\n      })\n    }\n  )",
 	"extraModules": "const userService = require('../services/users.service')"
 }
