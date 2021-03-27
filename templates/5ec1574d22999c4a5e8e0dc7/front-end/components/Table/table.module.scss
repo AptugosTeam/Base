@@ -1,5 +1,7 @@
 
 .tableHolder {
+  overflow: auto;
+  
   & .table {
     & .tableHeader {
       & .warning {
