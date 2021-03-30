@@ -7,7 +7,7 @@ options:
   - name: theme
     display: Theme
     type: dropdown
-    options: website;whatsapp;layout;fantasyx;crm
+    options: website;whatsapp;layout;fantasyx;crm;minimum
   - name: useAsset
     display: Use an Asset
     type: dropdown
@@ -59,8 +59,11 @@ options:
 sourceType: javascript
 children: []
 */
+
 // Theme selection
 {% if element.values.useAsset %}
+  {% if element.values.useAsset == 'minimum' %}
+  {% endif %}
   {% set asset = element.values.useAsset|assetData %}
   {% set theme = asset.name|friendly %}
   {% set bpr %}
@@ -69,7 +72,7 @@ children: []
 {% else %}
   {% set theme = element.values.theme %}
   {% set bpr %}
-    import {{ element.values.theme }} from './{{ element.values.theme }}.module.scss'
+    import {{ element.values.theme }} from '../components/Themes/{{ element.values.theme }}.module.scss'
   {% endset %}
 {% endif %}
 {{ save_delayed('bpr',bpr) }}

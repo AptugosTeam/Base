@@ -7,6 +7,9 @@ helpText: >-
   An alert displays a short, important message in a way that attracts the user's
   attention without interrupting the user's task.
 children: []
+settings:
+  - name: Packages
+    value: '"@material-ui/lab": "^4.0.0-alpha.56",'
 options:
   - name: severity
     display: Severity
@@ -21,7 +24,7 @@ options:
     options: standard;filled;outlined
 */
 {% set bpr %}
-import Alert from '@material-ui/core/Alert'
+import Alert from '@material-ui/lab/Alert'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 {% if element.values.title %}
