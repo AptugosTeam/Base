@@ -381,7 +381,7 @@ html {
   }
 
   & .prehappypeople {
-    background: linear-gradient(180deg, #D9E9EE 0%, #FFFFFF 100%);
+    background: linear-gradient(180deg, #d9e9ee 0%, #ffffff 100%);
     padding-bottom: 32rem;
 
     @media screen and (max-width: $break-large) {
@@ -521,8 +521,8 @@ html {
   }
 
   & .special {
-    background: linear-gradient(180deg, #FFFFFF 0%, #E9FAFF 100%);
-    border-bottom: 1rem solid #C0F2FF;
+    background: linear-gradient(180deg, #ffffff 0%, #e9faff 100%);
+    border-bottom: 1rem solid #c0f2ff;
     & .specialtitle {
       justify-items: center;
       display: flex;
@@ -657,16 +657,55 @@ html {
   }
 
   & .whatcanido {
-    background: linear-gradient(180deg, #ffffff 0%, #e9faff 37.5%);
+    background: linear-gradient(360deg, #ffffff 0%, #e9faff 100%);
     overflow-x: hidden;
 
-    & h3 {
+    & .featuresTitle {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin: auto;
       padding-top: 6.875rem;
-      margin-bottom: 2.5rem;
+    }
+
+    & .FeaturesCardsContainer {
+      display: flex;
+      flex-direction: row;
+      margin-top: 108px;
+    }
+
+    & .FeaturesCards {
+      //max-width: 50%;
+      width: 505px;
+      height: 930px;
+      background: linear-gradient(180deg, #e9faff 0%, rgba(233, 250, 255, 0) 100%);
+      border-radius: 60px;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    & .FeaturesCards > picture {
+      margin: auto;
+    }
+
+    & h3 {
+      margin: auto;
+      margin-bottom: 40px;
     }
 
     & p {
       width: 60%;
+      margin: auto;
+      text-align: center;
+    }
+
+    & .featuresButton {
+      display: flex;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 100px;
     }
 
     & h6 {
@@ -1355,7 +1394,7 @@ html {
     display: flex;
     flex-direction: column;
     background-color: #e9faff;
-    background: linear-gradient(180deg, #FFFFFF 0%, #E9FAFF 100%);
+    background: linear-gradient(180deg, #ffffff 0%, #e9faff 100%);
     padding-top: 5.5rem;
     box-sizing: border-box;
     margin-bottom: 7.1875rem;
@@ -1829,6 +1868,13 @@ html {
     }
 
     & .whatcanido {
+      .FeaturesCardsContainer {
+        margin-top: -30px;
+      }
+
+      .FeaturesCards {
+        margin-top: 96px;
+      }
       & p {
         width: 100%;
       }
