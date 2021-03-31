@@ -25,6 +25,12 @@ options:
     display: Variant
     type: dropdown
     options: standard;filled;outlined
+  - name: fieldame
+    display: fieldname
+    type: text
+    options: ''
+    settings:
+      default: ''
 children: []
 */
 {% set bpr %}
@@ -38,6 +44,7 @@ import TextField from '@material-ui/core/TextField'
     {% if element.values.DisableVariable %}disabled={ {{ element.values.DisableVariable }} }{% endif %}
     margin="dense"
     {% if element.values.label %}label="{{ element.values.label }}"{% endif %}
+    {% if element.values.fieldname %}fieldname="{{ element.values.fieldname }}"{% endif %}
     type="text"
     fullWidth
     {% if element.values.value %}value={{ element.values.value }}{% endif %}
