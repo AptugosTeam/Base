@@ -9,7 +9,7 @@ const newPage = {
 		"prevent_delete": true,
 		"cascades": false,
 		"children": [],
-		"collapseStatus": "collapse"
+		"collapseStatus": "collapse",
 	}, {
 		"name": "Page Header",
 		"type": "element",
@@ -17,7 +17,7 @@ const newPage = {
 		"prevent_delete": true,
 		"children": [],
 		"cascades": false,
-		"collapseStatus": "collapse"
+		"collapseStatus": "collapse",
 	}, {
 		"name": "Body",
 		"type": "element",
@@ -25,103 +25,148 @@ const newPage = {
 		"prevent_delete": true,
 		"cascades": false,
 		"children": [{
-	"name": "div",
-	"prevent_delete": false,
-	"cascades": false,
-	"children": [{
-		"name": "Table Area",
-		"prevent_delete": false,
-		"cascades": false,
-		"children": [{
-			"name": "Head",
+			"name": "div",
 			"prevent_delete": false,
 			"cascades": false,
 			"children": [{
-				"name": "dialog",
-				"prevent_delete": false,
-				"cascades": false,
-				"children": [],
-				"type": "element",
-				"value": "dialog",
-				"collapseStatus": "expand",
-				"values": {
-					"addProcedure": "Internal",
-						"title": `() => { return "Add " + aptugo.store.getState().application.tables.find(table => table.unique_id === "${Parameters.unique_id}").singleName }`,
-						"introText": `() => { return "Enter " + aptugo.store.getState().application.tables.find(table => table.unique_id === "${Parameters.unique_id}").singleName + " data" }`,
-						"color": "danger",
-						"table": Parameters.unique_id,
-						"button": "Add",
-						"editButton": "Edit",
-						"editTitle": `() => { return "Edit " + aptugo.store.getState().application.tables.find(table => table.unique_id === "${Parameters.unique_id}").singleName }`,
-						"editIntroText": `() => { return "Update " + aptugo.store.getState().application.tables.find(table => table.unique_id === "${Parameters.unique_id}").singleName + " data" }`,
-				}
-			}, {
-				"name": "typography",
+				"name": "Container",
 				"prevent_delete": false,
 				"cascades": false,
 				"children": [{
-					"name": "text",
+					"name": "Head",
 					"prevent_delete": false,
 					"cascades": false,
-					"children": [],
+					"children": [{
+						"name": "typography",
+						"prevent_delete": false,
+						"cascades": false,
+						"children": [{
+							"name": "text",
+							"prevent_delete": false,
+							"cascades": false,
+							"children": [],
+							"type": "element",
+							"value": "text",
+							"collapseStatus": "expand",
+							"values": {
+								"Content": `() => { return aptugo.store.getState().application.tables.find(table => table.unique_id === "${Parameters.unique_id}").singleName + " list" }`,
+							},
+						}],
+						"type": "element",
+						"value": "typography",
+						"collapseStatus": "expand",
+						"values": {
+							"tag": "h4"
+						},
+					}],
 					"type": "element",
-					"value": "text",
+					"value": "div",
 					"collapseStatus": "expand",
 					"values": {
-						"Content": `() => { return aptugo.store.getState().application.tables.find(table => table.unique_id === "${Parameters.unique_id}").singleName + " list" }`,
-					}
+						"class": "theme.tableHeading"
+					},
+				}, {
+					"name": "Paper",
+					"prevent_delete": false,
+					"cascades": false,
+					"children": [{
+						"name": "Table Area",
+						"prevent_delete": false,
+						"cascades": false,
+						"children": [{
+							"name": "Table Toolbar",
+							"prevent_delete": false,
+							"cascades": false,
+							"children": [{
+								"name": "searchField",
+								"prevent_delete": false,
+								"cascades": false,
+								"children": [],
+								"type": "element",
+								"value": "searchField",
+								"collapseStatus": "expand",
+								"values": {
+									"table": Parameters.unique_id,
+								}
+							}, {
+								"name": "dialog",
+								"prevent_delete": false,
+								"cascades": false,
+								"children": [],
+								"type": "element",
+								"value": "dialog",
+								"collapseStatus": "expand",
+								"values": {
+									"addProcedure": "Internal",
+									"title": `() => { return "Add " + aptugo.store.getState().application.tables.find(table => table.unique_id === "${Parameters.unique_id}").singleName }`,
+						      "introText": `() => { return "Enter " + aptugo.store.getState().application.tables.find(table => table.unique_id === "${Parameters.unique_id}").singleName + " data" }`,
+									"color": "primary",
+									"table": Parameters.unique_id,
+									"button": "Add",
+									"editButton": "Edit",
+									"editTitle": `() => { return "Edit " + aptugo.store.getState().application.tables.find(table => table.unique_id === "${Parameters.unique_id}").singleName }`,
+						      "editIntroText": `() => { return "Update " + aptugo.store.getState().application.tables.find(table => table.unique_id === "${Parameters.unique_id}").singleName + " data" }`,
+								},
+							}],
+							"type": "element",
+							"value": "div",
+							"collapseStatus": "expand",
+							"values": {
+								"class": "theme.tabletoolbar"
+							}
+						}, {
+							"name": "Body",
+							"prevent_delete": false,
+							"cascades": false,
+							"children": [{
+								"name": "table",
+								"prevent_delete": false,
+								"cascades": false,
+								"children": [],
+								"type": "element",
+								"value": "table",
+								"collapseStatus": "expand",
+								"values": {
+									"table": Parameters.unique_id,
+									"addProcedure": "Internal",
+									"title": "Table Title",
+									"headerColor": "rose"
+								},
+							}],
+							"type": "element",
+							"value": "div",
+							"collapseStatus": "expand",
+						}],
+						"type": "element",
+						"value": "div",
+						"collapseStatus": "expand",
+						"values": {
+							"class": "classes.tableResponsive"
+						},
+					}],
+					"type": "element",
+					"value": "Paper",
+					"collapseStatus": "expand"
 				}],
 				"type": "element",
-				"value": "typography",
+				"value": "Container",
 				"collapseStatus": "expand",
 				"values": {
-					"tag": "h4"
+					"maxWidth": "lg"
 				}
 			}],
 			"type": "element",
 			"value": "div",
 			"collapseStatus": "expand",
 			"values": {
-				"class": "classes.tableHeading"
-			}
-		}, {
-			"name": "Body",
-			"prevent_delete": false,
-			"cascades": false,
-			"children": [{
-				"name": "table",
-				"prevent_delete": false,
-				"cascades": false,
-				"children": [],
-				"type": "element",
-				"value": "table",
-				"collapseStatus": "expand",
-				"values": {
-					"table": Parameters.unique_id,
-					"addProcedure": "Internal",
-					"title": "Table Title",
-					"headerColor": "rose"
-				}
-			}],
-			"type": "element",
-			"value": "div",
-			"collapseStatus": "expand"
+				"class": "theme.mainarea"
+			},
 		}],
-		"type": "element",
-		"value": "div",
-		"collapseStatus": "collapse",
+		"collapseStatus": "expand",
 		"values": {
-			"class": "classes.tableResponsive"
+			"className": ["theme.pages"],
+			"primaryColor": "green"
 		}
-	}],
-	"type": "element",
-	"value": "div",
-	"collapseStatus": "expand",
-	"values": {
-		"class": "sidebarOpen ? classes.withSidebarOpen : classes.withSidebarClosed"
-	}
-}],
-		"collapseStatus": "expand"
 	}, {
 		"name": "Page Footer",
 		"type": "element",
@@ -129,7 +174,7 @@ const newPage = {
 		"prevent_delete": true,
 		"cascades": false,
 		"children": [],
-		"collapseStatus": "expand"
+		"collapseStatus": "expand",
 	}, {
 		"name": "After Page Render",
 		"type": "element",
@@ -137,7 +182,7 @@ const newPage = {
 		"prevent_delete": true,
 		"cascades": false,
 		"children": [],
-		"collapseStatus": "collapse"
+		"collapseStatus": "collapse",
 	}],
 	"path": `() => '/' + aptugo.store.getState().application.tables.find(table => table.unique_id === "${Parameters.unique_id}").name`,
 	"parent": Application.pages[0].unique_id,

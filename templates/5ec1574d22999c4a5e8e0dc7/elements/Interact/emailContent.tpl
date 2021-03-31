@@ -7,6 +7,7 @@ internalUse: true
 sourceType: javascript
 children: []
 */
+
 {% set bpr %}
 import _server from 'react-dom/server'
 

@@ -40,10 +40,11 @@ import ListItemText from '@material-ui/core/ListItemText'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 <NavLink
-    to={{ element.values.destination|textOrVariable }}
-    {% if element.values.activeClassName %}className={ {{ element.values.className }} }{% endif %}
-    {% if element.values.activeClassName %}activeClassName='{{ element.values.activeClassname }}'{% endif %}
-    key='{{ element.unique_id }}'
+  exact
+  to={{ element.values.destination|textOrVariable }}
+  {% if element.values.activeClassName %}className={ {{ element.values.className }} }{% endif %}
+  {% if element.values.activeClassName %}activeClassName='{{ element.values.activeClassname }}'{% endif %}
+  key='{{ element.unique_id }}'
 >
   <ListItem button className={classes.itemLink}>
     <ListItemText>

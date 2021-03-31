@@ -23,7 +23,7 @@ options:
   - name: color
     display: Color
     type: dropdown
-    options: warning;primary;danger;success
+    options: primary;inherit;secondary;default
   - name: table
     display: Table
     type: dropdown
@@ -52,6 +52,8 @@ options:
     options: ''
 children: []
 */
+
+
 {% set table = element.values.table | tableData %}
 {% if element.children %}
 {% else %}
