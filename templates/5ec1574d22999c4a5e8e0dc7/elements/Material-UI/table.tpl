@@ -82,16 +82,16 @@ children: []
   {% if element.children %}
       {% for field in element.children %}
           {% set currentField = field.values.Field | fieldData  %}
-          {% set tableFields = tableFields|merge([currentField.label|default(currentField.column_name)]) %}
+          {% set tableFields = tableFields|merge([currentField.displaylabel|default(currentField.column_name)]) %}
       {% endfor %}
   {% else %}
       {% set fields = table.fields %}
       {% for field in fields %}
-          {% set tableFields = tableFields|merge([field.label|default(field.column_name)]) %}
+          {% set tableFields = tableFields|merge([field.displaylabel|default(field.column_name)]) %}
       {% endfor %}
   {% endif %}
 
-  {% set tableData = '(' ~ table.name|friendly|lower ~ 'Data.' ~ table.name|friendly|lower ~ ' as any)' %}
+  {% set tableData = '(' ~ table.name|friendly|lower ~ 'Data.found' ~ table.name|friendly|lower ~ '.length ? ' ~ table.name|friendly|lower ~ 'Data.found' ~ table.name|friendly|lower ~ ' : ' ~ table.name|friendly|lower ~ 'Data.' ~ table.name|friendly|lower ~ ' as any)' %}
   {% set bpr %}
   import { add{{ table.name | friendly | capitalize }}, load{{ table.name | friendly | capitalize }}, remove{{ table.singleName | friendly | capitalize }}, edit{{ table.name | friendly | capitalize }} } from '../store/actions/{{ table.name | friendly | lower }}Actions'
   {% endset %}
@@ -105,14 +105,25 @@ children: []
   import IconButton from '@material-ui/core/IconButton'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
-
+{% set ph %}
+const [sortOrder, setSortOrder] = React.useState<{ orderBy?: string, order: 'asc' | 'desc' }>({ orderBy: null, order: 'asc'})
+{% endset %}
+{{ save_delayed('ph',ph)}}
 <Table
     title='{{ element.values.title }}'
     tableHeaderColor='{{ element.values.headerColor }}'
     tableHead={[{% for field in tableFields %}"{{ field }}",{% endfor %}{% if element.values.addProcedure != 'No' %}"Actions"{% endif %}]}
     tableData={ {{ tableData }} }
+    orderBy={sortOrder.orderBy}
+    order={sortOrder.order}
+    onRequestSort={(event, property) => { 
+      setSortOrder({
+        order: sortOrder.orderBy === property ? sortOrder.order === 'asc' ? 'desc' : 'asc' : 'asc',
+        orderBy: property 
+      })
+    }}
 >{% if element.children %}
-        {{ content | raw }}
+  {{ content | raw }}
 {% else %}
 {% for field in fields %}
   {% set innerParams = { 'element': { values: { 'Field': field.unique_id } } } %}

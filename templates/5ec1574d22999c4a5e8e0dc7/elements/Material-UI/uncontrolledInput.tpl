@@ -25,8 +25,18 @@ options:
     display: Variant
     type: dropdown
     options: standard;filled;outlined
+  - name: margin
+    display: Margin
+    type: dropdown
+    options: normal;dense;none
+  - name: className
+    display: ClassName
+    type: text
+    options: ''
 children: []
 */
+
+
 {% set bpr %}
 import TextField from '@material-ui/core/TextField'
 {% endset %}
@@ -36,8 +46,9 @@ import TextField from '@material-ui/core/TextField'
     {% if element.values.Autofocus %}autoFocus{% endif %}
     {% if element.values.placeholder %}placeholder="{{ element.values.placeholder }}"{% endif %}
     {% if element.values.DisableVariable %}disabled={ {{ element.values.DisableVariable }} }{% endif %}
-    margin="dense"
+    {% if element.values.margin %}margin="{{ element.values.margin }}"{% endif %}
     {% if element.values.label %}label="{{ element.values.label }}"{% endif %}
+    {% if element.values.className %}className={ {{ element.values.className }} }{% endif %}
     type="text"
     fullWidth
     {% if element.values.value %}value={{ element.values.value }}{% endif %}

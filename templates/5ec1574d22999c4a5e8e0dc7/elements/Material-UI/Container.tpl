@@ -34,7 +34,13 @@ import Container from '@material-ui/core/Container'
   {% if element.values.className %}className={ {{ element.values.className }} }{% endif %}
   {% if element.values.disableGutters %}disableGutters{% endif %}
   {% if element.values.fixed %}fixed{% endif %}
-  {% if element.values.maxWidth %}maxWidth="{{ element.values.maxWidth }}"{% endif %}
+  {% if (element.values.maxWidth) %}
+    {% if (element.values.maxWidth == 'false') %}
+      maxWidth={false}
+    {% else %}
+      maxWidth="{{ element.values.maxWidth }}"
+    {% endif %}
+  {% endif %}
 >
   {{ content | raw }}
 </Container>
