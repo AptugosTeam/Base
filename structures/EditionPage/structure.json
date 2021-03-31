@@ -1,0 +1,9 @@
+{
+  "_id": "xREW5vlHZ5SND1fk",
+  "name": "Edition Page",
+  "desc": "Creates a new page to add or edit records",
+  "icon": "",
+  "type": "structure",
+  "parameters": "Table",
+  "afterRun": ""
+}

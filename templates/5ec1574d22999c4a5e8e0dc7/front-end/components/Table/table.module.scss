@@ -1,5 +1,7 @@
 
 .tableHolder {
+  overflow: auto;
+  
   & .table {
     & .tableHeader {
       & .warning {
@@ -24,7 +26,7 @@
 
 .tableField {
   & img {
-    max-height: 100px;
+    width: 100%;
   }
 }
 

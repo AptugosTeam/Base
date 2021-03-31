@@ -6,3 +6,6 @@ applications copy
 olddrops
 Archive.zip
 applications/
+dump/*
+node_modules/.pnpm-debug.log
+structures/.DS_Store

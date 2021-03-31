@@ -20,4 +20,4 @@ const {{ page.name | friendly }}: FunctionComponent = (props: any) => {
   {% endfor %}
 
   {{ content|raw }}
-  return (
+  return (<React.Fragment>

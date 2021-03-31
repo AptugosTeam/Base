@@ -1,52 +1,36 @@
-import React, { useState, FunctionComponent } from 'react'
-
-// @material-ui/core components
-import AddIcon from '@material-ui/icons/Add'
 import Button from '@material-ui/core/Button'
 import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
 import DialogContent from '@material-ui/core/DialogContent'
 import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogTitle from '@material-ui/core/DialogTitle'
-import IconButton from '@material-ui/core/IconButton'
 import Switch from '@material-ui/core/Switch'
 import Tooltip from '@material-ui/core/Tooltip'
+import AddIcon from '@material-ui/icons/Add'
+import Fab from '@material-ui/core/Fab';
+import React, { FunctionComponent, useState } from 'react'
 
 interface addDialogProps {
-  isOpen: boolean,
-  onOpen: VoidFunction,
-  onClose: VoidFunction,
-  title: string,
-  text?: string,
-  button: string,
-  saveDataHandler: Function,
-  color: 'warning' | 'primary' | 'danger' | 'success' | 'info' | 'rose' | 'gray',
-  data: any,
-  initialData: any,
-  setData: Function,
-  allowMultipleSubmit: boolean,
+  isOpen: boolean
+  onOpen: VoidFunction
+  onClose: VoidFunction
+  title: string
+  text?: string
+  button: string
+  saveDataHandler: Function
+  color: "primary" | "inherit" | "secondary" | "default"
+  data: any
+  initialData: any
+  setData: Function
+  allowMultipleSubmit: boolean
   hideButton?: boolean
 }
 
 const AddDialog: FunctionComponent<addDialogProps> = (props) => {
-  const {
-    isOpen,
-    onOpen,
-    onClose,
-    title,
-    text,
-    button,
-    saveDataHandler,
-    color,
-    data,
-    initialData,
-    setData,
-    allowMultipleSubmit,
-    hideButton
-  } = props
-  
+  const { isOpen, onOpen, onClose, title, text, button, saveDataHandler, color, data, initialData, setData, allowMultipleSubmit, hideButton } = props
+
   const [switchState, setSwitchState] = useState({ addMultiple: false })
-  
+
   const handleSwitchChange = (name: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
     setSwitchState({ ...switchState, [name]: event.target.checked })
   }
@@ -69,26 +53,21 @@ const AddDialog: FunctionComponent<addDialogProps> = (props) => {
 
   return (
     <React.Fragment>
-      {!hideButton &&
+      {!hideButton && (
         <Tooltip title={title}>
-          <IconButton aria-label={title} onClick={onOpen} className={color}>
+          <Fab aria-label={title} color={color} onClick={onOpen}>
             <AddIcon />
-          </IconButton>
+          </Fab>
         </Tooltip>
-      }
-      <Dialog
-        disableEnforceFocus
-        open={isOpen}
-        onClose={handleClose}
-        aria-labelledby='form-dialog-title'
-      >
-        <DialogTitle id='form-dialog-title'>{title}</DialogTitle>
+      )}
+      <Dialog disableEnforceFocus open={isOpen} onClose={handleClose} aria-labelledby="form-dialog-title">
+        <DialogTitle id="form-dialog-title">{title}</DialogTitle>
         <DialogContent>
           <DialogContentText>{text}</DialogContentText>
           {props.children}
         </DialogContent>
         <DialogActions>
-          {allowMultipleSubmit &&
+          {allowMultipleSubmit && (
             <Tooltip title="Add multiple">
               <Switch
                 checked={switchState.addMultiple}
@@ -97,7 +76,7 @@ const AddDialog: FunctionComponent<addDialogProps> = (props) => {
                 inputProps={ { 'aria-label': 'secondary checkbox' } }
               />
             </Tooltip>
-          }
+          )}
           <Button onClick={handleClose} color="primary">
             Cancel
           </Button>

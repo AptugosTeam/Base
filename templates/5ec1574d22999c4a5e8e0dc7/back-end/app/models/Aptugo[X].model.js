@@ -47,4 +47,4 @@ const {{ table.name | friendly }}Schema = mongoose.Schema({
   }
 );
 
-module.exports = mongoose.model('{{ table.name | friendly }}', {{ table.name | friendly }}Schema)
+module.exports = mongoose.model('{{ table.name | friendly }}', {{ table.name | friendly }}Schema, '{{ table.name | friendly | lower }}')

@@ -29,6 +29,7 @@ children: []
     "start": "concurrently \"pnpm run dev:api\" \"pnpm run dev:client\"",
     "dev:client": "webpack serve --config=config/webpack.dev.js",
     "dev:api": "nodemon --delay 3 --exec babel-node back-end/index.js",
+    "postinstall": "cd back-end && pnpm install",
     {{ insert_setting('npmScripts') | raw }}
   },
   "devDependencies": {
@@ -79,11 +80,12 @@ children: []
     "@fortawesome/free-solid-svg-icons": "^5.15.2",
     "@fortawesome/react-fontawesome": "^0.1.14",
     "@material-ui/core": "^4.11.3",
-    "@material-ui/icons": "^4.11.2",
+    "@material-ui/icons": "next",
     "axios": "^0.21.1",
     "disqus-react": "^1.0.11",
     "immer": "^8.0.1",
     "react-ga": "^3.3.0",
+    "react-google-login": "^5.2.2",
     "react-helmet": "^6.1.0",
     "react-html-parser": "^2.0.2",
     "react-quill": "^1.3.5",
