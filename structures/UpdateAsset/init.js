@@ -1,5 +1,3 @@
-console.log(Parameters, 'params')
-
 const existing = Application.assets.find(asset => asset.id === Parameters.asset.id)
 console.log(existing)
 if (existing) {
@@ -15,6 +13,8 @@ if (existing) {
 
     if (Parameters.type === 'stylesheetAsset') {
         newAsset.type = 'stylesheet'
+    } else if (Parameters.type === "imageAsset") {
+        newAsset.type = 'image'
     }
 
     Application.assets.push(newAsset)
