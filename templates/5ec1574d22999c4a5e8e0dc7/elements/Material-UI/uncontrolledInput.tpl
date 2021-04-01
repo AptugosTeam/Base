@@ -33,8 +33,15 @@ options:
     display: ClassName
     type: text
     options: ''
+  - name: fieldname
+    display: fieldname
+    type: text
+    options: ''
 children: []
 */
+
+
+
 
 
 {% set bpr %}
@@ -49,6 +56,7 @@ import TextField from '@material-ui/core/TextField'
     {% if element.values.margin %}margin="{{ element.values.margin }}"{% endif %}
     {% if element.values.label %}label="{{ element.values.label }}"{% endif %}
     {% if element.values.className %}className={ {{ element.values.className }} }{% endif %}
+    {% if element.values.fieldname %}name={{ element.values.fieldname | textOrVariable}} {% endif %}
     type="text"
     fullWidth
     {% if element.values.value %}value={{ element.values.value }}{% endif %}
