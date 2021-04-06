@@ -15,6 +15,7 @@ options:
     options: ''
 helpText: Menus display a list of choices on temporary surfaces.
 */
+
 {% set bpr %}
 import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
@@ -36,7 +37,15 @@ import MenuItem from '@material-ui/core/MenuItem'
 {% endif %}
 <Menu
   anchorEl={ {{ anchorElement }} }
-  keepMounted
+  getContentAnchorEl={null}
+  anchorOrigin={ {
+    vertical: 'bottom',
+    horizontal: 'center',
+  } }
+  transformOrigin={ {
+    vertical: 'top',
+    horizontal: 'center',
+  } }
   open={ Boolean({{ anchorElement }}) }
   onClose={ {{ onClose }} }
 >

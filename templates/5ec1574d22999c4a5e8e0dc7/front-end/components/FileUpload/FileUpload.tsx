@@ -1,3 +1,5 @@
+import { faFilePdf } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import FormControl from '@material-ui/core/FormControl'
 import IconButton from '@material-ui/core/IconButton'
 import Input from '@material-ui/core/Input'
@@ -5,13 +7,12 @@ import InputLabel from '@material-ui/core/InputLabel'
 import { makeStyles } from '@material-ui/core/styles'
 import SearchIcon from '@material-ui/icons/Search'
 import React, { FunctionComponent } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFilePdf } from '@fortawesome/free-solid-svg-icons'
+import clsx from 'clsx'
 
 const useStyles = makeStyles({
   root: {
     display: 'flex',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   image: {
     maxHeight: '48px',
@@ -73,19 +74,23 @@ const AptugoImageUpload: FunctionComponent<any> = (props) => {
   }
 
   const renderUploadedState = () => {
-    if (!state.selectedFile && !state.fileName) return null
+    if (!state.selectedFile && !state.fileName && !props.value) return null
     if (state.file && state.file.type === 'application/pdf') return <FontAwesomeIcon className={classes.image} icon={faFilePdf} />
+    var src = state.selectedFile || `/img/${state.fileName}`
+    if (!state.selectedFile && !state.fileName) {
+      src = `/img/${props.value}`
+    }
     return (
       <div className={classes.image} onClick={imageResetHandler}>
-        <img className={classes.media} src={state.selectedFile || `/img/${state.fileName}`} />
+        <img className={classes.media} src={src} />
       </div>
     )
   }
 
   return (
-    <div className={classes.root}>
+    <div className={clsx(classes.root, props.className && props.className )}>
       {renderUploadedState()}
-      <FormControl margin="dense" fullWidth>
+      <FormControl margin="dense" fullWidth variant={props.variant}>
         <InputLabel htmlFor="component-upload">{props.label}</InputLabel>
         <Input
           value={state.fileName || ''}

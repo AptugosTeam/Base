@@ -37,8 +37,20 @@ options:
     display: margin
     type: dropdown
     options: dense;normal;none
+  - name: variant
+    display: Variant
+    type: dropdown
+    options: standard;filled;outlined
+    settings:
+      propertyCondition: Type
+      condition: edit
+  - name: classname
+    display: ClassName
+    type: text
 children: []
 */
+
+
 {% set bpr %}
     {% if element.values.Type == 'edit' %}
         import TextField from '@material-ui/core/TextField'

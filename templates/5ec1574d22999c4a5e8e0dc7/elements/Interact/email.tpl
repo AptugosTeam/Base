@@ -60,24 +60,27 @@ settings:
         }
       });
       app.use(express.json());
-      app.post("/api/sendEmail", (req, res, next) => {
-        const name = req.body.name;
-        const email = req.body.email;
-        const message = req.body.messageHtml;
+      app.set('sendEmail', async function(emailDetails) {
         var mail = {
-          from: name,
-          to: email,
-          subject: req.body.subject,
-          html: message,
-        };
-        
+          from: emailDetails.name,
+          to: emailDetails.email,
+          subject: emailDetails.subject,
+          html: emailDetails.message,
+        }
         transporter.sendMail(mail, (err, data) => {
           if (err) {
-            res.json({ msg: "fail" });
+            return { msg: 'fail' }
           } else {
-            res.json({ msg: "success" });
+            return { msg: 'success' }
           }
-        });
+        })
+      })
+      app.post("/api/sendEmail", (req, res, next) => {
+        const name = req.body.name
+        const email = req.body.email
+        const message = req.body.messageHtml
+        const subject = req.body.subject
+        res.json( sendEmail( { name, email, message, subject }) )
       });
 childs:
   - name: Email Content

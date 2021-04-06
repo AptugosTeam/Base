@@ -1,16 +1,24 @@
-/*
-path: minimum.module.scss
-type: file
-unique_id: pU1vzQWQ
-icon: file.svg
-children: []
-*/
+body {
+  background-color: white !important;
+}
+
 .pages {
-  margin: 0;
+  margin: 1rem 0;
   flex-grow: 2;
   background: white;
-  padding: 1rem 0;
   display: flex;
+
+  & :global(.MuiAppBar-root) {
+    backdrop-filter: blur(4px);
+
+    & .profilePicture {
+      margin: 0 0 0 auto;
+      & img {
+        width: 2.5rem;
+        border-radius: 1.75rem;
+      }
+    }
+  }
 
   .greenText {
     color: green;
@@ -24,7 +32,7 @@ children: []
     flex-grow: 2;
 
     .tableHeading {
-      margin: 3rem 0;
+      margin: 5rem 0 3rem;
     }
 
     & :global(.MuiPaper-elevation1) {
@@ -75,6 +83,16 @@ children: []
       padding-left: 1rem;
       align-items: center;
       display: flex;
+    }
+
+    & .marginatedForms {
+      margin: 1rem 2rem;
+      display: flex;
+      flex-direction: column;
+
+      & button {
+        margin: 0.5rem 0 1rem auto;
+      }
     }
   }
 }
@@ -173,6 +191,82 @@ children: []
       justify-content: space-between;
       align-items: center;
       margin: 1rem 0;
+    }
+  }
+}
+
+.menuProfileDetails {
+  border-bottom: 1px solid rgba(224, 224, 224, 1);
+  padding: 1rem 0.5rem;
+  font-size: 0.8rem;
+  color: rgba(128, 128, 128, 1);
+}
+
+.regulatedWidth {
+  max-width: 30rem;
+  margin: 0 auto;
+}
+
+.fileuploadprofile {
+  margin: 0 auto;
+  & > div:first-child {
+    max-height: unset;
+    padding: 0.5rem;
+    border: 1px dotted rgba(0, 0, 0, 0.23);
+    border-radius: 50%;
+    & > img {
+      max-height: unset;
+      width: 8rem;
+      height: 8rem;
+      border-radius: 4rem;
+    }
+  }
+
+  & :global(.MuiFormLabel-root) {
+    display: none;
+  }
+
+  & :global(.MuiInputBase-root) {
+    &::before,
+    &::after {
+      content: none;
+    }
+  }
+
+  & :global(.MuiFormControl-fullWidth) {
+    width: 8rem;
+    height: 8rem;
+    margin-left: -9rem;
+  }
+
+  & :global(.MuiInputBase-input) {
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  & :global(.MuiIconButton-root) {
+    width: 8rem;
+    height: 8rem;
+    box-sizing: border-box;
+    top: -1rem;
+    left: 1px;
+    right: unset;
+    display: none;
+  }
+
+  & :global(.MuiIconButton-label) {
+    height: 100%;
+  }
+
+  &:hover {
+    & img {
+      transition: all linear 300ms;
+      filter: blur(1px);
+    }
+
+    & :global(.MuiIconButton-root) {
+      display: block;
     }
   }
 }

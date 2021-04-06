@@ -33,8 +33,13 @@ options:
     display: ClassName
     type: text
     options: ''
+  - name: type
+    display: Type
+    type: dropdown
+    options: text;password
 children: []
 */
+
 
 
 {% set bpr %}
@@ -49,7 +54,7 @@ import TextField from '@material-ui/core/TextField'
     {% if element.values.margin %}margin="{{ element.values.margin }}"{% endif %}
     {% if element.values.label %}label="{{ element.values.label }}"{% endif %}
     {% if element.values.className %}className={ {{ element.values.className }} }{% endif %}
-    type="text"
+    type="{{ element.values.type|default('text') }}"
     fullWidth
     {% if element.values.value %}value={{ element.values.value }}{% endif %}
     {% if element.values.onChange %}onChange={ {{ element.values.onChange }} }{% endif %}
