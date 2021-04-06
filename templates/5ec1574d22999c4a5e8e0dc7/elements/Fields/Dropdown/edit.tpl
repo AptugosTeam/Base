@@ -22,10 +22,11 @@ import MenuItem from '@material-ui/core/MenuItem'
     select
     {% if element.values.Autofocus %}autoFocus{% endif %}
     {% if element.values.DisableVariable %}disabled={ {{ element.values.DisableVariable }} }{% endif %}
-    margin="dense"
+    margin='{{ element.values.margin|default("dense") }}'
     label="{{ field.prompt|default(field.column_name) }}"
     type="text"
     fullWidth
+    variant="{{ element.values.variant|default('standard') }}"
     value={ {{ tableName }}data.{{ field.column_name | friendly }}}
     onChange={handle{{ tableName }}Change("{{ field.column_name | friendly }}")}
 >

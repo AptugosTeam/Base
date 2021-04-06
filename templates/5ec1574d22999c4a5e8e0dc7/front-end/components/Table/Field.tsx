@@ -1,3 +1,11 @@
+/*
+path: Field.tsx
+type: file
+unique_id: PA55kCUp
+icon: ico-field
+sourceType: typescript
+children: []
+*/
 import React, { FunctionComponent } from 'react'
 import styles from './table.module.scss'
 

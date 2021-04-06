@@ -7,6 +7,30 @@
       "display": "Name of the Users Table",
       "type": "text",
       "helpText": "Type the name of the Users Table"
+    },
+    {
+      "name": "smpthost",
+      "display": "SMTP Host",
+      "type": "text",
+      "helpText": "Type the name of the Users Table"
+    },
+    {
+      "name": "smtpport",
+      "display": "SMTP Port",
+      "type": "text",
+      "helpText": "Type the name of the Users Table"
+    },
+    {
+      "name": "smtpuser",
+      "display": "SMTP User",
+      "type": "text",
+      "helpText": "Type the name of the Users Table"
+    },
+    {
+      "name": "smtppass",
+      "display": "SMTP Password",
+      "type": "text",
+      "helpText": "Type the name of the Users Table"
     }
   ],
   "afterRun": "",

@@ -6,6 +6,7 @@ icon: ico-field
 sourceType: javascript
 children: []
 */
+
 {% set tableName = ( field | fieldData ).table.name | friendly %}
 {% set bpr %}
 import TextField from '@material-ui/core/TextField'
@@ -22,6 +23,7 @@ import TextField from '@material-ui/core/TextField'
     label="{{ field.prompt|default(field.column_name) }}"
     type="text"
     fullWidth
+    variant="{{ element.values.variant|default('standard') }}"
     value={ {{ tableName }}data.{{ field.column_name | friendly }}}
     onChange={handle{{ tableName }}Change("{{ field.column_name | friendly }}")}
 />
