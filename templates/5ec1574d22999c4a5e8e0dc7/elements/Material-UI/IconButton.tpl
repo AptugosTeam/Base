@@ -30,5 +30,6 @@ import {{element.values.icon}}Icon from '@material-ui/icons/{{element.values.ico
   {% if element.values.Action %}onClickCapture={ {{ element.values.Action }} }{% endif %}
   {% if element.values.className %}className={ {{ element.values.className }} }{% endif %}
 >
-  <{{element.values.icon}}Icon />
+  {% if element.values.icon %}<{{element.values.icon}}Icon />{% endif %}
+  {{ content | raw }}
 </IconButton>
