@@ -1,0 +1,15 @@
+{
+  "label": "Number",
+  "value": "Number",
+  "dataType": "Number",
+  "initialValue": "",
+  "options": {
+    "extra": [
+      {
+        "display": "Default Value",
+        "value": "defaultValue",
+        "type": "text"
+      }
+    ]
+  }
+}
