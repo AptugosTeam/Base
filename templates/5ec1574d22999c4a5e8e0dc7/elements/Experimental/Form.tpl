@@ -1,15 +1,16 @@
 /*
 path: Form.tpl
 type: file
-unique_id: wQZAET6u
+unique_id: pepAmzRk
 icon: file.svg
-children: []
-options: []
+options:
+  - name: action
+    display: route
+    type: text
+    options: ''
 */
-
-
 <form
-  method="{{element.values.method}}"
+  method="POST"
   action="http://localhost:4567{{element.values.action}}"
 >
 <input type="hidden" name="token" value="5ff714646dcece84a0c222d3" />
