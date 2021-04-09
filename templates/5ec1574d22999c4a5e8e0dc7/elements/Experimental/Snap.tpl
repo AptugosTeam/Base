@@ -11,4 +11,5 @@ settings:
     value: '"postbuild": "react-snap",'
 children: []
 */
+
 // This project generates a set of pre-rendered HMTL pages.

@@ -1,19 +1,13 @@
 /*
 path: Form.tpl
 type: file
-unique_id: ILcL0HCZ
+unique_id: wQZAET6u
 icon: file.svg
 children: []
-options:
-  - name: method
-    display: Method
-    type: dropdown
-    options: POST;GET
-  - name: action
-    display: Action
-    type: text
-    options: ''
+options: []
 */
+
+
 <form
   method="{{element.values.method}}"
   action="http://localhost:4567{{element.values.action}}"
