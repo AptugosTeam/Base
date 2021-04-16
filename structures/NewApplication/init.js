@@ -1,12 +1,29 @@
 // Application
-if (State.usersReducer.apps.find(app => app.settings.name === Parameters.Name)) {
+
+// Backwards compatibility
+if (State.usersReducer) {
+  if (State.usersReducer.apps.find(app => app.settings.name === Parameters.Name)) {
     const error = 'Application with the same name exists'
     Store.dispatch({ type: "SET_ERROR", error: error })
     return false
+  }
+} else {
+  if (State.apps.find(app => app.settings.name === Parameters.Name)) {
+    const error = 'Application with the same name exists'
+    return { error }
+  }
 }
 
-const defaultTemplate = State.templatesReducer.templates.filter(template => template.default )
-State.templatesReducer.loadedTemplate = defaultTemplate[0]
+
+// Backwards compatibility
+let defaultTemplate
+if (State.templatesReducer) {
+  defaultTemplate = State.templatesReducer.templates.filter(template => template.default )
+  State.templatesReducer.loadedTemplate = defaultTemplate[0]
+} else {
+  defaultTemplate = State.templates.filter(template => template.default)
+}
+
 const username = aptugo.friendly(State.auth.user.name)
 const dbpassword = aptugo.generateID() + aptugo.generateID()
 const appname = aptugo.friendly(Parameters.Name)

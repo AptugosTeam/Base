@@ -45,9 +45,6 @@ children: []
 */
 
 
-
-
-
 {% set bpr %}
 import TextField from '@material-ui/core/TextField'
 {% endset %}
@@ -61,7 +58,6 @@ import TextField from '@material-ui/core/TextField'
     {% if element.values.label %}label="{{ element.values.label }}"{% endif %}
     {% if element.values.className %}className={ {{ element.values.className }} }{% endif %}
     {% if element.values.fieldname %}name={{ element.values.fieldname | textOrVariable}} {% endif %}
-    type="text"
     type="{{ element.values.type|default('text') }}"
     fullWidth
     {% if element.values.value %}value={{ element.values.value }}{% endif %}
