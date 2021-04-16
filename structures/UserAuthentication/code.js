@@ -1416,7 +1416,7 @@ const ForgotPage = {
 					"value": "saveToRedux",
 					"collapseStatus": "expand",
 					"values": {
-						"data": "9d66WRhF"
+						"data": Parameters.table_unique_id
 					},
 					"children": [],
 				}],
@@ -1807,55 +1807,226 @@ const ForgotPage = {
 dmz.children.push(LoginPage, RegisterPage, ForgotPage)
 
 const secureZone = {
-	"name": "Restricted Zone",
+  "name": "Restricted Zone",
 	"type": "page",
+	"path": "",
+	"filename": "",
+	"parent": false,
+	"collapseStatus": "expand",
 	"children": [{
+		"children": [{
+			"name": "authHeaders",
+			"prevent_delete": false,
+			"cascades": true,
+			"children": [],
+			"type": "element",
+			"value": "import",
+			"collapseStatus": "expand",
+			"values": {
+				"moduleName": "authHeaders",
+				"modulePath": "../services/auth-header"
+			}
+		}, {
+			"name": "AuthService",
+			"prevent_delete": false,
+			"cascades": true,
+			"children": [],
+			"type": "element",
+			"value": "import",
+			"collapseStatus": "expand",
+			"values": {
+				"moduleName": "AuthService",
+				"modulePath": "../services/auth.service"
+			}
+		}],
 		"name": "Before Page Render",
 		"type": "element",
 		"value": "bpr",
 		"prevent_delete": true,
 		"cascades": false,
+		"collapseStatus": "expand"
+	}, {
 		"children": [{
+			"name": "useState",
+			"prevent_delete": false,
+			"cascades": true,
+			"type": "element",
+			"value": "useState",
+			"collapseStatus": "expand",
+			"values": {
+				"variableName": "profileMenuAnchor",
+				"defaultValue": "null"
+			},
+			"children": [],
+		}, {
 			"name": "code",
 			"prevent_delete": false,
 			"cascades": true,
-			"children": [],
 			"type": "element",
 			"value": "code",
 			"values": {
-				"code": "import authHeaders from '../services/auth-header'"
-			}
-		}]
-	}, {
+				"code": "if (!authHeaders()) { \n  props.history.push(\"/Login\")\n}"
+			},
+			"collapseStatus": "expand",
+			"children": []
+		}, {
+			"name": "useState",
+			"prevent_delete": false,
+			"cascades": true,
+			"type": "element",
+			"value": "useState",
+			"collapseStatus": "expand",
+			"values": {
+				"defaultValue": "AuthService.getCurrentUser()",
+				"variableName": "currentUser"
+			},
+			"children": []
+		}],
 		"name": "Page Header",
 		"type": "element",
 		"value": "ph",
 		"prevent_delete": true,
-		"children": [{
-			"name": "code",
-			"prevent_delete": false,
-			"cascades": true,
-			"children": [],
-			"type": "element",
-			"value": "code",
-			"values": {
-				"code": "if (!authHeaders()) { \n    props.history.push(\"/Login\")\n  }"
-			}
-		}],
-		"cascades": false
+		"cascades": false,
+		"collapseStatus": "expand"
 	}, {
 		"name": "Body",
 		"type": "element",
 		"value": "b",
 		"prevent_delete": true,
 		"cascades": false,
-		"children": []
+		"collapseStatus": "expand",
+		"children": [{
+			"children": [{
+				"children": [{
+					"children": [{
+						"name": "image",
+						"prevent_delete": false,
+						"cascades": false,
+						"type": "element",
+						"value": "image",
+						"collapseStatus": "expand",
+						"values": {
+							"path": "/img/${currentUser.ProfilePic}",
+							"ClassName": []
+						},
+						"children": [],
+					}],
+					"name": "IconButton",
+					"prevent_delete": false,
+					"cascades": false,
+					"type": "element",
+					"value": "IconButton",
+					"collapseStatus": "expand",
+					"values": {
+						"className": "theme.profilePicture",
+						"Action": "(event) => { setprofileMenuAnchor(event.currentTarget) }"
+					},
+				}, {
+					"children": [{
+						"children": [{
+							"name": "text",
+							"prevent_delete": false,
+							"cascades": false,
+							"type": "element",
+							"value": "text",
+							"collapseStatus": "expand",
+							"values": {
+								"Content": "{currentUser.FirstName} {currentUser.LastName}"
+							},
+							"children": [],
+						}],
+						"name": "div",
+						"prevent_delete": false,
+						"cascades": false,
+						"type": "element",
+						"value": "div",
+						"collapseStatus": "expand",
+						"values": {
+							"class": "theme.menuProfileDetails"
+						},
+					}, {
+						"children": [{
+							"name": "text",
+							"prevent_delete": false,
+							"cascades": false,
+							"type": "element",
+							"value": "text",
+							"collapseStatus": "expand",
+							"values": {
+								"Content": "Profile"
+							},
+							"children": [],
+						}],
+						"name": "MenuItem",
+						"prevent_delete": false,
+						"cascades": false,
+						"type": "element",
+						"value": "MenuItem",
+						"collapseStatus": "expand",
+					}, {
+						"children": [{
+							"name": "text",
+							"prevent_delete": false,
+							"cascades": false,
+							"type": "element",
+							"value": "text",
+							"collapseStatus": "expand",
+							"values": {
+								"Content": "Logout"
+							},
+							"children": [],
+						}],
+						"name": "MenuItem",
+						"prevent_delete": false,
+						"cascades": false,
+						"type": "element",
+						"value": "MenuItem",
+						"collapseStatus": "expand",
+						"values": {
+							"onclick": "(params) => { AuthService.logout(); props.history.push('/') }"
+						},
+					}],
+					"name": "Menu",
+					"prevent_delete": false,
+					"cascades": false,
+					"type": "element",
+					"value": "Menu",
+					"collapseStatus": "expand",
+					"values": {
+						"anchorElement": "profileMenuAnchor",
+						"onClose": "(params) => { setprofileMenuAnchor(null)}"
+					},
+				}],
+				"name": "navbar",
+				"prevent_delete": false,
+				"cascades": true,
+				"type": "element",
+				"value": "navbar",
+				"collapseStatus": "expand",
+				"values": {
+					"Title": "",
+					"Color": "transparent",
+					"Position": "absolute",
+					"Elevation": "3"
+				},
+			}],
+			"name": "condition",
+			"prevent_delete": false,
+			"cascades": true,
+			"type": "element",
+			"value": "condition",
+			"collapseStatus": "expand",
+			"values": {
+				"condition": "currentUser"
+			},
+		}]
 	}, {
 		"name": "Page Footer",
 		"type": "element",
 		"value": "pf",
 		"prevent_delete": true,
 		"cascades": false,
+		"collapseStatus": "expand",
 		"children": []
 	}, {
 		"name": "After Page Render",
@@ -1863,70 +2034,9 @@ const secureZone = {
 		"value": "apr",
 		"prevent_delete": true,
 		"cascades": false,
+		"collapseStatus": "collapse",
 		"children": []
-	}, {
-		"name": "Admin Dashboard",
-		"type": "page",
-		"path": "/admin",
-		"filename": "admindashboard.tsx",
-		"prevent_delete": false,
-		"children": [{
-			"name": "Before Page Render",
-			"type": "element",
-			"value": "bpr",
-			"prevent_delete": true,
-			"cascades": false,
-			"children": []
-		}, {
-			"name": "Page Header",
-			"type": "element",
-			"value": "ph",
-			"prevent_delete": true,
-			"cascades": false,
-			"children": []
-		}, {
-			"name": "Body",
-			"type": "element",
-			"value": "b",
-			"prevent_delete": true,
-			"children": [{
-				"name": "HTML Code",
-				"type": "element",
-				"value": "html",
-				"prevent_delete": false,
-				"cascades": false,
-				"canhavechildren": "true",
-				"children": [],
-				"values": {
-					"html": "<h1>Index page for your application</h1>"
-				}
-			}, {
-				"name": "autolinking",
-				"prevent_delete": false,
-				"cascades": false,
-				"children": [],
-				"type": "element",
-				"value": "autolinking"
-			}],
-			"cascades": false
-		}, {
-			"name": "Page Footer",
-			"type": "element",
-			"value": "pf",
-			"prevent_delete": true,
-			"cascades": false,
-			"children": []
-		}, {
-			"name": "After Page Render",
-			"type": "element",
-			"value": "apr",
-			"prevent_delete": true,
-			"cascades": false,
-			"children": []
-		}]
-	}],
-	"path": "",
-	"filename": ""
+	}]
 }
 
 Application.pages[0].children.push(dmz)
