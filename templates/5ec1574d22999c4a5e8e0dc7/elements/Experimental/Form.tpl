@@ -2,10 +2,11 @@
 path: Form.tpl
 type: file
 unique_id: 7CHs788C
-icon: file.svg
+icon: ico-field
 children: []
 options: []
 */
+
 <form
   method="{{element.values.method}}"
   action="http://localhost:4567{{element.values.action}}"
