@@ -6,6 +6,7 @@ const bodyParser = require('body-parser')
 const fileupload = require('express-fileupload')
 
 const app = express()
+app.set('filesFolder', {% if variables.filesFolder %}'{{ variables.filesFolder }}'{% else %}__dirname + '/../dist/img'{% endif %})
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*")

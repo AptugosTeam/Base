@@ -32,6 +32,10 @@ children: []
     "postinstall": "cd back-end && pnpm install",
     {{ insert_setting('npmScripts') | raw }}
   },
+  "reactSnap": {
+    "inlineCss": true,
+    "puppeteerArgs": ["--disable-web-security"]
+  },
   "devDependencies": {
     "@babel/cli": "^7.13.10",
     "@babel/node": "^7.0.0",

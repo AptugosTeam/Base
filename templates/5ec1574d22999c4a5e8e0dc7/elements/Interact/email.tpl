@@ -34,6 +34,10 @@ options:
     display: Email Parameters
     type: text
     options: ''
+  - name: from
+    display: From (name <emailaddress>)
+    type: text
+    options: ''
 settings:
   - name: BackendPackages
     value: '"nodemailer": "^6.4.11",'
@@ -80,13 +84,14 @@ settings:
         const email = req.body.email
         const message = req.body.messageHtml
         const subject = req.body.subject
-        res.json( sendEmail( { name, email, message, subject }) )
+        res.json( app.get('sendEmail')( { name, email, message, subject }) )
       });
 childs:
   - name: Email Content
     element: emailContent
 children: []
 */
+
 {% set bpr %}
 import axios from 'axios'
 {% endset %}
@@ -103,7 +108,7 @@ const {{ functionName }} = (to) => {
       method: "POST", 
       url:"{{ settings.apiURL | raw }}/api/sendEmail",
       data: {
-        name: 'Gaston from Aptugo <gaston@aptugo.com>',
+        name: '{{ element.values.from }}',
         email: to,
         messageHtml: messageHtml,
         subject: {{ element.values.subject }}
