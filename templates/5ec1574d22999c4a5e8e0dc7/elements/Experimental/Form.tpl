@@ -2,13 +2,11 @@
 path: Form.tpl
 type: file
 unique_id: 7CHs788C
-icon: file.svg
-options:
-  - name: action
-    display: route
-    type: text
-    options: ''
+icon: ico-field
+children: []
+options: []
 */
+
 <form
   method="POST"
   action="http://localhost:4567{{element.values.action}}"
