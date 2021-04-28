@@ -46,6 +46,18 @@ children: []
 {% else %}
   {% set limit = 5000 %}
 {% endif %}
+{% set optionsObject %}
+{
+  page: 1,
+  limit: {{ limit }},
+  {% if element.values.searchString %}searchString: {{ element.values.searchString }} || '',{% endif %}
+  {% if element.values.fieldToSearch %}searchField: "{{ element.values.fieldToSearch }}",{% endif %}
+  {% if element.values.sortColumn %}sort: {
+    field: '{{ element.values.sortColumn }}',
+    method: '{{ element.values.sortMethod|default('DESC') }}'
+  }{% endif %}
+}
+{% endset %}
 {% if data %}
   {% set table = data | tableData %}
 {% else %}
@@ -95,9 +107,13 @@ const dispatch = useDispatch()
           dispatch(search{{ table.name | friendly | capitalize }}({
             searchString: {{ element.values.searchString }} || '',
             {% if element.values.fieldToSearch %}searchField: "{{ element.values.fieldToSearch }}",{% endif %}
+            {% if element.values.sortColumn %}sort: {
+              field: '{{ element.values.sortColumn }}',
+              method: '{{ element.values.sortMethod|default('DESC') }}
+            }{% endif %}
           }))
         {% else %}
-          dispatch(load{{ table.name | friendly | capitalize }}(1, {{ limit }}))
+          dispatch(load{{ table.name | friendly | capitalize }}({{ optionsObject }}))
         {% endif %}
       } {% if element.values.onload %} else {
         {{ element.values.onload }}
@@ -116,14 +132,7 @@ const dispatch = useDispatch()
             {{ table.name | friendly | lower }}Data.searchString !== {{ element.values.searchString }}
           )
         ) {
-          dispatch(search{{ table.name | friendly | capitalize }}({
-            searchString: {{ element.values.searchString }} || '',
-            {% if element.values.fieldToSearch %}searchField: "{{ element.values.fieldToSearch }}",{% endif %}
-            {% if element.values.sortColumn %}sort: {
-              field: '{{ element.values.sortColumn }}',
-              method: '{{ element.values.sortMethod|default('DESC') }}
-            }{% endif %}
-          }))
+          dispatch(search{{ table.name | friendly | capitalize }}({{ optionsObject }}))
         }
         {% if element.values.onload %}
         else {
@@ -137,7 +146,7 @@ const dispatch = useDispatch()
           {{ table.name | friendly | lower }}Data.loadingStatus === 'notloaded' ||
           {{ table.name | friendly | lower }}Data.loadingStatus === 'failed'
         ) {
-          dispatch(load{{ table.name | friendly | capitalize }}(1, {{ limit }}))
+          dispatch(load{{ table.name | friendly | capitalize }}({{ optionsObject }}))
         } 
         {% if element.values.onload %}
         else {

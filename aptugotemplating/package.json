@@ -1,0 +1,85 @@
+{
+	"name": "vscode-twig-pack",
+	"displayName": "TWIG pack",
+	"description": "Snippets, auto-completion, emmet, and syntax(whatwedo) for TWIG language",
+	"version": "1.1.0",
+	"icon": "icon.png",
+	"license": "MIT",
+	"publisher": "bajdzis",
+	"author": {
+		"name": "Rafał Budzis",
+		"url": "https://budzis.pl"
+	},
+	"contributors": [
+		{
+			"name": "whatwedo",
+			"url": "https://github.com/whatwedo/vscode-twig"
+		}
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Bajdzis/vscode-twig-pack.git"
+	},
+	"engines": {
+		"vscode": "^0.10.1"
+	},
+	"categories": [
+		"Programming Languages",
+		"Snippets"
+	],
+	"keywords": [
+		"twig",
+		"snippets",
+		"completion",
+		"template"
+	],
+	"galleryBanner": {
+		"color": "#BBCE29",
+		"theme": "light"
+	},
+	"activationEvents": [
+		"*"
+	],
+	"main": "./extension",
+	"contributes": {
+		"snippets": [
+			{
+				"language": "tpl",
+				"path": "./snippets/filters.json"
+			},
+			{
+				"language": "tpl",
+				"path": "./snippets/twig.json"
+			},
+			{
+				"language": "tpl",
+				"path": "./snippets/functions.json"
+			}
+		],
+		"languages": [
+			{
+				"id": "tpl",
+				"aliases": [
+					"Aptugo Templating"
+				],
+				"extensions": [
+					".tpl"
+				],
+				"configuration": "./twig.configuration.json"
+			}
+		],
+		"grammars": [
+			{
+				"language": "tpl",
+				"scopeName": "text.tpl.aptugo",
+				"path": "./syntaxes/twig.tmLanguage"
+			}
+		]
+	},
+	"dependencies": {
+		"fs": "0.0.2"
+	},
+	"devDependencies": {
+		"vscode": "0.10.x"
+	}
+}

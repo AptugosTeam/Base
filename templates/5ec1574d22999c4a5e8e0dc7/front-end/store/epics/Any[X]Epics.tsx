@@ -66,13 +66,14 @@ const load{{ table.name | friendly | capitalize }}Epic: Epic<{{ table.name | fr
   let responses = []
   return action$.pipe(
     filter(isOfType({{ table.name | friendly | capitalize }}ActionTypes.LOAD_{{ table.name | friendly | upper }})),
-    switchMap(action =>
-      from(axios.get(`{{ settings.apiURL | raw }}/api/{{ table.name | friendly | lower }}/?page=${action.page}&limit=${action.limit}`)).pipe(
+    switchMap(action => {
+      let url = `{{ settings.apiURL | raw }}/api/{{ table.name | friendly | lower }}/`
+      return from(axios.get(url, { params: action.loadOptions } )).pipe(
         map((response) => loaded{{ table.name | friendly | capitalize }}(response.data)),
         startWith(loading{{ table.name | friendly | capitalize }}()),
         catchError(() => of(loading{{ table.name | friendly | capitalize }}Failed()))
       )
-    )
+    })
   )
 }
 

@@ -67,11 +67,10 @@ export function searching{{ table.name | friendly | capitalize }}Failed(): ISear
   }
 }
 
-export function load{{ table.name | friendly | capitalize }}(page = 1, limit = 5000): ILoad{{ table.name | friendly | capitalize }}Action {
+export function load{{ table.name | friendly | capitalize }}(loadOptions: TSearchOptions): ILoad{{ table.name | friendly | capitalize }}Action {
   return {
     type: {{ table.name | friendly | capitalize }}ActionTypes.LOAD_{{ table.name | friendly | upper }},
-    page: page,
-    limit: limit
+    loadOptions: loadOptions
   }
 }
 
@@ -210,8 +209,7 @@ export interface ISearching{{ table.name | friendly | capitalize }}FailedAction 
 
 export interface ILoad{{ table.name | friendly | capitalize }}Action {
   type: {{ table.name | friendly | capitalize }}ActionTypes.LOAD_{{ table.name | friendly | upper }}
-  page: number,
-  limit: number
+  loadOptions: TSearchOptions
 }
 
 export interface ILoading{{ table.name | friendly | capitalize }}Action {
