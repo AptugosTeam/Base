@@ -34,7 +34,10 @@ exports.create = (req, res) => {
 
 // Retrieve and return all {{ table.name | friendly }} from the database.
 exports.findAll = (req, res) => {
+  if (typeof req.query.sort === 'string') req.query.sort = JSON.parse(req.query.sort)
+
   {{ table.name | friendly }}.find()
+  .sort( req.query.sort && { [req.query.sort.field]: req.query.sort.method === 'DESC' ? 1 : -1 })
    {% for field in table.fields %}
     {% set fieldWithData = field | fieldData %}
     {% include includeTemplate(['Fields' ~ field.data_type ~'find.tpl', 'Fieldsfind.tpl']) %}

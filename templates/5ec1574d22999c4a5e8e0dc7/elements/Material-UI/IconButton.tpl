@@ -15,10 +15,14 @@ options:
   - name: icon
     display: Icon
     type: dropdown
-    options: Send;AllInbox;Menu;DeleteOutline;Favorite;Clear;Google;Facebook;Twitter
+    options: >-
+      Home;Send;AllInbox;Menu;DeleteOutline;Favorite;Clear;Google;Facebook;Twitter;Person;ThumbUp
 sourceType: javascript
 children: []
 */
+
+
+
 
 {% set bpr %}
 import IconButton from '@material-ui/core/IconButton'

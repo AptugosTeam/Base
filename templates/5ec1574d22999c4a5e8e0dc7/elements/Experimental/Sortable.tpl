@@ -6,7 +6,7 @@ icon: ico-field
 helpText: Sortable list
 settings:
   - name: Packages
-    value: '"react-sortablejs": "^6.0.0",'
+    value: '"react-sortablejs": "^6.0.0","sortablejs": "^1.13.0",'
 options:
   - name: List
     display: List
@@ -30,6 +30,7 @@ options:
     options: ''
 children: []
 */
+
 
 {% set bpr %}
 import { ReactSortable } from "react-sortablejs"
