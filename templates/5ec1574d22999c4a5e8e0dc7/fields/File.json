@@ -3,5 +3,14 @@
   "value": "File",
   "dataType": "String",
   "initialValue": "",
-  "options": null
+  "options": {
+    "frontEndType": "string",
+    "extra": [
+      {
+        "display": "File extensions",
+        "value": "filetype",
+        "type": "text"
+      }
+    ]
+  }
 }
