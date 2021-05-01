@@ -23,6 +23,9 @@ options:
       return [['var','Use a
       variable'],...aptugo.store.getState().application.tables.map(({ unique_id,
       name }) => [unique_id, name])]
+  - name: allowEdit
+    display: Allow Edition
+    type: checkbox
   - name: addTitle
     display: Title for Add procedure
     type: text
@@ -63,6 +66,7 @@ options:
       active: true
 children: []
 */
+
 {% set tableFields = [] %}
 {% if element.values.table == 'var' %}
   {% for field in element.children %}
@@ -132,6 +136,7 @@ const [sortOrder, setSortOrder] = React.useState<{ orderBy?: string, order: 'asc
 {% endif %}
 {% if element.values.addProcedure != 'No' %}
 <div className={classes.actionsArea}>
+    {% if element.values.allowEdit %}
     <IconButton
       aria-label="edit"
       color="primary"
@@ -148,6 +153,7 @@ const [sortOrder, setSortOrder] = React.useState<{ orderBy?: string, order: 'asc
     >
       <EditIcon fontSize="small" />
     </IconButton>
+    {% endif %}
     <IconButton aria-label="delete" color="primary" onClickCapture={(e: any) => { dispatch(remove{{ tableSingleName }} (e.element)) }}>
         <DeleteIcon fontSize="small" />
     </IconButton>
