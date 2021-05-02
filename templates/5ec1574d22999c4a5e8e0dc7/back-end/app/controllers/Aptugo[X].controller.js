@@ -32,6 +32,25 @@ exports.create = (req, res) => {
     })
 }
 
+exports.createAsPromise = (req, res) => {
+  return new Promise((resolve, reject) => {
+    const updatedData = {}
+
+    {% for field in table.fields %}
+      {% set fieldWithData = field | fieldData %}
+      {% include includeTemplate(['Fields' ~ field.data_type ~'update.tpl', 'Fieldsupdate.tpl']) %}
+    {% endfor %}
+  
+    // Create a {{ table.singleName | friendly }}
+    const {{ table.singleName | friendly }} = new {{ table.name | friendly }}(updatedData)
+
+    // Save {{ table.singleName | friendly }} in the database
+    {{ table.singleName | friendly }}.save()
+    .then(result => { resolve(result) })
+    .catch(err => { reject(err) })
+  })
+}
+
 // Retrieve and return all {{ table.name | friendly }} from the database.
 exports.findAll = (req, res) => {
   if (typeof req.query.sort === 'string') req.query.sort = JSON.parse(req.query.sort)
