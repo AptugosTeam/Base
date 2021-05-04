@@ -23,6 +23,13 @@ options:
       return [['var','Use a
       variable'],...aptugo.store.getState().application.tables.map(({ unique_id,
       name }) => [unique_id, name])]
+  - name: detailsURL
+    display: Details Page
+    type: dropdown
+    options: >-
+      return [['No','None'],['Internal','Popup
+      Dialog'],...aptugo.pageUtils.plainpages.map(({unique_id, name }) =>
+      [unique_id, name])]
   - name: allowEdit
     display: Allow Edition
     type: checkbox
@@ -66,6 +73,7 @@ options:
       active: true
 children: []
 */
+
 
 {% set tableFields = [] %}
 {% if element.values.table == 'var' %}
@@ -136,6 +144,18 @@ const [sortOrder, setSortOrder] = React.useState<{ orderBy?: string, order: 'asc
 {% endif %}
 {% if element.values.addProcedure != 'No' %}
 <div className={classes.actionsArea}>
+    {% if element.values.detailsURL %}
+    <IconButton
+      aria-label="edit"
+      color="primary"
+      onClickCapture={(e: any) => { 
+        const url = '{{ (element.values.detailsURL | elementData ).path }}'.replace(':id', e.element._id)
+        props.history.push(url)
+      }}
+    >
+      <EditIcon fontSize="small" />
+    </IconButton>
+    {% endif %}
     {% if element.values.allowEdit %}
     <IconButton
       aria-label="edit"
