@@ -28,8 +28,8 @@ const {{ table.name | friendly }}Schema = mongoose.Schema({
     {% set relData = relatedField.reference | fieldData %}
     {% if table.unique_id == relData.table.unique_id %}
         {% set foundFieldData = relatedField | fieldData %}
-{{ table.name | friendly }}Schema.virtual('{{ foundFieldData.table.name}}Ref', {
-    ref: '{{ foundFieldData.table.name}}',
+{{ table.name | friendly }}Schema.virtual('{{ foundFieldData.table.name | friendly }}', {
+    ref: '{{ foundFieldData.table.name | friendly }}',
     localField: '_id',
     foreignField: '{{ foundFieldData.column_name }}',
     justOne: false
