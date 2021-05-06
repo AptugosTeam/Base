@@ -1,10 +1,22 @@
+/*
+path: edit.tpl
+type: file
+unique_id: zdul9W1n
+icon: ico-field
+children: []
+options:
+  - name: fileType
+    display: Accept Files
+    type: text
+    options: ''
+*/
 {% set tableName = ( field | fieldData ).table.name | friendly %}
 {% set bpr %}
 import FileUpload from '../components/FileUpload/FileUpload'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
 <FileUpload
-    accept="application/pdf,application/zip"
+    accept="{{ field.fileType|default('*') }}"
     label="{{ field.prompt|default(field.column_name) }}"
     {% if field.placeholder %}placeholder="{{ field.placeholder }}"{% endif %}
     value={ {{ tableName }}data.{{ field.column_name | friendly }}}
