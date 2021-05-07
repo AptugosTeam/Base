@@ -34,6 +34,7 @@ settings:
     value: '"react-helmet": "^6.1.0",'
 children: []
 */
+
 {% set bpr %}
 import {Helmet} from 'react-helmet'
 {% endset %}
@@ -41,7 +42,7 @@ import {Helmet} from 'react-helmet'
 <Helmet>
     {% if element.values.title %}<title>{{ element.values.title }}</title>{% endif %}
     {% if element.values.description %}<meta name="description" property="og:description" content={{ element.values.description | textOrVariable }} />{% endif %}
-    {% if element.values.ogtitle %}<meta name="title" property="og:title" content={{ element.values.ogtitle }} />{% endif %}
+    {% if element.values.ogtitle %}<meta name="title" property="og:title" content={{ element.values.ogtitle | textOrVariable }} />{% endif %}
     {% if element.values.ogimage %}<meta name="image" property="og:image" content={{ element.values.ogimage | textOrVariable }}></meta>{% endif %}
     {% if element.values.ogurl %}<meta name="og:url" content={{ element.values.ogurl | textOrVariable }} />{% endif %}
 </Helmet>
