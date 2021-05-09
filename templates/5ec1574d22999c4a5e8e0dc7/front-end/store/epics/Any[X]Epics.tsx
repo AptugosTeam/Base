@@ -142,18 +142,17 @@ const edit{{ table.name | friendly | capitalize }}Epic: Epic<{{ table.name | fr
       }
 
       Object.keys(action.payload).map(
-        (item) =>
-          action.payload[item] &&
-          data.append(
-            item,
-            action.payload[item]._id
-              ? action.payload[item]._id
-              : typeof action.payload[item] === 'object' && action.payload[item].isPrototypeOf === 'File'
+        (item) => {
+          const value = action.payload[item]._id
+            ? action.payload[item]._id
+            : typeof action.payload[item] === 'object' && action.payload[item].isPrototypeOf === 'File'
               ? JSON.stringify(action.payload[item])
               : Array.isArray(action.payload[item])
-              ? JSON.stringify(action.payload[item])
-              : action.payload[item]
-          )
+                ? JSON.stringify(action.payload[item])
+                : action.payload[item]
+      
+          data.append(item, value)
+        }
       )
 
       return from(axios.put(`{{ settings.apiURL }}/api/{{ table.name | friendly | lower }}/${action.payload._id}`, data, config)).pipe(

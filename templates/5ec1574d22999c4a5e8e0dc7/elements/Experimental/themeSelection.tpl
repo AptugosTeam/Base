@@ -18,11 +18,7 @@ options:
     settings:
       aptugoOnChange: >-
         element = arguments[0]
-
         var selectedAsset = element.values?.useAsset
-
-        console.log('onchange', element, selectedAsset)
-
         //if (selectedAsset !== 'none') {
 
         //  const assetInfo = aptugo.assetUtils.stylesheets().find(ss => ss.id
@@ -62,8 +58,6 @@ children: []
 
 // Theme selection
 {% if element.values.useAsset %}
-  {% if element.values.useAsset == 'minimum' %}
-  {% endif %}
   {% set asset = element.values.useAsset|assetData %}
   {% set theme = asset.name|friendly %}
   {% set bpr %}
