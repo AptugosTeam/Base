@@ -16,7 +16,7 @@ import FileUpload from '../components/FileUpload/FileUpload'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
 <FileUpload
-    accept="{{ field.fileType|default('*') }}"
+    accept="{{ field.filetype|default('*') }}"
     label="{{ field.prompt|default(field.column_name) }}"
     {% if field.placeholder %}placeholder="{{ field.placeholder }}"{% endif %}
     value={ {{ tableName }}data.{{ field.column_name | friendly }}}

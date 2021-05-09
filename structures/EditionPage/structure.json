@@ -4,6 +4,13 @@
   "desc": "Creates a new page to add or edit records",
   "icon": "",
   "type": "structure",
-  "parameters": "Table",
+  "parameters": [
+    {
+      "name": "unique_id",
+      "display": "Table unique ID",
+      "type": "text",
+      "helpText": "Unique ID for the table to generate"
+    }
+  ],
   "afterRun": ""
 }
