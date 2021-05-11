@@ -1,0 +1,16 @@
+{
+  "label": "URL",
+  "value": "Url",
+  "dataType": "String",
+  "initialValue": "",
+  "options": {
+    "frontEndType": "string",
+    "extra": [
+      {
+        "display": "Prepend",
+        "value": "prepend",
+        "type": "text"
+      }
+    ]
+  }
+}

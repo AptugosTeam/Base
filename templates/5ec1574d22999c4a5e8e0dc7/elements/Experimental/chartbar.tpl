@@ -7,7 +7,7 @@ helpText: Uses Nivo Charting library to draw a chart
 sourceType: javascript
 settings:
   - name: Packages
-    value: '"@nivo/bar": "latest",'
+    value: '"@nivo/bar": "latest","@nivo/core": "latest",'
 options:
   - name: Responsive
     display: Responsive
@@ -29,15 +29,25 @@ options:
   - name: Index
     display: Index By
     type: dropdown
-    options: return aptugo.tableUtils.getAllFields()
-  - name: Vak¡lues
-    display: Values
-    type: dropdown
-    options: return aptugo.tableUtils.getAllFields()
+    options: return [['useVar','Use a Variable'], ...aptugo.tableUtils.getAllFields()]
+  - name: indexVariable
+    display: Index By Variable
+    type: text
+    settings:
+      propertyCondition: Index
+      condition: useVar
+      active: true
   - name: Values
     display: Values
     type: dropdown
-    options: return aptugo.tableUtils.getAllFields()
+    options: return [['useVar','Use a Variable'], ...aptugo.tableUtils.getAllFields()]
+  - name: valuesVariable
+    display: Values Variable
+    type: text
+    settings:
+      propertyCondition: Values
+      condition: useVar
+      active: true
   - name: LeftAxisLegend
     display: 'Left Axis: Legend'
     type: text
@@ -45,7 +55,6 @@ options:
   - name: Variable
     display: Variable to Use
     type: text
-    options: return aptugo.tableUtils.getAllFields()
   - name: Code
     display: Use Code instead
     type: text
@@ -57,8 +66,8 @@ import { {% if element.values.Responsive %}ResponsiveBar{% else %}Bar{% endif %}
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 {% if element.values.Code %}
-  {% set indexName = 'indexes' %}
-  {% set valuesName = 'values' %}
+  {% set indexName = element.values.indexVariable %}
+  {% set valuesName = element.values.valuesVariable %}
   {% set ph %}
   {{ element.values.Code | raw }}
   {% endset %}
@@ -81,13 +90,13 @@ import { {% if element.values.Responsive %}ResponsiveBar{% else %}Bar{% endif %}
   {{ save_delayed('ph',ph) }}
 {% endif %}
 <{% if element.values.Responsive %}ResponsiveBar{% else %}Bar{% endif %}
-  width={ {{ element.values.Width }} }
-  height={ {{ element.values.Height }} }
+  {% if element.values.Width %}width={ {{ element.values.Width }} }{% endif %}
+  {% if element.values.Height %}height={ {{ element.values.Height }} }{% endif %}
   colors={ { scheme: '{{ element.values.Scheme }}' } }
-  indexBy='{{ indexName }}'
+  indexBy={ {{ indexName }} }
   data={chartdata}
-  keys={['{{ valuesName }}']}
-        
+  keys={ {{ valuesName }} }
+  groupMode='grouped'
         margin={ { top: 50, right: 130, bottom: 50, left: 60 } }
         padding={0.3}
         borderColor={ { from: 'color', modifiers: [ [ 'darker', 1.6 ] ] } }
@@ -97,7 +106,7 @@ import { {% if element.values.Responsive %}ResponsiveBar{% else %}Bar{% endif %}
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
-            legend: 'country',
+            legend: 'response',
             legendPosition: 'middle',
             legendOffset: 32
         } }
@@ -112,30 +121,6 @@ import { {% if element.values.Responsive %}ResponsiveBar{% else %}Bar{% endif %}
         labelSkipWidth={12}
         labelSkipHeight={12}
         labelTextColor={ { from: 'color', modifiers: [ [ 'darker', 1.6 ] ] } }
-        legends={[
-            {
-                dataFrom: 'keys',
-                anchor: 'bottom-right',
-                direction: 'column',
-                justify: false,
-                translateX: 120,
-                translateY: 0,
-                itemsSpacing: 2,
-                itemWidth: 100,
-                itemHeight: 20,
-                itemDirection: 'left-to-right',
-                itemOpacity: 0.85,
-                symbolSize: 20,
-                effects: [
-                    {
-                        on: 'hover',
-                        style: {
-                            itemOpacity: 1
-                        }
-                    }
-                ]
-            }
-        ]}
         animate={true}
         motionStiffness={90}
         motionDamping={15}
