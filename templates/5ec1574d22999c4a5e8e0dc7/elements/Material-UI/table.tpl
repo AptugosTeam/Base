@@ -33,6 +33,9 @@ options:
   - name: allowEdit
     display: Allow Edition
     type: checkbox
+    settings:
+      default: '''true'''
+      condition: ''
   - name: addTitle
     display: Title for Add procedure
     type: text
@@ -73,6 +76,11 @@ options:
       active: true
 children: []
 */
+
+
+
+
+
 
 
 {% set tableFields = [] %}
