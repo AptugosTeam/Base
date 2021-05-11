@@ -77,23 +77,18 @@ children: []
   {% include includeTemplate('FieldseditInclude.tpl') with { 'tableInfo': element.values.Field | fieldData } %}
   {% endset %}
   {{ save_delayed('ph', ph ) }}
-{% endif %}
-{% if (element.values.Field) and (element.values.Field != 'useVar') %}
   {% set theField = element.values.Field | fieldData %}
 {% else %}
-    {% set theField = field %}
+  {% set theField = field %}
 {% endif %}
 {% if element.values.CutOnNewline %}
     {% set fieldValue = 'data.' ~ theField.column_name  ~ '.substr(0, data.' ~ theField.column_name ~ '.indexOf("\n"))' %}
 {% else %}
     {% set fieldValue = theField.column_name %}
 {% endif %}
-{% if element.rendered %}
+{% if element.values.Field == 'useVar' %}
   {{ theField.rendered }}
 {% else %}
-  {% if element.values.Type == 'edit' %}
-    {% include includeTemplate('Fields' ~ theField.data_type ~ 'edit.tpl') with theField %}
-  {% else %}
-    {% include includeTemplate('Fields' ~ theField.data_type ~ 'show.tpl') with theField %}
-  {% endif %}
+  {% if element.values.Type == 'edit' %}{% include includeTemplate('Fields' ~ theField.data_type ~ 'edit.tpl') with theField %}
+  {% else %}{% include includeTemplate('Fields' ~ theField.data_type ~ 'show.tpl') with theField %}{% endif %}
 {% endif %}

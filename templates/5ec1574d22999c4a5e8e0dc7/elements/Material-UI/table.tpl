@@ -177,7 +177,6 @@ const [sortOrder, setSortOrder] = React.useState<{ orderBy?: string, order: 'asc
           const url = '{{ (element.values.addProcedure | elementData ).path }}'.replace(':id', e.element._id)
           props.history.push(url)
         {% endif %}
-        
       }}
     >
       <EditIcon fontSize="small" />
