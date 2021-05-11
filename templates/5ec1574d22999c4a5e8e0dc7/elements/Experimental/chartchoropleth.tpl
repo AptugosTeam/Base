@@ -36,6 +36,7 @@ settings:
     value: '"@nivo/geo": "latest",'
 children: []
 */
+
 {% set countries = element.values.Countries|fieldData %}
 {% set values = element.values.Values|fieldData %}
 {% set bpr %}
