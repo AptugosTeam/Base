@@ -76,18 +76,15 @@ options:
       active: true
 children: []
 */
-
-
-
-
-
-
-
 {% set tableFields = [] %}
 {% if element.values.table == 'var' %}
   {% for field in element.children %}
-    {% set currentField = field.values.Field | fieldData  %}
-    {% set tableFields = tableFields|merge([currentField.column_name]) %}
+    {% if field.values.Field == 'useVar' %}
+      {% set tableFields = tableFields|merge([field.values.columnName]) %}
+    {% else %}
+      {% set currentField = field.values.Field | fieldData  %}
+      {% set tableFields = tableFields|merge([currentField.column_name]) %}
+    {% endif %}
   {% endfor %}
   {% set tableData = element.values.variableToUse %}
 {% else %}
@@ -101,8 +98,12 @@ children: []
 
   {% if element.children %}
       {% for field in element.children %}
+        {% if field.values.Field == 'useVar' %}
+          {% set tableFields = tableFields|merge([field.values.columnName]) %}
+        {% else %}
           {% set currentField = field.values.Field | fieldData  %}
           {% set tableFields = tableFields|merge([currentField.displaylabel|default(currentField.column_name)]) %}
+        {% endif %}
       {% endfor %}
   {% else %}
       {% set fields = table.fields %}
