@@ -18,6 +18,10 @@
           {
             "label": "CKEditor",
             "value": "ckeditor"
+          },
+          {
+            "label": "Jodit",
+            "value": "jodit"
           }
         ]
       }

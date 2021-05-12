@@ -10,6 +10,7 @@ settings:
 children: []
 */
 
+
 {% set bpr %}
 import FormControl from '@material-ui/core/FormControl'
 import InputLabel from '@material-ui/core/InputLabel'
@@ -18,6 +19,8 @@ import InputLabel from '@material-ui/core/InputLabel'
 {% set tableName = ( field | fieldData ).table.name | friendly %}
 {% if field.editor == 'ckeditor' %}
   {% include includeTemplate('FieldsWysiwygckeditor.tpl') with { 'field': field } %}
+{% elseif field.editor == 'jodit' %}
+  {% include includeTemplate('FieldsWysiwygjodit.tpl') with { 'field': field } %}
 {% else %}
 {% set bpr %}
 import ReactQuill from 'react-quill'
