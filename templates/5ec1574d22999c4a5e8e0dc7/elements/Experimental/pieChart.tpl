@@ -15,6 +15,7 @@ import { ResponsivePie } from '@nivo/pie'
   {{ save_delayed('ph',ph) }}
 {% endif %}
 <ResponsivePie
+  activeOuterRadiusOffset={8}
   data={ {{ element.values.variableName }} }
   margin={ { top: 40, right: 80, bottom: 80, left: 80 } }
   colors={ { scheme: '{{ element.values.Scheme }}' } }

@@ -11,7 +11,6 @@ settings:
       "@ckeditor/ckeditor5-react": "latest",
       "@ckeditor/ckeditor5-build-balloon": "latest",
 */
-
 {% set tableName = ( field | fieldData ).table.name | friendly %}
 {% set bpr %}
 import { CKEditor } from '@ckeditor/ckeditor5-react'
