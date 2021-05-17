@@ -11,12 +11,13 @@ settings:
 */
 {% set tableName = ( field | fieldData ).table.name | friendly %}
 {% set bpr %}
-import JoditEditor from "jodit-react"
+import HTMLEditor from "../components/Jodit"
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
 <FormControl margin="dense" fullWidth>
-  <JoditEditor
-    value={ {{ tableName | friendly }}data.{{ field.column_name | friendly }} }
+  <HTMLEditor
+    initialValue={ {{ tableName | friendly }}data.{{ field.column_name | friendly }} || '' }
+    updateState={ (newdata) => handle{{ tableName | friendly }}Change('{{ field.column_name | friendly }}')(newdata) }
     config={ {
       toolbar: false,
       inline: true,
@@ -30,7 +31,5 @@ import JoditEditor from "jodit-react"
         insertImageAsBase64URI: true
       }
 	  } }
-    tabIndex={1} // tabIndex of textarea
-    onChange={ (newdata) => handle{{ tableName | friendly }}Change('{{ field.column_name | friendly }}')(newdata) }
   />
 </FormControl>
