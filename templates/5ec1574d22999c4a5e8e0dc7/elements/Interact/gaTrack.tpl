@@ -15,6 +15,7 @@ options:
 sourceType: javascript
 children: []
 */
+
 {% set bpr %}
 import ReactGA from 'react-ga'
 {% endset %}

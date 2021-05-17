@@ -17,10 +17,10 @@ const hist = createBrowserHistory()
 
 const rootElement = document.getElementById('app')
 const app = {% if hasTables %}<Provider store={store}>{% endif %}
-  <Router history={hist}>
-    <ScrollToTop />
-    <App />
-  </Router>
+<Router history={hist}>
+  <ScrollToTop />
+  <App />
+</Router>
 {% if hasTables %}</Provider>{% endif %}
 
 if (rootElement.hasChildNodes()) {
