@@ -14,4 +14,7 @@ options:
     options: ''
 children: []
 */
+{% set ph %}
 const [{{ element.values.variableName }}, set{{ element.values.variableName }}] = React.useState<any>({{ element.values.defaultValue }})
+{% endset %}
+{{ save_delayed('ph',ph,1) }}
