@@ -12,6 +12,10 @@ options:
     display: On Close
     type: text
     options: ''
+  - name: maxWidth
+    display: Max Width
+    type: dropdown
+    options: false;'xs';'sm';'md';'lg';'xl'
 sourceType: javascript
 childs:
   - name: Title
@@ -22,10 +26,16 @@ childs:
     element: dialogActions
 children: []
 */
+
+
 {% set bpr %}
 import Dialog from '@material-ui/core/Dialog'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
-<Dialog open={ {{ element.values.open }} } onClose={ {{ element.values.onclose }}}>
+<Dialog
+  open={ {{ element.values.open }} }
+  onClose={ {{ element.values.onclose }}}
+  maxWidth={ {{ element.values.maxWidth }} }
+>
 {{ content | raw }}
 </Dialog>

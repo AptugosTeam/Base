@@ -8,7 +8,7 @@
 */
 const dotenv = require('dotenv')
 dotenv.config({ path: './config/.env.development' })
-
+const fs = require('fs')
 const express = require('express')
 const bodyParser = require('body-parser')
 const fileupload = require('express-fileupload')

@@ -27,7 +27,7 @@ children: []
   {% if element.values.useid %}id="{{ element.unique_id }}"{% endif %}
   {% if element.values.id %}id={{ element.values.id | textOrVariable }}{% endif %}
   {% if element.values.class %}className={ {{element.values.class}} }{% endif %}
-  {% if element.values.onclick %}onClickCapture={() => {{element.values.onclick}} }{% endif %}
+  {% if element.values.onclick %}onClickCapture={(e) => {{element.values.onclick}} }{% endif %}
 >
 {{ content | raw }}
 </div>

@@ -63,7 +63,6 @@ options:
     type: text
 children: []
 */
-
 {% set bpr %}
     {% if element.values.Type == 'edit' %}
         import TextField from '@material-ui/core/TextField'
