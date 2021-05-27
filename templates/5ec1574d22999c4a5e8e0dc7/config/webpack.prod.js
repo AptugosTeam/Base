@@ -22,6 +22,9 @@ module.exports = merge(commonConfig, {
           from: 'dist/robots.txt',
         },
         {
+          from: 'dist/manifest.json',
+        },
+        {
           from: 'dist/img',
           to: 'img',
         },
