@@ -121,7 +121,7 @@ const dispatch = useDispatch()
       {% if element.values.searchString %}
       }
       {% endif %}
-    }, [{{ element.values.searchString }}])
+    }, [{{ element.values.searchString }}, {{ element.values.variableName }}])
   {% else %}
     {% if element.values.searchString %}
       React.useEffect(() => {

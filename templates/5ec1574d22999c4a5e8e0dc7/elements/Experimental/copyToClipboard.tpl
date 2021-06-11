@@ -4,6 +4,11 @@ type: file
 unique_id: 11u8ATDo
 icon: ico-field
 children: []
+options:
+  - name: onCopy
+    display: On Copy
+    type: text
+    options: ''
 */
 
 const copyToClipboard = (str, e) => {
@@ -17,4 +22,8 @@ const copyToClipboard = (str, e) => {
   el.select()
   document.execCommand('copy')
   container.removeChild(el)
+
+  {% if element.values.onCopy %}
+  {{ element.values.onCopy }}
+  {% endif %}
 }
