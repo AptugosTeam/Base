@@ -23,6 +23,14 @@ options:
       return [['var','Use a
       variable'],...aptugo.store.getState().application.tables.map(({ unique_id,
       name }) => [unique_id, name])]
+  - name: showall
+    display: Show All
+    type: checkbox
+    settings:
+      condition: var
+      propertyCondition: table
+      active: true
+      conditionNegate: true
   - name: detailsURL
     display: Details Page
     type: dropdown
@@ -83,6 +91,7 @@ options:
 children: []
 */
 
+
 {% set tableFields = [] %}
 {% if element.values.table == 'var' %}
   {% for field in element.children %}
@@ -119,7 +128,11 @@ children: []
       {% endfor %}
   {% endif %}
 
-  {% set tableData = '(' ~ table.name|friendly|lower ~ 'Data.found' ~ table.name|friendly|lower ~ '.length ? ' ~ table.name|friendly|lower ~ 'Data.found' ~ table.name|friendly|lower ~ ' : ' ~ table.name|friendly|lower ~ 'Data.' ~ table.name|friendly|lower ~ ' as any)' %}
+  {% if element.values.showall %}
+    {% set tableData = '(' ~ table.name|friendly|lower ~ 'Data.' ~ table.name|friendly|lower ~ ' as any)' %}
+  {% else %}
+    {% set tableData = '(' ~ table.name|friendly|lower ~ 'Data.found' ~ table.name|friendly|lower ~ '.length ? ' ~ table.name|friendly|lower ~ 'Data.found' ~ table.name|friendly|lower ~ ' : ' ~ table.name|friendly|lower ~ 'Data.' ~ table.name|friendly|lower ~ ' as any)' %}
+  {% endif %}
   {% set bpr %}
   import { add{{ table.name | friendly | capitalize }}, load{{ table.name | friendly | capitalize }}, remove{{ table.singleName | friendly | capitalize }}, edit{{ table.name | friendly | capitalize }} } from '../store/actions/{{ table.name | friendly | lower }}Actions'
   {% endset %}

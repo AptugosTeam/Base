@@ -59,7 +59,7 @@ const AptugoAutocomplete: FunctionComponent<any> = (props: AutocompleteProps) =>
   }, [props.options, props.value])
 
   return (
-    <div className={clsx('MuiFormControl-root MuiTextField-root MuiFormControl-marginDense MuiFormControl-fullWidth', classes.autocomplete)}>
+    <div className={clsx('MuiFormControl-root MuiTextField-root MuiFormControl-marginNormal MuiFormControl-fullWidth', classes.autocomplete)}>
       <label
         className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-marginDense MuiFormLabel-filled"
         data-shrink="true"
