@@ -65,36 +65,38 @@ children: []
 import { {% if element.values.Responsive %}ResponsiveBar{% else %}Bar{% endif %} } from '@nivo/bar'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
+{% set indexName = element.values.indexVariable %}
+{% set valuesName = element.values.valuesVariable %}
 {% if element.values.Code %}
-  {% set indexName = element.values.indexVariable %}
-  {% set valuesName = element.values.valuesVariable %}
   {% set ph %}
   {{ element.values.Code | raw }}
   {% endset %}
   {{ save_delayed('ph',ph) }}
 {% else %}
-  {% set indexBy = element.values.Index|fieldData %}
-  {% set values = element.values.Values|fieldData %}
-  {% set indexName = indexBy.column_name %}
-  {% set valuesName = values.column_name %}
-  {% include includeTemplate('loadFromRedux.tpl') with { 'data': indexBy.table.unique_id } %}
-  {% set ph %}
-  const chartdata = []
-  {{ element.values.Variable }}.forEach({{ indexBy.table.singleName | friendly | lower }} => {
-    chartdata.push({ 
-      {{ indexBy.column_name }}: {{ indexBy.table.singleName | friendly | lower }}.{{ indexBy.column_name }},
-      {{ values.column_name }}: {{ indexBy.table.singleName | friendly | lower }}.{{ values.column_name }}
-    })  
-  })
-  {% endset %}
-  {{ save_delayed('ph',ph) }}
+  {% if element.values.Index != 'useVar' %}
+    {% set indexBy = element.values.Index|fieldData %}
+    {% set values = element.values.Values|fieldData %}
+    {% set indexName = indexBy.column_name %}
+    {% set valuesName = values.column_name %}
+    {% include includeTemplate('loadFromRedux.tpl') with { 'data': indexBy.table.unique_id } %}
+    {% set ph %}
+    const chartdata = []
+    {{ element.values.Variable }}.forEach({{ indexBy.table.singleName | friendly | lower }} => {
+      chartdata.push({ 
+        {{ indexBy.column_name }}: {{ indexBy.table.singleName | friendly | lower }}.{{ indexBy.column_name }},
+        {{ values.column_name }}: {{ indexBy.table.singleName | friendly | lower }}.{{ values.column_name }}
+      })  
+    })
+    {% endset %}
+    {{ save_delayed('ph',ph) }}
+  {% endif %}
 {% endif %}
 <{% if element.values.Responsive %}ResponsiveBar{% else %}Bar{% endif %}
   {% if element.values.Width %}width={ {{ element.values.Width }} }{% endif %}
   {% if element.values.Height %}height={ {{ element.values.Height }} }{% endif %}
   colors={ { scheme: '{{ element.values.Scheme }}' } }
   indexBy={ {{ indexName }} }
-  data={chartdata}
+  data={ {% if element.values.Index == 'useVar' %}{{ element.values.Variable }}{% else %}chartdata{% endif %} }
   keys={ {{ valuesName }} }
   groupMode='grouped'
         margin={ { top: 50, right: 130, bottom: 50, left: 60 } }
