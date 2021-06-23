@@ -12,6 +12,7 @@ helpText: Watch a variable for changes
 children: []
 */
 
+
 React.useEffect(() => {
     {{ content | raw }}
 },[{{ element.values.watchVariable }}])

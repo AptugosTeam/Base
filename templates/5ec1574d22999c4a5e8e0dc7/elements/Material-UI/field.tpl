@@ -61,8 +61,12 @@ options:
   - name: classname
     display: ClassName
     type: text
+  - name: autosave
+    display: Autosave on Change
+    type: checkbox
 children: []
 */
+
 {% set bpr %}
     {% if element.values.Type == 'edit' %}
         import TextField from '@material-ui/core/TextField'

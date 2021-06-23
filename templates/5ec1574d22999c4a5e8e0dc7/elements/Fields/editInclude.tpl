@@ -2,6 +2,12 @@
 import { useDispatch } from 'react-redux'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
+{% if element.values.autosave %}
+{% set bpr %}
+import { edit{{ tableInfo.table.name | friendly | capitalize }} } from '../store/actions/{{ tableInfo.table.name | friendly | lower }}Actions'
+{% endset %}
+{{ save_delayed('bpr', bpr ) }}
+{% endif %}
 {% set eifields = tableInfo.table.fields %}
 {% set ph %}
 const initialData{{ tableInfo.table.name | friendly }} = {
@@ -14,7 +20,7 @@ const initialData{{ tableInfo.table.name | friendly }} = {
   {% endif %}
   {% if (field | fieldData).reference %}
     {% set referencedField = (field | fieldData).reference | fieldData %}
-    {% if field|fieldData.relationshipType == '1:m' %}
+    {% if field|fieldData.relationshipType == '1:m' or field|fieldData.relationshipType == '1:1' %}
       {% set fieldValue = "[]" %}
     {% else %}
       {% set fieldValue = "null" %}
@@ -23,7 +29,6 @@ const initialData{{ tableInfo.table.name | friendly }} = {
   {{ field.column_name | friendly }}: {{ fieldValue }},
 {% endfor %}
 }
-
 const [{{ tableInfo.table.name | friendly }}data, set{{ tableInfo.table.name | friendly }}Data] = React.useState<any>(initialData{{ tableInfo.table.name | friendly }})
 const handle{{ tableInfo.table.name | friendly }}Change = (name: string) => (event: any) => {
     const value = event?.target ? (event.target.files ? event.target.files[0] : event.currentTarget.value || event.target.value) : event
@@ -31,6 +36,14 @@ const handle{{ tableInfo.table.name | friendly }}Change = (name: string) => (eve
       ...{{ tableInfo.table.name | friendly }}data,
       [name]: value
     })
+    {% if element.values.autosave %}
+    if ({{ tableInfo.table.name | friendly }}data._id) {
+      dispatch(edit{{ tableInfo.table.name | friendly }}({
+        ...{{ tableInfo.table.name | friendly }}data,
+        [name]: value
+      }))
+    }
+    {% endif %}
   }
 {% endset %}
 {{ save_delayed('ph', ph, 1 ) }}

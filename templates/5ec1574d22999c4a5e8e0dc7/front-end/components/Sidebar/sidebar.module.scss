@@ -37,9 +37,16 @@
   background-color: rgb(69, 129, 255);
 }
 
-.colorBlue:global(.MuiPaper-root) {
-  @extend .baseColor;
-  background-color: rgb(69, 111, 161);
+.colorBlue {
+  &:global(.MuiPaper-root) {
+    color: #3f51b5;
+
+    & :global(.active) {
+      background-color: #3f51b5;
+      border-right: 2px solid #002984;
+      color: #FFF;
+    }
+  }
 }
 
 .colorGreens {
@@ -49,7 +56,7 @@
     & :global(.active) {
       background-color: rgba(0, 171, 85, 0.08);
       border-right: 2px solid rgb(0, 171, 85);
-      color:rgb(0, 171, 85);
+      color: rgb(0, 171, 85);
     }
   }
 }

@@ -99,11 +99,12 @@ import { {% if element.values.Responsive %}ResponsiveBar{% else %}Bar{% endif %}
   data={ {% if element.values.Index == 'useVar' %}{{ element.values.Variable }}{% else %}chartdata{% endif %} }
   keys={ {{ valuesName }} }
   groupMode='grouped'
-        margin={ { top: 50, right: 130, bottom: 50, left: 60 } }
+        margin={ { top: 50, right: 50, bottom: 50, left: 60 } }
         padding={0.3}
         borderColor={ { from: 'color', modifiers: [ [ 'darker', 1.6 ] ] } }
         axisTop={null}
         axisRight={null}
+        enableLabel={false} 
         axisBottom={ {
             tickSize: 5,
             tickPadding: 5,

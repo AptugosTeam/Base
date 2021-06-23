@@ -9,11 +9,16 @@ options:
     display: Condition
     type: text
     options: ''
+  - name: usefragment
+    display: Do Not Use Fragment
+    type: checkbox
+    options: ''
 helpText: Make a decision based on a value
 children: []
 */
+
 { {{ element.values.condition }} &&
-<React.Fragment>
+{% if not element.values.usefragment %}<React.Fragment>{% endif %}
 {{ content | raw }}
-</React.Fragment>
+{% if not element.values.usefragment %}</React.Fragment>{% endif %}
 }
