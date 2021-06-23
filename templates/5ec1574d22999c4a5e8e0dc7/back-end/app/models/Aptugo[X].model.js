@@ -11,7 +11,7 @@ const {{ table.name | friendly }}Schema = mongoose.Schema({
       {% endif %}
     {% else %}
       {% set fieldInfo = field | fieldData %}
-      {% if fieldInfo.relationshipType == '1:m' %}
+      {% if fieldInfo.relationshipType == '1:m' or fieldInfo.relationshipType == '1:1' %}
         {% set fieldInfo = fieldInfo|merge({'dataType': '[' ~ fieldInfo.dataType ~ ']'}) %}
       {% endif %}
     {% endif %}

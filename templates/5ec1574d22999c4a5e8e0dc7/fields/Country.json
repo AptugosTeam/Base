@@ -1,0 +1,7 @@
+{
+  "label": "Country",
+  "value": "Country",
+  "dataType": "String",
+  "initialValue": "",
+  "options": null
+}

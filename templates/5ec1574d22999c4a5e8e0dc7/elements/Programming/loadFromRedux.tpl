@@ -54,7 +54,7 @@ children: []
   {% if element.values.fieldToSearch %}searchField: "{{ element.values.fieldToSearch }}",{% endif %}
   {% if element.values.sortColumn %}sort: {
     field: '{{ element.values.sortColumn }}',
-    method: '{{ element.values.sortMethod|default('DESC') }}'
+    method: '{{ element.values.sortMethod|default('DESC') | raw }}'
   }{% endif %}
 }
 {% endset %}
@@ -109,7 +109,7 @@ const dispatch = useDispatch()
             {% if element.values.fieldToSearch %}searchField: "{{ element.values.fieldToSearch }}",{% endif %}
             {% if element.values.sortColumn %}sort: {
               field: '{{ element.values.sortColumn }}',
-              method: '{{ element.values.sortMethod|default('DESC') }}
+              method: '{{ element.values.sortMethod|default('DESC') }}'
             }{% endif %}
           }))
         {% else %}
