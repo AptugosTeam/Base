@@ -30,8 +30,8 @@ const [snackBarOpen, setSnackbarOpen] = React.useState(false)
 {% set splited = element.values.position|split('-') %}
 <Snackbar
   open={snackBarOpen}
-  message="{{ element.values.message }}"
+  {% if element.values.message %}message="{{ element.values.message }}"{% endif %}
   {% if element.values.autohide %}autoHideDuration={ {{ element.values.autohide }} }{% endif %}
   onClose={() => { setSnackbarOpen(false) } }
   anchorOrigin={ { vertical: '{{splited[0]|lower}}', horizontal: '{{splited[1]|lower}}' } }
-/>
+>{{ content | raw }}</Snackbar>

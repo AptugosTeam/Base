@@ -29,7 +29,7 @@ import Alert from '@material-ui/lab/Alert'
 {{ save_delayed('bpr',bpr) }}
 {% if element.values.title %}
 {% set bpr %}
-import AlertTitle from '@material-ui/core/AlertTitle'
+import AlertTitle from '@material-ui/lab/AlertTitle'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 {% endif %}
