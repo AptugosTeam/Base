@@ -18,6 +18,12 @@
         "options": "aptugo.tableUtils.getAllFields().map(field => { return { label: field[1], value: field[0] } })"
       },
       {
+        "display": "Auto Load",
+        "value": "autoload",
+        "type": "select",
+        "options": "[{ label: 'yes', value: 'yes'},{ label: 'no', value: 'no'}]"
+      },
+      {
         "display": "ReferencedKey",
         "value": "referencekey",
         "type": "select",
