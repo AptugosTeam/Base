@@ -42,13 +42,13 @@ options:
     display: Allow Edition
     type: checkbox
     settings:
-      default: '''true'''
+      default: true
       condition: ''
   - name: allowDeletion
     display: Allow Deletion
     type: checkbox
     settings:
-      default: '''true'''
+      default: false
       condition: ''
   - name: addTitle
     display: Title for Add procedure
@@ -90,6 +90,8 @@ options:
       active: true
 children: []
 */
+
+
 
 
 {% set tableFields = [] %}

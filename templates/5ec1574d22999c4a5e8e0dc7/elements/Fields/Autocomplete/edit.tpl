@@ -34,7 +34,7 @@ const {{ referencedTable | lower }}Data = useSelector((state: IState) => state.{
 {% set ph %}
 
 const typeInSearch{{ referencedTable }} = (typedIn) => {
-  if ({{ referencedTable | lower }}Data.loadingStatus !== 'loading' && typedIn !== '') {
+  if ({{ referencedTable | lower }}Data.loadingStatus !== 'loading' {% if not element.values.autoload == 'no' %}&& typedIn !== ''{% endif %}) {
     dispatch(search{{ referencedTable }}(typedIn))
   }
 }
