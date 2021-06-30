@@ -3,7 +3,7 @@ updatedData['{{ field.column_name | friendly }}'] = []
 try {
   var ObjectId = require('mongodb').ObjectID
   const {{ reference.table.name | friendly }} = require('../models/{{ reference.table.name | friendly | lower }}.model.js')
-  let Received{{ field.column_name | friendly }} =  JSON.parse(req.body.{{ field.column_name | friendly }})
+  let Received{{ field.column_name | friendly }} =  JSON.parse(data.{{ field.column_name | friendly }})
   {{ field.column_name | friendly }}Raw = Array.isArray(Received{{ field.column_name | friendly }}) ? Received{{ field.column_name | friendly }} : [Received{{ field.column_name | friendly }}]
   {{ field.column_name | friendly }}Raw.forEach({{ field.column_name | friendly }}info => {
     if (!{{ field.column_name | friendly }}info._id) {
@@ -16,5 +16,5 @@ try {
     }
   })
 } catch(e) {
-    updatedData['{{ field.column_name | friendly }}'] = req.body.{{ field.column_name | friendly }}
+    updatedData['{{ field.column_name | friendly }}'] = data.{{ field.column_name | friendly }}
 }

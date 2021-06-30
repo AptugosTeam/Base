@@ -5,7 +5,7 @@ unique_id: uGLTtaIE
 icon: field
 */
 {% if table.beforeCreate %}{{ table.beforeCreate }}{% endif %}
-{{ table.name | friendly | lower }}.createAsPromise(req, res).then(result => {
+{{ table.name | friendly | lower }}.createAsPromise({ req, res }).then(result => {
     if (callback) callback(result)
     else res.send(result)  
 })

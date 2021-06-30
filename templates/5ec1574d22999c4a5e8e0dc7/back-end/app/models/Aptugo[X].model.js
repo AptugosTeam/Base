@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const mongoosePaginate = require('mongoose-paginate-v2')
-// here
+
 const {{ table.name | friendly }}Schema = mongoose.Schema({
   {% for field in table.fields %}
     {% if field.referencekey %}
@@ -12,11 +12,13 @@ const {{ table.name | friendly }}Schema = mongoose.Schema({
     {% else %}
       {% set fieldInfo = field | fieldData %}
       {% if fieldInfo.relationshipType == '1:m' or fieldInfo.relationshipType == '1:1' %}
-        {% set fieldInfo = fieldInfo|merge({'dataType': '[' ~ fieldInfo.dataType ~ ']'}) %}
+        {% set fieldInfo = fieldInfo|merge({'dataType': fieldInfo.dataType}) %}
       {% endif %}
     {% endif %}
     {% set datatype = fieldInfo.dataType %}
+    {% if datatype %}
     {{ field.column_name | friendly }}: {{ datatype }},
+    {% endif %}
   {% endfor %}
 }, {
     timestamps: true,
@@ -26,14 +28,19 @@ const {{ table.name | friendly }}Schema = mongoose.Schema({
 {% for relatedField in builder.plainFields %}
   {% if relatedField.reference %}
     {% set relData = relatedField.reference | fieldData %}
-    {% if table.unique_id == relData.table.unique_id %}
+    {% if relatedField.data_type == 'Relationship' and (relatedField | fieldData).table.unique_id == table.unique_id %}
+        {{ table.name | friendly }}Schema.add({ {{ relData.table.name }}: [ require('./{{ relData.table.name | lower }}.model.js').schema ] })
+    {% else %}
+      {% if relatedField.relationshipType != 'm:1' and table.unique_id == relData.table.unique_id %}
         {% set foundFieldData = relatedField | fieldData %}
-{{ table.name | friendly }}Schema.virtual('{{ foundFieldData.table.name | friendly }}', {
-    ref: '{{ foundFieldData.table.name | friendly }}',
-    localField: '_id',
-    foreignField: '{{ foundFieldData.column_name }}',
-    justOne: false
-})
+        {{ table.name | friendly }}Schema.virtual('{{ foundFieldData.table.name | friendly }}', {
+          ref: '{{ foundFieldData.table.name | friendly }}',
+          localField: '_id',
+          foreignField: '{{ foundFieldData.column_name }}',
+          justOne: false,
+          type: '{{ relData.relationshipType }}'
+        })
+      {% endif %}
     {% endif %}
   {% endif %}
 {% endfor %}
@@ -47,4 +54,5 @@ const {{ table.name | friendly }}Schema = mongoose.Schema({
   }
 );
 
-module.exports = mongoose.model('{{ table.name | friendly }}', {{ table.name | friendly }}Schema, '{{ table.name | friendly | lower }}')
+const myModel = module.exports = mongoose.model('{{ table.name | friendly }}', {{ table.name | friendly }}Schema, '{{ table.name | friendly | lower }}')
+myModel.schema = {{ table.name | friendly }}Schema

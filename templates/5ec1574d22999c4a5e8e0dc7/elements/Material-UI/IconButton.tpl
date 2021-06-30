@@ -16,10 +16,11 @@ options:
     display: Icon
     type: dropdown
     options: >-
-      None;Add;Home;Link;Send;AllInbox;Menu;DeleteOutline;Favorite;Clear;Google;Facebook;Twitter;Person;ThumbUp
+      None;Add;Home;Link;MoreVert;Send;AllInbox;Menu;DeleteOutline;Favorite;Clear;Google;Facebook;Twitter;Person;ThumbUp
 sourceType: javascript
 children: []
 */
+
 
 
 

@@ -1,1 +1,1 @@
-if(req.body.{{ field.column_name | friendly }}) updatedData['{{ field.column_name | friendly }}'] = req.body.{{ field.column_name | friendly }}
+if(data.{{ field.column_name | friendly }}) updatedData['{{ field.column_name | friendly }}'] = data.{{ field.column_name | friendly }}

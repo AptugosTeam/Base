@@ -90,10 +90,8 @@ options:
       active: true
 children: []
 */
-
-
-
-
+{% set allowEdit = element.values.allowEdit|default(true) %}
+{% set allowDeletion = element.values.allowDeletion|default(true) %}
 {% set tableFields = [] %}
 {% if element.values.table == 'var' %}
   {% for field in element.children %}
@@ -155,7 +153,7 @@ const [sortOrder, setSortOrder] = React.useState<{ orderBy?: string, order: 'asc
 <Table
     title='{{ element.values.title }}'
     tableHeaderColor='{{ element.values.headerColor }}'
-    tableHead={[{% for field in tableFields %}"{{ field }}",{% endfor %}{% if element.values.addProcedure != 'No' or element.values.allowEdit or element.values.allowDeletion %}"Actions"{% endif %}]}
+    tableHead={[{% for field in tableFields %}"{{ field }}",{% endfor %}{% if element.values.addProcedure != 'No' or allowEdit or allowDeletion %}"Actions"{% endif %}]}
     tableData={ {{ tableData }} }
     orderBy={sortOrder.orderBy}
     order={sortOrder.order}
@@ -187,7 +185,7 @@ const [sortOrder, setSortOrder] = React.useState<{ orderBy?: string, order: 'asc
       <EditIcon fontSize="small" />
     </IconButton>
     {% endif %}
-    {% if element.values.allowEdit %}
+    {% if allowEdit %}
     <IconButton
       aria-label="edit"
       color="primary"
@@ -204,7 +202,7 @@ const [sortOrder, setSortOrder] = React.useState<{ orderBy?: string, order: 'asc
       <EditIcon fontSize="small" />
     </IconButton>
     {% endif %}
-    {% if element.values.allowDeletion %}
+    {% if allowDeletion %}
     <IconButton aria-label="delete" color="primary" onClickCapture={(e: any) => { dispatch(remove{{ tableSingleName }} (e.element)) }}>
       <DeleteIcon fontSize="small" />
     </IconButton>
