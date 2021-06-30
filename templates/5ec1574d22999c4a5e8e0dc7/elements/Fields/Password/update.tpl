@@ -1,1 +1,1 @@
-if (req.body.{{ field.column_name | friendly }}) updatedData['{{ field.column_name | friendly }}'] = bcrypt.hashSync(req.body.{{ field.column_name | friendly }}, 10)
+if (data.{{ field.column_name | friendly }}) updatedData['{{ field.column_name | friendly }}'] = bcrypt.hashSync(data.{{ field.column_name | friendly }}, 10)

@@ -15,7 +15,8 @@
         "display": "From",
         "value": "reference",
         "type": "select",
-        "options": "aptugo.tableUtils.getAllFields().map(field => { return { label: field[1], value: field[0] } })"
+        "options": "aptugo.tableUtils.getAllFields().map(field => { return { label: field[1], value: field[0] } })",
+        "onChange": "(values) => { if (values.relationshipType === 'm:1') { aptugo.tableUtils.findContainerTable(values.reference).fields.push({ data_type: 'Relationship', column_name: `Rel: ${values.column_name}`, unique_id: aptugo.generateID(), reference: values.unique_id }) } }"
       },
       {
         "display": "Auto Load",

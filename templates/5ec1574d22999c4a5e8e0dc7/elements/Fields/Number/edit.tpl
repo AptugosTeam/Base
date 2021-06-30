@@ -15,6 +15,6 @@ import TextField from '@material-ui/core/TextField'
     type="number"
     fullWidth
     variant="{{ element.values.variant|default('standard') }}"
-    value={ {{ tableName }}data.{{ field.column_name | friendly }}}
+    value={ {{ tableName }}data.{{ field.column_name | friendly }} || '' }
     onChange={handle{{ tableName }}Change("{{ field.column_name | friendly }}")}
 />
