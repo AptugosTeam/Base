@@ -9,7 +9,7 @@ import CardHeader from '@material-ui/core/CardHeader';
 {% endif %}
 <CardHeader
     {{ theTitle }}
-    {% if element.values.subheader %}subheader="{{ element.values.subheader }}"{% endif %}
+    {% if element.values.subheader %}subheader={{ element.values.subheader | textOrVariable }}{% endif %}
 >
 {{ content | raw }}
 </CardHeader>
