@@ -1,3 +1,13 @@
+/*
+path: "{{ table.name |\_friendly |\_lower }}.routes.js"
+type: file
+unique_id: uPKnInsn
+icon: ico-field
+modelRelated: true
+sourceType: javascript
+subtype: Aptugo
+children: []
+*/
 module.exports = (app) => {
   const {{ table.name | friendly | lower }} = require('../controllers/{{ table.name | friendly | lower }}.controller.js')
   {% if table.extraModules %}{{ table.extraModules }}{% endif %}

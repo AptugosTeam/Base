@@ -48,9 +48,7 @@ const AptugoAutocomplete: FunctionComponent<any> = (props: AutocompleteProps) =>
 
   React.useEffect(() => {
     let options = []
-    if (props.value) {
-      options.push(...props.value)
-    }
+    
     options.push(...props.options)
     if (localValue.length > 2) {
       options.push({ label: `Add ${localValue}...`, value: 'new' })

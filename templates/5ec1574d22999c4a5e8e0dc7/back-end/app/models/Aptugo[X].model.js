@@ -1,3 +1,14 @@
+/*
+path: "{{ table.name |\_friendly |\_lower }}.model.js"
+type: file
+unique_id: fnd3TqFu
+icon: ico-field
+modelRelated: true
+sourceType: javascript
+subtype: Aptugo
+children: []
+*/
+
 const mongoose = require('mongoose')
 const mongoosePaginate = require('mongoose-paginate-v2')
 
@@ -11,8 +22,8 @@ const {{ table.name | friendly }}Schema = mongoose.Schema({
       {% endif %}
     {% else %}
       {% set fieldInfo = field | fieldData %}
-      {% if fieldInfo.relationshipType == '1:m' or fieldInfo.relationshipType == '1:1' %}
-        {% set fieldInfo = fieldInfo|merge({'dataType': fieldInfo.dataType}) %}
+      {% if fieldInfo.relationshipType == '1:m' %}
+        {% set fieldInfo = fieldInfo|merge({'dataType': '[' ~ fieldInfo.dataType ~ ']'}) %}
       {% endif %}
     {% endif %}
     {% set datatype = fieldInfo.dataType %}
