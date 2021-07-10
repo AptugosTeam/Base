@@ -13,7 +13,7 @@ children: []
 {% set referencedString = 'fieldData.' ~  (field.column_name | friendly)  %}
 {% if referencedField.table.subtype == 'Aptugo' %}
   {% if field.relationshipType == '1:1' %}
-    {% set referencedString = referencedString ~ '[0].' ~ (referencedField.column_name | friendly) %}
+    {% set referencedString = referencedString ~ '.' ~ (referencedField.column_name | friendly) %}
   {% else %}
     {% set referencedString = referencedString ~ '.' ~ (referencedField.column_name | friendly) %}
   {% endif %}

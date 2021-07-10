@@ -1,3 +1,16 @@
+/*
+path: "{{ table.name |\_friendly |\_lower }}.routes.js"
+type: file
+unique_id: qLpvzgbk
+icon: ico-field
+modelRelated: true
+subtype: Api
+sourceType: javascript
+settings:
+  - name: Packages
+    value: '"node-hash": "latest",'
+children: []
+*/
 const axios = require('axios')
 const hash = require('node_hash')
 const fs = require('fs')

@@ -4,6 +4,23 @@
   "dataType": "String",
   "initialValue": "''",
   "options": {
-    "frontEndType": "string"
+    "frontEndType": "string",
+    "validations": [
+      {
+        "display": "Requires a value",
+        "value": "required",
+        "type": "checkbox"
+      },
+      {
+        "display": "Require a unique value",
+        "value": "unique",
+        "type": "checkbox"
+      },
+      {
+        "display": "Validation Regexp",
+        "value": "regexp",
+        "type": "text"
+      }
+    ]
   }
 }

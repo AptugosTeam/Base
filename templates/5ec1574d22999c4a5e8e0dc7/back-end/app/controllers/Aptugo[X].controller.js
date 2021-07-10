@@ -1,3 +1,14 @@
+/*
+path: "{{ table.name |\_friendly |\_lower }}.controller.js"
+type: file
+unique_id: gSp3dULo
+icon: ico-field
+modelRelated: true
+sourceType: javascript
+subtype: Aptugo
+children: []
+*/
+
 const {{ table.name | friendly }} = require('../models/{{ table.name | friendly | lower }}.model.js')
 const fs = require('fs')
 const paginate = require('../paginate')
@@ -12,6 +23,15 @@ var ObjectId = require('mongodb').ObjectID
 exports.create = (options) => {
   const data = options.req ? options.req.body : options.data
   const updatedData = {}
+
+  {% for field in table.fields %}
+    {% for key, value in field|castToArray %}
+      {% if 'validators.' in value[0] %}
+        {% set validator = value[0][11:] %}
+        {% include includeTemplate(['Fields' ~ field.data_type ~ validator ~ '.tpl']) %}
+      {% endif %}
+    {% endfor %}
+  {% endfor %}
 
   {% for field in table.fields %}
     {% set fieldWithData = field | fieldData %}
