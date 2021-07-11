@@ -93,7 +93,7 @@ const dispatch = useDispatch()
   const {{ table.name | friendly | lower }}Data = useSelector((state: IState) => state.{{ table.name | friendly | lower }})
 {% endif %}
 {% endset %}
-{{ save_delayed('ph', ph ) }}
+{{ save_delayed('ph', ph, 1 ) }}
 {% set ph %}
   {% if element.values.variableName %}
     const [{{ element.values.variableName }}Loading, set{{ element.values.variableName }}Loading] = React.useState(false)

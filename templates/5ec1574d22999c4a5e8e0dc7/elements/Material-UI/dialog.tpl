@@ -5,12 +5,34 @@ unique_id: Lcyk85fH
 icon: ico-dialogs
 sourceType: javascript
 options:
+  - name: table
+    display: Table
+    type: dropdown
+    options: >-
+      return aptugo.store.getState().application.tables.map(({ unique_id, name
+      }) => [unique_id, name])
   - name: title
-    display: Title
+    display: Title (add)
     type: text
     options: ''
   - name: introText
-    display: Intro Text
+    display: Intro Text (add)
+    type: text
+    options: ''
+  - name: button
+    display: Button Text (add)
+    type: text
+    options: ''
+  - name: editTitle
+    display: Title (edit)
+    type: text
+    options: ''
+  - name: editIntroText
+    display: Intro Text (edit)
+    type: text
+    options: ''
+  - name: editButton
+    display: Button Text (edit)
     type: text
     options: ''
   - name: addProcedure
@@ -24,35 +46,16 @@ options:
     display: Color
     type: dropdown
     options: primary;inherit;secondary;default
-  - name: table
-    display: Table
-    type: dropdown
-    options: >-
-      return aptugo.store.getState().application.tables.map(({ unique_id, name
-      }) => [unique_id, name])
-  - name: button
-    display: Button Text (add)
-    type: text
-    options: ''
-  - name: editButton
-    display: Button Text (edit)
-    type: text
-    options: ''
-  - name: editTitle
-    display: Title (edit)
-    type: text
-    options: ''
-  - name: editIntroText
-    display: Intro Text (edit)
-    type: text
-    options: ''
   - name: hideButton
     display: Hide Button
     type: checkbox
     options: ''
+  - name: manuallyManaged
+    display: Do not auto close
+    type: checkbox
+    options: ''
 children: []
 */
-
 
 {% set table = element.values.table | tableData %}
 {% if element.children %}
@@ -88,6 +91,9 @@ import AddDialog from '../components/Dialog/Dialog'
   {% if element.values.hideButton %}hideButton={true}{% endif %}
   isOpen={dialogAction !== ''}
   onOpen={() => {% if element.values.addProcedure == 'Internal' %}setDialogAction('add'){% else %}props.history.push('{{ (element.values.addProcedure | elementData ).path | withoutVars }}'){% endif %}}
+  {% if not element.values.manuallyManaged %}
+    onSave={() => setDialogAction('')}
+  {% endif %}
   onClose={() => setDialogAction('')}
   title={dialogAction === 'edit' ? '{{ element.values.editTitle }}' : '{{ element.values.title }}'}
   text={dialogAction === 'edit' ? '{{ element.values.editIntroText }}' : '{{ element.values.introText }}'}

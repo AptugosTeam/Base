@@ -9,7 +9,10 @@ export const initial{{ table.name | friendly | capitalize }}State: I{{ table.na
   searchString: '',
   {{ table.name | friendly | lower }}: [],
   found{{ table.name | friendly | lower }}: [],
-  totalDocs: 0
+  totalDocs: 0,
+  errMessage: '',
+  errStatus: null,
+  errField: null
 }
 
 export default function {{ table.name | friendly | lower }}Reducer(state: I{{ table.name | friendly | capitalize }}State = initial{{ table.name | friendly | capitalize }}State, action: {{ table.name | friendly | capitalize }}Action) {
@@ -50,14 +53,21 @@ export default function {{ table.name | friendly | lower }}Reducer(state: I{{ t
       case {{ table.name | friendly | capitalize }}ActionTypes.ADD_{{ table.name | friendly | upper }}:
       case {{ table.name | friendly | capitalize }}ActionTypes.ADDING_{{ table.name | friendly | upper }}:
         draft.addingStatus = ApiStatus.LOADING
+        draft.errMessage = ''
+        draft.errStatus = null
+        draft.errField = null
         break
 
       case {{ table.name | friendly | capitalize }}ActionTypes.ADDING_{{ table.name | friendly | upper }}_FAILED:
         draft.addingStatus = ApiStatus.FAILED
+        draft.errMessage = action.message
+        draft.errStatus = action.status
+        draft.errField = action.field
         break
 
       case {{ table.name | friendly | capitalize }}ActionTypes.ADDED_{{ table.name | friendly | upper }}:
         draft.addingStatus = ApiStatus.LOADED
+        draft.errStatus = 200
         draft.{{ table.name | friendly | lower }}.push(action.payload.{{ table.name | friendly | lower }}.docs[0])
         if (draft.searchString) draft.found{{ table.name | friendly | lower }}.push(action.payload.{{ table.name | friendly | lower }}.docs[0])
         break
@@ -89,4 +99,7 @@ export interface I{{ table.name | friendly | capitalize }}State {
   {{ table.name | friendly | lower }}: I{{ table.name | friendly | capitalize }}Item[]
   found{{ table.name | friendly | lower }}: I{{ table.name | friendly | capitalize }}Item[]
   totalDocs: number
+  errMessage?: string
+  errStatus?: number
+  errField?: string
 }

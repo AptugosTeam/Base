@@ -92,7 +92,6 @@ const add{{ table.name | friendly | capitalize }}Epic: Epic<{{ table.name | fri
     }
     Object.keys(action.payload).map(
       (item) =>
-        action.payload[item] &&
         data.append(
           item,
           action.payload[item]._id
@@ -107,7 +106,7 @@ const add{{ table.name | friendly | capitalize }}Epic: Epic<{{ table.name | fri
     return from(axios.post(`{{ settings.apiURL }}/api/{{ table.name | friendly | lower }}/`, data, config)).pipe(
       map((response) => added{{ table.name | friendly | capitalize }}(response.data)),
       startWith(adding{{ table.name | friendly | capitalize }}()),
-      catchError(() => of(adding{{ table.name | friendly | capitalize }}Failed()))
+      catchError((err) => of(adding{{ table.name | friendly | capitalize }}Failed(err.response)))
     )
   })
 )

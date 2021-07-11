@@ -117,9 +117,12 @@ export function added{{ table.name | friendly | capitalize }}({{ table.name | fr
   }
 }
 
-export function adding{{ table.name | friendly | capitalize }}Failed(): IAdding{{ table.name | friendly | capitalize }}FailedAction {
+export function adding{{ table.name | friendly | capitalize }}Failed(errData: { data: { message: string, field?: string }, status: number }): IAdding{{ table.name | friendly | capitalize }}FailedAction {
   return {
-    type: {{ table.name | friendly | capitalize }}ActionTypes.ADDING_{{ table.name | friendly | upper }}_FAILED
+    type: {{ table.name | friendly | capitalize }}ActionTypes.ADDING_{{ table.name | friendly | upper }}_FAILED,
+    message: errData.data.message,
+    status: errData.status,
+    field: errData.data.field
   }
 }
 
@@ -245,6 +248,9 @@ export interface IAdded{{ table.name | friendly | capitalize }}Action {
 
 export interface IAdding{{ table.name | friendly | capitalize }}FailedAction {
   type: {{ table.name | friendly | capitalize }}ActionTypes.ADDING_{{ table.name | friendly | upper }}_FAILED
+  message: string
+  status: number
+  field?: string
 }
 
 export interface IRemove{{ table.singleName | friendly | capitalize }}Action {
