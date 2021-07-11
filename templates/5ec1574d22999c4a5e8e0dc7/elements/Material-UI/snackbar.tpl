@@ -16,22 +16,27 @@ options:
     display: Position
     type: dropdown
     options: Top-Left;Top-Center;Top-Right;Bottom-Left;Bottom-Center;Bottom-Right
+  - name: varName
+    display: Variable Name (snackBarOpen)
+    type: text
+    settings:
+      default: snackBarOpen
+      active: true
 children: []
 */
-
 {% set bpr %}
 import Snackbar from '@material-ui/core/Snackbar'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 {% set ph %}
-const [snackBarOpen, setSnackbarOpen] = React.useState(false)
+const [{{ element.values.varName }}, set{{ element.values.varName }}] = React.useState(false)
 {% endset %}
 {{ save_delayed('ph', ph ) }}
 {% set splited = element.values.position|split('-') %}
 <Snackbar
-  open={snackBarOpen}
+  open={ {{ element.values.varName }} }
   {% if element.values.message %}message="{{ element.values.message }}"{% endif %}
   {% if element.values.autohide %}autoHideDuration={ {{ element.values.autohide }} }{% endif %}
-  onClose={() => { setSnackbarOpen(false) } }
+  onClose={() => { set{{ element.values.varName }}(false) } }
   anchorOrigin={ { vertical: '{{splited[0]|lower}}', horizontal: '{{splited[1]|lower}}' } }
 >{{ content | raw }}</Snackbar>

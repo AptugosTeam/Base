@@ -26,7 +26,7 @@ exports.create = (options) => {
 
   {% for field in table.fields %}
     {% for key, value in field|castToArray %}
-      {% if 'validators.' in value[0] %}
+      {% if 'validators.' in value[0] and value[1] %}
         {% set validator = value[0][11:] %}
         {% include includeTemplate(['Fields' ~ field.data_type ~ validator ~ '.tpl']) %}
       {% endif %}
@@ -56,6 +56,15 @@ exports.createAsPromise = (options) => {
   return new Promise((resolve, reject) => {
     const data = options.req ? options.req.body : options.data
     const updatedData = {}
+
+    {% for field in table.fields %}
+      {% for key, value in field|castToArray %}
+        {% if 'validators.' in value[0] and value[1] %}
+          {% set validator = value[0][11:] %}
+          {% include includeTemplate(['Fields' ~ field.data_type ~ validator ~ '.tpl']) %}
+        {% endif %}
+      {% endfor %}
+    {% endfor %}
 
     {% for field in table.fields %}
       {% set fieldWithData = field | fieldData %}

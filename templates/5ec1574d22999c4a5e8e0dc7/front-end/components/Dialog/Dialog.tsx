@@ -13,7 +13,8 @@ import React, { FunctionComponent, useState } from 'react'
 interface addDialogProps {
   isOpen: boolean
   onOpen: VoidFunction
-  onClose: VoidFunction
+  onSave?: VoidFunction
+  onClose?: VoidFunction
   title: string
   text?: string
   button: string
@@ -27,7 +28,7 @@ interface addDialogProps {
 }
 
 const AddDialog: FunctionComponent<addDialogProps> = (props) => {
-  const { isOpen, onOpen, onClose, title, text, button, saveDataHandler, color, data, initialData, setData, allowMultipleSubmit, hideButton } = props
+  const { isOpen, onOpen, onSave, onClose, title, text, button, saveDataHandler, color, data, initialData, setData, allowMultipleSubmit, hideButton } = props
 
   const [switchState, setSwitchState] = useState({ addMultiple: false })
 
@@ -40,15 +41,17 @@ const AddDialog: FunctionComponent<addDialogProps> = (props) => {
   }
 
   const handleClose = () => {
-    resetSwitch()
-    setData(initialData)
+    if (onSave) {
+      resetSwitch()
+      setData(initialData)
+    }
     onClose()
   }
 
   const handleSubmit = () => {
     saveDataHandler(data)
     setData(initialData)
-    !switchState.addMultiple && handleClose()
+    if (onSave) !switchState.addMultiple && handleClose()
   }
 
   return (
