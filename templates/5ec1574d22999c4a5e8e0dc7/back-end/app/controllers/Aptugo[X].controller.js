@@ -12,7 +12,7 @@ children: []
 const {{ table.name | friendly }} = require('../models/{{ table.name | friendly | lower }}.model.js')
 const fs = require('fs')
 const paginate = require('../paginate')
-var ObjectId = require('mongodb').ObjectID
+var ObjectId = require('mongoose').ObjectId
 
 {% for field in table.fields %}
   {% set fieldWithData = field | fieldData %}
@@ -77,7 +77,7 @@ exports.createAsPromise = (options) => {
     // Save {{ table.singleName | friendly }} in the database
     {{ table.singleName | friendly }}.save()
     .then(result => {
-      exports.findOne({ ID: result._id, res: options.res })
+      if (!options.skipfind) exports.findOne({ ID: result._id, res: options.res })
      })
     .catch(err => { reject(err) })
   })
@@ -111,7 +111,7 @@ exports.find = (options) => {
   if (query.searchField) {
     findString = { [query.searchField]: query.searchString }
     if ({{ table.name | friendly }}.schema.path(query.searchField).instance === 'ObjectID') {
-      findString = { [query.searchField]: ObjectId(query.searchString) }
+      findString = { [query.searchField]: require('mongoose').Types.ObjectId(query.searchString) }
     }
   }
   if (typeof query.sort === 'string') query.sort = JSON.parse(query.sort)
@@ -189,23 +189,20 @@ exports.update = (options) => {
 
 // Delete a {{ table.singleName | friendly | lower }} with the specified ID in the request
 exports.delete = (options) => {
-  const id = options.req ? options.req.params.ID : options.ID
-  {{ table.name | friendly }}.findByIdAndRemove(id)
-    .then({{ table.singleName | friendly | lower }} => {
-      if(!{{ table.singleName | friendly | lower }}) {
-        return options.res.status(404).send({
-          message: "{{ table.singleName | friendly }} not found with id " + id
-        })
-      }
-      options.res.send({message: "{{ table.singleName | friendly }} deleted successfully!"});
-    }).catch(err => {
-      if(err.kind === 'ObjectId' || err.name === 'NotFound') {
-        return options.res.status(404).send({
-          message: "{{ table.singleName | friendly }} not found with id " + id
-        })
-      }
-      return options.res.status(500).send({
-        message: "Could not delete {{ table.singleName | friendly }} with id " + id
+  return new Promise((resolve, reject) => {
+    const params = options.req ? options.req.params : options
+    let theFilter = { '_id' : params.ID }
+    
+    if (options.queryString && options.queryField) {
+      theFilter = { [options.queryField]: options.queryString }
+    }
+    {{ table.name | friendly }}.deleteMany(theFilter)
+      .then((result) => {
+        resolve(result)
+      })
+      .catch((e) => {
+        reject(e)
       })
   })
 }
+

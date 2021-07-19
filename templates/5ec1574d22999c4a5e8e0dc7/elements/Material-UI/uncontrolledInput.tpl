@@ -40,9 +40,10 @@ options:
   - name: type
     display: Type
     type: dropdown
-    options: text;password
+    options: text;password;date
 children: []
 */
+
 
 
 {% set bpr %}
