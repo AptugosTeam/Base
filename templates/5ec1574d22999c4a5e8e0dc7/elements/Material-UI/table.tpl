@@ -192,7 +192,7 @@ const [sortOrder, setSortOrder] = React.useState<{ orderBy?: string, order: 'asc
       onClickCapture={(e: any) => { 
         {% if element.values.addProcedure == 'Internal' %}
           {{ setEditDataFunctionName }}(e.element)
-          setDialogAction('edit')
+          setdialog{{ tableName | capitalize }}Action('edit')
         {% else %}
           const url = '{{ (element.values.addProcedure | elementData ).path }}'.replace(':id', e.element._id)
           props.history.push(url)

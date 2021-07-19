@@ -40,7 +40,16 @@ const aptugotheme = createMuiTheme({
 {{ save_delayed('bpr', bpr) }}
 <ThemeProvider theme={aptugotheme}>
 {% endif %}
-<div className={ {{ element.values.className|default('classes.mainPanel') }} } >
+{% if element.values.className is defined and element.values.className|length > 1 %}
+{% set bpr %}
+import clsx from 'clsx'
+{% endset %}
+{{ save_delayed('bpr',bpr) }}
+  {% set class = 'clsx(' ~ element.values.className|join(',') ~ ')' %}
+{% else %}
+  {% set class = element.values.className|default('classes.mainPanel') %}
+{% endif %}
+<div className={ {{ class }} } >
 {{ content|raw }}
 </div>
 {% if element.values.primaryColor %}

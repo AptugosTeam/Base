@@ -4,6 +4,13 @@
   "dataType": "Date",
   "initialValue": "",
   "options": {
+    "validations": [
+      {
+        "display": "Requires a value",
+        "value": "required",
+        "type": "checkbox"
+      }
+    ],
     "extra": [
       {
         "display": "Date Format",

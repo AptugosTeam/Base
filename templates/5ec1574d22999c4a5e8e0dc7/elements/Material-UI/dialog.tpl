@@ -56,14 +56,15 @@ options:
     options: ''
 children: []
 */
-
 {% set table = element.values.table | tableData %}
+{% set friendlyTableName = table.name | friendly | capitalize %}
+{% set dialogVariable = 'dialog' ~ friendlyTableName ~ 'Action' %}
 {% if element.children %}
 {% else %}
   {% set fields = table.fields %}
 {% endif %}
 {% set bpr %}
-import { I{{ table.name | friendly | capitalize }}Item } from '../store/models'
+import { I{{ friendlyTableName }}Item } from '../store/models'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 {% set bpr %}
@@ -71,11 +72,11 @@ import TextField from '@material-ui/core/TextField'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 {% set bpr %}
-import { add{{ table.name | friendly | capitalize }} } from '../store/actions/{{ table.name | friendly | lower }}Actions'
+import { add{{ friendlyTableName }} } from '../store/actions/{{ table.name | friendly | lower }}Actions'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 {% set bpr %}
-import { edit{{ table.name | friendly | capitalize }} } from '../store/actions/{{ table.name | friendly | lower }}Actions'
+import { edit{{ friendlyTableName }} } from '../store/actions/{{ table.name | friendly | lower }}Actions'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 {% set bpr2 %}
@@ -83,31 +84,34 @@ import AddDialog from '../components/Dialog/Dialog'
 {% endset %}
 {{ save_delayed('bpr', bpr2 ) }}
 {% set ph %}
-  const [dialogAction, setDialogAction] = React.useState<'add' | 'edit' | "">('')
+  const [{{ dialogVariable }}, set{{ dialogVariable }}] = React.useState<'add' | 'edit' | "">('')
+{% endset %}
+{{ save_delayed('ph', ph ) }}
+{% set ph %}
   const LocalAddDialog = AddDialog
 {% endset %}
 {{ save_delayed('ph', ph ) }}
 <LocalAddDialog
   {% if element.values.hideButton %}hideButton={true}{% endif %}
-  isOpen={dialogAction !== ''}
-  onOpen={() => {% if element.values.addProcedure == 'Internal' %}setDialogAction('add'){% else %}props.history.push('{{ (element.values.addProcedure | elementData ).path | withoutVars }}'){% endif %}}
+  isOpen={ {{ dialogVariable }} !== ''}
+  onOpen={() => {% if element.values.addProcedure == 'Internal' %}set{{ dialogVariable }}('add'){% else %}props.history.push('{{ (element.values.addProcedure | elementData ).path | withoutVars }}'){% endif %}}
   {% if not element.values.manuallyManaged %}
-    onSave={() => setDialogAction('')}
+    onSave={() => set{{ dialogVariable }}('')}
   {% endif %}
-  onClose={() => setDialogAction('')}
-  title={dialogAction === 'edit' ? '{{ element.values.editTitle }}' : '{{ element.values.title }}'}
-  text={dialogAction === 'edit' ? '{{ element.values.editIntroText }}' : '{{ element.values.introText }}'}
-  button={dialogAction === 'edit' ? '{{ element.values.editButton }}' : '{{ element.values.button }}'}
+  onClose={() => set{{ dialogVariable }}('')}
+  title={ {{ dialogVariable }} === 'edit' ? '{{ element.values.editTitle }}' : '{{ element.values.title }}'}
+  text={ {{ dialogVariable }} === 'edit' ? '{{ element.values.editIntroText }}' : '{{ element.values.introText }}'}
+  button={ {{ dialogVariable }} === 'edit' ? '{{ element.values.editButton }}' : '{{ element.values.button }}'}
   saveDataHandler={ (data: I{{ table.name | friendly | capitalize }}Item ) => {
     {% if element.values.addProcedure == 'Internal' %}
-      dialogAction === 'add' ? dispatch(add{{ table.name | friendly | capitalize }}(data)) : dispatch(edit{{ table.name | friendly | capitalize }}(data))
+      {{ dialogVariable }} === 'add' ? dispatch(add{{ table.name | friendly | capitalize }}(data)) : dispatch(edit{{ table.name | friendly | capitalize }}(data))
     {% endif %}
   } }
   color='{{ element.values.color }}'
   data={ {{ table.name | friendly }}data}
   initialData={initialData{{ table.name | friendly }}}
   setData={set{{ table.name | friendly }}Data}
-  allowMultipleSubmit={dialogAction === 'add'}
+  allowMultipleSubmit={ {{ dialogVariable }} === 'add'}
 >
 {% for field in fields %}
  {% set subvalues = { element: { values: { Field: field.unique_id, Type: 'edit' } }  } %}

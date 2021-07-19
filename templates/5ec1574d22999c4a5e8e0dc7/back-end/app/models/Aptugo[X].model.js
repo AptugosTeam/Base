@@ -8,29 +8,33 @@ sourceType: javascript
 subtype: Aptugo
 children: []
 */
-
+{% set friendlyTableName = table.name | friendly %}
+{% set schema = '' %}
+{% set extraImports = '' %}
+{% set extraPlugins = '' %}
+{% for field in table.fields %}
+  {% set fieldInfo = field | fieldData %}
+  {% if fieldInfo.relationshipType == '1:m' %}
+    {% set fieldInfo = fieldInfo|merge({'dataType': '[' ~ fieldInfo.dataType ~ ']'}) %}
+  {% endif %}
+  {% set datatype = fieldInfo.dataType %}
+  {% if fieldInfo.relationshipType == 'm:1' %}
+    {{ add_setting('BackendPackages', '"mongoose-autopopulate" : "latest",') }}
+    {% set extraPlugins = friendlyTableName ~ "Schema.plugin(mongooseAutoPopulate)" %}
+    {% set extraImports = "const mongooseAutoPopulate = require('mongoose-autopopulate')\n" %}
+    {% set relatedFieldInfo = fieldInfo.reference | fieldData %}
+    {% set datatype = '{\ntype:' ~ fieldInfo.dataType ~ ',\nref: ' ~ '"' ~ relatedFieldInfo.table.name | friendly ~ '"' ~ ',\nautopopulate: true\n' ~ '}\n' %}
+  {% endif %}
+  {% set friendlyColumnName = field.column_name | friendly  %}
+  
+  {% set schema = schema ~ friendlyColumnName ~ ': ' ~  datatype  ~ ',\n' %}
+{% endfor %}
+  
 const mongoose = require('mongoose')
 const mongoosePaginate = require('mongoose-paginate-v2')
-
-const {{ table.name | friendly }}Schema = mongoose.Schema({
-  {% for field in table.fields %}
-    {% if field.referencekey %}
-      {% if field.referencekey == '_id' %}
-        {% set fieldInfo = field | fieldData %}
-      {% else %}
-        {% set fieldInfo = field.referencekey | fieldData %}
-      {% endif %}
-    {% else %}
-      {% set fieldInfo = field | fieldData %}
-      {% if fieldInfo.relationshipType == '1:m' %}
-        {% set fieldInfo = fieldInfo|merge({'dataType': '[' ~ fieldInfo.dataType ~ ']'}) %}
-      {% endif %}
-    {% endif %}
-    {% set datatype = fieldInfo.dataType %}
-    {% if datatype %}
-    {{ field.column_name | friendly }}: {{ datatype }},
-    {% endif %}
-  {% endfor %}
+{{ extraImports }}
+const {{ friendlyTableName }}Schema = mongoose.Schema({
+ {{ schema }}
 }, {
     timestamps: true,
     toJSON: { virtuals: true }
@@ -56,8 +60,9 @@ const {{ table.name | friendly }}Schema = mongoose.Schema({
   {% endif %}
 {% endfor %}
 
-{{ table.name | friendly }}Schema.plugin(mongoosePaginate)
-{{ table.name | friendly }}Schema.index(
+{{ extraPlugins }}
+{{ friendlyTableName }}Schema.plugin(mongoosePaginate)
+{{ friendlyTableName }}Schema.index(
   {
   {% for field in table.fields %}
     {{ field.column_name | friendly }}: 'text',
