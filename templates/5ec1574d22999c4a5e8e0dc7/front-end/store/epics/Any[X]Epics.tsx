@@ -94,9 +94,9 @@ const add{{ table.name | friendly | capitalize }}Epic: Epic<{{ table.name | fri
       (item) =>
         data.append(
           item,
-          action.payload[item]._id
-            ? action.payload[item]._id
-            : typeof action.payload[item] === 'object' && action.payload[item].isPrototypeOf === 'File'
+          action.payload[item]?._id
+            ? action.payload[item]?._id
+            : typeof action.payload[item] === 'object' && action.payload[item]?.isPrototypeOf === 'File'
             ? JSON.stringify(action.payload[item])
             : Array.isArray(action.payload[item])
             ? JSON.stringify(action.payload[item])
