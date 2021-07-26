@@ -19,6 +19,8 @@ options:
     options: Top-Left;Top-Center;Top-Right;Bottom-Left;Bottom-Center;Bottom-Right
 */
 {% set table = element.values.table | tableData %}
+{% set friendlyTableName = table.name | friendly | capitalize %}
+{% set dialogVariable = 'dialog' ~ friendlyTableName ~ 'Action' %}
 {% set element = element|merge({'values': (element.values | merge({'severity': 'error', 'varName': table.name|friendly|lower ~ 'snackbar' })) }) %}
 {% set ph %}
 React.useEffect(() => {
@@ -26,7 +28,7 @@ React.useEffect(() => {
     if ({{ table.name|friendly|lower }}Data.errStatus !== 200) {
       set{{element.values.varName}}(true)
     } else {
-      setDialogAction('')
+      typeof set{{ dialogVariable }} !== 'undefined' && set{{ dialogVariable }}('')
     }
   }
 },[{{ table.name|friendly|lower }}Data.errStatus])
