@@ -46,7 +46,7 @@ const {{ friendlyTableName }}Schema = mongoose.Schema({
     {% if relatedField.data_type == 'Relationship' and (relatedField | fieldData).table.unique_id == table.unique_id %}
         {{ table.name | friendly }}Schema.add({ {{ relData.table.name }}: [ require('./{{ relData.table.name | lower }}.model.js').schema ] })
     {% else %}
-      {% if relatedField.relationshipType != 'm:1' and table.unique_id == relData.table.unique_id %}
+      {% if relatedField.relationshipType != '1:m' and table.unique_id == relData.table.unique_id %}
         {% set foundFieldData = relatedField | fieldData %}
         {{ table.name | friendly }}Schema.virtual('{{ foundFieldData.table.name | friendly }}', {
           ref: '{{ foundFieldData.table.name | friendly }}',
