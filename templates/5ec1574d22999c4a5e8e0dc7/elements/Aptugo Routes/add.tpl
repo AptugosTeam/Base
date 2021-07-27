@@ -11,5 +11,5 @@ children: []
     res.send(result)
   })
   .catch(e => {
-    res.status(500).send(e)
+    res.status(e.code || 500).send(e)
   })
