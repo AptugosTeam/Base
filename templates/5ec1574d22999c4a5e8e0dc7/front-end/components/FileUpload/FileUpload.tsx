@@ -5,8 +5,8 @@ import IconButton from '@material-ui/core/IconButton'
 import Input from '@material-ui/core/Input'
 import InputLabel from '@material-ui/core/InputLabel'
 import { makeStyles } from '@material-ui/core/styles'
-import SearchIcon from '@material-ui/icons/Search'
 import PublishIcon from '@material-ui/icons/Publish'
+import SearchIcon from '@material-ui/icons/Search'
 import clsx from 'clsx'
 import React, { FunctionComponent } from 'react'
 
@@ -40,12 +40,14 @@ const altStyles = makeStyles({
       transform: 'none !important',
       position: 'absolute',
       left: '50px',
-      top: '22px'
-    }
+      top: '22px',
+    },
   },
   image: {
     maxHeight: '48px',
-    margin: '5px 5px 0 0',
+    margin: '5px 4px 5px auto',
+    borderRadius: '5px',
+    overflow: 'hidden'
   },
   media: {
     maxHeight: '48px',
@@ -60,10 +62,10 @@ const altStyles = makeStyles({
     width: '100%',
     border: '1px solid rgb(196 196 196)',
     '&:after': {
-      content: 'none'
+      content: 'none',
     },
     '&:before': {
-      content: 'none'
+      content: 'none',
     },
     '& label': {
       left: '0px',
@@ -74,14 +76,14 @@ const altStyles = makeStyles({
         whiteSpace: 'nowrap',
         top: '6px',
         margin: '0',
-        color: '#808080'
-      }
+        color: '#808080',
+      },
     },
     '& input': {
       width: '1px',
       overflow: 'hidden',
-      textIndent: '10px'
-    }
+      textIndent: '10px',
+    },
   },
   button: {
     position: 'absolute',
@@ -91,6 +93,7 @@ const altStyles = makeStyles({
 
 const AptugoImageUpload: FunctionComponent<any> = (props) => {
   const classes = props.visual === 'standard' ? useStyles() : altStyles()
+
   const [state, setState] = React.useState({
     uploading: false,
     file: null,
@@ -166,7 +169,8 @@ const AptugoImageUpload: FunctionComponent<any> = (props) => {
             }
           />
         </FormControl>
-    </div>)
+      </div>
+    )
   }
 
   const alternativeVisual = () => {
@@ -181,11 +185,12 @@ const AptugoImageUpload: FunctionComponent<any> = (props) => {
             <label>
               <input accept={state.accept} className={classes.input} multiple type="file" onChange={handleUploadClick} />
               <IconButton component="span" className={classes.button} aria-label="Search">
-                <PublishIcon color='primary' />
+                <PublishIcon color="primary" />
               </IconButton>
               <p>{props.label}</p>
             </label>
           }
+          endAdornment={renderUploadedState()}
         />
       </FormControl>
     )

@@ -12,29 +12,15 @@ children: []
 {% set schema = '' %}
 {% set extraImports = '' %}
 {% set extraPlugins = '' %}
-{% for field in table.fields %}
-  {% set fieldInfo = field | fieldData %}
-  {% if fieldInfo.relationshipType == '1:m' %}
-    {% set fieldInfo = fieldInfo|merge({'dataType': '[' ~ fieldInfo.dataType ~ ']'}) %}
-  {% endif %}
-  {% set datatype = fieldInfo.dataType %}
-  {% if fieldInfo.relationshipType == 'm:1' %}
-    {{ add_setting('BackendPackages', '"mongoose-autopopulate" : "latest",') }}
-    {% set extraPlugins = friendlyTableName ~ "Schema.plugin(mongooseAutoPopulate)" %}
-    {% set extraImports = "const mongooseAutoPopulate = require('mongoose-autopopulate')\n" %}
-    {% set relatedFieldInfo = fieldInfo.reference | fieldData %}
-    {% set datatype = '{\ntype:' ~ fieldInfo.dataType ~ ',\nref: ' ~ '"' ~ relatedFieldInfo.table.name | friendly ~ '"' ~ ',\nautopopulate: true\n' ~ '}\n' %}
-  {% endif %}
-  {% set friendlyColumnName = field.column_name | friendly  %}
-  
-  {% set schema = schema ~ friendlyColumnName ~ ': ' ~  datatype  ~ ',\n' %}
-{% endfor %}
   
 const mongoose = require('mongoose')
 const mongoosePaginate = require('mongoose-paginate-v2')
 {{ extraImports }}
 const {{ friendlyTableName }}Schema = mongoose.Schema({
- {{ schema }}
+  {% for field in table.fields %}
+    {% set fieldInfo = field | fieldData %}
+    {% include includeTemplate(['Fields' ~ field.data_type ~ 'model.tpl', 'Fieldsmodel.tpl']) with { fieldInfo: fieldInfo} %}
+  {% endfor %}
 }, {
     timestamps: true,
     toJSON: { virtuals: true }
