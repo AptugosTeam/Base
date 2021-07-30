@@ -105,6 +105,7 @@ const dispatch = useDispatch()
         set{{ element.values.variableName }}Loading(true)
         {% if element.values.searchString %}
           dispatch(search{{ table.name | friendly | capitalize }}({
+            limit: {{ limit }},
             searchString: {{ element.values.searchString }} || '',
             {% if element.values.fieldToSearch %}searchField: "{{ element.values.fieldToSearch }}",{% endif %}
             {% if element.values.sortColumn %}sort: {
@@ -125,20 +126,19 @@ const dispatch = useDispatch()
   {% else %}
     {% if element.values.searchString %}
       React.useEffect(() => {
-        if (
-          {{ element.values.searchString }} && (
-            {{ table.name | friendly | lower }}Data.searchingStatus === 'notloaded' ||
+        if ({{ element.values.searchString }}) {
+          if ( {{ table.name | friendly | lower }}Data.searchingStatus === 'notloaded' ||
             {{ table.name | friendly | lower }}Data.searchingStatus === 'failed' ||
             {{ table.name | friendly | lower }}Data.searchString !== {{ element.values.searchString }}
-          )
-        ) {
-          dispatch(search{{ table.name | friendly | capitalize }}({{ optionsObject }}))
+          ) {
+            dispatch(search{{ table.name | friendly | capitalize }}({{ optionsObject }}))
+          }
+          {% if element.values.onload %}
+          else {
+            {{ element.values.onload }}
+          }
+          {% endif %}
         }
-        {% if element.values.onload %}
-        else {
-          {{ element.values.onload }}
-        }
-        {% endif %}
       }, [{{ table.name | friendly | lower }}Data.searchingStatus])
     {% else %}
       React.useEffect(() => {

@@ -9,10 +9,11 @@ subtype: Aptugo
 children: []
 */
 
+
 const {{ table.name | friendly }} = require('../models/{{ table.name | friendly | lower }}.model.js')
 const fs = require('fs')
 const paginate = require('../paginate')
-const errors = require('../services/error.service')
+const errors = require('../services/errors.service')
 
 {% for field in table.fields %}
   {% set fieldWithData = field | fieldData %}
@@ -118,7 +119,7 @@ exports.find = (options) => {
     const data = options.req ? options.req.body : options.data
     let findString =  query.searchString ? { $text: { $search: query.searchString } } : {}
     if (query.searchField) {
-      findString = { [query.searchField]: query.searchString }
+      findString = { [query.searchField]: { $regex : new RegExp(query.searchString, "i") } }
       if ({{ table.name | friendly }}.schema.path(query.searchField).instance === 'ObjectID') {
         findString = { [query.searchField]: require('mongoose').Types.ObjectId(query.searchString) }
       }

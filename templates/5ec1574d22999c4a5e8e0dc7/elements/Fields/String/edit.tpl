@@ -24,7 +24,7 @@ import TextField from '@material-ui/core/TextField'
     type="text"
     fullWidth
     variant="{{ element.values.variant|default('standard') }}"
-    value={ {{ tableName }}data.{{ field.column_name | friendly }}}
+    value={ {{ tableName }}data.{{ field.column_name | friendly }} || '' }
     onChange={handle{{ tableName }}Change("{{ field.column_name | friendly }}")}
     error={ {{ tableName | lower }}Data?.errField === '{{ field.column_name | friendly }}'}
     helperText={ {{ tableName | lower }}Data?.errField === '{{ field.column_name | friendly }}' && {{ tableName | lower }}Data.errMessage}
