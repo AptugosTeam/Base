@@ -86,7 +86,6 @@ children: []
     "@material-ui/core": "^4.12.2",
     "@material-ui/icons": "next",
     "axios": "^0.21.1",
-    "disqus-react": "^1.0.11",
     "immer": "^8.0.1",
     "react-ga": "^3.3.0",
     "react-google-login": "^5.2.2",

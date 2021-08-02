@@ -17,6 +17,7 @@ options:
     type: text
     options: ''
 */
+
 {% set bpr %}
 import { Bar } from 'react-chartjs-2'
 {% endset %}
