@@ -27,21 +27,26 @@ import { search{{ referencedTable }} } from '../store/actions/{{ referencedTable
 import Autocomplete from '../components/Autocomplete'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
-{% set ph %}
-const {{ referencedTable | lower }}Data = useSelector((state: IState) => state.{{ referencedTable | lower }})
+{% set bpr %}
+import axios from 'axios'
 {% endset %}
-{{ save_delayed('ph',ph) }}
+{{ save_delayed('bpr',bpr) }}
 {% set ph %}
-
-const typeInSearch{{ referencedTable }} = (typedIn) => {
-  if ({{ referencedTable | lower }}Data.loadingStatus !== 'loading' {% if not element.values.autoload == 'no' %}&& typedIn !== ''{% endif %}) {
-    dispatch(search{{ referencedTable }}(typedIn))
-  }
-}
+const {{ referencedTable | lower }}AutocompleteData = useSelector((state: IState) => state.{{ referencedTable | lower }})
 {% endset %}
 {{ save_delayed('ph',ph) }}
 {% set ph %}
 const [{{ columnName }}Options, set{{ columnName }}Options] = React.useState<{ label: String, value: String }[]>([])
+const typeInSearch{{ referencedTable }} = (typedIn) => {
+  const searchOptions = { searchString: typedIn, searchField: '{{ referencedField.column_name | friendly }}', page: 1, limit: 10 }
+  axios.get('{{ settings.apiURL }}/api/{{ referencedTable | lower }}/search/', { params: searchOptions }).then(result => { 
+    set{{ columnName }}Options(result.data.docs.map({{ referencedField.table.singleName | friendly | lower }} => { return { label: {{ referencedField.table.singleName | friendly | lower }}.{{ referencedField.column_name | friendly }}, value: {{ referencedField.table.singleName | friendly | lower }}.{{ referencekey }} }}))
+  })
+}
+{% endset %}
+{{ save_delayed('ph',ph) }}
+{% set ph %}
+
 const [{{ columnName }}Value, set{{ columnName }}Value] = React.useState(null)
 React.useEffect(() => {
     if (!{{ tableName }}data.{{ columnName }}) return undefined
@@ -51,13 +56,6 @@ React.useEffect(() => {
     )
   }, [{{ tableName }}data.{{ columnName }}])
 
-React.useEffect(() => {
-    let options:any = {{ referencedTable | lower }}Data.found{{ referencedTable | lower }}.map(({{ referencedField.table.singleName | friendly | lower }}) => { 
-        return { label: {{ referencedField.table.singleName | friendly | lower }}.{{ referencedField.column_name | friendly }}, value: {{ referencedField.table.singleName | friendly | lower }}.{{ referencekey }} }
-    })
-    set{{ columnName }}Options(options)
-}, [{{ referencedTable | lower }}Data.found{{ referencedTable | lower }}])
-
 {% endset %}
 {{ save_delayed('ph',ph) }}
 <Autocomplete
@@ -65,8 +63,11 @@ React.useEffect(() => {
   value={ {{ columnName }}Value }
   onType={ typeInSearch{{ referencedTable }} }
   onChange={(newValue) => handle{{ tableName }}Change('{{ columnName }}')(newValue?.length ? newValue.map(item => ({ _id: item.value !== 'new' ? item.value : null, {{ referencedField.column_name | friendly }}: item.label })) : [])}
-  loading={ {{ referencedTable | lower }}Data.loadingStatus === 'loading' }
+  loading={ {{ referencedTable | lower }}AutocompleteData.loadingStatus === 'loading' }
   {% if field.placeholder %}placeholder="{{ field.placeholder }}"{% endif %}
   options={ {{ columnName }}Options }
   label="{{ field.column_name }}"
+  fullWidth
+  variant="{{ element.values.variant|default('standard') }}"
+  margin='{{ element.values.margin|default("dense") }}'
 />

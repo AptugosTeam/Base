@@ -73,5 +73,5 @@ export default function JoditSetup(props) {
     input.click();
   }
 
-  return <JoditEditor config={config} value={initialValue} onChange={updateState} />;
+  return <JoditEditor config={config} value={initialValue} onBlur={updateState} />;
 }

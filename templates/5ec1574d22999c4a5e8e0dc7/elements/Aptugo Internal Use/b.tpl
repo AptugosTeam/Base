@@ -27,10 +27,10 @@ import {{ element.values.primaryColor }} from '@material-ui/core/colors/{{ eleme
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
 {% set bpr %}
-import { createMuiTheme } from '@material-ui/core/styles'
+import { createTheme } from '@material-ui/core/styles'
 import { ThemeProvider } from '@material-ui/styles'
 
-const aptugotheme = createMuiTheme({
+const aptugotheme = createTheme({
   palette: {
     primary: {{ element.values.primaryColor }},
   },

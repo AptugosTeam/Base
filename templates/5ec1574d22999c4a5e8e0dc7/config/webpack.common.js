@@ -26,7 +26,7 @@ module.exports = {
         use: ['style-loader', 'css-loader', 'sass-loader'],
       },
       {
-        test: /\.(jpe?g|png|gif|svg|webp)$/i,
+        test: /\.(jpe?g|png|gif|svg|webp|woff)$/i,
         use: [
           'file-loader?hash=sha512&digest=hex&name=img/[contenthash].[ext]',
           'image-webpack-loader?bypassOnDebug&optipng.optimizationLevel=7&gifsicle.interlaced=false',

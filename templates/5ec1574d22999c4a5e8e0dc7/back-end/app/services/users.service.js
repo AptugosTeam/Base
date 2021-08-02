@@ -25,7 +25,6 @@ async function recoverPassword(req) {
       const nonce = Buffer.from(bcrypt.hashSync(JSON.stringify(userWithoutPassword), Password)).toString('base64')
       let parsedmessage = message.replace('**nonce**', nonce)
       parsedmessage = parsedmessage.replace('**email**', Buffer.from(userWithoutPassword.Email).toString('base64'))
-      console.log(nonce, parsedmessage)
       req.app.get('sendEmail')({ name, email, message: parsedmessage, subject })
       resolve(user)
     })
@@ -37,8 +36,7 @@ async function checkNonce(req) {
     const { nonce, email } = req.body
     const asciiEMail = Buffer.from(email, 'base64').toString('ascii')
     const ascii = Buffer.from(nonce, 'base64').toString('ascii')
-
-    const query = Users.findOne({ Email: asciiEMail })
+    const query = Users.findOne({ Email: email })
     const promise = query.exec()
 
     promise.then((user) => {
