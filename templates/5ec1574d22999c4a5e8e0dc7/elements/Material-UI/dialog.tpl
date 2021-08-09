@@ -94,7 +94,7 @@ import AddDialog from '../components/Dialog/Dialog'
 <LocalAddDialog
   {% if element.values.hideButton %}hideButton={true}{% endif %}
   isOpen={ {{ dialogVariable }} !== ''}
-  onOpen={() => {% if element.values.addProcedure == 'Internal' %}set{{ dialogVariable }}('add'){% else %}props.history.push('{{ (element.values.addProcedure | elementData ).path | withoutVars }}'){% endif %}}
+  onOpen={() => {% if element.values.addProcedure != 'No' %}{% if element.values.addProcedure == 'Internal' %}set{{ dialogVariable }}('add'){% else %}props.history.push('{{ (element.values.addProcedure | elementData ).path | withoutVars }}'){% endif %}{% else %}{}{%endif%}}
   {% if not element.values.manuallyManaged %}
     onSave={() => set{{ dialogVariable }}('')}
   {% endif %}
