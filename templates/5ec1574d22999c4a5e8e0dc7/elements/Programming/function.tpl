@@ -16,7 +16,7 @@ options:
     options: ''
   - name: functionBody
     display: Body
-    type: text
+    type: function
     options: ''
   - name: priority
     display: Priiority
@@ -24,6 +24,7 @@ options:
     options: Normal;High;Low
 children: []
 */
+
 {% if element.values.priority %}
 {% set ph %}
 const {{ element.values.functionName }} = ({{ element.values.functionParameters }}) => {
