@@ -1,3 +1,12 @@
+/*
+path: Carousel.tsx
+type: file
+unique_id: sBI3GK1O
+icon: ico-field
+sourceType: typescript
+children: []
+*/
+
 import Slide from '@material-ui/core/Slide'
 import { makeStyles } from '@material-ui/core/styles'
 import ArrowBackIcon from '@material-ui/icons/ArrowBack'
@@ -42,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
     position: 'absolute',
     bottom: 0,
     left: '50%',
-    display: 'flex'
+    display: 'flex',
   },
   carouselDot: {
     width: '10px',
@@ -52,24 +61,25 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: '5px',
     opacity: '0.5',
     '&:hover': {
-      opacity: '1'
-    }
+      opacity: '1',
+    },
   },
   currentCarouselDot: {
-    opacity: '1'
-  }
+    opacity: '1',
+  },
 }))
 
 interface carouselProps {
   autoPlay: boolean
   height: string
   arrowsOrDotsMethod: 'none' | 'arrows' | 'dots'
+  showSlide?:number 
 }
 
 const AptugoCarousel: FunctionComponent<carouselProps> = (props) => {
   const classes = useStyles()
 
-  const [currentSlide, setCurrentSlide] = React.useState<number>(0)
+  const [currentSlide, setCurrentSlide] = React.useState<number>(props.showSlide || 0)
   const [isOver, setIsOver] = React.useState<boolean>(false)
   let timer
 
@@ -102,6 +112,10 @@ const AptugoCarousel: FunctionComponent<carouselProps> = (props) => {
     }
   }, [currentSlide, timer])
 
+    React.useEffect(() => {
+     setCurrentSlide(props.showSlide)
+  }, [props.showSlide])
+
   return (
     <div className={classes.root} style={ { height: props.height } }>
       {props.arrowsOrDotsMethod === 'arrows' && <ArrowBackIcon className={classes.backArrow} />}
@@ -122,10 +136,19 @@ const AptugoCarousel: FunctionComponent<carouselProps> = (props) => {
           )
         })}
       </div>
-      {props.arrowsOrDotsMethod === 'dots' && <div className={classes.carouselDots}>{slides.map((child, index) => {
-          return (<div key={`dot_${index}`} className={`${classes.carouselDot} ${currentSlide === index && classes.currentCarouselDot}`} onClick={() => setCurrentSlide(index) } />)
-        })
-      }</div>}
+      {props.arrowsOrDotsMethod === 'dots' && (
+        <div className={classes.carouselDots}>
+          {slides.map((child, index) => {
+            return (
+              <div
+                key={`dot_${index}`}
+                className={`${classes.carouselDot} ${currentSlide === index && classes.currentCarouselDot}`}
+                onClick={() => setCurrentSlide(index)}
+              />
+            )
+          })}
+        </div>
+      )}
       {props.arrowsOrDotsMethod === 'arrows' && <ArrowForwardIcon onClick={() => nextSlide()} className={classes.forwardArrow} />}
     </div>
   )
