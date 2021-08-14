@@ -66,13 +66,8 @@ options:
     type: checkbox
 children: []
 */
-
 {% set bpr %}
-    {% if element.values.Type == 'edit' %}
-        import TextField from '@material-ui/core/TextField'
-    {% else %}
-        import Field from '../components/Table/Field'
-    {% endif %}
+  import Field from '../components/Table/Field'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 {% if (element.values.Field) and (element.values.Field != 'useVar') %}

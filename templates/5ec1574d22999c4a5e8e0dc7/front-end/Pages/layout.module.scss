@@ -283,43 +283,6 @@ img {
     height: auto;
     word-break: break-all;
     min-width: 0px;
-
-    &:first-child > div:first-child {
-      border-left-width: 1px;
-      border-color: rgb(214, 214, 214);
-      border-style: solid;
-    }
-
-    & > div:first-child {
-      height: 55px;
-      border-color: rgb(214, 214, 214);
-      border-width: 1px 0;
-      border-style: solid;
-      display: flex;
-      justify-content: space-between;
-
-      & svg {
-        fill: none;
-        stroke: rgb(214, 214, 214);
-        right: 0;
-      }
-
-      & > div {
-        padding: 0.3rem;
-        font-weight: 500;
-        font-size: 16px;
-      }
-    }
-
-    &:last-child {
-      border-width: 0 1px 0 0;
-      border-color: rgb(214, 214, 214);
-      border-style: solid;
-
-      & svg {
-        display: none;
-      }
-    }
   }
 
   & .list {

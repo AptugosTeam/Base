@@ -20,14 +20,6 @@ options:
     display: ClassName
     type: text
     options: ''
-  - name: RowData
-    display: Row Data
-    type: text
-    options: ''
-  - name: matchCondition
-    display: Match Condition
-    type: text
-    options: ''
   - name: classNameList
     display: ClassName (list)
     type: text
@@ -58,6 +50,8 @@ settings:
       "react-dnd-html5-backend": "11.1.3",
 children: []
 */
+
+
 {% if data %}{% set table = data | tableData %}{% else %}{% set table = element.values.data | tableData %}{% endif %}
 {% if element.values.addRecords %}
 {% set bpr %}
@@ -87,7 +81,7 @@ import { HTML5Backend } from 'react-dnd-html5-backend'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 {% set ph %}
-const KanbanColumn = ({ channel, children }) => {
+const KanbanColumn = ({ channel, children, ...props }) => {
     const ref = React.useRef(null)
     const [{ isOver }, drop] = useDrop({
       accept: 'card',
@@ -99,10 +93,10 @@ const KanbanColumn = ({ channel, children }) => {
       })
     })
     drop(ref)
-    return <div ref={ref} className={clsx(isOver && classes.over)} >{children}</div>
+    return <div ref={ref} {...props} >{children}</div>
   }
 
-const KanbanItem = ({ item, children }) => {
+const KanbanItem = ({ item, children, ...props }) => {
     const ref = React.useRef(null)
     const [{ isDragging }, drag] = useDrag({
       item: { type: 'card', item },
@@ -114,7 +108,7 @@ const KanbanItem = ({ item, children }) => {
     const opacity = isDragging ? 0 : 1
     drag(ref)
     return (
-      <div ref={ref} className={classes.item} style={ { opacity } }>
+      <div ref={ref} {...props} style={ { opacity } }>
         {children}
       </div>
     )
@@ -124,30 +118,7 @@ const KanbanItem = ({ item, children }) => {
 <DndProvider backend={HTML5Backend}>       
 <div className={clsx(classes.kanban {% if element.values.className %}, {{ element.values.className }}{% endif %})}>
 { {{ element.values.Columns }}.map((columnItem, columnIndex) => {
-    return (
-      <KanbanColumn channel={columnItem} key={columnIndex} >
-          <div {% if element.values.columnHeaderColor %}style={ { backgroundColor: {{ element.values.columnHeaderColor }} } }{% endif %}>
-            <div className='kanbanHeader'>{{ element.values.ColumnName }}{% if element.values.Subtitle %}<span>{{ element.values.Subtitle }}</span>{% endif %}</div>
-            <svg width="10" height="56"><path d="M1 0l8 28-8 28"></path></svg>
-          </div>
-          <div className={clsx(classes.list {% if element.values.classNameList %}, {{ element.values.classNameList }}{% endif %})}>
-            { {{ element.values.RowData }}.map((rowItem, rowIndex) => {
-              if ({{ element.values.matchCondition }}) {
-                return (
-                  <KanbanItem key={rowIndex} item={rowItem}>
-                    {{ content | raw }}
-                  </KanbanItem>
-                )
-              }
-            })}
-            {% if element.values.addRecords %}
-            <Button onClickCapture={() => { {{ element.values.addRecords }} }}>
-              <AddIcon />
-            </Button>
-            {% endif %}
-          </div>
-      </KanbanColumn>
-    )
+    return ({{ content | raw }})
 })}
 </div>
 </DndProvider>

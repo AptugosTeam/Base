@@ -19,6 +19,7 @@ options:
     type: text
 */
 
+
 {% set bpr %}
 import { {{ element.values.icon|default('HelpOutline') }} } from '@material-ui/icons';
 {% endset %}

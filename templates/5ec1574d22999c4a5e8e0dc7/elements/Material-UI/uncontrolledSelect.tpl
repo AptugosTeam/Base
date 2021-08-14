@@ -21,8 +21,22 @@ options:
     display: Options
     type: text
     options: ''
+  - name: margin
+    display: Margin
+    type: dropdown
+    options: none;normal;dense
+  - name: fullwidth
+    display: Use full width?
+    type: checkbox
+    options: none;normal;dense
+  - name: className
+    display: ClassName
+    type: text
+    options: ''
 children: []
 */
+
+
 {% set bpr %}
 import TextField from '@material-ui/core/TextField'
 import MenuItem from '@material-ui/core/MenuItem'
@@ -31,10 +45,11 @@ import MenuItem from '@material-ui/core/MenuItem'
 <TextField
     {% if element.values.Autofocus %}autoFocus{% endif %}
     {% if element.values.DisableVariable %}disabled={ {{ element.values.DisableVariable }} }{% endif %}
-    margin="dense"
+    margin='{{ element.values.margin|default("dense") }}'
     {% if element.values.label %}label="{{ element.values.label }}"{% endif %}
+    {% if element.values.className %}className={ {{ element.values.className }} }{% endif %}
     select
-    fullWidth
+    {% if element.values.fullWidth %}fullWidth{% endif %}
     {% if element.values.value %}value={{ element.values.value }}{% endif %}
     {% if element.values.onChange %}onChange={ {{ element.values.onChange }} }{% endif %}
 >
