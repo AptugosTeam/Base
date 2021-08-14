@@ -23,7 +23,11 @@ module.exports = {
       },
       {
         test: /\.(scss|sass)$/,
-        use: ['style-loader', 'css-loader', 'sass-loader'],
+        use: ['style-loader', { loader: 'css-loader', options: {
+          modules: {
+            localIdentName: "[path][name]__[local]--[hash:base64:5]",
+          },
+        }}, { loader: 'sass-loader', options: { sourceMap: true } }]
       },
       {
         test: /\.(jpe?g|png|gif|svg|webp|woff)$/i,
