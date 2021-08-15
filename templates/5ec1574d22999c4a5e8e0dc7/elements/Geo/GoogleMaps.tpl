@@ -24,6 +24,7 @@ options:
 */
 
 
+
 {% set bpr %}
 import { Map, Marker } from 'google-maps-react'
 {% endset %}
