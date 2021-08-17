@@ -54,5 +54,5 @@ import MenuItem from '@material-ui/core/MenuItem'
     {% if element.values.onChange %}onChange={ {{ element.values.onChange }} }{% endif %}
 >
 <MenuItem value=""><em>All</em></MenuItem>
-{ {{ element.values.options }}.map((item, index) => <MenuItem value={item} key={index}>{item}</MenuItem> )}
+{ {{ element.values.options }}.map((item, index) => <MenuItem value={item.value ? item.value : item} key={index}>{item.name ? item.name : item}</MenuItem> )}
 </TextField>

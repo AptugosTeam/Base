@@ -120,9 +120,14 @@ exports.find = (options) => {
     let findString =  query.searchString ? { $text: { $search: query.searchString } } : {}
     if (query.searchField) {
       findString = { [query.searchField]: { $regex : new RegExp(query.searchString, "i") } }
-      if ({{ table.name | friendly }}.schema.path(query.searchField).instance === 'ObjectID') {
+      if ({{ table.name | friendly }}.schema.path(query.searchField).instance === 'ObjectID' || {{ table.name | friendly }}.schema.path(query.searchField).instance === 'Array') {
         findString = { [query.searchField]: require('mongoose').Types.ObjectId(query.searchString) }
       }
+    } else if (query.filters) {
+      query.filters.forEach(filter => {
+        const parsed = typeof filter === 'string' ? JSON.parse(filter) : filter
+        findString[parsed.field] = parsed.value
+      })
     }
     if (typeof query.sort === 'string') query.sort = JSON.parse(query.sort)
 

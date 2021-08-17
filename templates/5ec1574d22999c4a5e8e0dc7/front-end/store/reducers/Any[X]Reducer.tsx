@@ -1,103 +1,117 @@
-import produce from 'immer'
-import { ApiStatus, Ipaginated{{ table.name | friendly | capitalize }}, I{{ table.name | friendly | capitalize }}Item } from '../models'
-import { {{ table.name | friendly | capitalize }}Action, {{ table.name | friendly | capitalize }}ActionTypes } from '../actions/{{ table.name | friendly | lower }}Actions'
+{% set tableNameCap = table.name | friendly | capitalize %}
+{% set tableNameLow = table.name | friendly | lower %}
+{% set tableNameUp = table.name | friendly | upper %}
 
-export const initial{{ table.name | friendly | capitalize }}State: I{{ table.name | friendly | capitalize }}State = {
+import produce from 'immer'
+import { ApiStatus, Ipaginated{{ tableNameCap }}, I{{ tableNameCap }}Item } from '../models'
+import { {{ tableNameCap }}Action, {{ tableNameCap }}ActionTypes } from '../actions/{{ tableNameLow }}Actions'
+
+export const initial{{ tableNameCap }}State: I{{ tableNameCap }}State = {
   loadingStatus: ApiStatus.NOTLOADED,
   addingStatus: ApiStatus.NOTLOADED,
   searchingStatus: ApiStatus.NOTLOADED,
   searchString: '',
-  {{ table.name | friendly | lower }}: [],
-  found{{ table.name | friendly | lower }}: [],
+  {{ tableNameLow }}: [],
+  found{{ tableNameLow }}: [],
   totalDocs: 0,
   errMessage: '',
   errStatus: null,
   errField: null
 }
 
-export default function {{ table.name | friendly | lower }}Reducer(state: I{{ table.name | friendly | capitalize }}State = initial{{ table.name | friendly | capitalize }}State, action: {{ table.name | friendly | capitalize }}Action) {
+export default function {{ tableNameLow }}Reducer(state: I{{ tableNameCap }}State = initial{{ tableNameCap }}State, action: {{ tableNameCap }}Action) {
   return produce(state, draft => {
     switch (action.type) {
-      case {{ table.name | friendly | capitalize }}ActionTypes.SEARCH_{{ table.name | friendly | upper }}:
+      case {{ tableNameCap }}ActionTypes.SEARCH_{{ tableNameUp }}:
         draft.searchString = action.searchOptions.searchString
         break
-      case {{ table.name | friendly | capitalize }}ActionTypes.SEARCHING_{{ table.name | friendly | upper }}:
+      case {{ tableNameCap }}ActionTypes.SEARCHING_{{ tableNameUp }}:
         draft.searchingStatus = ApiStatus.LOADING
+        draft.loadingStatus = ApiStatus.NOTLOADED
+        draft.addingStatus = ApiStatus.NOTLOADED
         break
 
-      case {{ table.name | friendly | capitalize }}ActionTypes.SEARCHING_{{ table.name | friendly | upper }}_FAILED:
+      case {{ tableNameCap }}ActionTypes.SEARCHING_{{ tableNameUp }}_FAILED:
         draft.searchingStatus = ApiStatus.FAILED
         break
 
-      case {{ table.name | friendly | capitalize }}ActionTypes.FOUND_{{ table.name | friendly | upper }}:
+      case {{ tableNameCap }}ActionTypes.FOUND_{{ tableNameUp }}:
         draft.searchingStatus = ApiStatus.LOADED
-        action.keep ? draft.found{{ table.name | friendly | lower }}.push(...action.payload.{{ table.name | friendly | lower }}.docs) : draft.found{{ table.name | friendly | lower }} = action.payload.{{ table.name | friendly | lower }}.docs
-        draft.totalDocs = action.payload.{{ table.name | friendly | lower }}.totalDocs
+        action.keep ? draft.found{{ tableNameLow }}.push(...action.payload.{{ tableNameLow }}.docs) : draft.found{{ tableNameLow }} = action.payload.{{ tableNameLow }}.docs
+        draft.totalDocs = action.payload.{{ tableNameLow }}.totalDocs
         break
         
-      case {{ table.name | friendly | capitalize }}ActionTypes.LOAD_{{ table.name | friendly | upper }}:
-      case {{ table.name | friendly | capitalize }}ActionTypes.LOADING_{{ table.name | friendly | upper }}:
+      case {{ tableNameCap }}ActionTypes.LOAD_{{ tableNameUp }}:
+      case {{ tableNameCap }}ActionTypes.LOADING_{{ tableNameUp }}:
         draft.loadingStatus = ApiStatus.LOADING
+        draft.addingStatus = ApiStatus.NOTLOADED
+        draft.searchingStatus = ApiStatus.NOTLOADED
         break
 
-      case {{ table.name | friendly | capitalize }}ActionTypes.LOADING_{{ table.name | friendly | upper }}_FAILED:
+      case {{ tableNameCap }}ActionTypes.LOADING_{{ tableNameUp }}_FAILED:
         draft.loadingStatus = ApiStatus.FAILED
         break
 
-      case {{ table.name | friendly | capitalize }}ActionTypes.LOADED_{{ table.name | friendly | upper }}:
+      case {{ tableNameCap }}ActionTypes.LOADED_{{ tableNameUp }}:
         draft.loadingStatus = ApiStatus.LOADED
-        draft.{{ table.name | friendly | lower }} = action.payload.{{ table.name | friendly | lower }}.docs
-        draft.totalDocs = action.payload.{{ table.name | friendly | lower }}.totalDocs
+        draft.{{ tableNameLow }} = action.payload.{{ tableNameLow }}.docs
+        draft.totalDocs = action.payload.{{ tableNameLow }}.totalDocs
         break
 
-      case {{ table.name | friendly | capitalize }}ActionTypes.ADD_{{ table.name | friendly | upper }}:
-      case {{ table.name | friendly | capitalize }}ActionTypes.ADDING_{{ table.name | friendly | upper }}:
+      case {{ tableNameCap }}ActionTypes.ADD_{{ tableNameUp }}:
+      case {{ tableNameCap }}ActionTypes.ADDING_{{ tableNameUp }}:
         draft.addingStatus = ApiStatus.LOADING
+        draft.loadingStatus = ApiStatus.NOTLOADED
+        draft.searchingStatus = ApiStatus.NOTLOADED
         draft.errMessage = ''
         draft.errStatus = null
         draft.errField = null
         break
 
-      case {{ table.name | friendly | capitalize }}ActionTypes.ADDING_{{ table.name | friendly | upper }}_FAILED:
+      case {{ tableNameCap }}ActionTypes.ADDING_{{ tableNameUp }}_FAILED:
         draft.addingStatus = ApiStatus.FAILED
         draft.errMessage = action.message
         draft.errStatus = action.status
         draft.errField = action.field
         break
 
-      case {{ table.name | friendly | capitalize }}ActionTypes.ADDED_{{ table.name | friendly | upper }}:
+      case {{ tableNameCap }}ActionTypes.ADDED_{{ tableNameUp }}:
         draft.addingStatus = ApiStatus.LOADED
         draft.errStatus = 200
-        draft.{{ table.name | friendly | lower }}.push(action.payload.{{ table.name | friendly | lower }}.docs[0])
-        if (draft.searchString) draft.found{{ table.name | friendly | lower }}.push(action.payload.{{ table.name | friendly | lower }}.docs[0])
+        draft.{{ tableNameLow }}.push(action.payload.{{ tableNameLow }}.docs[0])
+        if (draft.searchString) draft.found{{ tableNameLow }}.push(action.payload.{{ tableNameLow }}.docs[0])
         break
         
-      case {{ table.name | friendly | capitalize }}ActionTypes.REMOVE_{{ table.singleName | friendly | upper }}:
-        draft.{{ table.name | friendly | lower }}.splice(draft.{{ table.name | friendly | lower }}.findIndex({{ table.singleName | friendly | lower }} => {{ table.singleName | friendly | lower }}._id === action.payload._id), 1)
+      case {{ tableNameCap }}ActionTypes.REMOVE_{{ table.singleName | friendly | upper }}:
+        draft.{{ tableNameLow }}.splice(draft.{{ tableNameLow }}.findIndex({{ table.singleName | friendly | lower }} => {{ table.singleName | friendly | lower }}._id === action.payload._id), 1)
         break
         
-      case {{ table.name | friendly | capitalize }}ActionTypes.EDIT_{{ table.name | friendly | upper }}:
-        draft.{{ table.name | friendly | lower }}[draft.{{ table.name | friendly | lower }}.findIndex(
+      case {{ tableNameCap }}ActionTypes.EDIT_{{ tableNameUp }}:
+        draft.loadingStatus = ApiStatus.NOTLOADED
+        draft.addingStatus = ApiStatus.LOADING
+        draft.searchingStatus = ApiStatus.NOTLOADED
+        draft.{{ tableNameLow }}[draft.{{ tableNameLow }}.findIndex(
           ({{ table.singleName | friendly | lower }}) => {{ table.singleName | friendly | lower }}._id === action.payload._id)] = action.payload
         break
         
-      case {{ table.name | friendly | capitalize }}ActionTypes.EDITED_{{ table.name | friendly | upper }}:
-        draft.{{ table.name | friendly | lower }}[draft.{{ table.name | friendly | lower }}.findIndex(
+      case {{ tableNameCap }}ActionTypes.EDITED_{{ tableNameUp }}:
+        draft.addingStatus = ApiStatus.LOADED
+        draft.{{ tableNameLow }}[draft.{{ tableNameLow }}.findIndex(
           ({{ table.singleName | friendly | lower }}) => {{ table.singleName | friendly | lower }}._id === action.payload._id)] = action.payload
-        draft.found{{ table.name | friendly | lower }}[draft.found{{ table.name | friendly | lower }}.findIndex(
+        draft.found{{ tableNameLow }}[draft.found{{ tableNameLow }}.findIndex(
           ({{ table.singleName | friendly | lower }}) => {{ table.singleName | friendly | lower }}._id === action.payload._id)] = action.payload
         break
     }
   })
 }
 
-export interface I{{ table.name | friendly | capitalize }}State {
+export interface I{{ tableNameCap }}State {
   loadingStatus: ApiStatus
   addingStatus: ApiStatus
   searchingStatus: ApiStatus
   searchString: string
-  {{ table.name | friendly | lower }}: I{{ table.name | friendly | capitalize }}Item[]
-  found{{ table.name | friendly | lower }}: I{{ table.name | friendly | capitalize }}Item[]
+  {{ tableNameLow }}: I{{ tableNameCap }}Item[]
+  found{{ tableNameLow }}: I{{ tableNameCap }}Item[]
   totalDocs: number
   errMessage?: string
   errStatus?: number

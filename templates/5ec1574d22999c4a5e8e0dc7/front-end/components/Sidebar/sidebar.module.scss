@@ -21,8 +21,7 @@
   }
 }
 
-.color:global(.MuiPaper-root),
-.colorRed:global(.MuiPaper-root) {
+.color:global(.MuiPaper-root) {
   @extend .baseColor;
   background-color: rgb(219, 54, 76);
 }
@@ -44,7 +43,19 @@
     & :global(.active) {
       background-color: #3f51b5;
       border-right: 2px solid #002984;
-      color: #FFF;
+      color: #fff;
+    }
+  }
+}
+
+.colorRed {
+  &:global(.MuiPaper-root) {
+    color: rgb(219, 54, 76);
+
+    & :global(.active) {
+      background-color: rgba(171, 0, 0, 0.08);
+      border-right: 2px solid rgb(219, 54, 76);
+      color: rgb(219, 54, 76);
     }
   }
 }
