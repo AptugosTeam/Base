@@ -182,10 +182,11 @@ type TSearchOptions = {
   searchField?: string
   page?: number
   limit?: number
-  sort?: { 
-    field: string,
-    method?: 'ASC' | 'DESC' 
+  sort?: {
+    field: string
+    method?: 'ASC' | 'DESC'
   }
+  filters?: { field: string, value: string }[]
 }
 
 export interface ISearch{{ table.name | friendly | capitalize }}Action {
