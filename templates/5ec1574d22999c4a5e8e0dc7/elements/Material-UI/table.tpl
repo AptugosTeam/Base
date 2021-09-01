@@ -73,6 +73,13 @@ options:
     settings:
       condition: var
       propertyCondition: table
+  - name: headerVariable
+    display: Variable to use in Header
+    type: text
+    options: ''
+    settings:
+      condition: var
+      propertyCondition: table
   - name: usePagination
     display: Use Pagination
     type: checkbox
@@ -90,6 +97,8 @@ options:
       active: true
 children: []
 */
+
+
 {% set allowEdit = element.values.allowEdit|default(true) %}
 {% set allowDeletion = element.values.allowDeletion|default(true) %}
 {% set tableFields = [] %}
@@ -153,7 +162,13 @@ const [sortOrder, setSortOrder] = React.useState<{ orderBy?: string, order: 'asc
 <Table
     title='{{ element.values.title }}'
     tableHeaderColor='{{ element.values.headerColor }}'
-    tableHead={[{% for field in tableFields %}"{{ field }}",{% endfor %}{% if element.values.addProcedure != 'No' or allowEdit or allowDeletion %}"Actions"{% endif %}]}
+    tableHead={
+      {% if element.values.headerVariable %}
+        {{element.values.headerVariable}}
+      {% else %}
+        [{% for field in tableFields %}"{{ field }}",{% endfor %}{% if element.values.addProcedure != 'No' or allowEdit or allowDeletion %}"Actions"{% endif %}]
+      {% endif %}
+    }
     tableData={ {{ tableData }} }
     orderBy={sortOrder.orderBy}
     order={sortOrder.order}
