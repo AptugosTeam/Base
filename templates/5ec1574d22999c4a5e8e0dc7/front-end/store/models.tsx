@@ -1,3 +1,8 @@
+/*
+path: models.tsx
+completePath: front-end/store/models.tsx
+unique_id: K34wWnGp
+*/
 import { DocumentProvider } from "mongoose"
 
 {% for table in application.tables %}

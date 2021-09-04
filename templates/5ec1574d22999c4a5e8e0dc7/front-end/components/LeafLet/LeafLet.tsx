@@ -1,3 +1,8 @@
+/*
+path: LeafLet.tsx
+completePath: front-end/components/LeafLet/LeafLet.tsx
+unique_id: dPTUixwP
+*/
 import React, { FunctionComponent } from 'react'
 import { Map, TileLayer } from 'react-leaflet'
 import classes from './leaflet.module.scss'

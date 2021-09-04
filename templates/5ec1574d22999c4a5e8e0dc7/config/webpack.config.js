@@ -1,3 +1,8 @@
+/*
+path: webpack.config.js
+completePath: config/webpack.config.js
+unique_id: kVphMrug
+*/
 const { merge } = require('webpack-merge')
 const Dotenv = require('dotenv-webpack')
 const commonConfig = require('./webpack.common.js')

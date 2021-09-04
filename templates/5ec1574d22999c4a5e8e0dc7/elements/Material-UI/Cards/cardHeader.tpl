@@ -1,3 +1,8 @@
+/*
+path: cardHeader.tpl
+completePath: elements/Material-UI/Cards/cardHeader.tpl
+unique_id: aFBU2rTB
+*/
 {% set bpr %}
 import CardHeader from '@material-ui/core/CardHeader';
 {% endset %}

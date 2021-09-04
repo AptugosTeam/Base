@@ -1,19 +1,7 @@
 /*
-'0':
-  path: package.json
-'1':
-  unique_id: SitBkknS
-'2':
-  icon: ico-field
-'3':
-  sourceType: json
-'4':
-  children: null
 path: package.json
-unique_id: SitBkknS
-icon: ico-field
-sourceType: json
-children: []
+completePath: package.json
+unique_id: 0i8AxGw6
 */
 {
   "name": "{{ application.settings.name | lower }}",

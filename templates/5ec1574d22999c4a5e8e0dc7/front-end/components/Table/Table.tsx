@@ -1,11 +1,9 @@
 /*
-- path: Table.tsx
-- type: file
-- unique_id: cFXF9Jms
-- icon: ico-field
-- sourceType: typescript
-- children: 
+path: Table.tsx
+completePath: front-end/components/Table/Table.tsx
+unique_id: KaVZdzkg
 */
+
 import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
 import TableCell from '@material-ui/core/TableCell'

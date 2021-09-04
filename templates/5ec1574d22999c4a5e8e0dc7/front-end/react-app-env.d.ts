@@ -1,3 +1,8 @@
+/*
+path: react-app-env.d.ts
+completePath: front-end/react-app-env.d.ts
+unique_id: 2FRiXIRt
+*/
 /// <reference types="node" />
 /// <reference types="react" />
 /// <reference types="react-dom" />

@@ -1,3 +1,8 @@
+/*
+path: Parallax.tpl
+completePath: elements/Material-UI/Parallax.tpl
+unique_id: x1zn859K
+*/
 {% set bpr %}
 import { Parallax } from 'react-parallax'
 {% endset %}

@@ -1,3 +1,8 @@
+/*
+path: Autocomplete.tsx
+completePath: front-end/components/Autocomplete/Autocomplete.tsx
+unique_id: wpHBmu7F
+*/
 import clsx from 'clsx'
 import React, { FunctionComponent } from 'react'
 import Select from 'react-select'

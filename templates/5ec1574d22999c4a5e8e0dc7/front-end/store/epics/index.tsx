@@ -1,3 +1,8 @@
+/*
+path: index.tsx
+completePath: front-end/store/epics/index.tsx
+unique_id: 2yDQTtLe
+*/
 
 import { combineEpics, createEpicMiddleware } from 'redux-observable'
 {% for table in application.tables %}

@@ -1,0 +1,9 @@
+/*
+path: anewfile.txt
+completePath: anewfile.txt
+type: file
+unique_id: rFnt6e8Q
+icon: file.svg
+children: []
+*/
+shut up and take my money without anything else edited

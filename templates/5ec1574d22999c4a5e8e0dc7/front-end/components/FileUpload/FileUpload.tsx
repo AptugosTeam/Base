@@ -1,3 +1,8 @@
+/*
+path: FileUpload.tsx
+completePath: front-end/components/FileUpload/FileUpload.tsx
+unique_id: QZm2nTtL
+*/
 import { faFilePdf } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import FormControl from '@material-ui/core/FormControl'

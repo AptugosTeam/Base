@@ -1,3 +1,8 @@
+/*
+path: robots.txt
+completePath: dist/robots.txt
+unique_id: lpdzMF6M
+*/
 User-agent: *
 
 Disallow: /login

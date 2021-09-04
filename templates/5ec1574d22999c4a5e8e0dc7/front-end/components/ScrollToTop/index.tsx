@@ -1,3 +1,8 @@
+/*
+path: index.tsx
+completePath: front-end/components/ScrollToTop/index.tsx
+unique_id: cxyLtE01
+*/
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 

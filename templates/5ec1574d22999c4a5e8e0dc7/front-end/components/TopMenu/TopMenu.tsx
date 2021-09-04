@@ -1,3 +1,8 @@
+/*
+path: TopMenu.tsx
+completePath: front-end/components/TopMenu/TopMenu.tsx
+unique_id: 4yBozeZw
+*/
 import React, { FunctionComponent } from 'react'
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
@@ -87,7 +92,12 @@ export const AptugoMenuItem: FunctionComponent<menuItemProps> = (props) => {
 
   let component = <div><Button>{props.text}</Button></div>
   if (props.link) {
-    component = <NavLink to={props.link}><Button>{props.text}</Button></NavLink>    
+    if (props.link.substr(0,4).toLowerCase() === 'http') {
+      component = <a href={props.link}><Button>{props.text}</Button></a>
+    } else {
+      component = <NavLink to={props.link}><Button>{props.text}</Button></NavLink>    
+    }
+    
   }
 
   if (props.isSubMenu) {

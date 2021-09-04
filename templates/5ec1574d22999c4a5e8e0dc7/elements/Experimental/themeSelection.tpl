@@ -1,5 +1,6 @@
 /*
 path: themeSelection.tpl
+completePath: elements/Experimental/themeSelection.tpl
 type: file
 unique_id: rtGqPUwH
 icon: ico-theme-selection
@@ -18,8 +19,10 @@ options:
     settings:
       aptugoOnChange: >-
         element = arguments[0]
+
         var selectedAsset = element.values?.useAsset
-        //if (selectedAsset !== 'none') {
+
+        if (selectedAsset !== 'none') {
 
         //  const assetInfo = aptugo.assetUtils.stylesheets().find(ss => ss.id
         === //selectedAsset)
@@ -29,9 +32,8 @@ options:
 
         //  aptugo.variables.setPageVariable(currentPage,{ theme: assetInfo })
 
-        //  console.log(assetInfo)
-
-        //}
+          console.log('onchange', element, selectedAsset)
+        }
       aptugoOnLoad: >-
         element = arguments[0]
 
@@ -39,19 +41,17 @@ options:
 
         console.log('onload', element, selectedAsset)
 
-        //if (selectedAsset !== 'none') {
+        if (selectedAsset !== 'none') {
 
-        //  const assetInfo = aptugo.assetUtils.stylesheets().find(ss => ss.id
-        === selectedAsset)
+          const assetInfo = aptugo.assetUtils.stylesheets().find(ss => ss.id === selectedAsset)
 
-        //  const currentPage =
-        aptugo.pageUtils.findContainerPage(element).unique_id
+          const currentPage = aptugo.pageUtils.findContainerPage(element).unique_id
 
-        //  aptugo.variables.setPageVariable(currentPage,{ theme: assetInfo })
+          aptugo.variables.setPageVariable(currentPage,{ theme: assetInfo })
 
-        //  console.log(assetInfo)
+          console.log(assetInfo)
 
-        //}
+        }
 sourceType: javascript
 children: []
 */

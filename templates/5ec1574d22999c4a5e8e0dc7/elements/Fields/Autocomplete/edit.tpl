@@ -46,7 +46,6 @@ const typeInSearch{{ referencedTable }} = (typedIn) => {
 {% endset %}
 {{ save_delayed('ph',ph) }}
 {% set ph %}
-
 const [{{ columnName }}Value, set{{ columnName }}Value] = React.useState(null)
 React.useEffect(() => {
     if (!{{ tableName }}data.{{ columnName }}) return undefined

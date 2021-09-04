@@ -1,3 +1,8 @@
+/*
+path: apiRoutes.js
+completePath: back-end/app/routes/apiRoutes.js
+unique_id: OTfdPo69
+*/
 const axios = require('axios')
 const memCache = require('./../services/memCache.service.js')
 

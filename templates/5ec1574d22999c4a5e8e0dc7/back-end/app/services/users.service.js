@@ -1,3 +1,8 @@
+/*
+path: users.service.js
+completePath: back-end/app/services/users.service.js
+unique_id: aOViR3kP
+*/
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 const Users = require('../models/users.model.js')

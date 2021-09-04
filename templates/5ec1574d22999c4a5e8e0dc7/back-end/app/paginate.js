@@ -1,3 +1,8 @@
+/*
+path: paginate.js
+completePath: back-end/app/paginate.js
+unique_id: 4lfemUFL
+*/
 exports.paginate = (docs, options = {}) => {
   if (!options.page) options.page = 1
   if (!options.limit) options.limit = 10

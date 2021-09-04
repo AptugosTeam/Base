@@ -1,3 +1,8 @@
+/*
+path: manifest.json
+completePath: dist/manifest.json
+unique_id: epiGL3M9
+*/
 {
   "short_name": "{{ application.settings.name }}",
   "name": "Aptugo - Augmented Software Development",

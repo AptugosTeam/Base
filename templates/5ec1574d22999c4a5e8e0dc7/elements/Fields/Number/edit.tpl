@@ -1,3 +1,8 @@
+/*
+path: edit.tpl
+completePath: elements/Fields/Number/edit.tpl
+unique_id: iTMTweVR
+*/
 {% set tableName = ( field | fieldData ).table.name | friendly %}
 {% set bpr %}
 import TextField from '@material-ui/core/TextField'

@@ -1,3 +1,8 @@
+/*
+path: update.tpl
+completePath: elements/Fields/Autocomplete/update.tpl
+unique_id: zd6mrTlU
+*/
 {% set reference = field.reference | fieldData %}
 {% if field.relationshipType == 'm:1' %}
   if (data.{{ field.column_name | friendly }} === 'null') data.{{ field.column_name | friendly }} = null

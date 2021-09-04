@@ -1,3 +1,8 @@
+/*
+path: webpack.dev.js
+completePath: config/webpack.dev.js
+unique_id: n119zEq4
+*/
 // development config
 const { merge } = require("webpack-merge");
 const webpack = require("webpack");

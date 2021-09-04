@@ -1,3 +1,12 @@
+/*
+path: '{{ table.name | friendly | lower }}Reducer.tsx'
+completePath: front-end/store/reducers/Any[X]Reducer.tsx
+unique_id: xFiytkIa
+children: []
+modelRelated: true
+helpText: Reducer file
+subtype: Any
+*/
 {% set tableNameCap = table.name | friendly | capitalize %}
 {% set tableNameLow = table.name | friendly | lower %}
 {% set tableNameUp = table.name | friendly | upper %}

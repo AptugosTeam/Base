@@ -1,3 +1,8 @@
+/*
+path: edit.tpl
+completePath: elements/Fields/Boolean/edit.tpl
+unique_id: WQPUIqHm
+*/
 {% set tableName = ( field | fieldData ).table.name | friendly %}
 {% set bpr %}
 import Checkbox from '@material-ui/core/Checkbox'

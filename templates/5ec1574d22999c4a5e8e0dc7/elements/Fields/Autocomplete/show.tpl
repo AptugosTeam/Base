@@ -4,9 +4,6 @@ type: file
 unique_id: IV3Bf9aL
 icon: ico-field
 sourceType: javascript
-settings:
-  - name: Packages
-    value: '"@material-ui/lab": "^4.0.0-alpha.56",'
 children: []
 */
 {% set referencedField = field.reference | fieldData %}

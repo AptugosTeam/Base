@@ -1,3 +1,8 @@
+/*
+path: auth-header.tsx
+completePath: front-end/services/auth-header.tsx
+unique_id: kvycd8W9
+*/
 import axios from "axios"
 
 const authHeaders = () => {

@@ -1,3 +1,8 @@
+/*
+path: show.tpl
+completePath: elements/Fields/Image/show.tpl
+unique_id: Z1frMeIx
+*/
 {% set bpr %}
 import Field from '../components/Table/Field'
 {% endset %}
