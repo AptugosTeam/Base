@@ -55,6 +55,7 @@ export default function {{ tableNameLow }}Reducer(state: I{{ tableNameCap }}Stat
         draft.loadingStatus = ApiStatus.LOADING
         draft.addingStatus = ApiStatus.NOTLOADED
         draft.searchingStatus = ApiStatus.NOTLOADED
+        draft.found{{ tableNameLow }} = []
         break
 
       case {{ tableNameCap }}ActionTypes.LOADING_{{ tableNameUp }}_FAILED:

@@ -19,8 +19,6 @@ interface tableProps {
   addText?: string
   tableData: Array<Array<string>>
   tableHead: string[]
-  tableHeaderColor: 'warning' | 'primary' | 'danger' | 'success' | 'info' | 'rose' | 'gray'
-  title: string
   orderBy?: string
   order?: 'asc' | 'desc'
   onRequestSort?: Function
