@@ -97,6 +97,8 @@ options:
       active: true
 children: []
 */
+
+
 {% set allowEdit = element.values.allowEdit|default(true) %}
 {% set allowDeletion = element.values.allowDeletion|default(true) %}
 {% set tableFields = [] %}
@@ -167,7 +169,6 @@ const [sortOrder, setSortOrder] = React.useState<{ orderBy?: string, order: 'asc
         [{% for field in tableFields %}"{{ field }}",{% endfor %}{% if element.values.addProcedure != 'No' or allowEdit or allowDeletion %}"Actions"{% endif %}]
       {% endif %}
     }
-    tableHead={[{% for field in tableFields %}"{{ field }}",{% endfor %}{% if element.values.addProcedure != 'No' or allowEdit or allowDeletion %}"Actions"{% endif %}]}
     tableData={ {{ tableData }} }
     orderBy={sortOrder.orderBy}
     order={sortOrder.order}
