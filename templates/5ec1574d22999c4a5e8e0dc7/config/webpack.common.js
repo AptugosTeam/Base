@@ -1,3 +1,8 @@
+/*
+path: webpack.common.js
+completePath: config/webpack.common.js
+unique_id: EpA5lGLz
+*/
 // shared config (dev and prod)
 const { resolve } = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')

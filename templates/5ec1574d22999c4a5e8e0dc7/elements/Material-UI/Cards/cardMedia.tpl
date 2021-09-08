@@ -1,3 +1,8 @@
+/*
+path: cardMedia.tpl
+completePath: elements/Material-UI/Cards/cardMedia.tpl
+unique_id: vcZKHGTu
+*/
 {% set bpr %}
 import CardMedia from '@material-ui/core/CardMedia'
 {% endset %}

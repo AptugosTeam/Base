@@ -1,3 +1,8 @@
+/*
+path: Sidebar.tsx
+completePath: front-end/components/Sidebar/Sidebar.tsx
+unique_id: eagUHEvx
+*/
 import React, { FunctionComponent } from 'react'
 import clsx from 'clsx'
 import Drawer from '@material-ui/core/Drawer'

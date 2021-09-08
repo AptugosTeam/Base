@@ -1,3 +1,8 @@
+/*
+path: webpack.prod.js
+completePath: config/webpack.prod.js
+unique_id: 2dcEbmD8
+*/
 // production config
 const { merge } = require('webpack-merge')
 const { resolve } = require('path')

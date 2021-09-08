@@ -1,3 +1,9 @@
+/*
+path: App.tsx
+completePath: front-end/App.tsx
+unique_id: EebCWx4V
+children: []
+*/
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 
@@ -45,3 +51,4 @@ const App: React.FunctionComponent = (props: any) => {
 }
 
 export default App
+

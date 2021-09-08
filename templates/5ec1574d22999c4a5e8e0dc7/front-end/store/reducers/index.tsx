@@ -1,3 +1,8 @@
+/*
+path: index.tsx
+completePath: front-end/store/reducers/index.tsx
+unique_id: nh3VWVzs
+*/
 import { combineReducers } from 'redux'
 
 {% for table in application.tables %}

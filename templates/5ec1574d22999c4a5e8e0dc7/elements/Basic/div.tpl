@@ -1,5 +1,6 @@
 /*
 path: div.tpl
+completePath: elements/Basic/div.tpl
 type: file
 unique_id: y8fra7Zo
 icon: ico-div
@@ -30,6 +31,7 @@ options:
     type: text
     options: ''
 children: []
+helpText: Basic HTML Div element
 */
 
 

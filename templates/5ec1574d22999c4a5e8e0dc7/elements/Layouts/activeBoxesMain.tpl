@@ -1,3 +1,8 @@
+/*
+path: activeBoxesMain.tpl
+completePath: elements/Layouts/activeBoxesMain.tpl
+unique_id: Avpcw8C8
+*/
 {% set bpr %}
 import Grid from '@material-ui/core/Grid'
 {% endset %}

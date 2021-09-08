@@ -1,3 +1,8 @@
+/*
+path: show.tpl
+completePath: elements/Fields/Datetime/show.tpl
+unique_id: x6nXr6Eu
+*/
 {% set bpr %}
 import Field from '../components/Table/Field'
 {% endset %}

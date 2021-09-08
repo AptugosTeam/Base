@@ -1,10 +1,8 @@
 /*
-- path: index.js
-- type: file
-- unique_id: UkXBqfSH
-- icon: ico-field
-- sourceType: javascript
-- children: 
+path: index.js
+completePath: back-end/index.js
+unique_id: QOxu9q3o
+children: []
 */
 const dotenv = require('dotenv')
 dotenv.config({ path: './config/.env.development' })
@@ -96,4 +94,7 @@ function doListen() {
 }
 
 doListen()
+
+
+
 

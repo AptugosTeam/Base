@@ -1,3 +1,8 @@
+/*
+path: index.tsx
+completePath: front-end/components/ContentEdit/index.tsx
+unique_id: UPhKOA4J
+*/
 import ContentTools from 'ContentTools'
 import 'ContentTools/build/content-tools.min.css'
 import React, { FunctionComponent } from 'react'

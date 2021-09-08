@@ -1,3 +1,8 @@
+/*
+path: auth.service.tsx
+completePath: front-end/services/auth.service.tsx
+unique_id: dDixye51
+*/
 import axios from 'axios'
 
 const API_URL = '{{ settings.apiURL }}/api/users/'

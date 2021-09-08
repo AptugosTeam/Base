@@ -1,3 +1,8 @@
+/*
+path: serviceWorker.tsx
+completePath: front-end/serviceWorker.tsx
+unique_id: JAKe2GPt
+*/
 const isLocalhost = Boolean(
   window.location.hostname === 'localhost' ||
     // [::1] is the IPv6 localhost address.

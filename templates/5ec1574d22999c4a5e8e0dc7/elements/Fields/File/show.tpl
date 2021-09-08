@@ -1,3 +1,8 @@
+/*
+path: show.tpl
+completePath: elements/Fields/File/show.tpl
+unique_id: R6hOrDAB
+*/
 {% set bpr %}
 import Field from '../components/Table/Field'
 {% endset %}

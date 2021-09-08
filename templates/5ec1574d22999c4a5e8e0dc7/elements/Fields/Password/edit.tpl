@@ -1,3 +1,8 @@
+/*
+path: edit.tpl
+completePath: elements/Fields/Password/edit.tpl
+unique_id: zlxp4g5o
+*/
 {% set tableName = ( field | fieldData ).table.name | friendly %}
 {% set bpr %}
 import TextField from '@material-ui/core/TextField'

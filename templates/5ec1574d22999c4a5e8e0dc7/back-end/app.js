@@ -1,3 +1,9 @@
+/*
+path: app.js
+completePath: back-end/app.js
+unique_id: 76kg0duo
+children: []
+*/
 const dotenv = require('dotenv')
 dotenv.config({ path: './config/.env.development' })
 

@@ -1,3 +1,8 @@
+/*
+path: show.tpl
+completePath: elements/Fields/MultilineString/show.tpl
+unique_id: 1UVCZinf
+*/
 {% set bpr %}
 import Field from '../components/Table/Field'
 {% endset %}

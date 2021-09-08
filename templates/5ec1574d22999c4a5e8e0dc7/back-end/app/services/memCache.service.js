@@ -1,3 +1,8 @@
+/*
+path: memCache.service.js
+completePath: back-end/app/services/memCache.service.js
+unique_id: LknM5IrR
+*/
 const hash = require('node_hash')
 const fs = require('fs')
 

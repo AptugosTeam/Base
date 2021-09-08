@@ -1,3 +1,8 @@
+/*
+path: ActiveBoxes.tpl
+completePath: elements/Layouts/ActiveBoxes.tpl
+unique_id: geLuluT8
+*/
 {% set bpr %}
 import clsx from 'clsx'
 {% endset %}

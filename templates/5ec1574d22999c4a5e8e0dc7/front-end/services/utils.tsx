@@ -1,3 +1,8 @@
+/*
+path: utils.tsx
+completePath: front-end/services/utils.tsx
+unique_id: 1VgUatiQ
+*/
 
 interface classType {  [key: string]: string }
 

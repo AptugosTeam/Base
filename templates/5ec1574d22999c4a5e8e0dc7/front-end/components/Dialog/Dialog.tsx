@@ -1,3 +1,8 @@
+/*
+path: Dialog.tsx
+completePath: front-end/components/Dialog/Dialog.tsx
+unique_id: uZJ3fdwZ
+*/
 import Button from '@material-ui/core/Button'
 import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'

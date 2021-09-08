@@ -1,3 +1,8 @@
+/*
+path: user.service.tsx
+completePath: front-end/services/user.service.tsx
+unique_id: QcDotLgm
+*/
 import axios from 'axios';
 import authHeader from './auth-header';
 
