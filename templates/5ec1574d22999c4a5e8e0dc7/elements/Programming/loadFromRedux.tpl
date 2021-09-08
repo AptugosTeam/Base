@@ -41,34 +41,14 @@ options:
     options: ''
 children: []
 */
-{% if element.values.usePagination %}
-  {% set limit = element.values.elementsLimit|default(100) %}
-{% else %}
-  {% set limit = 5000 %}
-{% endif %}
-{% set optionsObject %}
-{
-  page: 1,
-  limit: {{ limit }},
-  {% if element.values.searchString %}searchString: {{ element.values.searchString }} || '',{% endif %}
-  {% if element.values.fieldToSearch %}searchField: "{{ element.values.fieldToSearch }}",{% endif %}
-  {% if element.values.sortColumn %}sort: {
-    field: '{{ element.values.sortColumn }}',
-    method: '{{ element.values.sortMethod|default('DESC') | raw }}'
-  }{% endif %}
-}
-{% endset %}
 {% if data %}
   {% set table = data | tableData %}
 {% else %}
   {% set table = element.values.data | tableData %}
 {% endif %}
+{% set varName = element.values.variableName|default(table.name | friendly | lower ~ 'Data') %}
 {% set bpr %}
-  import { useDispatch } from 'react-redux'
-{% endset %}
-{{ save_delayed('bpr', bpr ) }}
-{% set bpr %}
-import { useSelector } from 'react-redux'
+import { load{{ table.name | friendly | capitalize }}, search{{ table.name | friendly | capitalize }} } from '../store/actions/{{ table.name | friendly | lower }}Actions'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 {% set bpr %}
@@ -76,7 +56,7 @@ import { IState } from '../store/reducers/index'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 {% set bpr %}
-import { load{{ table.name | friendly | capitalize }}, search{{ table.name | friendly | capitalize }} } from '../store/actions/{{ table.name | friendly | lower }}Actions'
+  import { useDispatch, useSelector } from 'react-redux'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 {% set ph %}
@@ -84,77 +64,32 @@ const dispatch = useDispatch()
 {% endset %}
 {{ save_delayed('ph', ph ) }}
 {% set ph %}
-{% if element.values.variableName %}
-  const {{ element.values.variableName }} = useSelector((state: IState) => state.{{ table.name | friendly | lower }}).{% if element.values.searchString %}found{% endif %}{{ table.name | friendly | lower }}
-  {% if element.values.searchString %}
-    const {{ element.values.variableName }}searchString = useSelector((state: IState) => state.{{ table.name | friendly | lower }}).searchString
-  {% endif %}
-{% else %}
-  const {{ table.name | friendly | lower }}Data = useSelector((state: IState) => state.{{ table.name | friendly | lower }})
-{% endif %}
+const {{ varName }} = useSelector((state: IState) => state.{{ table.name | friendly | lower }})
 {% endset %}
 {{ save_delayed('ph', ph, 1 ) }}
 {% set ph %}
-  {% if element.values.variableName %}
-    const [{{ element.values.variableName }}Loading, set{{ element.values.variableName }}Loading] = React.useState(false)
-    React.useEffect(() => {
-      {% if element.values.searchString %}
-      if ({{ element.values.searchString }}) {
-      {% endif %}
-      if (!{{ element.values.variableName }}Loading && !{{ element.values.variableName }}.length {% if element.values.searchString %}|| {{ element.values.variableName }}searchString !== {{ element.values.searchString }}{% endif %}) {
-        set{{ element.values.variableName }}Loading(true)
-        {% if element.values.searchString %}
-          dispatch(search{{ table.name | friendly | capitalize }}({
-            limit: {{ limit }},
-            searchString: {{ element.values.searchString }} || '',
-            {% if element.values.fieldToSearch %}searchField: "{{ element.values.fieldToSearch }}",{% endif %}
-            {% if element.values.sortColumn %}sort: {
-              field: '{{ element.values.sortColumn }}',
-              method: '{{ element.values.sortMethod|default('DESC') }}'
-            }{% endif %}
-          }))
-        {% else %}
-          dispatch(load{{ table.name | friendly | capitalize }}({{ optionsObject }}))
-        {% endif %}
-      } {% if element.values.onload %} else {
-        {{ element.values.onload }}
-      }{% endif %}
-      {% if element.values.searchString %}
-      }
-      {% endif %}
-    }, [{% if element.values.searchString %}{{ element.values.searchString }}, {% endif %}{{ element.values.variableName }}])
-  {% else %}
-    {% if element.values.searchString %}
-      React.useEffect(() => {
-        if ({{ element.values.searchString }}) {
-          if ( {{ table.name | friendly | lower }}Data.searchingStatus === 'notloaded' ||
-            {{ table.name | friendly | lower }}Data.searchingStatus === 'failed' ||
-            {{ table.name | friendly | lower }}Data.searchString !== {{ element.values.searchString }}
-          ) {
-            dispatch(search{{ table.name | friendly | capitalize }}({{ optionsObject }}))
-          }
-          {% if element.values.onload %}
-          else {
-            {{ element.values.onload }}
-          }
-          {% endif %}
-        }
-      }, [{{ table.name | friendly | lower }}Data.searchingStatus])
-    {% else %}
-      React.useEffect(() => {
-        if (
-          {{ table.name | friendly | lower }}Data.loadingStatus === 'notloaded' ||
-          {{ table.name | friendly | lower }}Data.loadingStatus === 'failed'
-        ) {
-          dispatch(load{{ table.name | friendly | capitalize }}({{ optionsObject }}))
-        } 
-        {% if element.values.onload %}
-        else {
-          {{ element.values.onload }}
-        }
-        {% endif %}
-      }, [{{ table.name | friendly | lower }}Data.loadingStatus])
-    {% endif %}
-  {% endif %}
+const [{{ table.name | friendly }}loadoptions, set{{ table.name | friendly }}loadoptions] = React.useState<any>({ page: 1, limit: 25, sort: { field: null, method: 'ASC' } })
+const perform{{ table.name | friendly }}load = (options) => {
+  const searchOrLoad = options.searchString ? search{{ table.name | friendly }} : load{{ table.name | friendly }}
+  dispatch(
+    searchOrLoad(options)
+  )
+}
 {% endset %}
-{{ save_delayed('ph', ph ) }}
+{{ save_delayed('ph',ph)}}
+{% set ph %}
+React.useEffect(() => {
+  perform{{ table.name | friendly }}load({
+    ...{{ table.name | friendly }}loadoptions
+    {% if element.values.searchString %}, searchString: {{ element.values.searchString | textOrVariable }}{% endif %}
+  })
+},[{{ table.name | friendly }}loadoptions])
+{% endset %}
+{{ save_delayed('ph',ph)}}
+{% if element.values.onload %}
+React.useEffect(() => {
+  if ({{ varName }}.searchingStatus === 'loaded') {
+    {{ element.values.onload }}
+  }
+}, [{{ table.name | friendly | lower }}Data.loadingStatus]))
+{% endif %}
