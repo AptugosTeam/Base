@@ -1,5 +1,6 @@
 /*
 path: radar.tpl
+completePath: elements/Experimental/Charts/radar.tpl
 type: file
 unique_id: p28RJJ6S
 icon: ico-chart-js

@@ -184,7 +184,7 @@ type TSearchOptions = {
   limit?: number
   sort?: {
     field: string
-    method?: 'ASC' | 'DESC'
+    method?: 'asc' | 'desc'
   }
   filters?: { field: string, value: string }[]
 }

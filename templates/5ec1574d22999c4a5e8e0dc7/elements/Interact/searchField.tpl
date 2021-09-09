@@ -37,15 +37,6 @@ const searchFor{{ table.name | friendly }} = (event) => {
 }
 {% endset %}
 {{ save_delayed('ph',ph)}}
-{% set ph %}
-const [{{ table.name | friendly }}loadoptions, set{{ table.name | friendly }}loadoptions] = React.useState<any>({ page: 1, limit: 25, sort: { field: null, method: 'ASC' } })
-const perform{{ table.name | friendly }}load = (options) => {
-  const searchOrLoad = options.searchString ? search{{ table.name | friendly }} : load{{ table.name | friendly }}
-  dispatch(
-    searchOrLoad(options)
-  )
-}
-{% endset %}
-{{ save_delayed('ph',ph)}}
+{% include includeTemplate('loadFromRedux.tpl') with { 'data': element.values.table, 'element': element} %}
 {% set searchFieldParams = { element: { values: { onChange: 'searchFor' ~ table.name|friendly, placeholder: 'Search ' ~ table.singleName|friendly ~ '...', variant: 'outlined', margin: 'normal', className: 'theme.extensibleInput' } } } %}
 {% include includeTemplate('uncontrolledInput.tpl') with searchFieldParams %}

@@ -99,7 +99,7 @@ exports.findAll = (options) => {
   if (typeof query.sort === 'string') query.sort = JSON.parse(query.sort)
 
   {{ table.name | friendly }}.find()
-  .sort( query.sort && { [query.sort.field]: query.sort.method === 'DESC' ? 1 : -1 })
+  .sort( query.sort && { [query.sort.field]: query.sort.method === 'desc' ? 1 : -1 })
    {% for field in table.fields %}
     {% set fieldWithData = field | fieldData %}
     {% include includeTemplate(['Fields' ~ field.data_type ~'find.tpl', 'Fieldsfind.tpl']) %}

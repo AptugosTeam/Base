@@ -124,10 +124,6 @@ children: []
   import MoreIcon from '@material-ui/icons/More'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
-{% set ph %}
-const [sortOrder, setSortOrder] = React.useState<{ orderBy?: string, order: 'asc' | 'desc' }>({ orderBy: null, order: 'asc'})
-{% endset %}
-{{ save_delayed('ph',ph)}}
 <Table    
     tableHead={
       {% if element.values.headerVariable %}
@@ -137,17 +133,19 @@ const [sortOrder, setSortOrder] = React.useState<{ orderBy?: string, order: 'asc
       {% endif %}
     }
     tableData={ {{ tableData }} }
-    orderBy={sortOrder.orderBy}
-    order={sortOrder.order}
-    onRequestSort={(event, property) => {
-      set{{ table.name | friendly }}loadoptions({
-        ...{{ table.name | friendly }}loadoptions,
-        sort: {
-          field: property,
-          method: {{ table.name | friendly }}loadoptions.sort.field === property ? ({{ table.name | friendly }}loadoptions.sort.method === 'ASC' ? 'DESC' : 'ASC') : 'ASC',
-        }
-      })
-    }}
+    {% if element.values.table != 'var' %}
+      orderBy={ {{ table.name | friendly }}loadoptions.sort.field }
+      order={ {{ table.name | friendly }}loadoptions.sort.method }
+      onRequestSort={(event, property) => {
+        set{{ table.name | friendly }}loadoptions({
+          ...{{ table.name | friendly }}loadoptions,
+          sort: {
+            field: property,
+            method: {{ table.name | friendly }}loadoptions.sort.field === property ? ({{ table.name | friendly }}loadoptions.sort.method === 'asc' ? 'desc' : 'asc') : 'ASC',
+          }
+        })
+      }}
+    {% endif %}
 >{% if element.children %}
   {{ content | raw }}
 {% else %}
