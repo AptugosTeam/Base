@@ -34,7 +34,7 @@ options:
   - name: sortMethod
     display: Sort Method
     type: dropdown
-    options: DESC;ASC
+    options: desc;asc
   - name: elementsLimit
     display: Limit of Elements
     type: text
@@ -64,11 +64,16 @@ const dispatch = useDispatch()
 {% endset %}
 {{ save_delayed('ph', ph ) }}
 {% set ph %}
-const {{ varName }} = useSelector((state: IState) => state.{{ table.name | friendly | lower }})
+const {{ varName }} = useSelector((state: IState) => state.{{ table.name | friendly | lower }}){% if element.values.variableName %}.{% if element.values.searchString %}found{% endif %}{{ table.name | friendly | lower }}{% endif %}
 {% endset %}
 {{ save_delayed('ph', ph, 1 ) }}
 {% set ph %}
-const [{{ table.name | friendly }}loadoptions, set{{ table.name | friendly }}loadoptions] = React.useState<any>({ page: 1, limit: 25, sort: { field: null, method: 'ASC' } })
+const [{{ table.name | friendly }}loadoptions, set{{ table.name | friendly }}loadoptions] = React.useState<any>({ 
+  page: 1,
+  limit: 25,
+  sort: { field: null, method: 'ASC' },
+  {% if element.values.fieldToSearch %}searchField: {{ element.values.fieldToSearch | textOrVariable }},{% endif %}
+})
 const perform{{ table.name | friendly }}load = (options) => {
   const searchOrLoad = options.searchString ? search{{ table.name | friendly }} : load{{ table.name | friendly }}
   dispatch(
@@ -81,7 +86,7 @@ const perform{{ table.name | friendly }}load = (options) => {
 React.useEffect(() => {
   perform{{ table.name | friendly }}load({
     ...{{ table.name | friendly }}loadoptions
-    {% if element.values.searchString %}, searchString: {{ element.values.searchString | textOrVariable }}{% endif %}
+    {% if element.values.searchString %}, searchString: {{ element.values.searchString }}{% endif %}
   })
 },[{{ table.name | friendly }}loadoptions])
 {% endset %}
@@ -91,5 +96,5 @@ React.useEffect(() => {
   if ({{ varName }}.searchingStatus === 'loaded') {
     {{ element.values.onload }}
   }
-}, [{{ table.name | friendly | lower }}Data.loadingStatus]))
+}, [{{ table.name | friendly | lower }}Data.loadingStatus])
 {% endif %}
