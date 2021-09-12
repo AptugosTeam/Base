@@ -26,6 +26,7 @@ unique_id: SBHiymdS
     {% endif %}
 {% endfor %}
 .populate({
+    strictPopulate: false,
     path: '{{ ffd.table.name | friendly }}'
     {% for sub in subpopulation %}
     , populate: {{ sub }}
