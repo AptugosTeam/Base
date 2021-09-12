@@ -17,7 +17,7 @@ settings:
       'port': '8108',      // For Typesense Cloud use 443
       'protocol': 'http'   // For Typesense Cloud use https
     }],
-    'apiKey': 'xyz',
+    'apiKey': 'wfEpVn4Grq6FBXsXlYG190N6M3CHhPD6DqGuPo4nTEx8NBeL',
     'connectionTimeoutSeconds': 2
   })
 
@@ -35,20 +35,23 @@ settings:
     }]
   }
 
-  // try {
-  //   client.collections().create(ElementsSchema)
+if (req.query.q === 'fillitup') {
+  try {
+    client.collections().create(ElementsSchema)
 
-  //   elements.find({ query: { limit: 500000 } }).then(res => {
-  //     res.docs.forEach(doc => {
-  //       const elDoc = {
-  //         Name: doc.Name,
-  //         Abstract: doc.Abstract,
-  //         Description: doc.Description
-  //       }
-  //       client.collections('elements').documents().create(elDoc)
-  //     })
-  //   })
-  // } catch(e) {}
+    elements.find({ query: { limit: 500000 } }).then(res => {
+      res.docs.forEach(doc => {
+        const elDoc = {
+          Name: doc.Name,
+          Abstract: doc.Abstract,
+          Description: doc.Description
+        }
+        client.collections('elements').documents().create(elDoc)
+      })
+    })
+  } catch(e) {}
+}
+  
 
 
   let searchParameters = {

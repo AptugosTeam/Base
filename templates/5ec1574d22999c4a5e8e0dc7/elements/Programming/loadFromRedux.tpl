@@ -64,6 +64,10 @@ const dispatch = useDispatch()
 {% endset %}
 {{ save_delayed('ph', ph ) }}
 {% set ph %}
+const {{ table.name | friendly | lower ~ 'Data' }} = useSelector((state: IState) => state.{{ table.name | friendly | lower }})
+{% endset %}
+{{ save_delayed('ph', ph, 1 ) }}
+{% set ph %}
 const {{ varName }} = useSelector((state: IState) => state.{{ table.name | friendly | lower }}){% if element.values.variableName %}.{% if element.values.searchString %}found{% endif %}{{ table.name | friendly | lower }}{% endif %}
 {% endset %}
 {{ save_delayed('ph', ph, 1 ) }}
@@ -75,10 +79,7 @@ const [{{ table.name | friendly }}loadoptions, set{{ table.name | friendly }}loa
   {% if element.values.fieldToSearch %}searchField: {{ element.values.fieldToSearch | textOrVariable }},{% endif %}
 })
 const perform{{ table.name | friendly }}load = (options) => {
-  const searchOrLoad = options.searchString ? search{{ table.name | friendly }} : load{{ table.name | friendly }}
-  dispatch(
-    searchOrLoad(options)
-  )
+  dispatch(options.searchString ? search{{ table.name | friendly | capitalize }}(options) : load{{ table.name | friendly | capitalize }}(options))
 }
 {% endset %}
 {{ save_delayed('ph',ph)}}
@@ -86,6 +87,7 @@ const perform{{ table.name | friendly }}load = (options) => {
 React.useEffect(() => {
   perform{{ table.name | friendly }}load({
     ...{{ table.name | friendly }}loadoptions
+    {% if element.values.fieldToSearch %}, searchField: {{ element.values.fieldToSearch | textOrVariable }}{% endif %}
     {% if element.values.searchString %}, searchString: {{ element.values.searchString }}{% endif %}
   })
 },[{{ table.name | friendly }}loadoptions])
@@ -93,7 +95,7 @@ React.useEffect(() => {
 {{ save_delayed('ph',ph)}}
 {% if element.values.onload %}
 React.useEffect(() => {
-  if ({{ varName }}.searchingStatus === 'loaded') {
+  if ({{ table.name | friendly | lower }}Data.loadingStatus === 'loaded') {
     {{ element.values.onload }}
   }
 }, [{{ table.name | friendly | lower }}Data.loadingStatus])

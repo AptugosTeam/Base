@@ -8,6 +8,7 @@ const { merge } = require('webpack-merge')
 const { resolve } = require('path')
 const CopyPlugin = require('copy-webpack-plugin')
 const { GenerateSW } = require('workbox-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const commonConfig = require('./webpack.common')
 
 module.exports = merge(commonConfig, {
@@ -20,6 +21,7 @@ module.exports = merge(commonConfig, {
   },
   devtool: false,
   plugins: [
+    new CleanWebpackPlugin(),
     new GenerateSW(),
     new CopyPlugin({
       patterns: [
