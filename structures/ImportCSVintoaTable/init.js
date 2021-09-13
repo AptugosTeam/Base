@@ -2,8 +2,8 @@ Parameters.unique_id = aptugo.generateID()
 Parameters.fields = []
 
 const untitledTables = Application.tables.filter(table => table.name.substr(0,8) === 'Untitled').length
-const name = aptugo.friendly(Parameters.Name)
-const singleName = `${aptugo.friendly(Parameters.Name)}record`
+const name = aptugo.friendly(Parameters.Name).toLowerCase()
+const singleName = `${aptugo.friendly(Parameters.Name).toLowerCase()}record`
 
 const readUploadedFileAsText = () => {
   var reader = new FileReader()

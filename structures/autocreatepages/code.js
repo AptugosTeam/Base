@@ -128,7 +128,7 @@ const newPage = {
 								"collapseStatus": "expand",
 								"values": {
 									"table": Parameters.unique_id,
-									"addProcedure": "Internal",
+									"editProcedure": "Internal",
 									"title": "Table Title",
 									"headerColor": "rose"
 								},
