@@ -1,2 +1,2 @@
-$(which node) $(which pnpm) install --prefer-offline
-$(which node) $(which pnpm) run build
+pnpm install --prefer-offline
+pnpm run build

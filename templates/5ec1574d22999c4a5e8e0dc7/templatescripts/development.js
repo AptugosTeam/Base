@@ -1,1 +1,1 @@
-$(which node) $(which pnpm) install --prefer-offline
+pnpm install --prefer-offline
