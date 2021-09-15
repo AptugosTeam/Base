@@ -61,7 +61,7 @@ import Button from '@material-ui/core/Button'
 <Button 
   {% if element.values.Variant %}variant='{{ element.values.Variant }}'{% endif %}
   {% if element.values.Color %}color='{{ element.values.Color }}'{% endif %}
-  {% if element.values.Action %}onClickCapture={ {{ element.values.Action }} }{% endif %}
+  {% if element.values.Action %}onClickCapture={ {{ element.values.Action | functionOrCall }} }{% endif %}
   {% if element.values.className %}className={ {{ element.values.className }} }{% endif %}
   {% if element.values.fullWidth %}fullWidth{% endif %}
   {% if element.values.icon and element.values.icon != 'None' %}startIcon={<{{ element.values.icon }}Icon />}{% endif %}
