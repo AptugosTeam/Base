@@ -45,7 +45,7 @@ import Grid from '@material-ui/core/Grid'
   {% if element.values.container %}
     container
     {% if element.values.align %}alignItems="{{ element.values.align }}"{% endif %}
-    {% if element.values.justify %}justify="{{ element.values.justify }}"{% endif %}
+    {% if element.values.justify %}justifyContent="{{ element.values.justify }}"{% endif %}
   {% else %}
     item
   {% if element.values.smallcolumns %}xs={ {{ element.values.smallcolumns }} }{% endif %}
