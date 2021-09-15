@@ -1,3 +1,4 @@
+// Code for new Pages
 const newPage = {
 	"asociated_table": Parameters.unique_id,
 	"name": `() => aptugo.store.getState().application.tables.find(table => table.unique_id === "${Parameters.unique_id}").name`,
