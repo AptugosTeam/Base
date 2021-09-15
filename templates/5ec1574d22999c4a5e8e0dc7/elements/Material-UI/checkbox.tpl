@@ -22,20 +22,29 @@ options:
   - name: threeway
     display: Use a 3 states checkbox
     type: checkbox
+  - name: Switch
+    display: Use a Switch instead of a checkbox
+    type: checkbox
 sourceType: javascript
 children: []
 */
-
-{% if (element.values.threeway) %}
-  {% set compo = 'ThreeCheckbox' %}
+{% if (element.values.Switch) %}
+  {% set compo = 'Switch' %}
   {% set bpr %}
-    import ThreeCheckbox from '../components/ThreeCheckbox'
+    import Switch from '@material-ui/core/Switch'
   {% endset %}
 {% else %}
-  {% set compo = 'Checkbox' %}
-  {% set bpr %}
-    import Checkbox from '@material-ui/core/Checkbox'
-  {% endset %}
+  {% if (element.values.threeway) %}
+    {% set compo = 'ThreeCheckbox' %}
+    {% set bpr %}
+      import ThreeCheckbox from '../components/ThreeCheckbox'
+    {% endset %}
+  {% else %}
+    {% set compo = 'Checkbox' %}
+    {% set bpr %}
+      import Checkbox from '@material-ui/core/Checkbox'
+    {% endset %}
+  {% endif %}
 {% endif %}
 {{ save_delayed('bpr',bpr) }}
 {% if element.values.label %}
@@ -49,8 +58,10 @@ import FormControlLabel from '@material-ui/core/FormControlLabel'
 {% endif %}
 <{{ compo }}
     checked={ {{ element.values.Checked }} }
-    {% if element.values.OnClick and compo == 'Checkbox' %}onClickCapture={{ element.values.OnClick }}{% endif %}
-    {% if element.values.OnClick and compo == 'ThreeCheckbox' %}onChange={{ element.values.OnClick }}{% endif %}
+    {% if element.values.OnClick %}
+      {% if compo == 'Checkbox' %}onClickCapture={{ element.values.OnClick }}{% endif %}
+      {% if compo == 'ThreeCheckbox' or compo == 'Switch' %}onChange={{ element.values.OnClick }}{% endif %}
+    {% endif %}
 />
 {% if element.values.label %}
   }
