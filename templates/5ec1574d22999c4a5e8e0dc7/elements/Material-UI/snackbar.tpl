@@ -25,7 +25,7 @@ options:
 children: []
 */
 {% set bpr %}
-import Snackbar from '@material-ui/core/Snackbar'
+import Snackbar from '@mui/material/Snackbar'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 {% set ph %}

@@ -7,7 +7,7 @@ sourceType: javascript
 children: []
 */
 {% set bpr %}
-import DialogContent from '@material-ui/core/DialogContent'
+import DialogContent from '@mui/material/DialogContent'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 <DialogContent>{{ content | raw }}</DialogContent>

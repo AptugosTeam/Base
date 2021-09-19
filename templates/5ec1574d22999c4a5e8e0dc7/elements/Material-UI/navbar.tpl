@@ -29,8 +29,8 @@ sourceType: javascript
 children: []
 */
 {% set bpr %}
-import AppBar from '@material-ui/core/AppBar'
-import Toolbar from '@material-ui/core/Toolbar'
+import AppBar from '@mui/material/AppBar'
+import Toolbar from '@mui/material/Toolbar'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 <AppBar

@@ -4,7 +4,7 @@ type: file
 unique_id: PNnWiHgb
 icon: ico-field
 */
-import { GetAppOutlined } from "@material-ui/icons"
+import { GetAppOutlined } from "@mui/icons-material"
 
 class AptugoGmail {
   listLabels() {

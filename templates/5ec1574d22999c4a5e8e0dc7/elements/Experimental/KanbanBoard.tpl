@@ -55,11 +55,11 @@ children: []
 {% if data %}{% set table = data | tableData %}{% else %}{% set table = element.values.data | tableData %}{% endif %}
 {% if element.values.addRecords %}
 {% set bpr %}
-import Button from '@material-ui/core/Button'
+import Button from '@mui/material/Button'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 {% set bpr %}
-import AddIcon from '@material-ui/icons/Add'
+import AddIcon from '@mui/icons-material/Add'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 {% endif %}

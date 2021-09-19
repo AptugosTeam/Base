@@ -19,7 +19,7 @@ options:
 children: []
 */
 {% set bpr %}
-import Box from '@material-ui/core/Box'
+import Box from '@mui/material/Box'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 <Box

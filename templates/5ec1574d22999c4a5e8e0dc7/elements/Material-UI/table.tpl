@@ -118,10 +118,10 @@ children: []
 
 {% set bpr %}
   import Table from '../components/Table/Table'
-  import EditIcon from '@material-ui/icons/Edit'
-  import DeleteIcon from '@material-ui/icons/Delete'
-  import IconButton from '@material-ui/core/IconButton'
-  import MoreIcon from '@material-ui/icons/More'
+  import EditIcon from '@mui/icons-material/Edit'
+  import DeleteIcon from '@mui/icons-material/Delete'
+  import IconButton from '@mui/material/IconButton'
+  import MoreIcon from '@mui/icons-material/More'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 <Table    
@@ -195,5 +195,6 @@ children: []
 </Table>
 {% if element.values.usePagination %}
 {% set innerParams = { 'element': { 'unique_id': item.unique_id, values: { 'variableToUse': table.name | friendly | lower ~ 'Data', 'table': element.values.table, 'elementsLimit': element.values.elementsLimit, 'totalDocs': element.values.variableToUse.totalDocs } } } %}
+{% include includeTemplate('loadFromRedux.tpl') with { 'data': element.values.table, 'element': element} %}
 {% include includeTemplate('Pagination.tpl') with innerParams %}
 {% endif %}

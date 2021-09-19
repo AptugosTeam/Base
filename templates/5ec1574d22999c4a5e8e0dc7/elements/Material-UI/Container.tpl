@@ -27,7 +27,7 @@ sourceType: javascript
 children: []
 */
 {% set bpr %}
-import Container from '@material-ui/core/Container'
+import Container from '@mui/material/Container'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 <Container

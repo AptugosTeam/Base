@@ -7,7 +7,7 @@ import clsx from 'clsx'
 import React, { FunctionComponent } from 'react'
 import Select from 'react-select'
 import classes from './autocomplete.module.scss'
-import { FormControl, InputLabel, Input, FormHelperText } from '@material-ui/core'
+import { FormControl, InputLabel, Input, FormHelperText } from '@mui/material'
 export interface AutocompleteProps {
   onChange: any
   options: { label: string; value: string }[]

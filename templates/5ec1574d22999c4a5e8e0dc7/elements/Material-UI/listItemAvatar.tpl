@@ -7,8 +7,8 @@ sourceType: javascript
 children: []
 */
 {% set bpr %}
-import ListItemAvatar from '@material-ui/core/ListItemAvatar'
-import Avatar from '@material-ui/core/Avatar'
+import ListItemAvatar from '@mui/material/ListItemAvatar'
+import Avatar from '@mui/material/Avatar'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 <ListItemAvatar>

@@ -28,7 +28,7 @@ options:
 children: []
 */
 {% set bpr %}
-import ListItem from '@material-ui/core/ListItem'
+import ListItem from '@mui/material/ListItem'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 <ListItem

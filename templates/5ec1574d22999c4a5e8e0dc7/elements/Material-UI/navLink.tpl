@@ -32,11 +32,11 @@ import { NavLink } from 'react-router-dom'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 {% set bpr %}
-import ListItem from '@material-ui/core/ListItem'
+import ListItem from '@mui/material/ListItem'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 {% set bpr %}
-import ListItemText from '@material-ui/core/ListItemText'
+import ListItemText from '@mui/material/ListItemText'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 <NavLink

@@ -68,7 +68,7 @@ import { I{{ friendlyTableName }}Item } from '../store/models'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 {% set bpr %}
-import TextField from '@material-ui/core/TextField'
+import TextField from '@mui/material/TextField'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 {% set bpr %}

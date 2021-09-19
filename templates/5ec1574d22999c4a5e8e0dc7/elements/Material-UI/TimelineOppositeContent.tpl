@@ -7,7 +7,7 @@ sourceType: javascript
 children: []
 */
 {% set bpr %}
-import TimelineOppositeContent from '@material-ui/lab/TimelineOppositeContent'
+import TimelineOppositeContent from '@mui/lab/TimelineOppositeContent'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 <TimelineOppositeContent>{{ content | raw }}</TimelineOppositeContent>

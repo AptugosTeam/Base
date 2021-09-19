@@ -50,12 +50,12 @@ children: []
 
 {% if element.values.icon and element.values.icon != 'None' %}
 {% set bpr %}
-import {{ element.values.icon }}Icon from '@material-ui/icons/{{ element.values.icon }}'
+import {{ element.values.icon }}Icon from '@mui/icons-material/{{ element.values.icon }}'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 {% endif %}
 {% set bpr %}
-import Button from '@material-ui/core/Button'
+import Button from '@mui/material/Button'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 <Button 
