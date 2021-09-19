@@ -14,7 +14,7 @@ unique_id: 2QiQ8WAK
         "display": "Relationship Type",
         "value": "relationshipType",
         "type": "select",
-        "options": "[{ label: '1 to many', value: '1:m'}, { label: 'many to 1', value: 'm:1'}]"
+        "options": "[{ label: '1 to many', value: '1:m'}, { label: 'many to 1', value: 'm:1'}, { label: '1 to 1', value: '1:1'}]"
       },
       {
         "display": "From",

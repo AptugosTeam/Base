@@ -119,10 +119,15 @@ React.useEffect(() => {
 {% endset %}
 {{ save_delayed('ph',ph)}}
 {% if element.values.onload %}
+{% if element.values.searchString %}
+  {% set functionCall = 'searchingStatus' %}
+{% else %}
+  {% set functionCall = 'loadingStatus' %}
+{% endif %}
 React.useEffect(() => {
-  if ({{ table.name | friendly | lower }}Data.loadingStatus === 'loaded') {
+  if ({{ table.name | friendly | lower }}Data.{{ functionCall }} === 'loaded') {
     {{ element.values.onload }}
   }
-}, [{{ table.name | friendly | lower }}Data.loadingStatus])
+}, [{{ table.name | friendly | lower }}Data.{{ functionCall }}])
 {% endif %}
 
