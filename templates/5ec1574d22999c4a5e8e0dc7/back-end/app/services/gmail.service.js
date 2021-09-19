@@ -39,11 +39,13 @@ class AptugoGmail {
     })
   }
 
-  listMessages(q = '') {
+  listMessages(q = '', page = null) {
+    console.log(q, page)
     return new Promise((solve, reject) => {
       gapi.client.gmail.users.messages.list({
         'userId': 'me',
-        'q': q
+        'q': q,
+        'pageToken': page
       }).then(function(response) {
         solve(response.result)
       })

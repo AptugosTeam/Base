@@ -21,8 +21,7 @@ const getMessages = () => {
         })
       })
       Promise.all(promises).then(res => {
-        setmessages(res)
-        console.log('res', res)
+        {{ content | raw }}
       })
     })
 }

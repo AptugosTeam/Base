@@ -34,23 +34,14 @@ options:
 
           console.log('onchange', element, selectedAsset)
         }
-      aptugoOnLoad: >-
-        element = arguments[0]
-
-        var selectedAsset = element.values?.useAsset
-
-        console.log('onload', element, selectedAsset)
-
+      aptugoOnLoad: |-
+        console.log('THEME ONLOAD');
+        element = arguments[0];
+        var selectedAsset = element.values?.useAsset;
         if (selectedAsset !== 'none') {
-
-          const assetInfo = aptugo.assetUtils.stylesheets().find(ss => ss.id === selectedAsset)
-
-          const currentPage = aptugo.pageUtils.findContainerPage(element).unique_id
-
-          aptugo.variables.setPageVariable(currentPage,{ theme: assetInfo })
-
-          console.log(assetInfo)
-
+          const assetInfo = aptugo.assetUtils.stylesheets().find(ss => ss.id === selectedAsset);
+          const currentPage = aptugo.pageUtils.findContainerPage(element).unique_id;
+          console.log(assetInfo);
         }
 sourceType: javascript
 children: []

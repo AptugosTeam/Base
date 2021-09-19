@@ -22,7 +22,7 @@ children: []
     "express": "^4.17.1",
     "express-pino-logger": "^5.0.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.9.25",
+    "mongoose": "latest",
     "process": "^0.11.10",
     "dotenv": "latest",
     "express-fileupload": "latest",
@@ -33,4 +33,5 @@ children: []
     "mongodb": "latest",
   }
 }
+
 
