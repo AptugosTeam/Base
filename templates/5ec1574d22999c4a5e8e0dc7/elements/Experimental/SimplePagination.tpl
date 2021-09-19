@@ -1,5 +1,6 @@
 /*
-path: Pagination.tpl
+path: SimplePagination.tpl
+completePath: elements/Experimental/SimplePagination.tpl
 type: file
 unique_id: Ip36BC3c
 icon: ico-pagination
@@ -56,3 +57,4 @@ React.useEffect(() => {
     setPage={(page) => { setPagination({ ...pagination, currentPage: page })}}
     totalItems={pagination.totalItems}
 />
+

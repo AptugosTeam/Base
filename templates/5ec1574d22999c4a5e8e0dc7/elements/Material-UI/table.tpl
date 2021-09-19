@@ -195,6 +195,5 @@ children: []
 </Table>
 {% if element.values.usePagination %}
 {% set innerParams = { 'element': { 'unique_id': item.unique_id, values: { 'variableToUse': table.name | friendly | lower ~ 'Data', 'table': element.values.table, 'elementsLimit': element.values.elementsLimit, 'totalDocs': element.values.variableToUse.totalDocs } } } %}
-{% include includeTemplate('loadFromRedux.tpl') with { 'data': element.values.table, 'element': element} %}
-{% include includeTemplate('Pagination.tpl') with innerParams %}
+{% include includeTemplate('SimplePagination.tpl') with innerParams %}
 {% endif %}
