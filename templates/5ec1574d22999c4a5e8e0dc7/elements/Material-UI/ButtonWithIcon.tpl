@@ -16,8 +16,8 @@ options:
     options: Delete;Add;Plus
 */
 {% set bpr %}
-import Button from '@material-ui/core/Button'
-import {{ element.values.icon }}Icon from '@material-ui/icons/{{ element.values.icon }}'
+import Button from '@mui/material/Button'
+import {{ element.values.icon }}Icon from '@mui/icons-material/{{ element.values.icon }}'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 <Button

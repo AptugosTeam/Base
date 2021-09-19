@@ -8,7 +8,7 @@ import clsx from 'clsx'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 {% set bpr %}
-import Grid from '@material-ui/core/Grid'
+import Grid from '@mui/material/Grid'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 {% set ph %}

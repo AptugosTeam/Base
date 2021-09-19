@@ -7,7 +7,7 @@ children: []
 */
 {% set tableName = ( field | fieldData ).table.name | friendly %}
 {% set bpr %}
-import TextField from '@material-ui/core/TextField'
+import TextField from '@mui/material/TextField'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
 <TextField

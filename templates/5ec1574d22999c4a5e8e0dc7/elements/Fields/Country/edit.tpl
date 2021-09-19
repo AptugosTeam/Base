@@ -6,15 +6,15 @@ icon: ico-field
 */
 {% set tableName = ( field | fieldData ).table.name | friendly %}
 {% set bpr %}
-import Select from '@material-ui/core/Select'
+import Select from '@mui/material/Select'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
 {% set bpr %}
-import FormControl from '@material-ui/core/FormControl'
+import FormControl from '@mui/material/FormControl'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
 {% set bpr %}
-import MenuItem from '@material-ui/core/MenuItem'
+import MenuItem from '@mui/material/MenuItem'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
 <FormControl

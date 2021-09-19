@@ -5,7 +5,7 @@ sourceType: javascript
 unique_id: efavXTy7
 */
 {% set bpr %}
-import Paper from '@material-ui/core/Paper'
+import Paper from '@mui/material/Paper'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
 <Paper

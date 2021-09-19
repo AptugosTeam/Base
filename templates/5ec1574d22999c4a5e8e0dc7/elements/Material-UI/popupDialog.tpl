@@ -29,7 +29,7 @@ children: []
 
 
 {% set bpr %}
-import Dialog from '@material-ui/core/Dialog'
+import Dialog from '@mui/material/Dialog'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 <Dialog

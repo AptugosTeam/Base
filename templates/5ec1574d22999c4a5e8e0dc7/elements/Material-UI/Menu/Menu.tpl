@@ -17,8 +17,8 @@ helpText: Menus display a list of choices on temporary surfaces.
 */
 
 {% set bpr %}
-import Menu from '@material-ui/core/Menu'
-import MenuItem from '@material-ui/core/MenuItem'
+import Menu from '@mui/material/Menu'
+import MenuItem from '@mui/material/MenuItem'
 {% endset %}
 {{ save_delayed('bpr',bpr)}}
 {% if not element.values.anchorElement %}

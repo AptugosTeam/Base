@@ -7,10 +7,10 @@ sourceType: typescript
 children: []
 */
 
-import Slide from '@material-ui/core/Slide'
-import { makeStyles } from '@material-ui/core/styles'
-import ArrowBackIcon from '@material-ui/icons/ArrowBack'
-import ArrowForwardIcon from '@material-ui/icons/ArrowForward'
+import Slide from '@mui/material/Slide'
+import { makeStyles } from '@mui/material/styles'
+import ArrowBackIcon from '@mui/icons-material/ArrowBack'
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
 import React, { FunctionComponent } from 'react'
 
 const useStyles = makeStyles((theme) => ({

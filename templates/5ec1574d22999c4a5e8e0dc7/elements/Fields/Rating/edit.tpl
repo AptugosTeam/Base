@@ -5,12 +5,12 @@ unique_id: 5XT4GTP7
 icon: file.svg
 */
 {% set bpr %}
-import FormControlLabel from '@material-ui/core/FormControlLabel'
+import FormControlLabel from '@mui/material/FormControlLabel'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
 {% set tableName = ( field | fieldData ).table.name | friendly %}
 {% set bpr %}
-import Rating from '@material-ui/lab/Rating';
+import Rating from '@mui/material/Rating';
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
 <FormControlLabel

@@ -4,7 +4,7 @@ completePath: elements/Material-UI/Accordion/accordion.tpl
 unique_id: WCeFNW3P
 */
 {% set bpr %}
-import Accordion from '@material-ui/core/Accordion'
+import Accordion from '@mui/material/Accordion'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 <Accordion

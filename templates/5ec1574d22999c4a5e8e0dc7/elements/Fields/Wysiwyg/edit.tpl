@@ -12,8 +12,8 @@ children: []
 
 
 {% set bpr %}
-import FormControl from '@material-ui/core/FormControl'
-import InputLabel from '@material-ui/core/InputLabel'
+import FormControl from '@mui/material/FormControl'
+import InputLabel from '@mui/material/InputLabel'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
 {% set tableName = ( field | fieldData ).table.name | friendly %}

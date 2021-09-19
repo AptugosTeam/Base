@@ -23,8 +23,8 @@ children: []
 
 
 {% set bpr %}
-import IconButton from '@material-ui/core/IconButton'
-import {{element.values.icon}}Icon from '@material-ui/icons/{{element.values.icon}}'
+import IconButton from '@mui/material/IconButton'
+import {{element.values.icon}}Icon from '@mui/icons-material/{{element.values.icon}}'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 

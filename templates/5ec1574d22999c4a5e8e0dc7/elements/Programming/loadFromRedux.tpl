@@ -1,5 +1,6 @@
 /*
 path: loadFromRedux.tpl
+completePath: elements/Programming/loadFromRedux.tpl
 type: file
 unique_id: 2uzdPTtK
 icon: ico-load-redux
@@ -11,6 +12,30 @@ options:
     options: >-
       return aptugo.store.getState().application.tables.map(({ unique_id, name
       }) => [unique_id, name])
+    settings:
+      aptugoOnLoad: |-
+        const varsToAdd = {};
+        const element = arguments[0];
+        const page = aptugo.pageUtils.findContainerPage(element.unique_id).unique_id;
+        const tableInfo = aptugo.store.getState().application.tables.find(table => table.unique_id === element.values.data )
+        const tableFields = tableInfo.fields;
+        tableFields.forEach(tableField => { varsToAdd[tableField.column_name] = 'String' });
+        const finalVarsToAdd = {
+          [aptugo.friendly(tableInfo.name).toLowerCase() + 'Data']: {
+            loadingStatus: 'String',
+            addingStatus: 'String',
+            searchingStatus: 'String',
+            searchString: 'String',
+            totalDocs: 'String',
+            [aptugo.friendly(tableInfo.name).toLowerCase()]: { ...varsToAdd },
+            ['found' + aptugo.friendly(tableInfo.name).toLowerCase()]: { ...varsToAdd },
+            errField: 'String',
+            errStatus: 'String',
+            errMessage: 'String'
+          }
+        };
+        aptugo.variables.setPageVariable(page, element.unique_id, finalVarsToAdd);
+      active: true
   - name: variableName
     display: Variable Name
     type: text
@@ -74,7 +99,7 @@ const {{ varName }} = useSelector((state: IState) => state.{{ table.name | frien
 {% set ph %}
 const [{{ table.name | friendly }}loadoptions, set{{ table.name | friendly }}loadoptions] = React.useState<any>({ 
   page: 1,
-  limit: 25,
+  limit: {{ element.values.elementsLimit|default(25) }},
   sort: { field: null, method: 'ASC' },
   {% if element.values.fieldToSearch %}searchField: {{ element.values.fieldToSearch | textOrVariable }},{% endif %}
 })
@@ -94,9 +119,15 @@ React.useEffect(() => {
 {% endset %}
 {{ save_delayed('ph',ph)}}
 {% if element.values.onload %}
+{% if element.values.searchString %}
+  {% set functionCall = 'searchingStatus' %}
+{% else %}
+  {% set functionCall = 'loadingStatus' %}
+{% endif %}
 React.useEffect(() => {
-  if ({{ table.name | friendly | lower }}Data.loadingStatus === 'loaded') {
+  if ({{ table.name | friendly | lower }}Data.{{ functionCall }} === 'loaded') {
     {{ element.values.onload }}
   }
-}, [{{ table.name | friendly | lower }}Data.loadingStatus])
+}, [{{ table.name | friendly | lower }}Data.{{ functionCall }}])
 {% endif %}
+

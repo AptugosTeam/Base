@@ -12,7 +12,7 @@ options:
 children: []
 */
 {% set bpr %}
-import Hidden from '@material-ui/core/Hidden'
+import Hidden from '@mui/material/Hidden'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 <Hidden {{ element.values.hidevalue }}>

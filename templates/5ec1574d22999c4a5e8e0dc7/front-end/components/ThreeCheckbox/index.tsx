@@ -4,7 +4,7 @@ type: file
 unique_id: 9aVcFTJe
 icon: file.svg
 */
-import MaterialCheckbox from '@material-ui/core/Checkbox';
+import MaterialCheckbox from '@mui/material/Checkbox';
 import React, { forwardRef, Ref, useEffect, useState } from 'react';
 
 const Checkbox = ({ name, checked, onFocus, onChange, onBlur }, ref) => {

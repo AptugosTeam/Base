@@ -38,7 +38,7 @@ const {{ friendlyTableName }}Schema = mongoose.Schema({
           ref: '{{ foundFieldData.table.name | friendly }}',
           localField: '_id',
           foreignField: '{{ foundFieldData.column_name }}',
-          justOne: false,
+          justOne: {% if relatedField.relationshipType == '1:1' %}true{% else %}false{% endif %},
           type: '{{ relData.relationshipType }}'
         })
       {% endif %}

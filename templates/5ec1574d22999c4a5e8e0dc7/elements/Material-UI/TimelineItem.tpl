@@ -12,7 +12,7 @@ options:
 children: []
 */
 {% set bpr %}
-import TimelineItem from '@material-ui/lab/TimelineItem'
+import TimelineItem from '@mui/lab/TimelineItem'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 <TimelineItem

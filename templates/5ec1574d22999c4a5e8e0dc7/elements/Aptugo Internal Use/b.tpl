@@ -24,12 +24,11 @@ options:
 
 {% if element.values.primaryColor %}
 {% set bpr %}
-import {{ element.values.primaryColor }} from '@material-ui/core/colors/{{ element.values.primaryColor }}'
+import {{ element.values.primaryColor }} from '@mui/material/colors/{{ element.values.primaryColor }}'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
 {% set bpr %}
-import { createTheme } from '@material-ui/core/styles'
-import { ThemeProvider } from '@material-ui/styles'
+import { createTheme, ThemeProvider } from '@mui/material/styles'
 
 const aptugotheme = createTheme({
   palette: {

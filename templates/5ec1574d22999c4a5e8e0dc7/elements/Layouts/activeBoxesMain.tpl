@@ -4,11 +4,11 @@ completePath: elements/Layouts/activeBoxesMain.tpl
 unique_id: Avpcw8C8
 */
 {% set bpr %}
-import Grid from '@material-ui/core/Grid'
+import Grid from '@mui/material/Grid'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 {% set bpr %}
-import Paper from '@material-ui/core/Paper'
+import Paper from '@mui/material/Paper'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 {% if element.children %}

@@ -5700,7 +5700,7 @@
                   "settings": [
                     {
                       "name": "Packages",
-                      "value": "\"@material-ui/lab\": \"^4.0.0-alpha.56\","
+                      "value": "\"@mui/lab\": \"^4.0.0-alpha.56\","
                     }
                   ],
                   "children": [],

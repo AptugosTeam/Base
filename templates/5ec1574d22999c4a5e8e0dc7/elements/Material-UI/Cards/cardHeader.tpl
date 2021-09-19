@@ -4,7 +4,7 @@ completePath: elements/Material-UI/Cards/cardHeader.tpl
 unique_id: aFBU2rTB
 */
 {% set bpr %}
-import CardHeader from '@material-ui/core/CardHeader';
+import CardHeader from '@mui/material/CardHeader';
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 {% if element.values.title | slice(0,1) == '{' %}

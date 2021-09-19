@@ -38,8 +38,8 @@ children: []
 
 
 {% set bpr %}
-import TextField from '@material-ui/core/TextField'
-import MenuItem from '@material-ui/core/MenuItem'
+import TextField from '@mui/material/TextField'
+import MenuItem from '@mui/material/MenuItem'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
 <TextField

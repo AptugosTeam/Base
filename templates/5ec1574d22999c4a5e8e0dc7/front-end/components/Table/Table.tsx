@@ -4,12 +4,12 @@ completePath: front-end/components/Table/Table.tsx
 unique_id: KaVZdzkg
 */
 
-import Table from '@material-ui/core/Table'
-import TableBody from '@material-ui/core/TableBody'
-import TableCell from '@material-ui/core/TableCell'
-import TableHead from '@material-ui/core/TableHead'
-import TableSortLabel from '@material-ui/core/TableSortLabel'
-import TableRow from '@material-ui/core/TableRow'
+import Table from '@mui/material/Table'
+import TableBody from '@mui/material/TableBody'
+import TableCell from '@mui/material/TableCell'
+import TableHead from '@mui/material/TableHead'
+import TableSortLabel from '@mui/material/TableSortLabel'
+import TableRow from '@mui/material/TableRow'
 import React, { FunctionComponent } from 'react'
 import styles from './table.module.scss'
 

@@ -8,15 +8,15 @@ children: []
 */
 {% set tableName = ( field | fieldData ).table.name | friendly %}
 {% set bpr %}
-import FormControlLabel from '@material-ui/core/FormControlLabel'
+import FormControlLabel from '@mui/material/FormControlLabel'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
 {% set bpr %}
-import Button from '@material-ui/core/Button'
+import Button from '@mui/material/Button'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 {% set bpr %}
-import ButtonGroup from '@material-ui/core/ButtonGroup'
+import ButtonGroup from '@mui/material/ButtonGroup'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 <FormControlLabel

@@ -7,9 +7,9 @@ sourceType: javascript
 children: []
 */
 {% set bpr %}
-import TimelineSeparator from '@material-ui/lab/TimelineSeparator'
-import TimelineConnector from '@material-ui/lab/TimelineConnector'
-import TimelineDot from '@material-ui/lab/TimelineDot'
+import TimelineSeparator from '@mui/lab/TimelineSeparator'
+import TimelineConnector from '@mui/lab/TimelineConnector'
+import TimelineDot from '@mui/lab/TimelineDot'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 <TimelineSeparator>

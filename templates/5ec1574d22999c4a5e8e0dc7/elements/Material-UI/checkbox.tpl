@@ -31,7 +31,7 @@ children: []
 {% if (element.values.Switch) %}
   {% set compo = 'Switch' %}
   {% set bpr %}
-    import Switch from '@material-ui/core/Switch'
+    import Switch from '@mui/material/Switch'
   {% endset %}
 {% else %}
   {% if (element.values.threeway) %}
@@ -42,15 +42,15 @@ children: []
   {% else %}
     {% set compo = 'Checkbox' %}
     {% set bpr %}
-      import Checkbox from '@material-ui/core/Checkbox'
+      import Checkbox from '@mui/material/Checkbox'
     {% endset %}
   {% endif %}
 {% endif %}
 {{ save_delayed('bpr',bpr) }}
 {% if element.values.label %}
 {% set bpr %}
-import FormControl from '@material-ui/core/FormControl'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
+import FormControl from '@mui/material/FormControl'
+import FormControlLabel from '@mui/material/FormControlLabel'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 <FormControl margin='{{ element.values.margin|default("dense") }}'>

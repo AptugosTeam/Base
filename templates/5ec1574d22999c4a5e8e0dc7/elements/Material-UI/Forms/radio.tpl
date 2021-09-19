@@ -28,12 +28,12 @@ options:
 */
 
 {% set bpr %}
-import Radio from '@material-ui/core/Radio'
+import Radio from '@mui/material/Radio'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 {% if element.values.label %}
 {% set bpr %}
-import FormControlLabel from '@material-ui/core/FormControlLabel'
+import FormControlLabel from '@mui/material/FormControlLabel'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 {% endif %}

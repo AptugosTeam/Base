@@ -4,7 +4,7 @@ completePath: elements/Material-UI/Cards/card.tpl
 unique_id: 6JQtnrW3
 */
 {% set bpr %}
-import Card from '@material-ui/core/Card'
+import Card from '@mui/material/Card'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 <Card

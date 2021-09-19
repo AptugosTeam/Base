@@ -6,7 +6,7 @@ icon: ico-dialog-actions
 children: []
 */
 {% set bpr %}
-import DialogActions from '@material-ui/core/DialogActions'
+import DialogActions from '@mui/material/DialogActions'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 <DialogActions>{{ content | raw }}</DialogActions>
