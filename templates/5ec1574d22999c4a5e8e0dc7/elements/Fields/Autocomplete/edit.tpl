@@ -9,6 +9,10 @@ settings:
     value: '"react-select": "^4.2.1",'
 children: []
 */
+{% set bpr %}
+import { useSelector } from 'react-redux'
+{% endset %}
+{{ save_delayed('bpr', bpr ) }}
 {% set tableName = ( field | fieldData ).table.name | friendly %}
 {% set referencedField = field.reference | fieldData %}
 {% if field.referencekey %}

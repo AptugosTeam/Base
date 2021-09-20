@@ -5,6 +5,7 @@ unique_id: SBHiymdS
 */
 {% set population = false %}
 {% set foundFieldData = [] %}
+// Directly Related Fields
 {% for relatedField in builder.plainFields %}
     {% if relatedField.reference %}
         {% set relData = relatedField.reference | fieldData %}
@@ -23,14 +24,25 @@ unique_id: SBHiymdS
         {% if (table.unique_id != subrelData.table.unique_id) %}
             {% set subpopulation = subpopulation|merge(["{ model: '" ~ subrelData.table.name | friendly ~ "', path: '" ~ subpopulationField.column_name | friendly ~ "' }"]) %}
         {% endif %}
+    {% else %}
+        {% for relatedField in builder.plainFields %}
+            {% if relatedField.reference and subpopulationField.unique_id == relatedField.reference %}
+                {% set subrelData = relatedField | fieldData %}
+                {% set subpopulation = subpopulation|merge(["{ model: '" ~ subrelData.table.name | friendly ~ "', path: '" ~ subrelData.table.name | friendly ~ "' }"]) %}
+            {% endif %}
+        {% endfor %}
     {% endif %}
 {% endfor %}
 .populate({
     strictPopulate: false,
     path: '{{ ffd.table.name | friendly }}'
-    {% for sub in subpopulation %}
-    , populate: {{ sub }}
-    {% endfor %}
+    {% if subpopulation %}
+        , populate: [
+        {% for sub in subpopulation %}
+            {{ sub }},
+        {% endfor %}
+        ]
+    {% endif %}
 })
 {% endfor %}
 {% endif %}

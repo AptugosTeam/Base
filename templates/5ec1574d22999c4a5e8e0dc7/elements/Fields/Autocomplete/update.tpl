@@ -9,7 +9,7 @@ unique_id: zd6mrTlU
   updatedData['{{ field.column_name | friendly }}'] = {}
   try {
     const {{ reference.table.name | friendly }} = require('../models/{{ reference.table.name | friendly | lower }}.model.js')
-    let Received{{ field.column_name | friendly }} =  JSON.parse(data.{{ field.column_name | friendly }})
+    let Received{{ field.column_name | friendly }} =  (typeof data.{{ field.column_name | friendly }} === 'string') ? JSON.parse(data.{{ field.column_name | friendly }}) : data.{{ field.column_name | friendly }} 
     {{ field.column_name | friendly }}info = Array.isArray(Received{{ field.column_name | friendly }}) ? Received{{ field.column_name | friendly }}[0] : Received{{ field.column_name | friendly }}
     
     if (!{{ field.column_name | friendly }}info._id) {
@@ -43,7 +43,7 @@ unique_id: zd6mrTlU
   updatedData['{{ field.column_name | friendly }}'] = []
   try {
     const {{ reference.table.name | friendly }} = require('../models/{{ reference.table.name | friendly | lower }}.model.js')
-    let Received{{ field.column_name | friendly }} =  JSON.parse(data.{{ field.column_name | friendly }})
+    let Received{{ field.column_name | friendly }} =  (typeof data.{{ field.column_name | friendly }} === 'string') ? JSON.parse(data.{{ field.column_name | friendly }}) : data.{{ field.column_name | friendly }} 
     {{ field.column_name | friendly }}Raw = Array.isArray(Received{{ field.column_name | friendly }}) ? Received{{ field.column_name | friendly }} : [Received{{ field.column_name | friendly }}]
     {{ field.column_name | friendly }}Raw.forEach({{ field.column_name | friendly }}info => {
       if (!{{ field.column_name | friendly }}info._id) {
