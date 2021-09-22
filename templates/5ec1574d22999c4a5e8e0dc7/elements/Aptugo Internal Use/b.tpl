@@ -49,7 +49,7 @@ import clsx from 'clsx'
 {% else %}
   {% set class = element.values.className|default('classes.mainPanel') %}
 {% endif %}
-<div className={ {{ class }} } >
+<div {% if class %}className={ {{ class }} }{% endif %} >
 {{ content|raw }}
 </div>
 {% if element.values.primaryColor %}
