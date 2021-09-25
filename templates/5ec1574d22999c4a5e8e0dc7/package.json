@@ -42,6 +42,7 @@ unique_id: 0i8AxGw6
     "css-loader": "^5.1.2",
     "copy-webpack-plugin": "^8.0.0",
     "eslint": "^7.22.0",
+    "@mui/styles": "^5.0.1",
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-react": "^7.22.0",

@@ -8,7 +8,7 @@ children: []
 */
 
 import Slide from '@mui/material/Slide'
-import { makeStyles } from '@mui/material/styles'
+import { makeStyles } from '@mui/styles'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
 import React, { FunctionComponent } from 'react'

@@ -6,7 +6,7 @@ unique_id: D10wnZ8z
 {% if element.values.localStyles %}
 {% set bpr %}
 import { mergeClasses } from '../services/utils'
-import { makeStyles } from '@mui/material/styles'
+import { makeStyles } from '@mui/styles'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
     const localStyles = makeStyles({

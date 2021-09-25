@@ -1,376 +1,190 @@
-const page = {
-	"name": "Add/Edit Personas",
-	"type": "page",
-	"children": [{
-		"name": "Before Page Render",
-		"type": "element",
-		"value": "bpr",
-		"prevent_delete": true,
-		"cascades": false,
-		"children": [],
-		"collapseStatus": "collapse"
-	}, {
-		"name": "Page Headerz",
-		"type": "element",
-		"value": "ph",
-		"prevent_delete": true,
-		"children": [{
-			"name": "Load Personas",
-			"prevent_delete": false,
-			"cascades": false,
-			"children": [],
-			"type": "element",
-			"value": "loadFromRedux",
-			"collapseStatus": "expand",
-			"values": {
-				"data": "4iEQiz3D",
-				"searchString": "props.match.params.id",
-				"variableName": "loadedPersona",
-				"fieldToSearch": "_id"
-			}
-		}, {
-			"name": "LoadedPersona",
-			"prevent_delete": false,
-			"cascades": false,
-			"children": [{
-				"name": "code",
-				"prevent_delete": false,
-				"cascades": false,
-				"children": [],
-				"type": "element",
-				"value": "code",
-				"collapseStatus": "expand",
-				"values": {
-					"code": "if (props.match.params.id && loadedPersona.length && loadedPersona[0]._id !== Personasdata._id) {\n  setPersonasData( { ...loadedPersona[0] } )\n}"
-				}
-			}],
-			"type": "element",
-			"value": "watchVariable",
-			"collapseStatus": "collapse",
-			"values": {
-				"watchVariable": "loadedPersona"
-			}
-		}, {
-			"name": "function",
-			"prevent_delete": false,
-			"cascades": false,
-			"children": [{
-				"name": "saveToRedux",
-				"prevent_delete": false,
-				"cascades": false,
-				"children": [],
-				"type": "element",
-				"value": "saveToRedux",
-				"collapseStatus": "expand",
-				"values": {
-					"data": "4iEQiz3D"
-				}
-			}],
-			"type": "element",
-			"value": "function",
-			"collapseStatus": "collapse",
-			"values": {
-				"functionName": "SavePerson",
-				"functionBody": "const data = {...Personasdata}\nprops.history.push('/Personas')"
-			}
-		}],
-		"cascades": false,
-		"collapseStatus": "collapse"
-	}, {
-		"name": "Body",
-		"type": "element",
-		"value": "b",
-		"prevent_delete": true,
-		"cascades": false,
-		"children": [{
-			"name": "div",
-			"prevent_delete": false,
-			"cascades": false,
-			"children": [{
-				"name": "Paper",
-				"prevent_delete": false,
-				"cascades": false,
-				"children": [{
-					"name": "typography",
-					"prevent_delete": false,
-					"cascades": false,
-					"children": [{
-						"name": "text",
-						"prevent_delete": false,
-						"cascades": false,
-						"children": [],
-						"type": "element",
-						"value": "text",
-						"collapseStatus": "expand",
-						"values": {
-							"Content": "{`${props.match.params.id ? 'Editar' : 'Agregar'}  Persona`}"
-						}
-					}],
-					"type": "element",
-					"value": "typography",
-					"collapseStatus": "expand",
-					"values": {
-						"tag": "h2"
-					}
-				}, {
-					"name": "div",
-					"prevent_delete": false,
-					"cascades": false,
-					"children": [{
-						"name": "Tipo",
-						"prevent_delete": false,
-						"cascades": false,
-						"children": [{
-							"name": "field",
-							"prevent_delete": false,
-							"cascades": false,
-							"children": [],
-							"type": "element",
-							"value": "field",
-							"collapseStatus": "expand",
-							"values": {
-								"Field": "nuX2xJQM",
-								"Type": "edit",
-								"Autofocus": true
-							}
-						}],
-						"type": "element",
-						"value": "div",
-						"collapseStatus": "expand"
-					}, {
-						"name": "Natural",
-						"prevent_delete": false,
-						"cascades": false,
-						"children": [{
-							"name": "Nombre",
-							"prevent_delete": false,
-							"cascades": false,
-							"children": [{
-								"name": "field",
-								"prevent_delete": false,
-								"cascades": false,
-								"children": [],
-								"type": "element",
-								"value": "field",
-								"collapseStatus": "expand",
-								"values": {
-									"Field": "lB7H7dFe",
-									"Type": "edit"
-								}
-							}],
-							"type": "element",
-							"value": "div",
-							"collapseStatus": "expand"
-						}, {
-							"name": "Apellido",
-							"prevent_delete": false,
-							"cascades": false,
-							"children": [{
-								"name": "field",
-								"prevent_delete": false,
-								"cascades": false,
-								"children": [],
-								"type": "element",
-								"value": "field",
-								"collapseStatus": "expand",
-								"values": {
-									"Field": "gwsFRNHV",
-									"Type": "edit"
-								}
-							}],
-							"type": "element",
-							"value": "div",
-							"collapseStatus": "expand"
-						}, {
-							"name": "Apellido Materno",
-							"prevent_delete": false,
-							"cascades": false,
-							"children": [{
-								"name": "field",
-								"prevent_delete": false,
-								"cascades": false,
-								"children": [],
-								"type": "element",
-								"value": "field",
-								"collapseStatus": "expand",
-								"values": {
-									"Field": "GXrcgK2O",
-									"Type": "edit"
-								}
-							}],
-							"type": "element",
-							"value": "div",
-							"collapseStatus": "collapse"
-						}],
-						"type": "element",
-						"value": "condition",
-						"collapseStatus": "expand",
-						"values": {
-							"condition": "Personasdata.Tipo === 'Natural'"
-						}
-					}, {
-						"name": "Jurídica",
-						"prevent_delete": false,
-						"cascades": false,
-						"children": [{
-							"name": "Razon Social",
-							"prevent_delete": false,
-							"cascades": false,
-							"children": [{
-								"name": "field",
-								"prevent_delete": false,
-								"cascades": false,
-								"children": [],
-								"type": "element",
-								"value": "field",
-								"collapseStatus": "expand",
-								"values": {
-									"Field": "ohMmAqQ9",
-									"Type": "edit"
-								}
-							}],
-							"type": "element",
-							"value": "div",
-							"collapseStatus": "expand"
-						}, {
-							"name": "div",
-							"prevent_delete": false,
-							"cascades": false,
-							"children": [{
-								"name": "Nombre Fantasia",
-								"prevent_delete": false,
-								"cascades": false,
-								"children": [],
-								"type": "element",
-								"value": "field",
-								"collapseStatus": "expand",
-								"values": {
-									"Field": "JERxxnAS",
-									"Type": "edit"
-								}
-							}, {
-								"name": "RUT",
-								"prevent_delete": false,
-								"cascades": false,
-								"children": [],
-								"type": "element",
-								"value": "field",
-								"collapseStatus": "expand",
-								"values": {
-									"Field": "PmAardC0",
-									"Type": "edit"
-								}
-							}, {
-								"name": "Representante Legal",
-								"prevent_delete": false,
-								"cascades": false,
-								"children": [],
-								"type": "element",
-								"value": "field",
-								"collapseStatus": "expand",
-								"values": {
-									"Field": "bEhTg19J",
-									"Type": "edit"
-								}
-							}],
-							"type": "element",
-							"value": "div",
-							"collapseStatus": "expand"
-						}, {
-							"name": "Personas",
-							"prevent_delete": false,
-							"cascades": false,
-							"children": [{
-								"name": "field",
-								"prevent_delete": false,
-								"cascades": false,
-								"children": [],
-								"type": "element",
-								"value": "field",
-								"collapseStatus": "expand",
-								"values": {
-									"Field": "0ylFWokE",
-									"Type": "edit"
-								}
-							}],
-							"type": "element",
-							"value": "div",
-							"collapseStatus": "collapse"
-						}],
-						"type": "element",
-						"value": "condition",
-						"collapseStatus": "collapse",
-						"values": {
-							"condition": "Personasdata.Tipo === 'Juridica'"
-						}
-					}],
-					"type": "element",
-					"value": "div",
-					"collapseStatus": "collapse",
-					"values": {
-						"class": "classes.indentedDiv"
-					}
-				}, {
-					"name": "div",
-					"prevent_delete": false,
-					"cascades": false,
-					"children": [{
-						"name": "button",
-						"prevent_delete": false,
-						"cascades": false,
-						"children": [],
-						"type": "element",
-						"value": "button",
-						"collapseStatus": "expand",
-						"values": {
-							"Action": "SavePerson",
-							"ButtonText": "Save",
-							"Variant": "contained",
-							"Color": "primary"
-						}
-					}],
-					"type": "element",
-					"value": "div",
-					"collapseStatus": "expand",
-					"values": {
-						"class": "classes.actionArea"
-					}
-				}],
-				"type": "element",
-				"value": "Paper",
-				"collapseStatus": "expand"
-			}],
-			"type": "element",
-			"value": "div",
-			"collapseStatus": "expand",
-			"values": {
-				"class": "sidebarOpen ? classes.withSidebarOpen : classes.withSidebarClosed"
-			}
-		}],
-		"collapseStatus": "collapse"
-	}, {
-		"name": "Page Footer",
-		"type": "element",
-		"value": "pf",
-		"prevent_delete": true,
-		"cascades": false,
-		"children": [],
-		"collapseStatus": "expand"
-	}, {
-		"name": "After Page Render",
-		"type": "element",
-		"value": "apr",
-		"prevent_delete": true,
-		"cascades": false,
-		"children": [],
-		"collapseStatus": "collapse"
-	}],
-	"path": "/Personas/edit/:id?",
-	"collapseStatus": "collapse",
-	"filename": "personas_edit.tsx",
-	"priority": 5
+const page_unique_id = aptugo.generateID()
+const asocTableID = Parameters.unique_id
+const tableDetails = aptugo.store.getState().application.tables.find(table => table.unique_id === asocTableID)
+const tableName = tableDetails.name
+const tablesingleName = tableDetails.singleName
+const newPageProperties = {
+	unique_id: page_unique_id,
+	name: `Add/Edit ${tableDetails.name}`,
+	path: `/${aptugo.friendly(tableDetails.name)}/edit/:id?`,
+	filename: `${tableDetails.name}_edit.tsx`
 }
 
-Application.pages[0].children.push(page)
+const childFields = tableDetails.fields.map((field, index) => {
+	return {
+		"name": field.column_name,
+		"value": "div",
+		"type": "element",
+		"children": [
+				{
+						"name": "field",
+						"value": "field",
+						"type": "element",
+						"values": {
+								"Field": field.unique_id,
+								"Type": "edit",
+								"Autofocus": index === 0
+						},
+						"children": []
+				}
+		]
+	}
+})
+
+const ph = {
+	"name": "Page Header",
+	"type": "element",
+	"value": "ph",
+	"children": [{
+		"name": `Load ${tableName}`,
+		"value": "loadFromRedux",
+		"values": {
+			"data": "2OqNUsXv",
+			"searchString": "props.match.params.id",
+			"variableName": `loaded${aptugo.friendly(tablesingleName)}`,
+			"fieldToSearch": "_id"
+		}
+	}, {
+		"children": [{
+			"name": `Set ${tableName} data from Database`,
+			"value": "code",
+			"collapseStatus": "expand",
+			"values": {
+				"code": `if (props.match.params.id && loaded${aptugo.friendly(tablesingleName)}.length && loaded${aptugo.friendly(tablesingleName)}[0]._id !== ${aptugo.friendly(tablesingleName)}sdata._id) {\n  set${aptugo.friendly(tableName)}Data( { ...loaded${aptugo.friendly(tablesingleName)}[0] } )\n}`
+			}
+		}],
+		"name": `Loaded${aptugo.friendly(tablesingleName)}`,
+		"value": "watchVariable",
+		"values": {
+			"watchVariable": `loaded${aptugo.friendly(tablesingleName)}`
+		}
+	}, {
+		"name": `Save ${aptugo.friendly(tableName)}`,
+		"value": "function",
+		"values": {
+			"functionName": `Save${aptugo.friendly(tablesingleName)}`,
+			"functionBody": "const data = { ...Productsdata }\nprops.history.push('/Products')"
+		},
+		"children": [{
+			"name": `Save ${aptugo.friendly(tablesingleName)} to Database`,
+			"value": "saveToRedux",
+			"values": {
+				"data": "2OqNUsXv"
+			},
+		}],
+	}],
+}
+
+const b = {
+	"name": "Body",
+	"value": "b",
+	"type": "element",
+	"values": {
+		"className": [
+			"theme.pages"
+		],
+		"primaryColor": "green"
+	},
+	"children": [
+			{
+					"name": "div",
+					"value": "div",
+					"type": "element",
+					"values": {
+							"class": "theme.mainarea"
+					},
+					"children": [
+							{
+									"name": "Container",
+									"value": "Container",
+									"type": "element",
+									"values": {
+											"className": ""
+									},
+									"children": [
+											{
+													"name": "div",
+													"value": "div",
+													"type": "element",
+													"values": {
+															"class": "theme.tableHeading"
+													},
+													"children": [
+															{
+																	"name": "typography",
+																	"value": "typography",
+																	"type": "element",
+																	"values": {
+																			"tag": "h4"
+																	},
+																	"children": [
+																			{
+																					"name": "text",
+																					"value": "text",
+																					"values": {
+																							"Content": "{`${props.match.params.id ? 'Edit' : 'Add'} " + tablesingleName + "`}"
+																					},
+																					"children": []
+																			}
+																	]
+															}
+													]
+											},
+											{
+													"name": "Paper",
+													"value": "Paper",
+													"type": "element",
+													"values": {
+															"className": [
+																	"theme.padded"
+															]
+													},
+													"children": [
+															{
+																	"name": "div",
+																	"value": "div",
+																	"type": "element",
+																	"values": {
+																			"class": "classes.tableResponsive"
+																	},
+																	"children": childFields
+															},
+															{
+																	"name": "Buttons",
+																	"value": "div",
+																	"type": "element",
+																	"values": {
+																			"class": "classes.actionArea"
+																	},
+																	"children": [
+																			{
+																					"name": "Save Button",
+																					"value": "button",
+																					"type": "element",
+																					"values": {
+																							"Action": `Save${aptugo.friendly(tablesingleName)}`,
+																							"ButtonText": "Save",
+																							"Variant": "contained",
+																							"Color": "primary"
+																					},
+																					"children": []
+																			}
+																	]
+															}
+													]
+											}
+									]
+							}
+					]
+			}
+	]
+}
+
+aptugo.structures.run('New Page', newPageProperties).then(() => {
+	const generatedPage = aptugo.pageUtils.plain[page_unique_id]
+	generatedPage.children[1] = ph
+	generatedPage.children[2] = b
+	aptugo.pageUtils.fix()
+})
 
 return Application

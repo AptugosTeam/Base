@@ -1,6 +1,9 @@
 
 const newPage = {
-    name: 'Untitled',
+    unique_id: Parameters.unique_id || aptugo.generateID(),
+    name: Parameters.name || 'Untitled',
+    path: Parameters.path || '',
+    filename: Parameters.filename || 'untitled.tsx',
     type: 'page',
     children: [
         {
