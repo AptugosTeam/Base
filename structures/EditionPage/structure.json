@@ -8,7 +8,8 @@
     {
       "name": "unique_id",
       "display": "Table unique ID",
-      "type": "text",
+      "type": "dropdown",
+      "options": "return aptugo.store.getState().application.tables.map(({ unique_id, name }) => [unique_id, name])",
       "helpText": "Unique ID for the table to generate"
     }
   ],
