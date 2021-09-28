@@ -25,7 +25,7 @@ options:
   - name: Color
     display: Color
     type: dropdown
-    options: default;inherit;primary;secondary
+    options: inherit;primary;secondary;success;error;info;warning
     settings:
       default: primary
   - name: disabled
@@ -44,10 +44,6 @@ options:
 sourceType: javascript
 children: []
 */
-
-
-
-
 {% if element.values.icon and element.values.icon != 'None' %}
 {% set bpr %}
 import {{ element.values.icon }}Icon from '@mui/icons-material/{{ element.values.icon }}'
@@ -60,7 +56,7 @@ import Button from '@mui/material/Button'
 {{ save_delayed('bpr', bpr ) }}
 <Button 
   {% if element.values.Variant %}variant='{{ element.values.Variant }}'{% endif %}
-  {% if element.values.Color %}color='{{ element.values.Color }}'{% endif %}
+  {% if element.values.Color %}color='{% if element.values.Color == 'default' %}inherit{% else %}{{ element.values.Color }}{% endif %}'{% endif %}
   {% if element.values.Action %}onClickCapture={ {{ element.values.Action | functionOrCall }} }{% endif %}
   {% if element.values.className %}className={ {{ element.values.className }} }{% endif %}
   {% if element.values.fullWidth %}fullWidth{% endif %}

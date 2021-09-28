@@ -42,7 +42,7 @@ options:
     options: ''
   - name: onload
     display: Run code upon loading
-    type: text
+    type: function
     options: ''
   - name: searchString
     display: Search String
