@@ -15,11 +15,7 @@ import { useSelector } from 'react-redux'
 {{ save_delayed('bpr', bpr ) }}
 {% set tableName = ( field | fieldData ).table.name | friendly %}
 {% set referencedField = field.reference | fieldData %}
-{% if field.referencekey %}
-{% set referencekey = (field.referencekey  | fieldData).column_name %}
-{% else %}
 {% set referencekey = '_id' %}
-{% endif %}
 
 {% set referencedTable = referencedField.table.name | friendly | capitalize %}
 {% set columnName = field.column_name | friendly %}
