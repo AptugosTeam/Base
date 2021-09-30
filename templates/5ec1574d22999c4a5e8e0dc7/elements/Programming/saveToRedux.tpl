@@ -1,5 +1,6 @@
 /*
 path: saveToRedux.tpl
+display: Save to Database
 type: file
 unique_id: OhQu8og7
 icon: ico-save-to-redux
