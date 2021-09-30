@@ -1,5 +1,6 @@
 /*
 path: loadFromRedux.tpl
+display: Load from Database
 completePath: elements/Programming/loadFromRedux.tpl
 type: file
 unique_id: 2uzdPTtK
@@ -115,7 +116,7 @@ React.useEffect(() => {
     {% if element.values.fieldToSearch %}, searchField: {{ element.values.fieldToSearch | textOrVariable }}{% endif %}
     {% if element.values.searchString %}, searchString: {{ element.values.searchString }}{% endif %}
   })
-},[{{ table.name | friendly }}loadoptions])
+},[{{ table.name | friendly }}loadoptions{% if element.values.searchString %}, {{ element.values.searchString }}{% endif %}])
 {% endset %}
 {{ save_delayed('ph',ph)}}
 {% if element.values.onload %}
