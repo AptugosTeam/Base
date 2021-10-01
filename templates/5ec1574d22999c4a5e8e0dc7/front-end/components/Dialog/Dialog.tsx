@@ -68,7 +68,7 @@ const AddDialog: FunctionComponent<addDialogProps> = (props) => {
           </Fab>
         </Tooltip>
       )}
-      <Dialog disableEnforceFocus open={isOpen} onClose={handleClose} aria-labelledby="form-dialog-title">
+      <Dialog disableEnforceFocus open={isOpen} onClose={handleClose} aria-labelledby="form-dialog-title" className={props.className}>
         <DialogTitle id="form-dialog-title">{title}</DialogTitle>
         <DialogContent>
           <DialogContentText>{text}</DialogContentText>

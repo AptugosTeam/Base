@@ -50,6 +50,10 @@ options:
     display: Hide Button
     type: checkbox
     options: ''
+  - name: classname
+    display: ClassName
+    type: text
+    options: ''
   - name: manuallyManaged
     display: Do not auto close
     type: checkbox
@@ -92,6 +96,7 @@ import AddDialog from '../components/Dialog/Dialog'
 {% endset %}
 {{ save_delayed('ph', ph ) }}
 <LocalAddDialog
+  {% if element.values.classname %}className={ {{ element.values.classname }} }{% endif %}
   {% if element.values.hideButton %}hideButton={true}{% endif %}
   isOpen={ {{ dialogVariable }} !== ''}
   onOpen={() => {% if element.values.addProcedure != 'No' %}{% if element.values.addProcedure == 'Internal' %}set{{ dialogVariable }}('add'){% else %}props.history.push('{{ (element.values.addProcedure | elementData ).path | withoutVars }}'){% endif %}{% else %}{}{%endif%}}
