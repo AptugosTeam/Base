@@ -5,6 +5,11 @@ if (existing) {
     var foundIndex = Application.assets.findIndex(asset => asset.id == Parameters.asset.id)
     Application.assets[foundIndex] = Parameters.asset
     _id = Parameters.asset.id
+    newAsset = {
+        type: Parameters.asset.type,
+        id: Parameters.asset.id || aptugo.generateID(),
+        name: Parameters.asset.name || Parameters.asset.source.name
+    }
 } else {
     newAsset = {
         type: Parameters.asset.type,
