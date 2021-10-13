@@ -15,27 +15,29 @@ options:
       }) => [unique_id, name])
     settings:
       aptugoOnLoad: |-
-        const varsToAdd = {};
-        const element = arguments[0];
-        const page = aptugo.pageUtils.findContainerPage(element.unique_id).unique_id;
-        const tableInfo = aptugo.store.getState().application.tables.find(table => table.unique_id === element.values.data )
-        const tableFields = tableInfo.fields;
-        tableFields.forEach(tableField => { varsToAdd[tableField.column_name] = 'String' });
-        const finalVarsToAdd = {
-          [aptugo.friendly(tableInfo.name).toLowerCase() + 'Data']: {
-            loadingStatus: 'String',
-            addingStatus: 'String',
-            searchingStatus: 'String',
-            searchString: 'String',
-            totalDocs: 'String',
-            [aptugo.friendly(tableInfo.name).toLowerCase()]: { ...varsToAdd },
-            ['found' + aptugo.friendly(tableInfo.name).toLowerCase()]: { ...varsToAdd },
-            errField: 'String',
-            errStatus: 'String',
-            errMessage: 'String'
-          }
-        };
-        aptugo.variables.setPageVariable(page, element.unique_id, finalVarsToAdd);
+        if ( element.values.data ) {
+          const varsToAdd = {};
+          const element = arguments[0];
+          const page = aptugo.pageUtils.findContainerPage(element.unique_id).unique_id;
+          const tableInfo = aptugo.store.getState().application.tables.find(table => table.unique_id === element.values.data )
+          const tableFields = tableInfo.fields;
+          tableFields.forEach(tableField => { varsToAdd[tableField.column_name] = 'String' });
+          const finalVarsToAdd = {
+            [aptugo.friendly(tableInfo.name).toLowerCase() + 'Data']: {
+              loadingStatus: 'String',
+              addingStatus: 'String',
+              searchingStatus: 'String',
+              searchString: 'String',
+              totalDocs: 'String',
+              [aptugo.friendly(tableInfo.name).toLowerCase()]: { ...varsToAdd },
+              ['found' + aptugo.friendly(tableInfo.name).toLowerCase()]: { ...varsToAdd },
+              errField: 'String',
+              errStatus: 'String',
+              errMessage: 'String'
+            }
+          };
+          aptugo.variables.setPageVariable(page, element.unique_id, finalVarsToAdd);
+        }
       active: true
   - name: variableName
     display: Variable Name

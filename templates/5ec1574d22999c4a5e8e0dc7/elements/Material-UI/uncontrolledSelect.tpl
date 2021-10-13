@@ -21,6 +21,9 @@ options:
     display: Options
     type: text
     options: ''
+  - name: showall
+    display: Show "All" for empty
+    type: checkbox
   - name: margin
     display: Margin
     type: dropdown
@@ -53,6 +56,6 @@ import MenuItem from '@mui/material/MenuItem'
     {% if element.values.value %}value={{ element.values.value }}{% endif %}
     {% if element.values.onChange %}onChange={ {{ element.values.onChange }} }{% endif %}
 >
-<MenuItem value=""><em>All</em></MenuItem>
+{% if element.values.showall %}<MenuItem value=""><em>All</em></MenuItem>{% endif %}
 { {{ element.values.options }}.map((item, index) => <MenuItem value={item.value ? item.value : item} key={index}>{item.name ? item.name : item}</MenuItem> )}
 </TextField>
