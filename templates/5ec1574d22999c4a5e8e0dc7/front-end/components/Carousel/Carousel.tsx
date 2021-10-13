@@ -137,7 +137,7 @@ const AptugoCarousel: FunctionComponent<carouselProps> = (props) => {
         })}
       </div>
       {props.arrowsOrDotsMethod === 'dots' && (
-        <div className={classes.carouselDots}>
+        <div className={`${classes.carouselDots} carouselDots`}>
           {slides.map((child, index) => {
             return (
               <div

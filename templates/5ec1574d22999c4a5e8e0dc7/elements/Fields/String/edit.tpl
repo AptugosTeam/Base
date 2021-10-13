@@ -23,7 +23,7 @@ import TextField from '@mui/material/TextField'
     label="{{ field.prompt|default(field.column_name) }}"
     type="text"
     fullWidth
-    className={'field_{{ field.column_name | friendly }}'}
+    className={ {% if element.values.classname %}{{ element.values.classname }}{% else %}'field_{{ field.column_name | friendly }}'{% endif %}}
     variant="{{ element.values.variant|default('standard') }}"
     value={ {{ tableName }}data.{{ field.column_name | friendly }} || '' }
     onChange={handle{{ tableName }}Change("{{ field.column_name | friendly }}")}

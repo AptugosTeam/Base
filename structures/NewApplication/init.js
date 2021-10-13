@@ -32,12 +32,12 @@ Application.createdAt = Date.now(),
 Application.settings = {
     name: Parameters.Name || 'Untitled Application',
     development: {
-      apiURL: `http://localhost:4567`,
+      apiURL: `http://127.0.0.1:4567`,
       type: 'Local',
       folder: appname,
       template: defaultTemplate ? defaultTemplate[0]._id : '',
       url: `https://${appname.toLowerCase()}_${username.toLowerCase()}.aptugo.com`,
-      dbconnectstring: `mongodb://localhost:27017/${username}`
+      dbconnectstring: `mongodb://127.0.0.1:27017/${username}`
     },
     stagging: {
       apiURL: `https://${appname}.aptugo.com:3456`,
@@ -45,7 +45,7 @@ Application.settings = {
       folder: `${appname}_stagging`,
       template: defaultTemplate ? defaultTemplate[0]._id : '',
       url: `https://${appname.toLowerCase()}_${username.toLowerCase()}.aptugo.com`,
-      dbconnectstring: `mongodb://localhost:27017/${username}`
+      dbconnectstring: `mongodb://127.0.0.1:27017/${username}`
     },
     production: {
       apiURL: `https://${appname}.aptugo.com:3456`,
@@ -53,7 +53,7 @@ Application.settings = {
       folder: appname,
       template: defaultTemplate ? defaultTemplate[0]._id : '',
       url: `https://${appname.toLowerCase()}.aptugo.com`,
-      dbconnectstring: `mongodb://${dbusername}:${dbpassword}@localhost:27017/${username}?authSource=admin`
+      dbconnectstring: `mongodb://${dbusername}:${dbpassword}@127.0.0.1:27017/${username}?authSource=admin`
     }
 }
 
