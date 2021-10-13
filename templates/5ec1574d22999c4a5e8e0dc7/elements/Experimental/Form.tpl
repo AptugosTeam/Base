@@ -9,7 +9,7 @@ options: []
 
 <form
   method="POST"
-  action="http://localhost:4567{{element.values.action}}"
+  action="http://127.0.0.1:4567{{element.values.action}}"
 >
 <input type="hidden" name="token" value="5ff714646dcece84a0c222d3" />
 {{ content | raw }}
