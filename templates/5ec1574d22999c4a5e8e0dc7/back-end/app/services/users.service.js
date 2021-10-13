@@ -5,7 +5,6 @@ unique_id: aOViR3kP
 */
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
-const Users = require('../models/users.model.js')
 
 module.exports = {
   authenticate,
@@ -58,19 +57,28 @@ async function checkNonce(req) {
   })
 }
 
-async function authenticate({ email, password }) {
+async function authenticate({ email, password, model, passwordField }) {
+  if (!model) {
+    const Users = require('../models/users.model.js')
+    model = Users
+  }
+
+  if (!passwordField) {
+    passwordField = 'Password'
+  }
   return new Promise(function (resolve, reject) {
     if (!email || !password) reject({ message: 'Wrong parameters sent' })
 
-    const query = Users.findOne({ Email: email })
+    const query = model.findOne({ Email: email })
     const promise = query.exec()
 
     promise.then((user) => {
+      console.log(user, 'user')
       if (!user) {
         reject({ message: 'Email not found' })
       }
 
-      bcrypt.compare(password, user.Password).then((isMatch) => {
+      bcrypt.compare(password, user[passwordField]).then((isMatch) => {
         if (isMatch) {
           console.log(user)
           const { Password, ...userWithoutPassword } = user._doc
