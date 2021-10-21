@@ -20,10 +20,11 @@ options:
 sourceType: javascript
 children: []
 */
-
-
 {% set bpr %}
 import IconButton from '@mui/material/IconButton'
+{% endset %}
+{{ save_delayed('bpr', bpr ) }}
+{% set bpr %}
 import {{element.values.icon}}Icon from '@mui/icons-material/{{element.values.icon}}'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
