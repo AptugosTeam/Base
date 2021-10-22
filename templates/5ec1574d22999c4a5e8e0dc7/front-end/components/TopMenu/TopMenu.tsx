@@ -3,17 +3,17 @@ path: TopMenu.tsx
 completePath: front-end/components/TopMenu/TopMenu.tsx
 unique_id: 4yBozeZw
 */
-import React, { FunctionComponent } from 'react'
 import Button from '@mui/material/Button'
-import { NavLink } from 'react-router-dom'
 import clsx from 'clsx'
-
+import React, { FunctionComponent } from 'react'
+import { NavLink } from 'react-router-dom'
 import classes from './topmenu.module.scss'
 
 interface menuItemProps {
-  text: string,
-  link?: string,
+  text: string
+  link?: string
   isSubMenu?: boolean
+  onClickCapture?: Function
 }
 
 interface topMenuProps {
@@ -22,32 +22,27 @@ interface topMenuProps {
 
 export const AptugoMenuItem: FunctionComponent<menuItemProps> = (props) => {
   const [isOpen, setOpen] = React.useState(false)
+  const { text, link, isSubMenu } = props
 
-  let component = <div><Button>{props.text}</Button></div>
+  let buttonComponent = <Button {...props}>{text}</Button>
+  let component = <div>{buttonComponent}</div>
   if (props.link) {
-    if (props.link.substr(0,4).toLowerCase() === 'http') {
-      component = <a href={props.link}><Button>{props.text}</Button></a>
+    if (props.link.substr(0, 4).toLowerCase() === 'http') {
+      component = <a href={props.link}>{buttonComponent}</a>
     } else {
-      component = <NavLink to={props.link}><Button>{props.text}</Button></NavLink>    
+      component = <NavLink to={props.link}>{buttonComponent}</NavLink>
     }
-    
   }
 
   if (props.isSubMenu) {
     return component
   } else {
     return (
-      <div
-        onMouseEnter={() => setOpen(true)}
-        onMouseLeave={() => setOpen(false)}
-        className={isOpen ? classes.selectedItem : undefined}
-      >
+      <div onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)} className={isOpen ? classes.selectedItem : undefined}>
         {component}
-        {props.children &&
-          <div className={classes.subMenu}>
-            {React.Children.map(props.children, (child: any) => React.cloneElement(child,{ isSubMenu: true }) )}
-          </div>
-        }
+        {props.children && (
+          <div className={classes.subMenu}>{React.Children.map(props.children, (child: any) => React.cloneElement(child, { isSubMenu: true }))}</div>
+        )}
       </div>
     )
   }
@@ -61,7 +56,7 @@ const AptugoTopMenu: FunctionComponent<topMenuProps> = (props) => {
   }
 
   return (
-    <div className={clsx(classes.menu,props.className)}>
+    <div className={clsx(classes.menu, props.className)}>
       <div className={'actioner'} onClickCapture={switchMenuView}></div>
       <div className={clsx('menu', isOpen && 'isOpen')}>{props.children}</div>
     </div>

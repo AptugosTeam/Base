@@ -119,7 +119,12 @@ exports.find = (options) => {
     const data = options.req ? options.req.body : options.data
     let findString =  query.searchString ? { $text: { $search: query.searchString } } : {}
     if (query.searchField) {
-      findString = { [query.searchField]: { $regex : new RegExp(query.searchString, "i") } }
+      if (query.searchString === 'true' || query.searchString === 'false') {
+        findString = { [query.searchField]: !!query.searchString }
+      } else {
+        findString = { [query.searchField]: { $regex : new RegExp(query.searchString, "i") } }
+      }
+      
       if ({{ table.name | friendly }}.schema.path(query.searchField).instance === 'ObjectID' || {{ table.name | friendly }}.schema.path(query.searchField).instance === 'Array') {
         findString = { [query.searchField]: require('mongoose').Types.ObjectId(query.searchString) }
       }
