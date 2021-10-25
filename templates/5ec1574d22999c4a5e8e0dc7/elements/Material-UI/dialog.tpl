@@ -11,30 +11,6 @@ options:
     options: >-
       return aptugo.store.getState().application.tables.map(({ unique_id, name
       }) => [unique_id, name])
-  - name: title
-    display: Title (add)
-    type: text
-    options: ''
-  - name: introText
-    display: Intro Text (add)
-    type: text
-    options: ''
-  - name: button
-    display: Button Text (add)
-    type: text
-    options: ''
-  - name: editTitle
-    display: Title (edit)
-    type: text
-    options: ''
-  - name: editIntroText
-    display: Intro Text (edit)
-    type: text
-    options: ''
-  - name: editButton
-    display: Button Text (edit)
-    type: text
-    options: ''
   - name: addProcedure
     display: Add Records
     type: dropdown
@@ -42,26 +18,63 @@ options:
       return [['No','None'],['Internal','Popup
       Dialog'],...aptugo.pageUtils.plainpages.map(({unique_id, name }) =>
       [unique_id, name])]
+  - name: hideButton
+    display: Hide Add Button
+    type: checkbox
+    options: ''
   - name: color
     display: Color
     type: dropdown
     options: primary;inherit;secondary;default
-  - name: hideButton
-    display: Hide Button
+  - name: manuallyManaged
+    display: Do not auto close
     type: checkbox
     options: ''
   - name: classname
     display: ClassName
     type: text
     options: ''
-  - name: manuallyManaged
-    display: Do not auto close
-    type: checkbox
+  - name: title
+    display: Add - Title
+    type: text
+    options: ''
+  - name: introText
+    display: Add - Intro Text
+    type: text
+    options: ''
+  - name: button
+    display: Add - Button Text
+    type: text
+    options: ''
+  - name: editTitle
+    display: Edit - Title
+    type: text
+    options: ''
+  - name: editIntroText
+    display: Edit - Intro Text
+    type: text
+    options: ''
+  - name: editButton
+    display: Edit - Button Text
+    type: text
+    options: ''
+  - name: deleteTitle
+    display: Delete - Title
+    type: text
+    options: ''
+  - name: deleteIntroText
+    display: Delete - Intro Text
+    type: text
+    options: ''
+  - name: deleteButton
+    display: Delete - Button Text
+    type: text
     options: ''
 children: []
 */
 {% set table = element.values.table | tableData %}
 {% set friendlyTableName = table.name | friendly | capitalize %}
+{% set friendlySingleName = table.singleName | friendly | capitalize %}
 {% set dialogVariable = 'dialog' ~ friendlyTableName ~ 'Action' %}
 {% if element.children %}
 {% else %}
@@ -83,12 +96,16 @@ import { add{{ friendlyTableName }} } from '../store/actions/{{ table.name | fri
 import { edit{{ friendlyTableName }} } from '../store/actions/{{ table.name | friendly | lower }}Actions'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
+{% set bpr %}
+import { remove{{ friendlySingleName }} } from '../store/actions/{{ table.name | friendly | lower }}Actions'
+{% endset %}
+{{ save_delayed('bpr', bpr ) }}
 {% set bpr2 %}
 import AddDialog from '../components/Dialog/Dialog'
 {% endset %}
 {{ save_delayed('bpr', bpr2 ) }}
 {% set ph %}
-  const [{{ dialogVariable }}, set{{ dialogVariable }}] = React.useState<'add' | 'edit' | "">('')
+  const [{{ dialogVariable }}, set{{ dialogVariable }}] = React.useState<'add' | 'edit' | 'delete' | "">('')
 {% endset %}
 {{ save_delayed('ph', ph ) }}
 {% set ph %}
@@ -104,12 +121,17 @@ import AddDialog from '../components/Dialog/Dialog'
     onSave={() => set{{ dialogVariable }}('')}
   {% endif %}
   onClose={() => set{{ dialogVariable }}('')}
-  title={ {{ dialogVariable }} === 'edit' ? '{{ element.values.editTitle }}' : '{{ element.values.title }}'}
-  text={ {{ dialogVariable }} === 'edit' ? '{{ element.values.editIntroText }}' : '{{ element.values.introText }}'}
-  button={ {{ dialogVariable }} === 'edit' ? '{{ element.values.editButton }}' : '{{ element.values.button }}'}
+  action={ {{ dialogVariable }} }
+  addOptions={ { title: '{{ element.values.title }}', text: '{{ element.values.introText }}', button: '{{ element.values.button }}' } }
+  editOptions={ { title: '{{ element.values.editTitle }}', text: '{{ element.values.editIntroText }}', button: '{{ element.values.editButton }}' } }
+  removeOptions={ { title: '{{ element.values.deleteTitle }}', text: '{{ element.values.deleteIntroText }}', button: '{{ element.values.deleteButton }}' } }
   saveDataHandler={ (data: I{{ table.name | friendly | capitalize }}Item ) => {
     {% if element.values.addProcedure == 'Internal' %}
-      {{ dialogVariable }} === 'add' ? dispatch(add{{ table.name | friendly | capitalize }}(data)) : dispatch(edit{{ table.name | friendly | capitalize }}(data))
+      if ({{ dialogVariable }} === 'delete') {
+        dispatch(remove{{ friendlySingleName }}(data))
+      } else {
+        {{ dialogVariable }} === 'add' ? dispatch(add{{ table.name | friendly | capitalize }}(data)) : dispatch(edit{{ table.name | friendly | capitalize }}(data))
+      }      
     {% endif %}
   } }
   color='{{ element.values.color }}'
