@@ -22,5 +22,5 @@ children: []
   })
 })
 {% endset %}
-{{ add_setting('schemaCotizaciones', savedValidation) }}
+{{ add_setting( 'schema' ~ friendlyTableName  , savedValidation) }}
 

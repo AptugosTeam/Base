@@ -47,7 +47,7 @@ const {{ friendlyTableName }}Schema = mongoose.Schema({
 {% endfor %}
 
 {{ extraPlugins }}
-{{ insert_setting({{ 'schema' ~ friendlyTableName }}) | raw }}
+{{ insert_setting('schema' ~ friendlyTableName) | raw }}
 {{ friendlyTableName }}Schema.plugin(mongoosePaginate)
 {{ friendlyTableName }}Schema.index(
   {
