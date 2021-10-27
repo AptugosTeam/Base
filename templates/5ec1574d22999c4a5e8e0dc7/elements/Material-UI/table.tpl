@@ -68,6 +68,10 @@ options:
       propertyCondition: usePagination
       condition: '"true"'
       active: true
+  - name: confirmDeletes
+    display: Show a confirmation before deleting
+    type: checkbox
+    options: ''
 children: []
 */
 
@@ -186,7 +190,14 @@ children: []
     </IconButton>
     {% endif %}
     {% if allowDeletion %}
-    <IconButton aria-label="delete" color="primary" onClickCapture={(e: any) => { dispatch(remove{{ tableSingleName }} (e.element)) }}>
+    <IconButton aria-label="delete" color="primary" onClickCapture={(e: any) => {
+      {% if element.values.confirmDeletes %}
+        {{ setEditDataFunctionName }}(e.element)
+        setdialog{{ tableName | capitalize }}Action('delete')
+      {% else %}
+        dispatch(remove{{ tableSingleName }} (e.element))
+      {% endif %}
+    }}>
       <DeleteIcon fontSize="small" />
     </IconButton>
     {% endif %}
