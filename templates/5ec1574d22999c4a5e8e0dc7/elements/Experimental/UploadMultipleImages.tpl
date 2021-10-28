@@ -14,6 +14,11 @@ options:
     display: On Change
     type: text
     options: ''
+  - name: innerText
+    display: Text for dropzone
+    type: text
+    options: ''
+    default: "Drag 'n' drop some files here, or click to select files"
 settings:
   - name: Packages
     value: '"react-dropzone": "^11.4.2",'
@@ -24,6 +29,7 @@ import MultipleFileUpload from '../components/MultipleFileUpload'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
 <MultipleFileUpload
+  {% if element.values.innerText %}innerText={ {{ element.values.innerText | textOrVariable }} }{% endif %}
   {% if element.values.classname %}className={ {{ element.values.classname }} }{% endif %}
   {% if element.values.onChange %}onChange={
     (files) => {

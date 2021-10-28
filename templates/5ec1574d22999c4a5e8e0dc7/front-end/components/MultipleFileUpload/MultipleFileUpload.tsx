@@ -52,7 +52,7 @@ const MultipleFileUpload: FunctionComponent<any> = (props) => {
     }
     <div {...getRootProps({className: "dropzone"})}>
       <input {...getInputProps()} />
-      <p>Drag 'n' drop some files here, or click to select files</p>
+      <p>{props.innerText ? props.innerText : "Drag 'n' drop some files here, or click to select files"}</p>
     </div>
     <aside className="thumbsContainer" >
       {thumbs}

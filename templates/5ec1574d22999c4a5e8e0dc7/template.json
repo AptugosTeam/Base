@@ -6514,6 +6514,13 @@
             "value": "defaultValue",
             "type": "text"
           }
+        ],
+        "validations": [
+          {
+            "display": "Auto increment",
+            "value": "autoincrement",
+            "type": "checkbox"
+          }
         ]
       }
     },
