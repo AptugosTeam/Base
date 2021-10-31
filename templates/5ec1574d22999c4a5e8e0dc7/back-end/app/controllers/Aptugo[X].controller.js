@@ -198,7 +198,7 @@ exports.update = (options) => {
     {{ table.name | friendly }}.findByIdAndUpdate(id, updatedData, {new: true})
     {% for field in table.fields %}
       {% set fieldWithData = field | fieldData %}
-      {% include includeTemplate(['Fields' ~ field.data_type ~'find.tpl']) %}
+      {% include includeTemplate(['Fields' ~ field.data_type ~'find.tpl', 'Fieldsfind.tpl']) %}
     {% endfor %}
       .then(result => {
         resolve(result)
