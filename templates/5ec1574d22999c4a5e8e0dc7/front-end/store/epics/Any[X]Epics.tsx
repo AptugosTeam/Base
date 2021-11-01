@@ -11,6 +11,7 @@ children: []
 import { combineEpics, Epic } from "redux-observable";
 import { switchMap, map, startWith, catchError, filter, mergeMap } from "rxjs/operators";
 import axios from "axios";
+import {buildFormData} from './index'
 import {
   {{ table.name | friendly | capitalize }}Action,
   {{ table.name | friendly | capitalize }}ActionTypes,
@@ -85,24 +86,13 @@ const add{{ table.name | friendly | capitalize }}Epic: Epic<{{ table.name | fri
 
   mergeMap((action) => {
     const data = new FormData()
+    buildFormData(data, action.payload)
     const config = {
       headers: {
           'content-type': 'multipart/form-data'
       }
     }
-    Object.keys(action.payload).map(
-      (item) =>
-        data.append(
-          item,
-          action.payload[item]?._id
-            ? action.payload[item]?._id
-            : typeof action.payload[item] === 'object' && action.payload[item]?.isPrototypeOf === 'File'
-            ? JSON.stringify(action.payload[item])
-            : Array.isArray(action.payload[item])
-            ? JSON.stringify(action.payload[item])
-            : action.payload[item]
-        )
-    )
+    
     return from(axios.post(`{{ settings.apiURL }}/api/{{ table.name | friendly | lower }}/`, data, config)).pipe(
       map((response) => added{{ table.name | friendly | capitalize }}(response.data)),
       startWith(adding{{ table.name | friendly | capitalize }}()),
@@ -134,33 +124,14 @@ const edit{{ table.name | friendly | capitalize }}Epic: Epic<{{ table.name | fr
     filter(isOfType({{ table.name | friendly | capitalize }}ActionTypes.EDIT_{{ table.name | friendly | upper }})),
     mergeMap((action) => {
       const data = new FormData()
+      buildFormData(data, action.payload)
       const config = {
         headers: {
             'content-type': 'multipart/form-data'
         }
       }
 
-      Object.keys(action.payload).map(
-        (item) => {
-          if (typeof action.payload[item] !== 'undefined') {
-            let value
-            if (action.payload[item] === null) {
-              value = null
-            } else {
-              value = action.payload[item]._id
-              ? action.payload[item]._id
-              : typeof action.payload[item] === 'object' && action.payload[item].isPrototypeOf === 'File'
-                ? JSON.stringify(action.payload[item])
-                : Array.isArray(action.payload[item])
-                  ? JSON.stringify(action.payload[item])
-                  : action.payload[item]
-            }
-            
-        
-            data.append(item, value)
-          }
-        }
-      )
+      
 
       return from(axios.put(`{{ settings.apiURL }}/api/{{ table.name | friendly | lower }}/${action.payload._id}`, data, config)).pipe(
         map((response) => edited{{ table.name | friendly | capitalize }}(response.data)),

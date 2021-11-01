@@ -16,4 +16,16 @@ export const rootEpic = combineEpics(
   {{ table.name | friendly | lower }}Epics,
 {% endfor %})
 
+export function buildFormData(formData, data, parentKey = null) {
+  if (data && typeof data === 'object' && !(data instanceof Date) && !(data instanceof File)) {
+    Object.keys(data).forEach(key => {
+      buildFormData(formData, data[key], parentKey ? `${parentKey}[${key}]` : key);
+    });
+  } else {
+    const value = data == null ? '' : data;
+
+    formData.append(parentKey, value);
+  }
+}
+
 export default createEpicMiddleware<Action, Action, IState>();

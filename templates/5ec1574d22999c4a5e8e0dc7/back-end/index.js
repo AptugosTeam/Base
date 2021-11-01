@@ -26,6 +26,26 @@ app.use(function(req, res, next) {
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use( fileupload() )
+app.all('*', checkReq);
+function checkReq(req, res, next) {
+  if (req.files) {
+    const keys = Object.keys(req.files)
+    keys.forEach(key => {
+      const regex = /(.*)\[([0-9]*)\]/gm;
+      let m = regex.exec(key)
+      if (m) {
+        if (m[2] === '0') {
+          req.body[m[1]] = []
+          req.files[m[1]] = []
+        }
+        req.body[m[1]].push(req.files[key])
+        req.files[m[1]].push(req.files[key])
+        delete req.files[key]
+      }
+    })
+  }
+  next();
+}
 
 {{ insert_setting('ServerAddenum') | raw }}
 
