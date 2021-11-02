@@ -31,7 +31,6 @@ options:
   - name: fullwidth
     display: Use full width?
     type: checkbox
-    options: none;normal;dense
   - name: className
     display: ClassName
     type: text
@@ -52,7 +51,7 @@ import MenuItem from '@mui/material/MenuItem'
     {% if element.values.label %}label="{{ element.values.label }}"{% endif %}
     {% if element.values.className %}className={ {{ element.values.className }} }{% endif %}
     select
-    {% if element.values.fullWidth %}fullWidth{% endif %}
+    {% if element.values.fullwidth %}fullWidth{% endif %}
     {% if element.values.value %}value={{ element.values.value }}{% endif %}
     {% if element.values.onChange %}onChange={ {{ element.values.onChange }} }{% endif %}
 >

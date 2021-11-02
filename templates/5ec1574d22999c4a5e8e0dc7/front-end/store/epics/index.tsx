@@ -17,15 +17,21 @@ export const rootEpic = combineEpics(
 {% endfor %})
 
 export function buildFormData(formData, data, parentKey = null) {
-  if (data && typeof data === 'object' && !(data instanceof Date) && !(data instanceof File)) {
-    Object.keys(data).forEach(key => {
-      buildFormData(formData, data[key], parentKey ? `${parentKey}[${key}]` : key);
-    });
-  } else {
-    const value = data == null ? '' : data;
-
-    formData.append(parentKey, value);
-  }
+  Object.keys(data).forEach((key) => {
+    let savekey = key
+    let value = data[key] == null ? '' : data[key]
+    if (data[key] && typeof data[key] === 'object' && !(data[key] instanceof Date) && !(data[key] instanceof File)) {
+      value = JSON.stringify(data[key])
+    } 
+    
+    if (data[key] && Array.isArray(data[key]) && data[key][0] instanceof File) { // handle array of filess
+      Object.keys(data[key]).forEach((subkey) => {
+        formData.append(`${savekey}[${subkey}]`, data[key][subkey])
+      })
+    } else {
+      formData.append(savekey, value)
+    }
+  })
 }
 
 export default createEpicMiddleware<Action, Action, IState>();
