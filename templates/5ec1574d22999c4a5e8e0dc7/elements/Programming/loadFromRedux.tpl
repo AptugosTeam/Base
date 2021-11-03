@@ -67,6 +67,10 @@ options:
     display: Limit of Elements
     type: text
     options: ''
+  - name: donotpopulate
+    display: Do NOT populate related tables
+    type: checkbox
+    options: ''
 children: []
 */
 {% if data %}
@@ -102,6 +106,7 @@ const {{ varName }} = useSelector((state: IState) => state.{{ table.name | frien
 {% set ph %}
 const [{{ table.name | friendly }}loadoptions, set{{ table.name | friendly }}loadoptions] = React.useState<any>({ 
   page: 1,
+  populate: {% if element.values.donotpopulate %}false{% else %}true{% endif %},
   limit: {{ element.values.elementsLimit|default(25) }},
   sort: { field: null, method: 'ASC' },
   {% if element.values.fieldToSearch %}searchField: {{ element.values.fieldToSearch | textOrVariable }},{% endif %}

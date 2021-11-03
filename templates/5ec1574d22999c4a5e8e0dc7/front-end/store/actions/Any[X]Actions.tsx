@@ -182,6 +182,7 @@ type TSearchOptions = {
   searchField?: string
   page?: number
   limit?: number
+  populate?: boolean
   sort?: {
     field: string
     method?: 'asc' | 'desc'

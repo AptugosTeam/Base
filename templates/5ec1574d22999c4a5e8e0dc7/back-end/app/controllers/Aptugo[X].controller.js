@@ -156,6 +156,7 @@ exports.find = (options) => {
 // Find a single {{ table.singleName | friendly }} with a ID
 exports.findOne = ( options ) => {
   return new Promise((resolve, reject) => {
+    const query = { populate: 'true' }
     const id = options.req ? options.req.params.ID : options.ID
     {{ table.name | friendly }}.findById(id)
     {% for field in table.fields %}
@@ -195,6 +196,7 @@ exports.update = (options) => {
     {% endfor %}
     
     // Find {{ table.singleName }} and update it with the request body
+    const query = { populate: 'true' }
     {{ table.name | friendly }}.findByIdAndUpdate(id, updatedData, {new: true})
     {% for field in table.fields %}
       {% set fieldWithData = field | fieldData %}

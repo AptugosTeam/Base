@@ -5,7 +5,6 @@ unique_id: SBHiymdS
 */
 {% set population = false %}
 {% set foundFieldData = [] %}
-// Directly Related Fields
 {% for relatedField in builder.plainFields %}
     {% if relatedField.reference %}
         {% set relData = relatedField.reference | fieldData %}
@@ -33,7 +32,7 @@ unique_id: SBHiymdS
         {% endfor %}
     {% endif %}
 {% endfor %}
-.populate({
+.populate(query.populate === 'true' && {
     strictPopulate: false,
     path: '{{ ffd.table.name | friendly }}'
     {% if subpopulation %}
