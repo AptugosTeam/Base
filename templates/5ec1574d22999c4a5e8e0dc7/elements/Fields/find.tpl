@@ -8,6 +8,7 @@ unique_id: SBHiymdS
 {% for relatedField in builder.plainFields %}
     {% if relatedField.reference %}
         {% set relData = relatedField.reference | fieldData %}
+        {# Relates fields from this table containing relationships with other tables #}
         {% if (table.unique_id == relData.table.unique_id) and (relData.unique_id == field.unique_id) %}
             {% set foundFieldData = foundFieldData|merge([relatedField | fieldData]) %}
             {% set population = true %}
