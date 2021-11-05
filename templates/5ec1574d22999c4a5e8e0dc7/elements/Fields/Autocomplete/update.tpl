@@ -27,7 +27,8 @@ unique_id: zd6mrTlU
   updatedData['{{ field.column_name | friendly }}'] = {}
   try {
     const {{ reference.table.name | friendly }} = require('../models/{{ reference.table.name | friendly | lower }}.model.js')
-    {{ field.column_name | friendly }}info =  JSON.parse(data.{{ field.column_name | friendly }})
+    let Received{{ field.column_name | friendly }} =  (typeof data.{{ field.column_name | friendly }} === 'string') ? JSON.parse(data.{{ field.column_name | friendly }}) : data.{{ field.column_name | friendly }} 
+    {{ field.column_name | friendly }}info = Array.isArray(Received{{ field.column_name | friendly }}) ? Received{{ field.column_name | friendly }}[0] : Received{{ field.column_name | friendly }}
     if (!{{ field.column_name | friendly }}info._id) {
       const {{ field.column_name | friendly }}ID = require('mongoose').Types.ObjectId()
       const {{ reference.table.singleName | friendly }} = new {{ reference.table.name | friendly }}({ ...{{ field.column_name | friendly }}info, _id: {{ field.column_name | friendly }}ID })
@@ -46,6 +47,13 @@ unique_id: zd6mrTlU
     let Received{{ field.column_name | friendly }} =  (typeof data.{{ field.column_name | friendly }} === 'string') ? JSON.parse(data.{{ field.column_name | friendly }}) : data.{{ field.column_name | friendly }} 
     {{ field.column_name | friendly }}Raw = Array.isArray(Received{{ field.column_name | friendly }}) ? Received{{ field.column_name | friendly }} : [Received{{ field.column_name | friendly }}]
     {{ field.column_name | friendly }}Raw.forEach({{ field.column_name | friendly }}info => {
+      {% if reference.data_type == 'Image' %}
+      if ({{ field.column_name | friendly }}info && {{ field.column_name | friendly }}info.data) {
+        fs.writeFileSync(`${options.req.app.get('filesFolder')}/${ {{ field.column_name | friendly }}info.name}`, {{ field.column_name | friendly }}info.data)
+        {{ field.column_name | friendly }}info.{{ reference.column_name | friendly }} = {{ field.column_name | friendly }}info.name
+      }
+      {% endif %}
+
       if (!{{ field.column_name | friendly }}info._id) {
         const {{ field.column_name | friendly }}ID = require('mongoose').Types.ObjectId()
         const {{ reference.table.singleName | friendly }} = new {{ reference.table.name | friendly }}({ ...{{ field.column_name | friendly }}info, _id: {{ field.column_name | friendly }}ID })

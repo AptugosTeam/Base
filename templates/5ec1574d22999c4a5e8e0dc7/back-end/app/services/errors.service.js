@@ -20,6 +20,8 @@ function prepareError(err) {
     newErr.field = Object.keys(err.errors)[0]
     if (err.errors[newErr.field].kind === 'required') {
       newErr.message = `A value is required for ${newErr.field}`
+    } else {
+      newErr.message = `${newErr.field}: ${err.errors[newErr.field].reason}`
     }
   }
   return newErr

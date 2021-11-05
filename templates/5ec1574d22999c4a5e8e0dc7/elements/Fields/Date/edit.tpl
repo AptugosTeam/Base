@@ -21,6 +21,7 @@ import moment from 'moment'
 {% endset %}
 {{ save_delayed('bpr', bprB ) }}
 <TextField
+    className={ {% if element.values.classname %}{{ element.values.classname }}{% else %}'field_{{ field.column_name | friendly }}'{% endif %}}
     {% if element.values.Autofocus %}autoFocus{% endif %}
     {% if element.values.DisableVariable %}disabled={ {{ element.values.DisableVariable }} }{% endif %}
     margin="dense"

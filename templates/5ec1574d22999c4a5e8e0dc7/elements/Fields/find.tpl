@@ -5,10 +5,10 @@ unique_id: SBHiymdS
 */
 {% set population = false %}
 {% set foundFieldData = [] %}
-// Directly Related Fields
 {% for relatedField in builder.plainFields %}
     {% if relatedField.reference %}
         {% set relData = relatedField.reference | fieldData %}
+        {# Relates fields from this table containing relationships with other tables #}
         {% if (table.unique_id == relData.table.unique_id) and (relData.unique_id == field.unique_id) %}
             {% set foundFieldData = foundFieldData|merge([relatedField | fieldData]) %}
             {% set population = true %}
@@ -33,7 +33,7 @@ unique_id: SBHiymdS
         {% endfor %}
     {% endif %}
 {% endfor %}
-.populate({
+.populate(query.populate === 'true' && {
     strictPopulate: false,
     path: '{{ ffd.table.name | friendly }}'
     {% if subpopulation %}

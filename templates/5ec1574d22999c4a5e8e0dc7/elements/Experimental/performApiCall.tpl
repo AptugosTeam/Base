@@ -9,6 +9,14 @@ options:
     display: URL
     type: text
     options: ''
+  - name: method
+    display: Method
+    type: dropdown
+    options: 'get;post;put;delete'
+  - name: dataVariable
+    display: Data Variable
+    type: text
+    options: ''
 sourceType: javascript
 children: []
 */
@@ -17,6 +25,6 @@ children: []
 import axios from 'axios'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
-axios.get({{ element.values.url }}).then(result => {
+axios.{{ element.values.method|default('get') }}({{ element.values.url }}{% if element.values.dataVariable %}, {{ element.values.dataVariable }}{% endif %}).then(result => {
  {{ content | raw }}
 })

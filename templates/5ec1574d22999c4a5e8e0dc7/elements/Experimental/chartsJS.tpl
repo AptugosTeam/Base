@@ -12,8 +12,8 @@ options:
     display: Data Variable
     type: text
     options: ''
-  - name: title
-    display: Title
+  - name: options
+    display: Options Variable
     type: text
     options: ''
 */
@@ -23,16 +23,6 @@ import { Bar } from 'react-chartjs-2'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
 <Bar
-    data={ {{ element.values.data }}}
-    options={ {
-        title:{
-            display:true,
-            text:'{{ element.values.title }}',
-            fontSize:20
-        },
-        legend:{
-            display:true,
-            position:'bottom'
-        }
-    } }
+    data={ {{ element.values.data }} }
+    options={ {{ element.values.options }} }
 />
