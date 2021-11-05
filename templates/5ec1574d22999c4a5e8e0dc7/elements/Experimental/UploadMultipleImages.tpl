@@ -10,6 +10,10 @@ options:
     display: ClassName
     type: text
     options: ''
+  - name: value
+    display: Initial Value
+    type: text
+    options: ''
   - name: onChange
     display: On Change
     type: text
@@ -29,7 +33,8 @@ import MultipleFileUpload from '../components/MultipleFileUpload'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
 <MultipleFileUpload
-  {% if element.values.innerText %}innerText={ {{ element.values.innerText | textOrVariable }} }{% endif %}
+  {% if element.values.value %}files={{ element.values.value | textOrVariable }}{% endif %}
+  {% if element.values.innerText %}innerText={{ element.values.innerText | textOrVariable }}{% endif %}
   {% if element.values.classname %}className={ {{ element.values.classname }} }{% endif %}
   {% if element.values.onChange %}onChange={
     (files) => {

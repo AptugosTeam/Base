@@ -12,7 +12,7 @@ unique_id: t9Bzg4Oy
     {% if everyField.reference %}
       {% set everyFieldRelationshipData = everyField.reference | fieldData %}
       {% if everyFieldRelationshipData.table.unique_id != reference.table.unique_id and everyFieldRelationshipData.table.unique_id != currentFieldData.table.unique_id %}
-        {% set subpopulation = subpopulation|merge(["{ model: '" ~ everyFieldRelationshipData.table.name | friendly ~ "', path: '" ~ everyField.column_name | friendly ~ "' }"]) %}
+        {% set subpopulation = subpopulation|merge(["{ strictPopulate: false, model: '" ~ everyFieldRelationshipData.table.name | friendly ~ "', path: '" ~ everyField.column_name | friendly ~ "' }"]) %}
         {% set population = true %}
       {% endif %}
     {% endif %}
