@@ -11,8 +11,13 @@ unique_id: t9Bzg4Oy
   {% for everyField in builder.plainFields %}
     {% if everyField.reference %}
       {% set everyFieldRelationshipData = everyField.reference | fieldData %}
-      {% if everyFieldRelationshipData.table.unique_id != reference.table.unique_id and everyFieldRelationshipData.table.unique_id != currentFieldData.table.unique_id %}
-        {% set subpopulation = subpopulation|merge(["{ model: '" ~ everyFieldRelationshipData.table.name | friendly ~ "', path: '" ~ everyField.column_name | friendly ~ "' }"]) %}
+      {% set everyFieldData = everyField | fieldData %}
+      {% if reference.table.unique_id == everyFieldData.table.unique_id %}
+        {% set subpopulation = subpopulation|merge(["{ strictPopulate: false, model: '" ~ everyFieldRelationshipData.table.name | friendly ~ "', path: '" ~ everyField.column_name | friendly ~ "' }"]) %}
+        {% set population = true %}
+      {% endif %}
+      {% if reference.table.unique_id == everyFieldRelationshipData.table.unique_id and everyFieldData.table.unique_id != currentFieldData.table.unique_id %}
+        {% set subpopulation = subpopulation|merge(["{ strictPopulate: false, model: '" ~ everyFieldData.table.name | friendly ~ "', path: '" ~ everyFieldData.table.name | friendly ~ "' }"]) %}
         {% set population = true %}
       {% endif %}
     {% endif %}
