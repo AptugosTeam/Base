@@ -112,7 +112,13 @@ const [{{ table.name | friendly }}loadoptions, set{{ table.name | friendly }}loa
   {% if element.values.fieldToSearch %}searchField: {{ element.values.fieldToSearch | textOrVariable }},{% endif %}
 })
 const perform{{ table.name | friendly }}load = (options) => {
-  dispatch(options.searchString ? search{{ table.name | friendly | capitalize }}(options) : load{{ table.name | friendly | capitalize }}(options))
+  {% if element.values.searchString %}
+    if (options.searchString) {
+      dispatch(search{{ table.name | friendly | capitalize }}(options))
+    }
+  {% else %}
+    dispatch(options.searchString ? search{{ table.name | friendly | capitalize }}(options) : load{{ table.name | friendly | capitalize }}(options))
+  {% endif %}
 }
 {% endset %}
 {{ save_delayed('ph',ph)}}
