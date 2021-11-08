@@ -17,7 +17,7 @@ interface tableProps {
   addProcedure?: Function
   addTitle?: string
   addText?: string
-  tableData: Array<Array<string>>
+  tableData: Array<Array<string>> | Array<any>
   tableHead: string[]
   orderBy?: string
   order?: 'asc' | 'desc'

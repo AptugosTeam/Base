@@ -22,9 +22,9 @@ import MenuItem from '@mui/material/MenuItem'
     variant="{{ element.values.variant|default('standard') }}"
     {% if element.values.Autofocus %}autoFocus{% endif %}
     {% if element.values.DisableVariable %}disabled={ {{ element.values.DisableVariable }} }{% endif %}
-    label="{{ field.prompt|default(field.column_name) }}"
 >
   <Select
+    label="{{ field.prompt|default(field.column_name) }}"
     value={ {{ tableName }}data.{{ field.column_name | friendly }}}
     onChange={handle{{ tableName }}Change("{{ field.column_name | friendly }}")}
     displayEmpty
