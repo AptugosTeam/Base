@@ -56,5 +56,5 @@ import MenuItem from '@mui/material/MenuItem'
     {% if element.values.onChange %}onChange={ {{ element.values.onChange }} }{% endif %}
 >
 {% if element.values.showall %}<MenuItem value=""><em>All</em></MenuItem>{% endif %}
-{ {{ element.values.options }}.map((item, index) => <MenuItem value={item.value ? item.value : item} key={index}>{item.name ? item.name : item}</MenuItem> )}
+{ {{ element.values.options }}.map((item: { value: any, name: string } | any, index: number) => <MenuItem value={item.value ? item.value : item} key={index}>{item.name ? item.name : item}</MenuItem> )}
 </TextField>

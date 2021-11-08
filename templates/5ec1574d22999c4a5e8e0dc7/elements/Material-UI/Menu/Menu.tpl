@@ -37,7 +37,6 @@ import MenuItem from '@mui/material/MenuItem'
 {% endif %}
 <Menu
   anchorEl={ {{ anchorElement }} }
-  getContentAnchorEl={null}
   anchorOrigin={ {
     vertical: 'bottom',
     horizontal: 'center',

@@ -71,6 +71,11 @@ settings:
           subject: emailDetails.subject,
           html: emailDetails.message,
         }
+
+        if (typeof addICal === "function") {
+          addICal(mail)
+        }
+        
         transporter.sendMail(mail, (err, data) => {
           if (err) {
             return { msg: 'fail' }
@@ -91,7 +96,6 @@ childs:
     element: emailContent
 children: []
 */
-
 {% set bpr %}
 import axios from 'axios'
 {% endset %}

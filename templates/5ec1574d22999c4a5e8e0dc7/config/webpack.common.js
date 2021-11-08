@@ -6,12 +6,15 @@ unique_id: EpA5lGLz
 // shared config (dev and prod)
 const { resolve } = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-
+const ProvidePlugin = require('webpack/lib/ProvidePlugin')
 module.exports = {
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.css'],
     alias: {
       dist: resolve(__dirname, '../', 'dist'),
+      process: 'process/browser',
+      stream: "stream-browserify",
+      zlib: "browserify-zlib"
     },
   },
   context: resolve(__dirname, '../'),
@@ -43,7 +46,10 @@ module.exports = {
       },
     ],
   },
-  plugins: [new HtmlWebpackPlugin({ template: './dist/index.html' })],
+  plugins: [new HtmlWebpackPlugin({ template: './dist/index.html' }),new ProvidePlugin({
+    process: 'process/browser',
+    Buffer: ['buffer', 'Buffer'],
+  })],
   externals: {
     react: 'React',
     'react-dom': 'ReactDOM',

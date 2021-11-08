@@ -95,6 +95,7 @@ exports.createAsPromise = (options) => {
 // Retrieve and return all {{ table.name | friendly }} from the database.
 exports.findAll = (options) => {
   const query = options.query ? options.query : options.req.query
+  if (typeof query.populate === 'undefined') query.populate = 'true'
   const data = options.req ? options.req.body : options.data
   if (typeof query.sort === 'string') query.sort = JSON.parse(query.sort)
 
