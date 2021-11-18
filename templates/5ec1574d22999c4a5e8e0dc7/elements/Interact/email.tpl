@@ -10,14 +10,26 @@ options:
     display: Function Name
     type: text
     options: ''
+  - name: service
+    display: Email Sending service
+    type: dropdown
+    options: SMTP;MailGun
   - name: smpthost
     display: Host (smtp)
     type: text
     options: ''
+    settings:
+      propertyCondition: service
+      condition: SMTP
+      active: true
   - name: smptport
     display: Port (smtp)
     type: text
     options: ''
+    settings:
+      propertyCondition: service
+      condition: SMTP
+      active: true
   - name: smptuser
     display: User (smtp)
     type: text
@@ -46,14 +58,24 @@ settings:
   - name: ServerRoute
     value: |
       const nodemailer = require("nodemailer");
-      var transport = {
-        host: "{{ element.values.smpthost }}",
-        port: "{{ element.values.smptport }}",
-        auth: {
-          user: "{{ element.values.smptuser }}",
-          pass: "{{ element.values.smptpass }}",
-        },
-      };
+      {% if element.values.service != 'MailGun' %}
+        var transport = {
+          host: "{{ element.values.smpthost }}",
+          port: "{{ element.values.smptport }}",
+          auth: {
+            user: "{{ element.values.smptuser }}",
+            pass: "{{ element.values.smptpass }}",
+          },
+        };
+      {% else %}
+        var transport = {
+          service: 'Mailgun',
+          auth: {
+            user: "{{ element.values.smptuser }}",
+            pass: "{{ element.values.smptpass }}",
+          }
+        }
+      {% endif %}
 
       var transporter = nodemailer.createTransport(transport);
       transporter.verify((error, success) => {

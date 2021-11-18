@@ -40,7 +40,7 @@ options:
   - name: type
     display: Type
     type: dropdown
-    options: text;password;date
+    options: text;password;date;number
 children: []
 */
 
