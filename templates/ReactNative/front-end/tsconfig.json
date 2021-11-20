@@ -1,0 +1,11 @@
+/*
+path: tsconfig.json
+completePath: front-end/tsconfig.json
+unique_id: alNzyRKN
+*/
+{
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "strict": true
+  }
+}
