@@ -18,9 +18,9 @@ export const rootEpic = combineEpics(
 
 export function buildFormData(formData, data, parentKey = null) {
   Object.keys(data).forEach((key) => {
-    if (data[key]) {
+    if (data[key] !== undefined || typeof data[key] === 'boolean') {
       let savekey = key
-      let value = data[key] == null ? '' : data[key]
+      let value = data[key] === null ? '' : data[key]
       if (data[key] && typeof data[key] === 'object' && !(data[key] instanceof Date) && !(data[key] instanceof File)) {
         value = JSON.stringify(data[key])
       }
@@ -31,6 +31,7 @@ export function buildFormData(formData, data, parentKey = null) {
           formData.append(`${savekey}[${subkey}]`, data[key][subkey])
         })
       } else {
+        console.log('save', savekey, value, typeof data[key])
         formData.append(savekey, value)
       }
     }
