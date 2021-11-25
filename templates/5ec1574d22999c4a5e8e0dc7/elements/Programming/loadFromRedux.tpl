@@ -108,7 +108,7 @@ const [{{ table.name | friendly }}loadoptions, set{{ table.name | friendly }}loa
   page: 1,
   populate: {% if element.values.donotpopulate %}false{% else %}true{% endif %},
   limit: {{ element.values.elementsLimit|default(25) }},
-  sort: { field: null, method: 'ASC' },
+  sort: { field: {{ element.values.sortColumn | default('null') }}, method: '{{ element.values.sortMethod | default('DESC') }}' },
   {% if element.values.fieldToSearch %}searchField: {{ element.values.fieldToSearch | textOrVariable }},{% endif %}
 })
 const perform{{ table.name | friendly }}load = (options) => {
