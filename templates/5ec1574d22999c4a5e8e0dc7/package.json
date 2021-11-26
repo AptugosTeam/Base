@@ -70,9 +70,6 @@ unique_id: 0i8AxGw6
     "workbox-webpack-plugin": "^6.1.1"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.34",
-    "@fortawesome/free-solid-svg-icons": "^5.15.2",
-    "@fortawesome/react-fontawesome": "^0.1.14",
     "@mui/icons-material": "^5.0.0",
     "@mui/material": "^5.0.0",
     "@emotion/react": "^11.4.1",
@@ -93,6 +90,9 @@ unique_id: 0i8AxGw6
     "rxjs": "^6.6.6",
     {{ insert_setting('Packages') | raw }}
     "typesafe-actions": "^5.1.0"
+  },
+  "resolutions": {
+    "gifsicle": "4.0.1"
   },
   "babel": {
     "presets": [

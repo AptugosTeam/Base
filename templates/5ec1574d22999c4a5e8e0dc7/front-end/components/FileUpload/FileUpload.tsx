@@ -4,7 +4,6 @@ completePath: front-end/components/FileUpload/FileUpload.tsx
 unique_id: QZm2nTtL
 */
 import { faFilePdf } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import FormControl from '@mui/material/FormControl'
 import IconButton from '@mui/material/IconButton'
 import Input from '@mui/material/Input'
@@ -12,6 +11,7 @@ import InputLabel from '@mui/material/InputLabel'
 import { makeStyles } from '@mui/styles'
 import PublishIcon from '@mui/icons-material/Publish'
 import SearchIcon from '@mui/icons-material/Search'
+import PictureAsPdf from '@mui/icons-material/PictureAsPdf'
 import clsx from 'clsx'
 import React, { FunctionComponent } from 'react'
 
@@ -142,7 +142,7 @@ const AptugoImageUpload: FunctionComponent<any> = (props) => {
 
   const renderUploadedState = () => {
     if (!state.selectedFile && !state.fileName && !props.value) return null
-    if (state.file && state.file.type === 'application/pdf') return <FontAwesomeIcon className={classes.image} icon={faFilePdf} />
+    if (state.file && state.file.type === 'application/pdf') return <PictureAsPdf className={classes.image} />
     var src = state.selectedFile || `/img/${state.fileName}`
     if (!state.selectedFile && !state.fileName) {
       src = `/img/${props.value}`
