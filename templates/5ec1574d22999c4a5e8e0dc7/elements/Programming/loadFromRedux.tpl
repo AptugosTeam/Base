@@ -125,7 +125,7 @@ const [{{ innervarname }}loadoptions, set{{ innervarname }}loadoptions] = React.
 })
 const perform{{ innervarname }}load = (options) => {
   {% if element.values.searchString %}
-    if (options.searchString) {
+    if (typeof options.searchString !== 'undefined') {
       dispatch(search{{ table.name | friendly | capitalize }}(options))
     }
   {% else %}
