@@ -72,9 +72,14 @@ options:
     display: Show a confirmation before deleting
     type: checkbox
     options: ''
+  - name: fixedSearchField
+    display: Search this field only
+    type: text
+  - name: fixedSearchString
+    display: Search this string always
+    type: text
 children: []
 */
-
 {% set editProc = element.values.editProcedure|default('No') %}
 {% set allowEdit = element.values.allowEdit|default(true) %}
 {% set allowDeletion = element.values.allowDeletion|default(true) %}
@@ -95,9 +100,8 @@ children: []
   {% set tableSingleName = table.singleName | friendly | capitalize %}
   {% set setEditDataFunctionName = 'set' ~ tableName ~ 'Data' %}
   {% set fields = table.fields %}
-
+  {% set innervarname = element.name | friendly %}
   {% include includeTemplate('loadFromRedux.tpl') with { 'data': element.values.table, 'element': element} %}
-
   {% if element.children %}
       {% for field in element.children %}
         {% if field.values.Field == 'useVar' %}
@@ -138,14 +142,14 @@ children: []
     }
     tableData={ {{ tableData }} }
     {% if element.values.table != 'var' %}
-      orderBy={ {{ table.name | friendly }}loadoptions.sort.field }
-      order={ {{ table.name | friendly }}loadoptions.sort.method }
+      orderBy={ {{ innervarname }}loadoptions.sort.field }
+      order={ {{ innervarname }}loadoptions.sort.method }
       onRequestSort={(event, property) => {
-        set{{ table.name | friendly }}loadoptions({
-          ...{{ table.name | friendly }}loadoptions,
+        set{{ innervarname }}loadoptions({
+          ...{{ innervarname }}loadoptions,
           sort: {
             field: property,
-            method: {{ table.name | friendly }}loadoptions.sort.field === property ? ({{ table.name | friendly }}loadoptions.sort.method === 'asc' ? 'desc' : 'asc') : 'ASC',
+            method: {{ innervarname }}loadoptions.sort.field === property ? ({{ innervarname }}loadoptions.sort.method === 'asc' ? 'desc' : 'asc') : 'ASC',
           }
         })
       }}

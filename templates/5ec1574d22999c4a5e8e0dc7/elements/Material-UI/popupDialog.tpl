@@ -26,15 +26,13 @@ childs:
     element: dialogActions
 children: []
 */
-
-
 {% set bpr %}
 import Dialog from '@mui/material/Dialog'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 <Dialog
   open={ {{ element.values.open }} }
-  onClose={ {{ element.values.onclose }}}
+  {% if element.values.onclose %}onClose={ {{ element.values.onclose | functionOrCall }} }{% endif %}
   maxWidth={ {{ element.values.maxWidth }} }
 >
 {{ content | raw }}
