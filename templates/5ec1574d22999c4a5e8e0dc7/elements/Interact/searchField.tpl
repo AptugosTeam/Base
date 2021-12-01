@@ -13,6 +13,9 @@ options:
       return [['var','Use a
       variable'],...aptugo.store.getState().application.tables.map(({ unique_id,
       name }) => [unique_id, name])]
+  - name: avoidLoad
+    display: Do not load data
+    type: checkbox
 */
 {% set table = element.values.table | tableData %}
 {% set bpr %}
@@ -32,11 +35,13 @@ let searchTimeout = null
 const searchFor{{ table.name | friendly }} = (event) => {
     if (searchTimeout) clearTimeout(searchTimeout)
     searchTimeout = setTimeout(() => {
-      set{{ table.name | friendly }}loadoptions({ ...{{ table.name | friendly }}loadoptions, searchString: event.target.value })
+      settableloadoptions({ ...tableloadoptions, searchString: event.target.value })
     },500)
 }
 {% endset %}
 {{ save_delayed('ph',ph)}}
-{% include includeTemplate('loadFromRedux.tpl') with { 'data': element.values.table, 'element': element} %}
+{% if not element.values.avoidLoad %}
+  {% include includeTemplate('loadFromRedux.tpl') with { 'data': element.values.table, 'element': element} %}
+{% endif %}
 {% set searchFieldParams = { element: { values: { onChange: 'searchFor' ~ table.name|friendly, placeholder: 'Search ' ~ table.singleName|friendly ~ '...', variant: 'outlined', margin: 'normal', className: 'theme.extensibleInput' } } } %}
 {% include includeTemplate('uncontrolledInput.tpl') with searchFieldParams %}

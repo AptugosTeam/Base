@@ -99,8 +99,14 @@ exports.findAll = (options) => {
   const data = options.req ? options.req.body : options.data
   if (typeof query.sort === 'string') query.sort = JSON.parse(query.sort)
 
-  {{ table.name | friendly }}.find()
-  .sort( query.sort && { [query.sort.field]: query.sort.method === 'desc' ? 1 : -1 })
+  const findString = {}
+  if (query.fixedSearch) {
+    query.fixedSearch = JSON.parse(query.fixedSearch)
+    findString[query.fixedSearch.field] = { $regex: new RegExp(query.fixedSearch.value, 'i') }
+  }
+
+  {{ table.name | friendly }}.find(findString)
+  .sort( query.sort && { [query.sort.field]: query.sort.method === 'desc' ? -1 : 1 })
    {% for field in table.fields %}
     {% set fieldWithData = field | fieldData %}
     {% include includeTemplate(['Fields' ~ field.data_type ~'find.tpl', 'Fieldsfind.tpl']) %}
@@ -137,8 +143,13 @@ exports.find = (options) => {
     }
     if (typeof query.sort === 'string') query.sort = JSON.parse(query.sort)
 
+    if (query.fixedSearch) {
+      query.fixedSearch = JSON.parse(query.fixedSearch)
+      findString[query.fixedSearch.field] = { $regex: new RegExp(query.fixedSearch.value, 'i') }
+    }
+
     {{ table.name | friendly }}.find(findString)
-    .sort( query.sort && { [query.sort.field]: query.sort.method === 'DESC' ? 1 : -1 })
+    .sort( query.sort && { [query.sort.field]: query.sort.method === 'desc' ? -1 : 1 })
     {% for field in table.fields %}
       {% set fieldWithData = field | fieldData %}
       {% include includeTemplate(['Fields' ~ field.data_type ~'find.tpl', 'Fieldsfind.tpl']) %}

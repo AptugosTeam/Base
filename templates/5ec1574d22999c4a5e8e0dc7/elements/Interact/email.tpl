@@ -86,7 +86,7 @@ settings:
         }
       });
       app.use(express.json());
-      app.set('sendEmail', async function(emailDetails) {
+      app.set('sendEmail', async function(emailDetails, extra) {
         var mail = {
           from: emailDetails.name,
           to: emailDetails.email,
@@ -94,8 +94,8 @@ settings:
           html: emailDetails.message,
         }
 
-        if (typeof addICal === "function") {
-          addICal(mail)
+        if (typeof addICal === "function" && extra && extra.sendWithIcal) {
+          addICal(mail, extra)
         }
         
         transporter.sendMail(mail, (err, data) => {
@@ -111,7 +111,7 @@ settings:
         const email = req.body.email
         const message = req.body.messageHtml
         const subject = req.body.subject
-        res.json( app.get('sendEmail')( { name, email, message, subject }) )
+        res.json( app.get('sendEmail')( { name, email, message, subject }, req.body.extra) )
       });
 childs:
   - name: Email Content
@@ -128,7 +128,7 @@ import axios from 'axios'
 {% else %}
 {% set functionName = 'sendEmail' %}
 {% endif %}
-const {{ functionName }} = (to) => {
+const {{ functionName }} = (to, extra = {}) => {
     const messageHtml = InlineLink({{ element.values.parameters }})
     axios({
       method: "POST", 
@@ -137,6 +137,7 @@ const {{ functionName }} = (to) => {
         name: '{{ element.values.from }}',
         email: to,
         messageHtml: messageHtml,
+        extra: extra,
         subject: {{ element.values.subject }}
       }
     }).then((response)=>{

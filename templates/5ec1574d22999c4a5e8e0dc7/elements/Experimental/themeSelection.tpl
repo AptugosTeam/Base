@@ -46,7 +46,7 @@ children: []
 */
 
 // Theme selection
-{% if element.values.useAsset %}
+{% if element.values.useAsset and element.values.useAsset != 'none' %}
   {% set asset = element.values.useAsset|assetData %}
   {% set theme = asset.name|friendly %}
   {% set bpr %}

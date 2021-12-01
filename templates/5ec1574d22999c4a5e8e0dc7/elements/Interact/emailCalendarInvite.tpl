@@ -39,19 +39,19 @@ settings:
     value: |
       const ical = require('ical-generator')
 
-      function addICal(mail) {
+      function addICal(mail, extra = {}) {
         function getIcalObjectInstance() {
-          const cal = ical({ domain: "{{ element.values.url }}", name: '{{ element.values.summary }}' })
+          const cal = ical({ domain: {{ element.values.url }}, name: {{ element.values.summary }} })
           cal.createEvent({
-            start: new Date('{{ element.values.startDate }}'),
-            end: new Date('{{ element.values.endDate }}'),
-            summary: '{{ element.values.summary }}',
-            description: '{{ element.values.description }}',
-            location: '{{ element.values.location }}',
-            url: '{{ element.values.url }}',
+            start: new Date({{ element.values.startDate }}),
+            end: new Date({{ element.values.endDate }}),
+            summary: {{ element.values.summary }},
+            description: {{ element.values.description }},
+            location: {{ element.values.location }},
+            url: {{ element.values.url }},
             organizer: {
-                name: '{{ element.values.organizer }}',
-                email: '{{ element.values.organizerEmail }}'
+                name: {{ element.values.organizer }},
+                email: {{ element.values.organizerEmail }}
             },
           })
           return cal
