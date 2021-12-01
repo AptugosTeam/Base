@@ -111,7 +111,7 @@ const {{ table.name | friendly | lower ~ 'Data' }} = useSelector((state: IState
 {% endset %}
 {{ save_delayed('ph', ph, 1 ) }}
 {% set ph %}
-const {{ varName }} = useSelector((state: IState) => state.{{ table.name | friendly | lower }}){% if element.values.variableName %}.{% if element.values.searchString %}found{% endif %}{{ table.name | friendly | lower }}{% endif %}{% if element.values.singleResult %}[0]{% endif %}
+const {{ varName }} = useSelector((state: IState) => state.{{ table.name | friendly | lower }}){% if element.values.variableName %}.{% if element.values.searchString %}found{% endif %}{{ table.name | friendly | lower }}{% endif %}{% if element.values.singleResult %}[0] || {}{% endif %}
 {% endset %}
 {{ save_delayed('ph', ph, 1 ) }}
 {% set ph %}

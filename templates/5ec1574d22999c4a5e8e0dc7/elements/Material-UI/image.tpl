@@ -9,7 +9,9 @@ options:
   - name: useAsset
     display: Use an asset
     type: dropdown
-    options: return aptugo.assetUtils.images().map(image => [image.id, image.name])
+    options: >-
+      return [['none', 'none'],
+      ...aptugo.assetUtils.images().map(image => [image.id, image.name])]
   - name: path
     display: Image Path
     type: text
@@ -49,7 +51,7 @@ options:
 {% set webppath = element.values.webppath %}
 {% set width = element.values.width|default(null) %}
 {% set height = element.values.height|default(null) %}
-{% if element.values.useAsset %}
+{% if element.values.useAsset and element.values.useAsset != 'none' %}
   {% set asset = element.values.useAsset|assetData %}
   {% if width == null %}
     {% set width = asset.width %}
