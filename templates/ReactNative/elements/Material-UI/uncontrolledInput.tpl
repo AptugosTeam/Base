@@ -33,6 +33,10 @@ options:
     display: ClassName
     type: text
     options: ''
+  - name: theme
+    display: Theme
+    type: text
+    options: ''
   - name: fieldname
     display: fieldname
     type: text
@@ -43,21 +47,19 @@ options:
     options: text;password;date
 children: []
 */
-
-
-
 {% set bpr %}
 import { TextInput } from 'react-native-paper'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
 <TextInput
-    variant="{{ element.values.variant|default('standard') }}"
+    mode="{{ element.values.variant|default('flat') }}"
     {% if element.values.Autofocus %}autoFocus{% endif %}
     {% if element.values.placeholder %}placeholder="{{ element.values.placeholder }}"{% endif %}
     {% if element.values.DisableVariable %}disabled={ {{ element.values.DisableVariable }} }{% endif %}
     {% if element.values.margin %}margin="{{ element.values.margin }}"{% endif %}
     {% if element.values.label %}label="{{ element.values.label }}"{% endif %}
-    {% if element.values.className %}className={ {{ element.values.className }} }{% endif %}
+    {% if element.values.className %}style={ {{ element.values.className }} }{% endif %}
+    {% if element.values.theme %}theme={ {{ element.values.theme }} }{% endif %}
     {% if element.values.fieldname %}name={{ element.values.fieldname | textOrVariable}} {% endif %}
     type="{{ element.values.type|default('text') }}"
     fullWidth
