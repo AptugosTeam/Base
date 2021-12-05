@@ -10,6 +10,16 @@ options:
     options: >-
       return aptugo.assetUtils.grabCssSelectors(
       aptugo.variables.retrievePageVariablesFromElement(arguments[0],'theme') )
+  - name: elevation
+    display: Elevation
+    type: text
+  - name: square
+    display: Square Looking
+    type: checkbox
+  - name: variant
+    display: Variant
+    type: dropdown
+    options: elevation;outlined
 */
 {% set bpr %}
 import Paper from '@mui/material/Paper'

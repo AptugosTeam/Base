@@ -16,7 +16,7 @@ options:
     display: Icon
     type: dropdown
     options: >-
-      None;Add;AddShoppingCart;CallMade;HelpOutline;Home;Link;MoreVert;Send;ShoppingBasket;ShoppingCart;SportsBasketball;AllInbox;Menu;DeleteOutline;Favorite;Clear;Google;Facebook;Twitter;Person;ThumbUp
+      None;Add;AddShoppingCart;CallMade;chevron-left;chevron-right;HelpOutline;Home;Link;MoreVert;Send;ShoppingBasket;ShoppingCart;SportsBasketball;AllInbox;Menu;DeleteOutline;Favorite;Clear;Google;Facebook;Twitter;Person;ThumbUp
   - name: iconstyle
     display: Icon Style
     type: dropdown
@@ -37,9 +37,9 @@ import { IconButton, Colors } from 'react-native-paper'
 {% set theIcon = element.values.icon | lower %}
 {% if theIcon == 'thumbup' %}{% set theIcon = 'thumb-up' %}{% endif %}
 <IconButton
-  icon={ props => <MaterialIcons name={{ theIcon | textOrVariable }} size={32} />}
+  {% if element.values.className %}style={ {{ element.values.className }} }{% endif %}
+  icon={ props => <MaterialIcons {% if element.values.className %}style={ {{ element.values.className ~ 'icon' }} }{% endif %} name={{ theIcon | textOrVariable }} size={32} />}
   {% if element.values.Action %}onPress={ {{ element.values.Action | functionOrCall }} }{% endif %}
-  {% if element.values.className %}className={ {{ element.values.className }} }{% endif %}
 >
   {{ content | raw }}
 </IconButton>

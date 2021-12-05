@@ -126,10 +126,10 @@ exports.find = (options) => {
     const data = options.req ? options.req.body : options.data
     let findString =  query.searchString ? { $text: { $search: query.searchString } } : {}
     if (query.searchField) {
-      if (query.searchString === 'true' || query.searchString === 'false') {
-        findString = { [query.searchField]: !!query.searchString }
+      if ({{ table.name | friendly }}.schema.path(query.searchField).instance === 'Boolean') {
+        findString = { [query.searchField]: JSON.parse(query.searchString) }
       } else {
-        findString = { [query.searchField]: { $regex : new RegExp(query.searchString, "i") } }
+        findString = { [query.searchField]: { $regex: new RegExp(query.searchString, 'i') } }
       }
       
       if ({{ table.name | friendly }}.schema.path(query.searchField).instance === 'ObjectID' || {{ table.name | friendly }}.schema.path(query.searchField).instance === 'Array') {
