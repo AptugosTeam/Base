@@ -6,12 +6,20 @@ icon: ico-field
 internalUse: true
 sourceType: javascript
 children: []
+options:
+  - name: internalfunctionName
+    display: Internal Function Name
+    type: text
+    options: ''
+    advanced: true
+    settings:
+      default: "'InlineLink'"
 */
 
 {% set bpr %}
 import _server from 'react-dom/server'
 
-function InlineLink(emailParameters = null) {
+function {{ element.values.internalfunctionName|default('InlineLink') }}(emailParameters = null) {
   var _server2 = _interopRequireDefault(_server)
   function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
