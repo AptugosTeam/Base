@@ -44,13 +44,15 @@ settings:
   - name: ServerRoute
     value: |
       const mercadopago = require ('mercadopago')
-      mercadopago.configure({
-        access_token: '{{ element.values.accessToken }}'
-      })
       app.post('{{ element.values.backendEndpoint | default('/api/mercadopago') }}', (req, res, next) => {
-        let preference = {}
-        preference.items = req.body
+        const { items, access_token, marketplace_fee, ...bodyWithoutItems } = req.body
+        mercadopago.configure({
+          access_token: access_token || {{ element.values.accessToken | textOrVariable }}
+        })
+        let preference = { ...bodyWithoutItems }
+        preference.items = [ ...req.body.items ]
         preference.auto_return = 'approved'
+        if (marketplace_fee) preference.marketplace_fee = marketplace_fee
         preference.back_urls = {
           'success': '{{ element.values.successURL }}',
           'failure': '{{ element.values.failureURL }}',
@@ -72,7 +74,7 @@ import axios from 'axios'
 import { useMercadopago } from 'react-sdk-mercadopago'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
-const mercadopago = useMercadopago.v2('{{ element.values.publicaccesstoken }}', {
+const mercadopago = useMercadopago.v2({{ element.values.publicaccesstoken }}, {
   locale: 'es-AR'
 })
 const {{ element.values.functionName | default('makePayment') }} = (cart) => {

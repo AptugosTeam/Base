@@ -10,6 +10,13 @@ options:
     display: Function Name
     type: text
     options: ''
+  - name: internalfunctionName
+    display: Internal Function Name
+    type: text
+    options: ''
+    advanced: true
+    settings:
+      default: "'InlineLink'"
   - name: service
     display: Email Sending service
     type: dropdown
@@ -129,7 +136,7 @@ import axios from 'axios'
 {% set functionName = 'sendEmail' %}
 {% endif %}
 const {{ functionName }} = (to, extra = {}) => {
-    const messageHtml = InlineLink({{ element.values.parameters }})
+    const messageHtml = {{ element.values.internalfunctionName|default('InlineLink') }}({{ element.values.parameters }})
     axios({
       method: "POST", 
       url:"{{ settings.apiURL | raw }}/api/sendEmail",
