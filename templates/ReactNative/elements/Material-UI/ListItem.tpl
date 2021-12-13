@@ -27,5 +27,4 @@ options:
     options: ''
 children: []
 */
-// LISTITEM
 {{ content | raw }}

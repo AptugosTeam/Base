@@ -5,10 +5,6 @@ unique_id: RDDUIuWL
 icon: ico-navlink
 sourceType: javascript
 options:
-  - name: Destination
-    display: destination
-    type: text
-    options: ''
   - name: destination
     display: Destination
     type: text
@@ -27,5 +23,18 @@ options:
     options: ''
 children: []
 */
-//navlink
-{{ content | raw }}
+{% set bpr %}
+import { Link } from "react-router-native"
+{% endset %}
+{{ save_delayed('bpr', bpr ) }}
+{% set bpr %}
+import { Text } from 'react-native'
+{% endset %}
+{{ save_delayed('bpr',bpr)}}
+<Link
+    to={{ element.values.destination|textOrVariable }}
+    key='{{ element.unique_id }}'
+>
+  <Text>{{ element.values.linkText }}</Text>
+  {{ content | raw }}
+</Link>

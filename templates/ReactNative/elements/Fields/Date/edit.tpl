@@ -7,31 +7,17 @@ sourceType: javascript
 children: []
 settings:
   - name: Packages
-    value: |-
-      "moment": "latest",
-      "react-moment": "latest",
+    value: '"@react-native-community/datetimepicker": "3.5.2",'
 */
 {% set tableName = ( field | fieldData ).table.name | friendly %}
 {% set bpr %}
-import { TextInput } from 'react-native-paper'
+import DateTimePicker from '@react-native-community/datetimepicker'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
-{% set bprB %}
-import moment from 'moment'
-{% endset %}
-{{ save_delayed('bpr', bprB ) }}
-<TextInput
-    className={ {% if element.values.classname %}{{ element.values.classname }}{% else %}'field_{{ field.column_name | friendly }}'{% endif %}}
-    {% if element.values.Autofocus %}autoFocus{% endif %}
-    {% if element.values.DisableVariable %}disabled={ {{ element.values.DisableVariable }} }{% endif %}
-    margin="dense"
-    label="{{ field.prompt|default(field.column_name) }}"
-    {% if field.placeholder %}placeholder="{{ field.placeholder }}"{% endif %}
-    type="date"
-    fullWidth
-    InputLabelProps={ { shrink: true } }
-    value={ {{ tableName }}data.{{ field.column_name | friendly }}?.slice(0,10) || {% if field.defaultToToday == "1" %}moment().utc().format('YYYY-MM-DD'){% else %}''{% endif %}}
-    onChange={handle{{ tableName }}Change("{{ field.column_name | friendly }}")}
-    error={ {{ tableName | lower }}Data?.errField === '{{ field.column_name | friendly }}'}
-    helperText={ {{ tableName | lower }}Data?.errField === '{{ field.column_name | friendly }}' && {{ tableName | lower }}Data.errMessage}
+<DateTimePicker
+  display='calendar'
+  mode={'date'}
+  testID="{{ element.values.unique_id }}"            
+  value={ {{ tableName }}data.{{ field.column_name | friendly }} || new Date() }
+  onChange={(e,selectedDate) => { handle{{ tableName }}Change('{{ field.column_name | friendly }}')(selectedDate) }}
 />

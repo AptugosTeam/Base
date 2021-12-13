@@ -57,7 +57,8 @@ exports.createAsPromise = (options) => {
   return new Promise((resolve, reject) => {
     const data = options.req ? options.req.body : options.data
     const updatedData = {}
-
+    if (data._id) updatedData._id = data._id
+    
     {% for field in table.fields %}
       {% for key, value in field|castToArray %}
         {% if 'validators.' in value[0] and value[1] %}
