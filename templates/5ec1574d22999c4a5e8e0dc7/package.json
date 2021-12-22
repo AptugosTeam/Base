@@ -16,7 +16,7 @@ unique_id: 0i8AxGw6
     "lint": "eslint './src/**/*.{js,ts,tsx}' --quiet",
     "start": "concurrently \"pnpm run dev:api\" \"pnpm run dev:client\"",
     "dev:client": "webpack serve --config=config/webpack.dev.js",
-    "dev:api": "nodemon --delay 3 --exec babel-node back-end/index.js",
+    "dev:api": "nodemon --signal SIGTERM  --delay 5 --exec babel-node back-end/index.js",
     "postinstall": "cd back-end && pnpm install",
     {{ insert_setting('npmScripts') | raw }}
   },

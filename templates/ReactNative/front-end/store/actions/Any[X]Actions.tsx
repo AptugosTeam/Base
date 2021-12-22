@@ -83,13 +83,25 @@ export const load{{ capitalizedTable }} = (loadOptions: TSearchOptions) => async
     })
 }
 
-
-export function search{{ table.name | friendly | capitalize }}(searchOptions: TSearchOptions | string, keep?: boolean): ISearch{{ table.name | friendly | capitalize }}Action {
-  return {
-    type: {{ table.name | friendly | capitalize }}ActionTypes.SEARCH_{{ table.name | friendly | upper }},
-    searchOptions: typeof searchOptions === 'string' ? { searchString: searchOptions } : searchOptions,
-    keep: keep
-  }
+export const search{{ capitalizedTable }} = (searchOptions: TSearchOptions | string, keep?: boolean) => async (dispatch: any) => {
+  return axios
+    .get('{{ settings.apiURL }}/api/{{ table.name | friendly | lower }}/search/', { params: searchOptions })
+    .then((res) => {
+      dispatch({
+        type: {{ table.name | friendly | capitalize }}ActionTypes.FOUND_{{ table.name | friendly | upper }},
+        keep: keep,
+        payload: {
+          {{ table.name | friendly | lower }}: res.data,
+        }
+      })
+    })
+    .catch((e) => {
+      dispatch({ 
+        type: {{ table.name | friendly | capitalize }}ActionTypes.SEARCHING_{{ table.name | friendly | upper }}_FAILED,
+        error: e
+      })
+      Promise.reject(e)
+    })
 }
 
 export function searching{{ table.name | friendly | capitalize }}(): ISearching{{ table.name | friendly | capitalize }}Action {

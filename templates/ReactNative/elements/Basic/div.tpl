@@ -52,7 +52,7 @@ import { Animated } from 'react-native'
   {% if element.values.useid %}id="{{ element.unique_id }}"{% endif %}
   {% if element.values.id %}id={{ element.values.id | textOrVariable }}{% endif %}
   {% if element.values.class %}style={ {{element.values.class}} }{% endif %}
-  {% if element.values.onclick %}onClickCapture={(e) => {{element.values.onclick}} }{% endif %}
+  {% if element.values.onclick %}onTouchStart={(e) => {{element.values.onclick}} }{% endif %}
   {% if element.values.ref %}ref={ {{element.values.ref}} }{% endif %}
   {% if element.values.style %}style={ {{element.values.style}} }{% endif %}
 >
