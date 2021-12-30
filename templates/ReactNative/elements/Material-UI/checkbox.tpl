@@ -47,8 +47,8 @@ import { TouchableOpacity } from 'react-native'
 {% if element.values.OnClick %}
 <TouchableOpacity onPress={{ element.values.OnClick }} {% if element.values.ClassName %}style={ {{ element.values.ClassName }} }{% endif %}>
 {% endif %}
-  <View style={ { flexDirection: 'row', alignItems: 'center' } } {% if element.values.ClassName and !element.values.OnClick %}style={ {{ element.values.ClassName }} }{% endif %}>
-    <MaterialIcons name={ {{ element.values.Checked }} ? 'check-box' : 'check-box-outline-blank'} {% if element.values.ClassName %}style={ {{ element.values.ClassName ~ 'icon' }} }{% endif %} />
+  <View style={ { flexDirection: 'row', alignItems: 'center' } } {% if element.values.ClassName and not element.values.OnClick %}style={ {{ element.values.ClassName }} }{% endif %}>
+    <MaterialIcons size={20} name={ {{ element.values.Checked }} ? 'check-box' : 'check-box-outline-blank'} {% if element.values.ClassName %}style={ {{ element.values.ClassName ~ 'icon' }} }{% endif %} />
     <Text {% if element.values.ClassName %}style={ {{ element.values.ClassName ~ 'text' }} }{% endif %}>{{ element.values.label }}</Text>
   </View>
 {% if element.values.OnClick %}

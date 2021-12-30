@@ -31,6 +31,8 @@ const dbusername = username + appname
 Application.createdAt = Date.now(),
 Application.settings = {
     name: Parameters.Name || 'Untitled Application',
+    lastSaved: null,
+    lastBuild: null,
     development: {
       apiURL: `http://127.0.0.1:4567`,
       type: 'Local',
