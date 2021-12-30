@@ -22,14 +22,10 @@ options:
     settings:
       default: snackBarOpen
       active: true
-  - name: className
-    display: ClassName
-    type: text
-    options: ''
 children: []
 */
 {% set bpr %}
-import { Snackbar } from 'react-native-paper'
+import Snackbar from '@mui/material/Snackbar'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 {% set ph %}
@@ -38,11 +34,9 @@ const [{{ element.values.varName }}, set{{ element.values.varName }}] = React.us
 {{ save_delayed('ph', ph ) }}
 {% set splited = element.values.position|split('-') %}
 <Snackbar
-  {% if element.values.className %}style={ {{ element.values.className }} }{% endif %}
-  {% if element.values.autohide %}duration={ {{ element.values.autohide }} }{% endif %}
-  visible={ {{ element.values.varName }} }
-  onDismiss={() => { set{{ element.values.varName }}(false) } }
->
-  {% if element.values.message %}{{ element.values.message }}{% endif %}
-  {{ content | raw }}
-</Snackbar>
+  open={ {{ element.values.varName }} }
+  {% if element.values.message %}message="{{ element.values.message }}"{% endif %}
+  {% if element.values.autohide %}autoHideDuration={ {{ element.values.autohide }} }{% endif %}
+  onClose={() => { set{{ element.values.varName }}(false) } }
+  anchorOrigin={ { vertical: '{{splited[0]|lower}}', horizontal: '{{splited[1]|lower}}' } }
+>{{ content | raw }}</Snackbar>

@@ -30,9 +30,6 @@ options:
     display: Extra Styles
     type: text
     options: ''
-  - name: scrollable
-    display: Is Scrollable
-    type: checkbox
 children: []
 helpText: Basic HTML Div element
 */
@@ -40,21 +37,13 @@ helpText: Basic HTML Div element
 import { View } from 'react-native'
 {% endset %}
 {{ save_delayed('bpr',bpr)}}
-{% if element.values.scrollable %}
-{% set bpr %}
-import { Animated } from 'react-native'
-{% endset %}
-{{ save_delayed('bpr',bpr)}}
-{% endif %}
-{% set tag = 'View' %}
-{% if element.values.scrollable %}{% set tag = 'Animated.ScrollView' %}{% endif %}
-<{{ tag }}
+<View
   {% if element.values.useid %}id="{{ element.unique_id }}"{% endif %}
   {% if element.values.id %}id={{ element.values.id | textOrVariable }}{% endif %}
   {% if element.values.class %}style={ {{element.values.class}} }{% endif %}
-  {% if element.values.onclick %}onTouchStart={(e) => {{element.values.onclick}} }{% endif %}
+  {% if element.values.onclick %}onClickCapture={(e) => {{element.values.onclick}} }{% endif %}
   {% if element.values.ref %}ref={ {{element.values.ref}} }{% endif %}
   {% if element.values.style %}style={ {{element.values.style}} }{% endif %}
 >
 {{ content | raw }}
-</{{ tag }}>
+</View>

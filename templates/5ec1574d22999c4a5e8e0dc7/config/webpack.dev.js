@@ -20,7 +20,6 @@ module.exports = merge(commonConfig, {
     publicPath: '/',
   },
   devServer: {
-    open: true,
     hot: true, // enable HMR on the server
     historyApiFallback: true,
     contentBase: './dist'

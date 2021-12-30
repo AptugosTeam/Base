@@ -14,18 +14,14 @@ options:
     display: Action
     type: text
     options: ''
-  - name: className
-    display: ClassName
-    type: text
-    options: ''
 sourceType: javascript
 children: []
 */
 {% set bpr %}
-import { Button } from 'react-native-paper'
+import { Button } from 'react-native'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 <Button
-  {% if element.values.className %}style={ {{ element.values.className }} }{% endif %}
+  title={{ element.values.ButtonText | textOrVariable | default('"Button Title"') }}
   {% if element.values.Action %}onPress={ {{ element.values.Action | functionOrCall }} }{% endif %}
->{{ element.values.ButtonText | default('Button Title') }}</Button>
+/>

@@ -44,10 +44,6 @@ options:
     options: >-
       return aptugo.assetUtils.grabCssSelectors(
       aptugo.variables.retrievePageVariablesFromElement(arguments[0],'theme') )
-  - name: style
-    display: Extra Styles
-    type: text
-    options: ''
 */
 {% set bpr %}
 import { Image } from 'react-native'
@@ -73,14 +69,7 @@ import { Image } from 'react-native'
       {% endif %}
     {% endfor %}
   {% endif %}
-<Image
-  
-  source={require('./..{{ path }}')}
-  {% if element.values.style %}style={ {{element.values.style}} }{% endif %}
-/>
-{% else %}
+{% endif %}
 <Image
   source={ { uri: `{{ path }}` } }
-  {% if element.values.style %}style={ {{element.values.style}} }{% endif %}
 />
-{% endif %}

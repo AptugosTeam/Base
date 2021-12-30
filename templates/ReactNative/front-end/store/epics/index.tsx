@@ -16,16 +16,20 @@ export const rootEpic = combineEpics(
   {{ table.name | friendly | lower }}Epics,
 {% endfor %})
 
-export function buildFormData(formData:any, data:any, parentKey:any = null) {
+export function buildFormData(formData, data, parentKey = null) {
   Object.keys(data).forEach((key) => {
     if (data[key]) {
       let savekey = key
-      if (parentKey) savekey = `${parentKey}___${key}`
       let value = data[key] == null ? '' : data[key]
-      if (typeof data[key] === 'object' && data[key].uri) {
-        formData.append(savekey, value)
-      } else if (typeof data[key] === 'object') {
-        buildFormData(formData, data[key], savekey)  
+      if (data[key] && typeof data[key] === 'object' && !(data[key] instanceof Date) && !(data[key] instanceof File)) {
+        value = JSON.stringify(data[key])
+      }
+
+      if (data[key] && Array.isArray(data[key]) && data[key][0] instanceof File) {
+        // handle array of filess
+        Object.keys(data[key]).forEach((subkey) => {
+          formData.append(`${savekey}[${subkey}]`, data[key][subkey])
+        })
       } else {
         formData.append(savekey, value)
       }

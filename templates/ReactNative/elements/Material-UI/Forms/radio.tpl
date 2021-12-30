@@ -26,12 +26,4 @@ options:
     type: text
     options: ''
 */
-{% set bpr %}
-import { RadioButton } from 'react-native-paper'
-{% endset %}
-{{ save_delayed('bpr',bpr)}}
-<RadioButton
-  value={{ element.values.value | textOrVariable }}
-  status={{ element.values.checked | textOrVariable }}
-  {% if element.values.Action %}onPress={ {{ element.values.Action | functionOrCall }} }{% endif %}
-/>
+// edit radio

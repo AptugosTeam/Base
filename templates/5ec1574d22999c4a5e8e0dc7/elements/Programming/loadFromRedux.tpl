@@ -85,7 +85,7 @@ children: []
   {% set table = element.values.data | tableData %}
 {% endif %}
 {% set innervarname = table.name | friendly %}
-{% if element.name != 'loadFromDatabase' %}
+{% if element.name != 'loadFromRedux' %}
   {% set innervarname = element.name | friendly %}
 {% endif %}
 

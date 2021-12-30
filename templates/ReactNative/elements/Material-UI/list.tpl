@@ -15,6 +15,5 @@ options:
     type: checkbox
     options: ''
 */
-<List.Section>
-  {{ content | raw }}
-</List.Section>
+//List
+{{ content | raw }}

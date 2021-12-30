@@ -25,8 +25,8 @@ import { MaterialIcons } from '@expo/vector-icons'
 {% set theIcon = element.values.icon | lower %}
 {% if theIcon == 'thumbup' %}{% set theIcon = 'thumb-up' %}{% endif %}
 <MaterialIcons
-  name={{ theIcon | textOrVariable }}
+  name={{ theIcon | textOrVariable }}
   {% if element.values.color %}color="{{ element.values.color }}"{% endif %}
-  {% if element.values.className %}style={ {{ element.values.className }} }{% endif %}
+  {% if element.values.className %}className={{ element.values.className|textOrVariable }}{% endif %}
   size={32}
 />

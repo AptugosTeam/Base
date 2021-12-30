@@ -44,7 +44,7 @@ options:
   - name: type
     display: Type
     type: dropdown
-    options: text;password;date;number
+    options: text;password;date
 children: []
 */
 {% set bpr %}
@@ -61,7 +61,8 @@ import { TextInput } from 'react-native-paper'
     {% if element.values.className %}style={ {{ element.values.className }} }{% endif %}
     {% if element.values.theme %}theme={ {{ element.values.theme }} }{% endif %}
     {% if element.values.fieldname %}name={{ element.values.fieldname | textOrVariable}} {% endif %}
+    type="{{ element.values.type|default('text') }}"
     fullWidth
     {% if element.values.value %}value={{ element.values.value }}{% endif %}
-    {% if element.values.onChange %}onChangeText={ {{ element.values.onChange }} }{% endif %}
+    {% if element.values.onChange %}onChange={ {{ element.values.onChange }} }{% endif %}
 />

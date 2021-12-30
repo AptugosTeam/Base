@@ -25,38 +25,20 @@ options:
     default: "Drag 'n' drop some files here, or click to select files"
 settings:
   - name: Packages
-    value: '"expo-image-picker": "~11.0.3",'
+    value: '"react-dropzone": "^11.4.2",'
 children: []
 */
 {% set bpr %}
-import { TouchableOpacity } from 'react-native'
+import MultipleFileUpload from '../components/MultipleFileUpload'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
-{% set bpr %}
-import * as ImagePicker from 'expo-image-picker'
-{% endset %}
-{{ save_delayed('bpr', bpr) }}
-{% set ph %}
-const openImagePickerAsync = async () => {
-  let permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync()
-    if (permissionResult.granted === false) {
-      alert('Permission to access camera roll is required!')
-      return
+<MultipleFileUpload
+  {% if element.values.value %}files={{ element.values.value | textOrVariable }}{% endif %}
+  {% if element.values.innerText %}innerText={{ element.values.innerText | textOrVariable }}{% endif %}
+  {% if element.values.classname %}className={ {{ element.values.classname }} }{% endif %}
+  {% if element.values.onChange %}onChange={
+    (files) => {
+      {{ element.values.onChange }}
     }
-
-    let pickerResult = await ImagePicker.launchImageLibraryAsync()
-    setEventsdata({ ...Eventsdata, MediaFiles: [ ...Eventsdata.MediaFiles, {
-      Type: 1,
-      Url: {
-        uri: pickerResult.uri,
-        name: pickerResult.uri.substr(pickerResult.uri.lastIndexOf('/') + 1),
-        type: `image/${pickerResult.uri.substr(pickerResult.uri.lastIndexOf('.') + 1)}`,
-      },
-      Name: pickerResult.uri.substr(pickerResult.uri.lastIndexOf('/') + 1)
-    } ]})
-}
-{% endset %}
-{{ save_delayed('ph',ph) }}
-<TouchableOpacity onPress={openImagePickerAsync} {% if element.values.classname %}style={ {{ element.values.classname }} }{% endif %}>
-  <Text {% if element.values.classname %}style={ {{ element.values.classname ~ 'text' }} }{% endif %}>{{ element.values.innerText | default('Pick a Photo') }}</Text>
-</TouchableOpacity>
+  }{% endif %}
+/>

@@ -9,8 +9,7 @@ subtype: Any
 children: []
 */
 import axios from 'axios'
-import { I{{ table.name | friendly | capitalize }}Item, Ipaginated{{ table.name | friendly | capitalize }} } from "../models"
-import { buildFormData } from '../epics/index'
+import { I{{ table.name | friendly | capitalize }}Item, Ipaginated{{ table.name | friendly | capitalize }} } from "../models";
 
 export enum {{ table.name | friendly | capitalize }}ActionTypes {
   SEARCH_{{ table.name | friendly | upper }} = '{{ table.name | friendly | lower }}/search',
@@ -42,66 +41,28 @@ export enum {{ table.name | friendly | capitalize }}ActionTypes {
 {% set capitalizedTable = table.name | friendly | capitalize %}
 {% set lowerSingleTable = table.singleName | friendly | lower %}
 
-export const add{{ capitalizedTable }} = ({{ lowerSingleTable }}: I{{ capitalizedTable }}Item) => async(dispatch:any) => {
-  const data = new FormData()
-  buildFormData(data, {{ lowerSingleTable }})
-  const config = {
-    headers: {
-      'content-type': 'multipart/form-data',
-    },
-  }
-  return axios.post('{{ settings.apiURL }}/api/{{ table.name | friendly | lower }}/', data, config).then(res => {
+export const add{{ capitalizedTable }} = ({{ lowerSingleTable }}: I{{ capitalizedTable }}Item): IAdd{{ capitalizedTable }}Action => async(dispatch) => {
+  try {
+    const res = await axios.post('{{ settings.apiURL }}/api/{{ table.name | friendly | lower }}/', data, config)
+
     dispatch({
-      type: {{ table.name | friendly | capitalize }}ActionTypes.ADD_{{ table.name | friendly | upper }},
+      type: ADD_{{ table.name | friendly | upper }},
       payload: res.data,
-    })
-    Promise.resolve(res.data)
-  }).catch(e => {
-    dispatch({ type: {{ table.name | friendly | capitalize }}ActionTypes.ADDING_{{ table.name | friendly | upper }}_FAILED, error: e})
-    Promise.reject(e)
-  })
+    });
+
+    return Promise.resolve(res.data);
+  } catch(e) {
+    return Promise.reject(err)
+  }
 }
 
-export const load{{ capitalizedTable }} = (loadOptions: TSearchOptions) => async (dispatch: any) => {
-  return axios
-    .get('{{ settings.apiURL }}/api/{{ table.name | friendly | lower }}/', { params: loadOptions })
-    .then((res) => {
-      dispatch({
-        type: {{ table.name | friendly | capitalize }}ActionTypes.LOADED_{{ table.name | friendly | upper }},
-        payload: {
-          {{ table.name | friendly | lower }}: res.data
-        }
-      })
-      Promise.resolve(res.data)
-    })
-    .catch((e) => {
-      dispatch({ 
-        type: {{ table.name | friendly | capitalize }}ActionTypes.LOADING_{{ table.name | friendly | upper }}_FAILED,
-        error: e
-      })
-      Promise.reject(e)
-    })
-}
 
-export const search{{ capitalizedTable }} = (searchOptions: TSearchOptions | string, keep?: boolean) => async (dispatch: any) => {
-  return axios
-    .get('{{ settings.apiURL }}/api/{{ table.name | friendly | lower }}/search/', { params: searchOptions })
-    .then((res) => {
-      dispatch({
-        type: {{ table.name | friendly | capitalize }}ActionTypes.FOUND_{{ table.name | friendly | upper }},
-        keep: keep,
-        payload: {
-          {{ table.name | friendly | lower }}: res.data,
-        }
-      })
-    })
-    .catch((e) => {
-      dispatch({ 
-        type: {{ table.name | friendly | capitalize }}ActionTypes.SEARCHING_{{ table.name | friendly | upper }}_FAILED,
-        error: e
-      })
-      Promise.reject(e)
-    })
+export function search{{ table.name | friendly | capitalize }}(searchOptions: TSearchOptions | string, keep?: boolean): ISearch{{ table.name | friendly | capitalize }}Action {
+  return {
+    type: {{ table.name | friendly | capitalize }}ActionTypes.SEARCH_{{ table.name | friendly | upper }},
+    searchOptions: typeof searchOptions === 'string' ? { searchString: searchOptions } : searchOptions,
+    keep: keep
+  }
 }
 
 export function searching{{ table.name | friendly | capitalize }}(): ISearching{{ table.name | friendly | capitalize }}Action {
@@ -123,6 +84,13 @@ export function found{{ table.name | friendly | capitalize }}({{ table.name | fr
 export function searching{{ table.name | friendly | capitalize }}Failed(): ISearching{{ table.name | friendly | capitalize }}FailedAction {
   return {
     type: {{ table.name | friendly | capitalize }}ActionTypes.SEARCHING_{{ table.name | friendly | upper }}_FAILED
+  }
+}
+
+export function load{{ table.name | friendly | capitalize }}(loadOptions: TSearchOptions): ILoad{{ table.name | friendly | capitalize }}Action {
+  return {
+    type: {{ table.name | friendly | capitalize }}ActionTypes.LOAD_{{ table.name | friendly | upper }},
+    loadOptions: loadOptions
   }
 }
 
