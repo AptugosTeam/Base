@@ -76,8 +76,7 @@ async function authenticate({ email, password, model, passwordField }) {
   }
   return new Promise(function (resolve, reject) {
     if (!email || !password) reject({ message: 'Wrong parameters sent' })
-
-    const query = model.findOne({ Email: email })
+    const query = model.findOne({ Email: new RegExp('^' + email.toLowerCase(), 'i')  })
     const promise = query.exec()
 
     promise.then((user) => {

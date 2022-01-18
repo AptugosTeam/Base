@@ -47,7 +47,7 @@ function checkReq(req, res, next) {
   next();
 }
 
-{{ insert_setting('ServerAddenum') | raw }}
+{{ insert_setting('ServerAddenum') | raw }}
 
 const dbConfig = require('./config/database.config.js')
 const mongoose = require('mongoose')
@@ -79,13 +79,13 @@ let tries = 0
 function doListen() {
   const port = {{ insert_setting('port')|default('4567') }}
   {% if settings.apiURL|slice(0,5) == 'https' %}
-  https.createServer({
+  const server = https.createServer({
     key: fs.readFileSync({{ insert_setting('key') }}, 'utf8'),
     cert: fs.readFileSync({{ insert_setting('cert') }}, 'utf8'),
     ca: fs.readFileSync({{ insert_setting('ca') }}, 'utf8')
     }, app)
   {% else %}
-    app
+    const server = app
   {% endif %}
     .listen(port,'0.0.0.0')
     .on('listening', () => {
@@ -110,6 +110,7 @@ function doListen() {
     .on('connection', (conn) => {
       console.log('connection')
     })
+    {{ insert_setting('ServerAddenumAfterUp') | raw }}
 }
 
 doListen()

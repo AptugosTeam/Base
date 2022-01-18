@@ -17,7 +17,18 @@ options:
     display: Will it be modified?
     type: checkbox
     options: ''
+  - name: serverSide
+    display: Back-End Variable
+    type: checkbox
+settings:
+  - name: ServerAddenum
+    value: |-
+      {% if element.values.serverSide %}
+        {% if element.values.willbeModified %}let{% else %}const{% endif %} {{ element.values.variableName }} = {{ element.values.variableValue }}
+      {% endif %}
 sourceType: javascript
 children: []
 */
-{% if element.values.willbeModified %}let{% else %}const{% endif %} {{ element.values.variableName }} = {{ element.values.variableValue }}
+{% if not element.values.serverSide %}
+  {% if element.values.willbeModified %}let{% else %}const{% endif %} {{ element.values.variableName }} = {{ element.values.variableValue }}
+{% endif %}

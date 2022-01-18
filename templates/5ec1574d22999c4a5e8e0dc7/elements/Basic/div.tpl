@@ -8,7 +8,7 @@ sourceType: javascript
 options:
   - name: class
     display: ClassName
-    type: text
+    type: styles
     options: ''
   - name: useid
     display: Use UniqueID as ID

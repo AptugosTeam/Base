@@ -6,7 +6,7 @@ children: []
 */
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
-
+{{ insert_setting('SiteWideBeforePageRenderAddenum') | raw }}
 {% for page in application.pages | plain('type','page')  %}
   {% if page.filename %}
     const {{ page.name | friendly }} = React.lazy(() => import ('./Pages/{{ page.filename | removeExtension }}'))
@@ -41,10 +41,15 @@ const App: React.FunctionComponent = (props: any) => {
     </Switch>
   )
 
+  {{ insert_setting('SiteWideHeaderAddenum') | raw }}
+
   return (
     <React.Fragment>
       <React.Suspense fallback={<span>Loading</span>}>
-      {switchRoutes}
+        <React.Fragment>
+          {switchRoutes}
+          {{ insert_setting('SiteWideAddenum') | raw }}
+        </React.Fragment>
       </React.Suspense>
     </React.Fragment>
   )

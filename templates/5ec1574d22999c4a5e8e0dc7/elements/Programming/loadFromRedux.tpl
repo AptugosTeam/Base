@@ -80,9 +80,9 @@ options:
 children: []
 */
 {% if data %}
-  {% set table = data | tableData %}
+  {% set table = data | tableData %}
 {% else %}
-  {% set table = element.values.data | tableData %}
+  {% set table = element.values.data | tableData %}
 {% endif %}
 {% set innervarname = table.name | friendly %}
 {% if element.name != 'loadFromDatabase' %}
@@ -107,11 +107,17 @@ const dispatch = useDispatch()
 {% endset %}
 {{ save_delayed('ph', ph ) }}
 {% set ph %}
-const {{ table.name | friendly | lower ~ 'Data' }} = useSelector((state: IState) => state.{{ table.name | friendly | lower }})
+const {{ table.name | friendly | lower ~ 'Data' }} = useSelector((state: IState) => state.{{ table.name | friendly | lower }})
 {% endset %}
 {{ save_delayed('ph', ph, 1 ) }}
+{% if element.values.singleResult %}
+{% set bpr %}
+import { I{{ table.name | friendly }}Item } from '../store/models'
+{% endset %}
+{{ save_delayed('bpr', bpr ) }}
+{% endif %}
 {% set ph %}
-const {{ varName }} = useSelector((state: IState) => state.{{ table.name | friendly | lower }}){% if element.values.variableName %}.{% if element.values.searchString %}found{% endif %}{{ table.name | friendly | lower }}{% endif %}{% if element.values.singleResult %}[0] || {}{% endif %}
+const {{ varName }} = useSelector((state: IState){% if element.values.singleResult %}:I{{ table.name | friendly }}Item{% endif %} => state.{{ table.name | friendly | lower }}){% if element.values.variableName %}.{% if element.values.searchString %}found{% endif %}{{ table.name | friendly | lower }}{% endif %}{% if element.values.singleResult %}[0] || {}{% endif %}
 {% endset %}
 {{ save_delayed('ph', ph, 1 ) }}
 {% set ph %}

@@ -36,10 +36,12 @@ options:
         }
       aptugoOnLoad: |-
         element = arguments[0];
-        var selectedAsset = element.values?.useAsset;
-        if (selectedAsset !== 'none') {
+        var selectedAsset = (element.values?.useAsset && element.values?.useAsset !== 'none') ? element.values?.useAsset : null;
+        if (selectedAsset) {
           const assetInfo = aptugo.assetUtils.stylesheets().find(ss => ss.id === selectedAsset);
           const currentPage = aptugo.pageUtils.findContainerPage(element).unique_id;
+          const cssinfo = aptugo.assetUtils.grabCssSelectors(assetInfo)
+          aptugo.variables.setPageVariable(currentPage, element.unique_id, { theme: cssinfo })
         }
 sourceType: javascript
 children: []
