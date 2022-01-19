@@ -24,11 +24,11 @@ settings:
   - name: ServerAddenum
     value: |-
       {% if element.values.serverSide %}
-        {% if element.values.willbeModified %}let{% else %}const{% endif %} {{ element.values.variableName }} = {{ element.values.variableValue }}
+        {% if element.values.willbeModified %}let{% else %}const{% endif %} {{ element.values.variableName }} = {{ element.values.variableValue|default(content | raw)}}
       {% endif %}
 sourceType: javascript
 children: []
 */
 {% if not element.values.serverSide %}
-  {% if element.values.willbeModified %}let{% else %}const{% endif %} {{ element.values.variableName }} = {{ element.values.variableValue }}
+  {% if element.values.willbeModified %}let{% else %}const{% endif %} {{ element.values.variableName }} = {{ element.values.variableValue|default(content | raw)}}
 {% endif %}

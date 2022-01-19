@@ -99,7 +99,11 @@ import { IState } from '../store/reducers/index'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 {% set bpr %}
-  import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
+{% endset %}
+{{ save_delayed('bpr', bpr ) }}
+{% set bpr %}
+  import { useSelector } from 'react-redux'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 {% set ph %}

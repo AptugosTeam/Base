@@ -129,6 +129,8 @@ exports.find = (options) => {
     if (query.searchField) {
       if ({{ table.name | friendly }}.schema.path(query.searchField).instance === 'Boolean') {
         findString = { [query.searchField]: JSON.parse(query.searchString) }
+      } else if ({{ table.name | friendly }}.schema.path(query.searchField).instance === 'Date') {
+        findString = { $expr: {$eq: [query.searchString, { $dateToString: {date: `$${query.searchField}`, format: "%Y-%m-%d"}}]}}
       } else {
         findString = { [query.searchField]: { $regex: new RegExp(query.searchString, 'i') } }
       }
