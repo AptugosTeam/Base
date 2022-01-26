@@ -21,6 +21,20 @@ options:
     display: Api Key (see docs for info)
     type: text
     options: ''
+  - name: Width
+    display: Width (sets the width in pixels)
+    type: text
+    options: ''
+    settings:
+      default: '300'
+      active: true
+  - name: Height
+    display: Height (sets the width in pixels)
+    type: text
+    options: ''
+    settings:
+      default: '300'
+      active: true
 */
 
 
@@ -43,7 +57,7 @@ React.useEffect(() => {
 },[])
 {% endset %}
 {{ save_delayed('ph',ph)}}
-<div style={ { width: '300px', height: '300px', position: 'relative' } }>
+<div style={ { width: '{{ element.values.Width }}px', height: '300px', position: 'relative' } }>
 {showMap && 
     <Map
         google={window.google}
