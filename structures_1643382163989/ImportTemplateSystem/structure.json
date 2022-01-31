@@ -1,0 +1,22 @@
+{
+  "_id": "WZqVgrnabpDroIh3",
+  "name": "Import Template System",
+  "desc": "Imports a folder as a template",
+  "icon": "",
+  "type": "structure",
+  "parameters": [
+    {
+      "name": "folder",
+      "display": "Folder to Import",
+      "type": "text",
+      "helpText": "Set the folder of the template to import"
+    },
+    {
+      "name": "name",
+      "display": "Template Name",
+      "type": "text",
+      "helpText": "Set a nice name for your template"
+    }
+  ],
+  "afterRun": ""
+}

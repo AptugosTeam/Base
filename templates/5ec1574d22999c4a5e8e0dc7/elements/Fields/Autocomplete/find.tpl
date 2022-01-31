@@ -22,7 +22,7 @@ unique_id: t9Bzg4Oy
       {% endif %}
     {% endif %}
   {% endfor %}
-  .populate((query.populate === 'true' || query.populate.indexOf('{{ reference.table.name | friendly }}') > -1) && { 
+  .populate((query.populate === 'true' || query.populate?.indexOf('{{ reference.table.name | friendly }}') > -1) && { 
     strictPopulate: false,
     model: '{{ reference.table.name | friendly }}',
     path: '{{ field.column_name }}'

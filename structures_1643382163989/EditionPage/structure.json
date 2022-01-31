@@ -1,0 +1,17 @@
+{
+  "_id": "xREW5vlHZ5SND1fk",
+  "name": "Edition Page",
+  "desc": "Creates a new page to add or edit records",
+  "icon": "",
+  "type": "structure",
+  "parameters": [
+    {
+      "name": "unique_id",
+      "display": "Table unique ID",
+      "type": "dropdown",
+      "options": "return aptugo.store.getState().application.tables.map(({ unique_id, name }) => [unique_id, name])",
+      "helpText": "Unique ID for the table to generate"
+    }
+  ],
+  "afterRun": ""
+}

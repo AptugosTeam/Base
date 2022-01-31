@@ -58,6 +58,7 @@ React.useEffect(() => {
 {% endset %}
 {{ save_delayed('ph',ph)}}
 <div style={ { width: '{{ element.values.Width }}px', height: '300px', position: 'relative' } }>
+  MODIFICO EL TITULO
 {showMap && 
     <Map
         google={window.google}

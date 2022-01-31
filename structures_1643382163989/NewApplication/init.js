@@ -29,10 +29,10 @@ const dbpassword = aptugo.generateID() + aptugo.generateID()
 const appname = aptugo.friendly(Parameters.Name)
 const dbusername = username + appname
 Application.createdAt = Date.now(),
+Application.lastSaved = null
+Application.lastBuild = null
 Application.settings = {
     name: Parameters.Name || 'Untitled Application',
-    lastSaved: null,
-    lastBuild: null,
     development: {
       apiURL: `http://127.0.0.1:4567`,
       type: 'Local',

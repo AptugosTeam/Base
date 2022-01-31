@@ -1,0 +1,19 @@
+{
+  "_id": "5f7b8c4b498ed2ff91c6d3ca",
+  "type": "structure",
+  "parameters": [
+    {
+      "name": "asset",
+      "display": "Asset",
+      "type": "text",
+      "helpText": "Asset"
+    }
+  ],
+  "afterRun": "",
+  "Created_date": {
+    "$date": "2020-10-05T21:12:43.630Z"
+  },
+  "__v": 0,
+  "desc": "Adds and Updates assets",
+  "name": "Update Asset"
+}

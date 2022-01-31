@@ -33,7 +33,7 @@ unique_id: SBHiymdS
         {% endfor %}
     {% endif %}
 {% endfor %}
-.populate((query.populate === 'true' || query.populate.indexOf('{{ ffd.table.name | friendly }}') > -1) && {
+.populate((query.populate === 'true' || query.populate?.indexOf('{{ ffd.table.name | friendly }}') > -1) && {
     strictPopulate: false,
     path: '{{ ffd.table.name | friendly }}'
     {% if subpopulation %}
