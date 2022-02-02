@@ -1,9 +1,0 @@
-{
-  "_id": "StNQqyy4TAthzJtd",
-  "name": "New Template",
-  "desc": "Structure ran when a template is created",
-  "icon": "",
-  "type": "structure",
-  "parameters": "",
-  "afterRun": ""
-}
