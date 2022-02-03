@@ -10,29 +10,45 @@ options:
     display: Secret Stripe's API key.
     type: text
     options: ''
+  - name: priceItem
+    display: Stripe's Price Item code
+    type: text
+    options: ''
+  - name: successURL
+    display: Redirect to this URL when done
+    type: text
+    options: ''
+  - name: cancelURL
+    display: Redirect to this URL when not done
+    type: text
+    options: ''
+  - name: skipFrontEnd
+    display: Do not render anything in the front-end
+    type: checkbox
+
 settings:
   - name: BackendPackages
     value: '"stripe": "^8.201.0",'
   - name: ServerRoute
     value: |
-      // This is your test secret API key.
       const stripe = require('stripe')('{{ element.values.apikey }}');
 
-      app.post('/create-checkout-session', async (req, res) => {
+      app.post('/create-checkout-session/:qty?', async (req, res) => {
         const session = await stripe.checkout.sessions.create({
           line_items: [
             {
-              price: 'price_1KO6F4DbbpFtBwctvqTqkO1s',
-              quantity: 1,
+              price: '{{ element.values.priceItem }}',
+              quantity: req.params.qty || 1,
             },
           ],
           mode: 'payment',
-          success_url: `http://localhost:8080/?success=true`,
-          cancel_url: `http://localhost:8080?canceled=true`,
+          success_url: `{{ element.values.successURL }}`,
+          cancel_url: `{{ element.values.cancelURL }}`,
         });
         res.redirect(303, session.url);
       });
 */
+{% if not element.values.skipFrontEnd %}
 {% set bpr %}
 const ProductDisplay = () => (
   <section>
@@ -80,4 +96,4 @@ React.useEffect(() => {
 {% endset %}
 {{ save_delayed('ph',ph) }}
 {message ? <Message message={message} /> : <ProductDisplay /> }
-{{ dump(element.values) }}
+{% endif %}

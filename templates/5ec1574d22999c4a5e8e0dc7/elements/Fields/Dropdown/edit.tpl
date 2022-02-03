@@ -30,6 +30,9 @@ import MenuItem from '@mui/material/MenuItem'
     value={ {{ tableName }}data.{{ field.column_name | friendly }}}
     onChange={handle{{ tableName }}Change("{{ field.column_name | friendly }}")}
 >
+{% if field.placeholder %}
+<MenuItem value="" disabled>{{ field.placeholder }}</MenuItem>
+{% endif %}
 {% for item in field.options|split(';') %}
         <MenuItem key="{{ item }}" value="{{ item }}">{{ item }}</MenuItem>
 {% endfor %}
