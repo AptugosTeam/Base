@@ -1,17 +1,24 @@
-import FormControl from '@material-ui/core/FormControl'
-import IconButton from '@material-ui/core/IconButton'
-import Input from '@material-ui/core/Input'
-import InputLabel from '@material-ui/core/InputLabel'
-import { makeStyles } from '@material-ui/core/styles'
-import SearchIcon from '@material-ui/icons/Search'
-import React, { FunctionComponent } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+/*
+path: FileUpload.tsx
+completePath: front-end/components/FileUpload/FileUpload.tsx
+unique_id: QZm2nTtL
+*/
 import { faFilePdf } from '@fortawesome/free-solid-svg-icons'
+import FormControl from '@mui/material/FormControl'
+import IconButton from '@mui/material/IconButton'
+import Input from '@mui/material/Input'
+import InputLabel from '@mui/material/InputLabel'
+import { makeStyles } from '@mui/styles'
+import PublishIcon from '@mui/icons-material/Publish'
+import SearchIcon from '@mui/icons-material/Search'
+import PictureAsPdf from '@mui/icons-material/PictureAsPdf'
+import clsx from 'clsx'
+import React, { FunctionComponent } from 'react'
 
 const useStyles = makeStyles({
   root: {
     display: 'flex',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   image: {
     maxHeight: '48px',
@@ -30,14 +37,75 @@ const useStyles = makeStyles({
   },
 })
 
+const altStyles = makeStyles({
+  root: {
+    display: 'flex',
+    alignItems: 'center',
+    '& label': {
+      transform: 'none !important',
+      position: 'absolute',
+      left: '50px',
+      top: '22px',
+    },
+  },
+  image: {
+    maxHeight: '48px',
+    margin: '5px 4px 5px auto',
+    borderRadius: '5px',
+    overflow: 'hidden'
+  },
+  media: {
+    maxHeight: '48px',
+  },
+  input: {
+    display: 'none',
+  },
+  altVisual: {
+    background: '#f9f9f9',
+    borderRadius: '5px',
+    height: '56px',
+    width: '100%',
+    border: '1px solid rgb(196 196 196)',
+    '&:after': {
+      content: 'none',
+    },
+    '&:before': {
+      content: 'none',
+    },
+    '& label': {
+      left: '0px',
+      top: '13px',
+      '& p': {
+        position: 'absolute',
+        left: '50px',
+        whiteSpace: 'nowrap',
+        top: '6px',
+        margin: '0',
+        color: '#808080',
+      },
+    },
+    '& input': {
+      width: '1px',
+      overflow: 'hidden',
+      textIndent: '10px',
+    },
+  },
+  button: {
+    position: 'absolute',
+    top: '-8px',
+  },
+})
+
 const AptugoImageUpload: FunctionComponent<any> = (props) => {
-  const classes = useStyles()
+  const classes = props.visual === 'standard' ? useStyles() : altStyles()
+
   const [state, setState] = React.useState({
     uploading: false,
     file: null,
     selectedFile: null,
     fileName: props.value,
     accept: props.accept || 'image/*',
+    visual: props.visual || 'staandard',
   })
 
   const handleUploadClick = (event) => {
@@ -73,36 +141,67 @@ const AptugoImageUpload: FunctionComponent<any> = (props) => {
   }
 
   const renderUploadedState = () => {
-    if (!state.selectedFile && !state.fileName) return null
-    if (state.file && state.file.type === 'application/pdf') return <FontAwesomeIcon className={classes.image} icon={faFilePdf} />
+    if (!state.selectedFile && !state.fileName && !props.value) return null
+    if (state.file && state.file.type === 'application/pdf') return <PictureAsPdf className={classes.image} />
+    var src = state.selectedFile || `/img/${state.fileName}`
+    if (!state.selectedFile && !state.fileName) {
+      src = `/img/${props.value}`
+    }
     return (
       <div className={classes.image} onClick={imageResetHandler}>
-        <img className={classes.media} src={state.selectedFile || `/img/${state.fileName}`} />
+        <img className={classes.media} src={src} />
       </div>
     )
   }
 
-  return (
-    <div className={classes.root}>
-      {renderUploadedState()}
-      <FormControl margin="dense" fullWidth>
-        <InputLabel htmlFor="component-upload">{props.label}</InputLabel>
+  const standardVisual = () => {
+    return (
+      <div className={clsx(classes.root, props.className && props.className)}>
+        {renderUploadedState()}
+        <FormControl margin="normal" fullWidth variant={props.variant}>
+          <InputLabel htmlFor="component-upload">{props.label}</InputLabel>
+          <Input
+            value={state.fileName || ''}
+            id="component-upload"
+            placeholder={props.placeholder || null}
+            endAdornment={
+              <label>
+                <input accept={state.accept} className={classes.input} multiple type="file" onChange={handleUploadClick} />
+                <IconButton component="span" className={classes.button} aria-label="Search">
+                  <SearchIcon />
+                </IconButton>
+              </label>
+            }
+          />
+        </FormControl>
+      </div>
+    )
+  }
+
+  const alternativeVisual = () => {
+    return (
+      <FormControl margin="normal" fullWidth variant={props.variant} className={classes.root}>
         <Input
+          className={classes.altVisual}
           value={state.fileName || ''}
           id="component-upload"
           placeholder={props.placeholder || null}
-          endAdornment={
+          startAdornment={
             <label>
               <input accept={state.accept} className={classes.input} multiple type="file" onChange={handleUploadClick} />
               <IconButton component="span" className={classes.button} aria-label="Search">
-                <SearchIcon />
+                <PublishIcon color="primary" />
               </IconButton>
+              <p>{props.label}</p>
             </label>
           }
+          endAdornment={renderUploadedState()}
         />
       </FormControl>
-    </div>
-  )
+    )
+  }
+
+  return state.visual === 'standard' ? standardVisual() : alternativeVisual()
 }
 
 export default AptugoImageUpload

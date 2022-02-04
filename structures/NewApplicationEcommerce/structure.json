@@ -1,0 +1,16 @@
+{
+  "_id": "40",
+  "name": "E-Commerce",
+  "desc": "Create a simple task management software",
+  "icon": "icon.png",
+  "type": "template",
+  "parameters": [
+    {
+      "name": "Name",
+      "display": "New Application Name",
+      "type": "text",
+      "helpText": "Type the name of your Application"
+    }
+  ],
+  "afterRun": "/DbDesigner"
+}

@@ -6,9 +6,10 @@ icon: ico-field
 sourceType: javascript
 children: []
 */
+
 {% set tableName = ( field | fieldData ).table.name | friendly %}
 {% set bpr %}
-import TextField from '@material-ui/core/TextField'
+import TextField from '@mui/material/TextField'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
 <TextField
@@ -22,6 +23,10 @@ import TextField from '@material-ui/core/TextField'
     label="{{ field.prompt|default(field.column_name) }}"
     type="text"
     fullWidth
-    value={ {{ tableName }}data.{{ field.column_name | friendly }}}
+    className={ {% if element.values.classname %}{{ element.values.classname }}{% else %}'field_{{ field.column_name | friendly }}'{% endif %}}
+    variant="{{ element.values.variant|default('standard') }}"
+    value={ {{ tableName }}data.{{ field.column_name | friendly }} || '' }
     onChange={handle{{ tableName }}Change("{{ field.column_name | friendly }}")}
+    error={ {{ tableName | lower }}Data?.errField === '{{ field.column_name | friendly }}'}
+    helperText={ {{ tableName | lower }}Data?.errField === '{{ field.column_name | friendly }}' && {{ tableName | lower }}Data.errMessage}
 />

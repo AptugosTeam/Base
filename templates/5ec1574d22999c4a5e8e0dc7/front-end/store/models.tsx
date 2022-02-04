@@ -1,3 +1,8 @@
+/*
+path: models.tsx
+completePath: front-end/store/models.tsx
+unique_id: K34wWnGp
+*/
 import { DocumentProvider } from "mongoose"
 
 {% for table in application.tables %}
@@ -22,6 +27,16 @@ export interface I{{ table.name | friendly | capitalize }}Item {
       {% endif %}
     {% else %}
       {{ field.column_name | friendly }}: {{ datatype }}
+    {% endif %}
+  {% endfor %}
+  {% for everyField in builder.plainFields %}
+    {% if everyField.reference %}
+      {% set everyFieldRelationshipData = everyField.reference | fieldData %}
+      {% set everyFieldData = everyField | fieldData %}
+      {% if table.unique_id ==  everyFieldRelationshipData.table.unique_id %}
+        // {{ table.name }} - {{ everyFieldData.table.name }} - {{ everyFieldData.column_name }} - {{ everyFieldRelationshipData.table.name }} - {{ everyFieldRelationshipData.column_name }}
+        {{ everyFieldData.table.name }}: I{{ everyFieldData.table.name | friendly | capitalize }}Item[]
+      {% endif %}
     {% endif %}
   {% endfor %}
 }

@@ -1,14 +1,18 @@
+/*
+path: ph.tpl
+completePath: elements/Aptugo Internal Use/ph.tpl
+unique_id: D10wnZ8z
+*/
 {% if element.values.localStyles %}
 {% set bpr %}
 import { mergeClasses } from '../services/utils'
-import { makeStyles } from '@material-ui/core/styles'
+import { makeStyles } from '@mui/styles'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
     const localStyles = makeStyles({
         {{ element.values.localStyles | raw }}
     })
 {% endif %}
-
 const {{ page.name | friendly }}: FunctionComponent = (props: any) => {
   {% if element.values.localStyles %}
     const classes = mergeClasses( baseClasses, localStyles())
@@ -20,4 +24,4 @@ const {{ page.name | friendly }}: FunctionComponent = (props: any) => {
   {% endfor %}
 
   {{ content|raw }}
-  return (
+  return (<React.Fragment>

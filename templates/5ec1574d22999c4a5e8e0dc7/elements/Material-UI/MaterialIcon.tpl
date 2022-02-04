@@ -14,9 +14,14 @@ options:
     display: Color
     type: dropdown
     options: default;primary;secondary;action;disabled
+  - name: className
+    display: className
+    type: text
 */
+
+
 {% set bpr %}
-import { {{ element.values.icon|default('HelpOutline') }} } from '@material-ui/icons';
+import { {{ element.values.icon|default('HelpOutline') }} } from '@mui/icons-material';
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
-<{{ element.values.icon|default('HelpOutline') }} {% if element.values.color %}color="{{ element.values.color }}"{% endif %}/>
+<{{ element.values.icon|default('HelpOutline') }} {% if element.values.color %}color="{{ element.values.color }}"{% endif %} {% if element.values.className %}className={{ element.values.className|textOrVariable }}{% endif %}/>

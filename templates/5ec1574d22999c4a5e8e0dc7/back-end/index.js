@@ -1,14 +1,12 @@
 /*
-- path: index.js
-- type: file
-- unique_id: UkXBqfSH
-- icon: ico-field
-- sourceType: javascript
-- children: 
+path: index.js
+completePath: back-end/index.js
+unique_id: QOxu9q3o
+children: []
 */
 const dotenv = require('dotenv')
 dotenv.config({ path: './config/.env.development' })
-
+const fs = require('fs')
 const express = require('express')
 const bodyParser = require('body-parser')
 const fileupload = require('express-fileupload')
@@ -28,8 +26,28 @@ app.use(function(req, res, next) {
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use( fileupload() )
+app.all('*', checkReq);
+function checkReq(req, res, next) {
+  if (req.files) {
+    const keys = Object.keys(req.files)
+    keys.forEach(key => {
+      const regex = /(.*)\[([0-9]*)\]/gm;
+      let m = regex.exec(key)
+      if (m) {
+        if (m[2] === '0') {
+          req.body[m[1]] = []
+          req.files[m[1]] = []
+        }
+        req.body[m[1]].push(req.files[key])
+        req.files[m[1]].push(req.files[key])
+        delete req.files[key]
+      }
+    })
+  }
+  next();
+}
 
-{{ insert_setting('ServerAddenum') | raw }}
+{{ insert_setting('ServerAddenum') | raw }}
 
 const dbConfig = require('./config/database.config.js')
 const mongoose = require('mongoose')
@@ -39,8 +57,7 @@ mongoose.Promise = global.Promise
 // Connecting to the database
 mongoose.connect(dbConfig.url, {
   useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useCreateIndex: true
+  useUnifiedTopology: true
 }).then(() => {
   console.log("Successfully connected to the database")  
 }).catch(err => {
@@ -62,13 +79,13 @@ let tries = 0
 function doListen() {
   const port = {{ insert_setting('port')|default('4567') }}
   {% if settings.apiURL|slice(0,5) == 'https' %}
-  https.createServer({
+  const server = https.createServer({
     key: fs.readFileSync({{ insert_setting('key') }}, 'utf8'),
     cert: fs.readFileSync({{ insert_setting('cert') }}, 'utf8'),
     ca: fs.readFileSync({{ insert_setting('ca') }}, 'utf8')
     }, app)
   {% else %}
-    app
+    const server = app
   {% endif %}
     .listen(port,'0.0.0.0')
     .on('listening', () => {
@@ -93,7 +110,11 @@ function doListen() {
     .on('connection', (conn) => {
       console.log('connection')
     })
+    {{ insert_setting('ServerAddenumAfterUp') | raw }}
 }
 
 doListen()
+
+
+
 

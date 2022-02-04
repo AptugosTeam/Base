@@ -1,8 +1,13 @@
+/*
+path: Autocomplete.tsx
+completePath: front-end/components/Autocomplete/Autocomplete.tsx
+unique_id: wpHBmu7F
+*/
 import clsx from 'clsx'
 import React, { FunctionComponent } from 'react'
 import Select from 'react-select'
 import classes from './autocomplete.module.scss'
-
+import { FormControl, InputLabel, Input, FormHelperText } from '@mui/material'
 export interface AutocompleteProps {
   onChange: any
   options: { label: string; value: string }[]
@@ -12,6 +17,9 @@ export interface AutocompleteProps {
   chips?: boolean
   onType: Function
   placeholder: string
+  variant?: "outlined" | "standard" | "filled"
+  margin?: 'dense' | 'none' | 'normal'
+  fullWidth?: boolean
 }
 
 const AptugoAutocomplete: FunctionComponent<any> = (props: AutocompleteProps) => {
@@ -40,9 +48,7 @@ const AptugoAutocomplete: FunctionComponent<any> = (props: AutocompleteProps) =>
 
   React.useEffect(() => {
     let options = []
-    if (props.value) {
-      options.push(...props.value)
-    }
+
     options.push(...props.options)
     if (localValue.length > 2) {
       options.push({ label: `Add ${localValue}...`, value: 'new' })
@@ -50,18 +56,29 @@ const AptugoAutocomplete: FunctionComponent<any> = (props: AutocompleteProps) =>
     setDropdownOptions(options)
   }, [props.options, props.value])
 
+  const selectRefLabel = React.useRef(null)
+
+  const [state, setstate] = React.useState({
+    isFocused: false
+  })
+
   return (
-    <div className={clsx('MuiFormControl-root MuiTextField-root MuiFormControl-marginDense MuiFormControl-fullWidth', classes.autocomplete)}>
-      <label
-        className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-marginDense MuiFormLabel-filled"
-        data-shrink="true"
-      >
-        {props.label}
-      </label>
-      <div className="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-fullWidth MuiInput-fullWidth MuiInputBase-formControl MuiInput-formControl MuiInputBase-marginDense MuiInput-marginDense">
-        <Select
-          placeholder={props.placeholder || props.label}
-          className={classes.aptugoDropdown}
+    <FormControl
+      variant={props.variant || 'outlined' }
+      margin={props.margin || 'normal' }
+      fullWidth={props.fullWidth || false}
+      className={clsx(classes.autocomplete,state.isFocused && 'MuiOutlinedInput-root', state.isFocused && 'Mui-focused')}
+    >
+      <InputLabel ref={selectRefLabel} focused={state.isFocused} shrink={state.isFocused || props.value ? true : false }>{props.label}</InputLabel>
+      <Select
+          onFocus={(e) => {
+            setstate({ ...state, isFocused: true })
+          }}
+          onBlur={(e) => {
+            setstate({ ...state, isFocused: false })
+          }}
+          placeholder={props.placeholder || props.label}
+          className={clsx(classes.aptugoDropdown, 'MuiOutlinedInput-notchedOutline')}
           classNamePrefix="aptugo"
           value={props.value || null}
           isMulti={props.chips}
@@ -77,6 +94,19 @@ const AptugoAutocomplete: FunctionComponent<any> = (props: AutocompleteProps) =>
           closeMenuOnSelect={true}
           options={dropdownOptions}
         />
+    </FormControl>
+  )
+
+  return (
+    <div className={clsx('MuiFormControl-root MuiTextField-root MuiFormControl-marginNormal MuiFormControl-fullWidth', classes.autocomplete)}>
+      <label
+        className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-marginDense MuiFormLabel-filled"
+        data-shrink="true"
+      >
+        {props.label}
+      </label>
+      <div className="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-fullWidth MuiInput-fullWidth MuiInputBase-formControl MuiInput-formControl MuiInputBase-marginDense MuiInput-marginDense">
+        
       </div>
     </div>
   )

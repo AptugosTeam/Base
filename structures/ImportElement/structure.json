@@ -1,0 +1,28 @@
+{
+  "_id": "tZOZxST6wz9LSaJs",
+  "name": "Import Element",
+  "desc": "",
+  "icon": "",
+  "type": "structure",
+  "parameters": [
+    {
+      "name": "Template",
+      "display": "Template",
+      "type": "text",
+      "helpText": "Select the template to insert this element into"
+    },
+    {
+      "name": "Name",
+      "display": "New Element Name",
+      "type": "text",
+      "helpText": "Type the element name for the imported file"
+    },
+    {
+      "name": "element",
+      "display": "File with Data",
+      "type": "text",
+      "helpText": "Select the file to import"
+    }
+  ],
+  "afterRun": ""
+}

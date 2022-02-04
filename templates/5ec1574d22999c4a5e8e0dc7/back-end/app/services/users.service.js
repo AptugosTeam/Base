@@ -1,32 +1,96 @@
+/*
+path: users.service.js
+completePath: back-end/app/services/users.service.js
+unique_id: aOViR3kP
+*/
 const jwt = require('jsonwebtoken')
-const bcrypt = require("bcryptjs")
-const Users = require("../models/users.model.js")
+const bcrypt = require('bcryptjs')
 
 module.exports = {
   authenticate,
   cryptPassword,
-  jwtVerify
+  jwtVerify,
+  recoverPassword,
+  checkNonce,
 }
 
-async function authenticate({ email, password }) {
-  return new Promise( function(resolve) {
-    if (!email || !password) resolve({ malformed: "Wrong parameters sent" })
+async function recoverPassword(req, model = null) {
+  const { name, email, message, subject } = req.body
+  if (!model) {
+    const Users = require('../models/users.model.js')
+    model = Users
+  }
 
-    const query = Users.findOne({ Email: email })
+  return new Promise(function (resolve, reject) {
+    if (!email) reject({ message: 'Wrong parameters sent' })
+    const query = model.findOne({ Email: email })
     const promise = query.exec()
-  
-    promise.then(user => {
+
+    promise.then((user) => {
       if (!user) {
-        resolve({ emailnotfound: "Email not found" })
+        reject({ message: 'Email not found' })
       }
-  
-      bcrypt.compare(password, user.Password).then(isMatch => {
+      const { Password, ...userWithoutPassword } = user._doc
+      const nonce = Buffer.from(bcrypt.hashSync(JSON.stringify(userWithoutPassword), Password)).toString('base64')
+      let parsedmessage = message.replace('**nonce**', nonce)
+      parsedmessage = parsedmessage.replace('**email**', Buffer.from(userWithoutPassword.Email).toString('base64'))
+      req.app.get('sendEmail')({ name, email, message: parsedmessage, subject })
+      resolve(user)
+    })
+  })
+}
+
+async function checkNonce(req, model = null) {
+  return new Promise(function (resolve, reject) {
+    if (!model) {
+      const Users = require('../models/users.model.js')
+      model = Users
+    }
+    const { nonce, email } = req.body
+    const asciiEMail = Buffer.from(email, 'base64').toString('ascii')
+    const ascii = Buffer.from(nonce, 'base64').toString('ascii')
+    const query = model.findOne({ Email: asciiEMail })
+    const promise = query.exec()
+    promise.then((user) => {
+      const { Password, ...userWithoutPassword } = user._doc
+      bcrypt.compare(JSON.stringify(userWithoutPassword), ascii).then((isMatch) => {
+        if (isMatch) {
+          const token = jwt.sign(userWithoutPassword, 'thisisthesecretandshouldbeconfigurable', { expiresIn: '7d' })
+          resolve({ accessToken: token, data: userWithoutPassword })
+        } else {
+          reject({ message: 'Bad bad nonce' })
+        }
+      })
+    })
+  })
+}
+
+async function authenticate({ email, password, model, passwordField }) {
+  if (!model) {
+    const Users = require('../models/users.model.js')
+    model = Users
+  }
+
+  if (!passwordField) {
+    passwordField = 'Password'
+  }
+  return new Promise(function (resolve, reject) {
+    if (!email || !password) reject({ message: 'Wrong parameters sent' })
+    const query = model.findOne({ Email: new RegExp('^' + email.toLowerCase(), 'i')  })
+    const promise = query.exec()
+
+    promise.then((user) => {
+      if (!user) {
+        reject({ message: 'Email not found' })
+      }
+
+      bcrypt.compare(password, user[passwordField]).then((isMatch) => {
         if (isMatch) {
           const { Password, ...userWithoutPassword } = user._doc
           const token = jwt.sign(userWithoutPassword, 'thisisthesecretandshouldbeconfigurable', { expiresIn: '7d' })
           resolve({ accessToken: token, data: userWithoutPassword })
         } else {
-          resolve({ passwordincorrect: "Password incorrect" })
+          reject({ message: 'Password incorrect' })
         }
       })
     })
@@ -40,11 +104,11 @@ function cryptPassword(password) {
 
 function jwtVerify(token) {
   if (token) {
-    const justTheToken = token.substr(token.indexOf(" ") + 1)
+    const justTheToken = token.substr(token.indexOf(' ') + 1)
     try {
       const decoded = jwt.verify(justTheToken, 'thisisthesecretandshouldbeconfigurable')
       return decoded
-    } catch(e) {
+    } catch (e) {
       return { error: e.message }
     }
   } else {

@@ -3,9 +3,26 @@ icon: ico-paper
 path: Paper.tpl
 sourceType: javascript
 unique_id: efavXTy7
+options:
+  - name: className
+    display: ClassName
+    type: chips
+    options: >-
+      return aptugo.assetUtils.grabCssSelectors(
+      aptugo.variables.retrievePageVariablesFromElement(arguments[0],'theme') )
+  - name: elevation
+    display: Elevation
+    type: text
+  - name: square
+    display: Square Looking
+    type: checkbox
+  - name: variant
+    display: Variant
+    type: dropdown
+    options: elevation;outlined
 */
 {% set bpr %}
-import Paper from '@material-ui/core/Paper'
+import Paper from '@mui/material/Paper'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
 <Paper

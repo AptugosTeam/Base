@@ -21,12 +21,12 @@ options:
     options: standard;filled;outlined
 */
 {% set bpr %}
-import Alert from '@material-ui/core/Alert'
+import Alert from '@mui/material/Alert'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 {% if element.values.title %}
 {% set bpr %}
-import AlertTitle from '@material-ui/core/AlertTitle'
+import AlertTitle from '@mui/material/AlertTitle'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 {% endif %}

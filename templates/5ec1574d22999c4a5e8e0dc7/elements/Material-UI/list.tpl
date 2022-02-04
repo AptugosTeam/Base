@@ -16,7 +16,7 @@ options:
     options: ''
 */
 {% set bpr %}
-import List from '@material-ui/core/List'
+import List from '@mui/material/List'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 <List

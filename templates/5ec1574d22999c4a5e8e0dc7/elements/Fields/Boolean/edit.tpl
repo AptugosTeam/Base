@@ -1,10 +1,15 @@
+/*
+path: edit.tpl
+completePath: elements/Fields/Boolean/edit.tpl
+unique_id: WQPUIqHm
+*/
 {% set tableName = ( field | fieldData ).table.name | friendly %}
 {% set bpr %}
-import Checkbox from '@material-ui/core/Checkbox'
+import Checkbox from '@mui/material/Checkbox'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
 {% set bpr %}
-import FormControlLabel from '@material-ui/core/FormControlLabel'
+import FormControlLabel from '@mui/material/FormControlLabel'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
 <FormControlLabel

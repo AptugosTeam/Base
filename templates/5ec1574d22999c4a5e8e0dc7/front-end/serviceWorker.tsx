@@ -1,3 +1,8 @@
+/*
+path: serviceWorker.tsx
+completePath: front-end/serviceWorker.tsx
+unique_id: JAKe2GPt
+*/
 const isLocalhost = Boolean(
   window.location.hostname === 'localhost' ||
     // [::1] is the IPv6 localhost address.
@@ -15,9 +20,9 @@ type Config = {
 
 export function register(config?: Config) {
   if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
-    const publicUrl = new URL('{{ application.url }}')
+    const publicUrl = new URL('{{ settings.url }}')
     window.addEventListener('load', () => {
-      const swUrl = `{{ application.url }}/service-worker.js`
+      const swUrl = `{{ settings.url }}/service-worker.js`
       if (isLocalhost) {
         checkValidServiceWorker(swUrl, config);
         navigator.serviceWorker.ready.then(() => {

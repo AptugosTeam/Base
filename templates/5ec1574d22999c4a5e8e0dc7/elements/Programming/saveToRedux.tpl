@@ -1,5 +1,6 @@
 /*
 path: saveToRedux.tpl
+display: Save to Database
 type: file
 unique_id: OhQu8og7
 icon: ico-save-to-redux
@@ -11,6 +12,14 @@ options:
     options: >-
       return aptugo.store.getState().application.tables.map(({ unique_id, name
       }) => [unique_id, name])
+  - name: condition
+    display: Condition
+    type: text
+  - name: variablename
+    display: Variable name to save
+    type: text
+    settings:
+      default: 'data'
 children: []
 */
 {% if data %}{% set table = data | tableData %}{% else %}{% set table = element.values.data | tableData %}{% endif %}
@@ -37,11 +46,13 @@ const dispatch = useDispatch()
 {% if element.children %}
 new Promise((resolve) => {
 {% endif %}
-if (data._id) {
-  dispatch(edit{{ table.name | friendly | capitalize }}(data as any))
+{% if element.values.condition %}if ({{ element.values.condition }}) { {% endif %}
+if ({{ element.values.variablename | default('data') }}._id) {
+  dispatch(edit{{ table.name | friendly | capitalize }}({{ element.values.variablename | default('data') }} as any))
 } else {
-  dispatch(add{{ table.name | friendly | capitalize }}(data as any))
+  dispatch(add{{ table.name | friendly | capitalize }}({{ element.values.variablename | default('data') }} as any))
 }
+{% if element.values.condition %}}{% endif %}
 {% if element.children %}
   resolve('ok')
 }).then(result => {

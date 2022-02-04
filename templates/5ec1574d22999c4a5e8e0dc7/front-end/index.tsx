@@ -1,3 +1,9 @@
+/*
+path: index.tsx
+completePath: front-end/index.tsx
+unique_id: RfBLgczw
+children: []
+*/
 {% if application.tables.length > 0 %}{% set hasTables = true %}{% else %}{% set hasTables = false %}{% endif %}
 import React from 'react'
 import { hydrate, render } from 'react-dom'
@@ -17,10 +23,10 @@ const hist = createBrowserHistory()
 
 const rootElement = document.getElementById('app')
 const app = {% if hasTables %}<Provider store={store}>{% endif %}
-  <Router history={hist}>
-    <ScrollToTop />
-    <App />
-  </Router>
+<Router history={hist}>
+  <ScrollToTop />
+  <App />
+</Router>
 {% if hasTables %}</Provider>{% endif %}
 
 if (rootElement.hasChildNodes()) {

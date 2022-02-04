@@ -15,19 +15,32 @@ options:
   - name: icon
     display: Icon
     type: dropdown
-    options: Send;AllInbox;Menu;DeleteOutline;Favorite;Clear
+    options: >-
+      None;AcUnit;Add;AddShoppingCart;CallMade;HelpOutline;Home;Link;MoreVert;Send;ShoppingBasket;ShoppingCart;SportsBasketball;AllInbox;Menu;DeleteOutline;Favorite;Clear;Google;Facebook;Twitter;Person;ThumbUp
+  - name: iconstyle
+    display: Icon Style
+    type: dropdown
+    options: >-
+      Filled;Outlined;Rounded;TwoTone;Sharp
 sourceType: javascript
 children: []
 */
+{% set addenum = '' %}
+{% if element.values.iconstyle and element.values.iconstyle != 'Filled' %}
+  {% set addenum = element.values.iconstyle %}
+{% endif %}
 {% set bpr %}
-import IconButton from '@material-ui/core/IconButton'
-import {{element.values.icon}}Icon from '@material-ui/icons/{{element.values.icon}}'
+import IconButton from '@mui/material/IconButton'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
-
+{% set bpr %}
+import {{element.values.icon}}{{ addenum }}Icon from '@mui/icons-material/{{element.values.icon}}{{ addenum }}'
+{% endset %}
+{{ save_delayed('bpr', bpr ) }}
 <IconButton
-  {% if element.values.Action %}onClickCapture={ {{ element.values.Action }} }{% endif %}
+  {% if element.values.Action %}onClickCapture={ {{ element.values.Action | functionOrCall }} }{% endif %}
   {% if element.values.className %}className={ {{ element.values.className }} }{% endif %}
 >
-  <{{element.values.icon}}Icon />
+  {% if element.values.icon %}<{{element.values.icon}}{{ addenum }}Icon />{% endif %}
+  {{ content | raw }}
 </IconButton>

@@ -1,52 +1,49 @@
-import React, { useState, FunctionComponent } from 'react'
+/*
+path: Dialog.tsx
+completePath: front-end/components/Dialog/Dialog.tsx
+unique_id: uZJ3fdwZ
+*/
+import AddIcon from '@mui/icons-material/Add'
+import Button from '@mui/material/Button'
+import Dialog from '@mui/material/Dialog'
+import DialogActions from '@mui/material/DialogActions'
+import DialogContent from '@mui/material/DialogContent'
+import DialogContentText from '@mui/material/DialogContentText'
+import DialogTitle from '@mui/material/DialogTitle'
+import Fab from '@mui/material/Fab'
+import Switch from '@mui/material/Switch'
+import Tooltip from '@mui/material/Tooltip'
+import React, { FunctionComponent, useState } from 'react'
 
-// @material-ui/core components
-import AddIcon from '@material-ui/icons/Add'
-import Button from '@material-ui/core/Button'
-import Dialog from '@material-ui/core/Dialog'
-import DialogActions from '@material-ui/core/DialogActions'
-import DialogContent from '@material-ui/core/DialogContent'
-import DialogContentText from '@material-ui/core/DialogContentText'
-import DialogTitle from '@material-ui/core/DialogTitle'
-import IconButton from '@material-ui/core/IconButton'
-import Switch from '@material-ui/core/Switch'
-import Tooltip from '@material-ui/core/Tooltip'
+interface subOptions {
+  title: string
+  text: string
+  button: string
+}
 
 interface addDialogProps {
-  isOpen: boolean,
-  onOpen: VoidFunction,
-  onClose: VoidFunction,
-  title: string,
-  text?: string,
-  button: string,
-  saveDataHandler: Function,
-  color: 'warning' | 'primary' | 'danger' | 'success' | 'info' | 'rose' | 'gray',
-  data: any,
-  initialData: any,
-  setData: Function,
-  allowMultipleSubmit: boolean,
+  isOpen: boolean
+  onOpen: VoidFunction
+  onSave?: VoidFunction
+  onClose?: VoidFunction
+  action: 'add' | 'edit' | 'delete' | ''
+  addOptions: subOptions
+  editOptions: subOptions
+  removeOptions: subOptions
+  saveDataHandler: Function
+  color: 'primary' | 'inherit' | 'secondary' | 'default'
+  data: any
+  initialData: any
+  setData: Function
+  allowMultipleSubmit: boolean
   hideButton?: boolean
 }
 
 const AddDialog: FunctionComponent<addDialogProps> = (props) => {
-  const {
-    isOpen,
-    onOpen,
-    onClose,
-    title,
-    text,
-    button,
-    saveDataHandler,
-    color,
-    data,
-    initialData,
-    setData,
-    allowMultipleSubmit,
-    hideButton
-  } = props
-  
+  const { isOpen, onOpen, onSave, onClose, action, saveDataHandler, color, data, initialData, setData, allowMultipleSubmit, hideButton } = props
+  const [options, setOptions] = useState({ title: '', text: '', button: ''})
   const [switchState, setSwitchState] = useState({ addMultiple: false })
-  
+
   const handleSwitchChange = (name: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
     setSwitchState({ ...switchState, [name]: event.target.checked })
   }
@@ -56,53 +53,65 @@ const AddDialog: FunctionComponent<addDialogProps> = (props) => {
   }
 
   const handleClose = () => {
-    resetSwitch()
-    setData(initialData)
+    if (onSave) {
+      resetSwitch()
+      setData(initialData)
+    }
     onClose()
   }
 
   const handleSubmit = () => {
     saveDataHandler(data)
     setData(initialData)
-    !switchState.addMultiple && handleClose()
+    if (onSave) !switchState.addMultiple && handleClose()
   }
+
+  React.useEffect(() => {
+    switch (action) {
+      case 'add':
+        setOptions(props.addOptions)
+        break
+      case 'edit':
+        setOptions(props.editOptions)
+        break
+      case 'delete':
+        setOptions(props.removeOptions)
+        break
+    }
+
+  }, [action])
 
   return (
     <React.Fragment>
-      {!hideButton &&
-        <Tooltip title={title}>
-          <IconButton aria-label={title} onClick={onOpen} className={color}>
+      {!hideButton && (
+        <Tooltip title={options.title}>
+          <Fab aria-label={options.title} color={color} onClick={onOpen}>
             <AddIcon />
-          </IconButton>
+          </Fab>
         </Tooltip>
-      }
-      <Dialog
-        disableEnforceFocus
-        open={isOpen}
-        onClose={handleClose}
-        aria-labelledby='form-dialog-title'
-      >
-        <DialogTitle id='form-dialog-title'>{title}</DialogTitle>
+      )}
+      <Dialog disableEnforceFocus open={isOpen} onClose={handleClose} aria-labelledby="form-dialog-title" className={props.className}>
+        <DialogTitle id="form-dialog-title">{options.title}</DialogTitle>
         <DialogContent>
-          <DialogContentText>{text}</DialogContentText>
-          {props.children}
+          <DialogContentText>{options.text}</DialogContentText>
+          {action !== 'delete' && <div>{props.children}</div>}
         </DialogContent>
         <DialogActions>
-          {allowMultipleSubmit &&
+          {allowMultipleSubmit && (
             <Tooltip title="Add multiple">
               <Switch
                 checked={switchState.addMultiple}
                 onChange={handleSwitchChange('addMultiple')}
                 value="addMultiple"
-                inputProps={ { 'aria-label': 'secondary checkbox' } }
+                inputProps={ { 'aria-label': 'add multiple' } }
               />
             </Tooltip>
-          }
+          )}
           <Button onClick={handleClose} color="primary">
             Cancel
           </Button>
           <Button onClick={handleSubmit} color="primary">
-            {button}
+            {options.button}
           </Button>
         </DialogActions>
       </Dialog>

@@ -1,5 +1,6 @@
 /*
 path: themeSelection.tpl
+completePath: elements/Experimental/themeSelection.tpl
 type: file
 unique_id: rtGqPUwH
 icon: ico-theme-selection
@@ -7,7 +8,7 @@ options:
   - name: theme
     display: Theme
     type: dropdown
-    options: website;whatsapp;layout;fantasyx;crm
+    options: website;whatsapp;layout;fantasyx;crm;minimum;prototyping
   - name: useAsset
     display: Use an Asset
     type: dropdown
@@ -21,9 +22,7 @@ options:
 
         var selectedAsset = element.values?.useAsset
 
-        console.log('onchange', element, selectedAsset)
-
-        //if (selectedAsset !== 'none') {
+        if (selectedAsset !== 'none') {
 
         //  const assetInfo = aptugo.assetUtils.stylesheets().find(ss => ss.id
         === //selectedAsset)
@@ -33,34 +32,23 @@ options:
 
         //  aptugo.variables.setPageVariable(currentPage,{ theme: assetInfo })
 
-        //  console.log(assetInfo)
-
-        //}
-      aptugoOnLoad: >-
-        element = arguments[0]
-
-        var selectedAsset = element.values?.useAsset
-
-        console.log('onload', element, selectedAsset)
-
-        //if (selectedAsset !== 'none') {
-
-        //  const assetInfo = aptugo.assetUtils.stylesheets().find(ss => ss.id
-        === selectedAsset)
-
-        //  const currentPage =
-        aptugo.pageUtils.findContainerPage(element).unique_id
-
-        //  aptugo.variables.setPageVariable(currentPage,{ theme: assetInfo })
-
-        //  console.log(assetInfo)
-
-        //}
+          console.log('onchange', element, selectedAsset)
+        }
+      aptugoOnLoad: |-
+        element = arguments[0];
+        var selectedAsset = (element.values?.useAsset && element.values?.useAsset !== 'none') ? element.values?.useAsset : null;
+        if (selectedAsset) {
+          const assetInfo = aptugo.assetUtils.stylesheets().find(ss => ss.id === selectedAsset);
+          const currentPage = aptugo.pageUtils.findContainerPage(element).unique_id;
+          const cssinfo = aptugo.assetUtils.grabCssSelectors(assetInfo)
+          aptugo.variables.setPageVariable(currentPage, element.unique_id, { theme: cssinfo })
+        }
 sourceType: javascript
 children: []
 */
+
 // Theme selection
-{% if element.values.useAsset %}
+{% if element.values.useAsset and element.values.useAsset != 'none' %}
   {% set asset = element.values.useAsset|assetData %}
   {% set theme = asset.name|friendly %}
   {% set bpr %}
@@ -69,7 +57,7 @@ children: []
 {% else %}
   {% set theme = element.values.theme %}
   {% set bpr %}
-    import {{ element.values.theme }} from './{{ element.values.theme }}.module.scss'
+    import {{ element.values.theme }} from '../components/Themes/{{ element.values.theme }}.module.scss'
   {% endset %}
 {% endif %}
 {{ save_delayed('bpr',bpr) }}

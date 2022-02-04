@@ -1,9 +1,0 @@
-{
-  "label": "Text",
-  "value": "String",
-  "dataType": "String",
-  "initialValue": "''",
-  "options": {
-    "frontEndType": "string"
-  }
-}
