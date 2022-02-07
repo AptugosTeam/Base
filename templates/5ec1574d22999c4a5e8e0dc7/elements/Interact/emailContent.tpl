@@ -28,7 +28,7 @@ function {{ element.values.internalfunctionName|default('InlineLink') }}(emailPa
     return `${doctype}${_server2.default.renderToStaticMarkup(emailComponent).replaceAll('/img/','{{ settings.url }}/img/')}`
   }
 
-  return renderEmail(emailParameters.content || <div>{{ content | raw }}</div>)
+  return emailParameters.content || renderEmail(<div>{{ content | raw }}</div>)
 }
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
