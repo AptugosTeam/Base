@@ -19,7 +19,7 @@ options:
 {% set bpr %}
 import _server from 'react-dom/server'
 
-function {{ element.values.internalfunctionName|default('InlineLink') }}(emailParameters = null) {
+function {{ element.values.internalfunctionName|default('InlineLink') }}(emailParameters:any = {}) {
   var _server2 = _interopRequireDefault(_server)
   function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28,7 +28,7 @@ function {{ element.values.internalfunctionName|default('InlineLink') }}(emailPa
     return `${doctype}${_server2.default.renderToStaticMarkup(emailComponent).replaceAll('/img/','{{ settings.url }}/img/')}`
   }
 
-  return renderEmail(<div>{{ content | raw }}</div>)
+  return renderEmail(emailParameters.content || <div>{{ content | raw }}</div>)
 }
 {% endset %}
 {{ save_delayed('bpr',bpr) }}

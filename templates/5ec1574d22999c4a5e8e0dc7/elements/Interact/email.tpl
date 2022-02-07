@@ -135,17 +135,19 @@ import axios from 'axios'
 {% else %}
 {% set functionName = 'sendEmail' %}
 {% endif %}
-const {{ functionName }} = (to, extra = {}) => {
+const {{ functionName }} = (to, extra:any = {}) => {
+    const from = extra.from || '{{ element.values.from }}'
+    const subject = extra.subject || {{ element.values.subject }}
     const messageHtml = {{ element.values.internalfunctionName|default('InlineLink') }}({{ element.values.parameters }})
     axios({
       method: "POST", 
       url:"{{ settings.apiURL | raw }}/api/sendEmail",
       data: {
-        name: '{{ element.values.from }}',
+        name: from,
         email: to,
         messageHtml: messageHtml,
         extra: extra,
-        subject: {{ element.values.subject }}
+        subject: subject
       }
     }).then((response)=>{
       if (response.data.msg === 'success'){
