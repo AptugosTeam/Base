@@ -33,11 +33,11 @@ settings:
     value: |
       const stripe = require('stripe')('{{ element.values.apikey }}');
 
-      app.post('/create-checkout-session/:qty?', async (req, res) => {
+      app.post('/create-checkout-session/:qty?/:productid?', async (req, res) => {
         const session = await stripe.checkout.sessions.create({
           line_items: [
             {
-              price: '{{ element.values.priceItem }}',
+              price: req.params.productid || '{{ element.values.priceItem }}',
               quantity: req.params.qty || 1,
             },
           ],
