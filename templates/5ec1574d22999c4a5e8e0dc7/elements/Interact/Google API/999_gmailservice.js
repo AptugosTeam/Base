@@ -1,10 +1,9 @@
 /*
-path: gmail.service.js
+path: 999_gmailservice.js
 type: file
 unique_id: PNnWiHgb
 icon: ico-field
 */
-import { GetAppOutlined } from "@mui/icons-material"
 
 class AptugoGmail {
   listLabels() {
@@ -143,8 +142,8 @@ class AptugoGmail {
   initClient() {
     const that = this
     gapi.client.init({
-      "clientId": "185605994716-utet8l1cj4inlpe30iso2j6nug3b4m4h.apps.googleusercontent.com",
-      "apiKey": "stWlxJHTVWFmv4AEB4cTDzet",
+      "clientId": "{{ element.values.clientId }}",
+      "apiKey": "{{ element.values.apiKey }}",
       "scope": "https://mail.google.com/ https://www.googleapis.com/auth/gmail.modify https://www.googleapis.com/auth/gmail.readonly",
       "discoveryDocs": ["https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest"]
     }).then(function () {

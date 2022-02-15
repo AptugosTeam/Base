@@ -200,16 +200,6 @@
                   "selectedFile": null
                 },
                 {
-                  "path": "gmail.service.js",
-                  "type": "file",
-                  "unique_id": "PNnWiHgb",
-                  "selected": true,
-                  "icon": "ico-field",
-                  "source": null,
-                  "selectedFile": null,
-                  "children": []
-                },
-                {
                   "path": "errors.service.js",
                   "type": "file",
                   "unique_id": "3iZoDZ1n",
