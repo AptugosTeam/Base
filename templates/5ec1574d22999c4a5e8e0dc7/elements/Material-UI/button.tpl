@@ -61,6 +61,7 @@ import Button from '@mui/material/Button'
   {% if element.values.className %}className={ {{ element.values.className }} }{% endif %}
   {% if element.values.fullWidth %}fullWidth{% endif %}
   {% if element.values.icon and element.values.icon != 'None' %}startIcon={<{{ element.values.icon }}Icon />}{% endif %}
+  {% if element.values.disabled %}disabled{% endif %}  
 >
   {{ element.values.ButtonText }}{{ content | raw }}
 </Button>
