@@ -25,6 +25,11 @@ unique_id: gaESHtLJ
         "display": "Validation Regexp",
         "value": "regexp",
         "type": "text"
+      },
+      {
+        "display": "Valid Email",
+        "value": "validEmail",
+        "type": "checkbox"
       }
     ]
   }
