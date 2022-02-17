@@ -81,7 +81,7 @@ async function authenticate({ email, password, model, passwordField }) {
 
     promise.then((user) => {
       if (!user) {
-        reject({ message: 'Email not found' })
+        return reject({ message: 'Email not found' })
       }
 
       bcrypt.compare(password, user[passwordField]).then((isMatch) => {

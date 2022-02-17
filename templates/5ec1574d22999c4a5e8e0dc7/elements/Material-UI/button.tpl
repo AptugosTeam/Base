@@ -25,7 +25,7 @@ options:
   - name: Color
     display: Color
     type: dropdown
-    options: inherit;primary;secondary;success;error;info;warning
+    options: default;inherit;primary;secondary
     settings:
       default: primary
   - name: disabled
