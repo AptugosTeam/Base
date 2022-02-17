@@ -30,8 +30,10 @@ options:
       default: primary
   - name: disabled
     display: Disabled
-    type: checkbox
+    type: variable
     options: ''
+    settings:
+      active: true
   - name: fullWidth
     display: Full Width
     type: checkbox
@@ -61,7 +63,7 @@ import Button from '@mui/material/Button'
   {% if element.values.className %}className={ {{ element.values.className }} }{% endif %}
   {% if element.values.fullWidth %}fullWidth{% endif %}
   {% if element.values.icon and element.values.icon != 'None' %}startIcon={<{{ element.values.icon }}Icon />}{% endif %}
-  {% if element.values.disabled %}disabled{% endif %}  
+  {% if element.values.disabled %}disabled={ {{element.values.disabled}} }{% endif %} 
 >
   {{ element.values.ButtonText }}{{ content | raw }}
 </Button>
