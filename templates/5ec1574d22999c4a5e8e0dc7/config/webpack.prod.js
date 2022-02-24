@@ -34,6 +34,7 @@ module.exports = merge(commonConfig, {
         {
           from: 'dist/img',
           to: 'img',
+          noErrorOnMissing: true
         },
       ],
     }),

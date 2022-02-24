@@ -42,7 +42,7 @@ Application.settings = {
       dbconnectstring: `mongodb://127.0.0.1:27017/${username}`
     },
     stagging: {
-      apiURL: `https://${appname}.aptugo.com:3456`,
+      apiURL: `https://${appname}_beta.aptugo.app`,
       type: 'Local',
       folder: `${appname}_stagging`,
       template: defaultTemplate ? defaultTemplate[0]._id : '',
@@ -50,19 +50,16 @@ Application.settings = {
       dbconnectstring: `mongodb://127.0.0.1:27017/${username}`
     },
     production: {
-      apiURL: `https://${appname}.aptugo.com:3456`,
-      type: 'Local',
+      apiURL: `https://${appname.toLowerCase()}_beta.backend.aptugo.app`,
+      type: 'Remote (Aptugo)',
       folder: appname,
       template: defaultTemplate ? defaultTemplate[0]._id : '',
-      url: `https://${appname.toLowerCase()}.aptugo.com`,
-      dbconnectstring: `mongodb://${dbusername}:${dbpassword}@127.0.0.1:27017/${username}?authSource=admin`
+      url: `https://${appname.toLowerCase()}_beta.aptugo.app`,
+      dbconnectstring: `mongodb://127.0.0.1:27017/${appname.toLowerCase()}`
     }
 }
 
-
 // aptugo.createdbuser({ dbName: username, user: dbusername, pwd: dbpassword })
-
-
 
 Application._id = aptugo.generateID(16)
 return Application
