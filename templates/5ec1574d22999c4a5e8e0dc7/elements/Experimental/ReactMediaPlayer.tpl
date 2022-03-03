@@ -25,7 +25,7 @@ const { PlayPause, MuteUnmute } = controls
 <Media>
   <div className="media">
     <div className="media-player">
-      <Player src="http://www.youtube.com/embed/h3YVKTxTOgU" />
+      <Player src={{element.values.playVideo}} />
     </div>
     <div className="media-controls">
       <PlayPause /><MuteUnmute />
