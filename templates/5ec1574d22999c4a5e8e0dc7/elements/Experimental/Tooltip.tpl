@@ -70,7 +70,7 @@ import Tooltip from '@mui/material/Tooltip'
 {% set followCursor = element.values.followCursor|default(false) %}
 
 <Tooltip
-    title="{{ element.values.content }}"
+    title={{ element.values.content | textOrVariable }}
     {% if element.values.placement %}placement='{{ element.values.placement }}'{% endif %}
     {% if arrow %}arrow{% endif %}
     {% if disableInteractive %}disableInteractive{% endif %}

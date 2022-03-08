@@ -57,6 +57,10 @@ options:
     display: Search String
     type: text
     options: ''
+  - name: useExactMatch
+    display: Should use an exact match?
+    type: checkbox
+    options: ''
   - name: fieldToSearch
     display: Field To Search
     type: text
@@ -151,6 +155,7 @@ React.useEffect(() => {
     {% if element.values.fixedSearchField %}, fixedSearch: { field: {{ element.values.fixedSearchField}}, value: {{ element.values.fixedSearchString }} }{% endif %}
     {% if element.values.fieldToSearch %}, searchField: {{ element.values.fieldToSearch | textOrVariable }}{% endif %}
     {% if element.values.searchString %}, searchString: {{ element.values.searchString }}{% endif %}
+    {% if element.values.useExactMatch %}, exactMatch: {{ element.values.useExactMatch }}{% endif %}
   })
 },[{{ innervarname }}loadoptions{% if element.values.searchString %}, {{ element.values.searchString }}{% endif %}])
 {% endset %}

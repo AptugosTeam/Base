@@ -123,7 +123,11 @@ exports.find = (options) => {
       if (query.searchString === 'true' || query.searchString === 'false') {
         findString = { [query.searchField]: !!query.searchString }
       } else {
-        findString = { [query.searchField]: { $regex : new RegExp(query.searchString, "i") } }
+        if (query.exactMatch) {
+          findString = { [query.searchField]: query.searchString }
+        } else {
+          findString = { [query.searchField]: { $regex : new RegExp(query.searchString, "i") } }
+        }
       }
       
       if ({{ table.name | friendly }}.schema.path(query.searchField).instance === 'ObjectID' || {{ table.name | friendly }}.schema.path(query.searchField).instance === 'Array') {
