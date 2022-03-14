@@ -17,7 +17,8 @@ options:
         const page = aptugo.pageUtils.findContainerPage(element.unique_id).unique_id;
         const usesVariable = element.values.variable
         const newLocalVarName = element.values.variablename || 'item'
-        finalVarsToAdd = { [newLocalVarName]: allVariables.find(thevar => thevar.name === usesVariable).value }
+        const foundVariable = allVariables.find(thevar => thevar.name === usesVariable)
+        finalVarsToAdd = { [newLocalVarName]: foundVariable ? foundVariable.value : ''}
         aptugo.variables.setElementVariable(element.unique_id, finalVarsToAdd);
       active: true
   - name: variablename

@@ -22,10 +22,7 @@ options:
       aptugo.variables.retrievePageVariablesFromElement(arguments[0],'theme') )
   - name: className
     display: ClassName
-    type: chips
-    options: >-
-      return aptugo.assetUtils.grabCssSelectors(
-      aptugo.variables.retrievePageVariablesFromElement(arguments[0],'theme') )
+    type: styles
   - name: alt
     display: Alt Text
     type: text

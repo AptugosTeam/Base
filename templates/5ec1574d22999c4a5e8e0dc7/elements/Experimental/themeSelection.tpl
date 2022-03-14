@@ -41,7 +41,7 @@ options:
           const assetInfo = aptugo.assetUtils.stylesheets().find(ss => ss.id === selectedAsset);
           const currentPage = aptugo.pageUtils.findContainerPage(element).unique_id;
           const cssinfo = aptugo.assetUtils.grabCssSelectors(assetInfo)
-          aptugo.variables.setPageVariable(currentPage, element.unique_id, { theme: cssinfo })
+          aptugo.variables.setPageVariable(currentPage, element.unique_id, { theme: cssinfo, hidden: selectedAsset })
         }
 sourceType: javascript
 children: []

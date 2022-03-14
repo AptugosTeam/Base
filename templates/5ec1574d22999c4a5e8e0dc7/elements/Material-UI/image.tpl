@@ -24,10 +24,7 @@ options:
       aptugo.variables.retrievePageVariablesFromElement(arguments[0],'theme') )
   - name: className
     display: ClassName
-    type: chips
-    options: >-
-      return aptugo.assetUtils.grabCssSelectors(
-      aptugo.variables.retrievePageVariablesFromElement(arguments[0],'theme') )
+    type: styles
   - name: alt
     display: Alt Text
     type: text
@@ -68,13 +65,12 @@ options:
     {% endfor %}
   {% endif %}
 {% endif %}
-<picture
-  {% if element.values.className %}className={ {{element.values.className}} }{% endif %}
->
+<picture>
   {% if webppath %}
   <source type="image/webp" srcSet="{{ webppath }}" />
   {% endif %}
   <img
+    {% if element.values.className %}className={ {{element.values.className}} }{% endif %}
     src={{ path|textOrVariable }}
     alt={{ element.values.alt|textOrVariable|default(path|textOrVariable) }}
     {% if width %}width={{ width|textOrVariable }}{% endif %}

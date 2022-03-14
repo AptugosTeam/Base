@@ -6,10 +6,7 @@ unique_id: efavXTy7
 options:
   - name: className
     display: ClassName
-    type: chips
-    options: >-
-      return aptugo.assetUtils.grabCssSelectors(
-      aptugo.variables.retrievePageVariablesFromElement(arguments[0],'theme') )
+    type: styles
   - name: elevation
     display: Elevation
     type: text

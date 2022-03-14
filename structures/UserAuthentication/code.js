@@ -675,6 +675,30 @@ const RegisterPage = {
         "modulePath": "../services/auth.service"
       },
       "children": [],
+    }, {
+      "name": "IState",
+      "prevent_delete": false,
+      "cascades": false,
+      "type": "element",
+      "value": "import",
+      "collapseStatus": "expand",
+      "values": {
+        "moduleName": "{ IState }",
+        "modulePath": "../store/reducers/index"
+      },
+      "children": [],
+    }, {
+      "name": "UseSelector",
+      "prevent_delete": false,
+      "cascades": false,
+      "type": "element",
+      "value": "import",
+      "collapseStatus": "expand",
+      "values": {
+        "moduleName": "{ useSelector }",
+        "modulePath": "react-redux"
+      },
+      "children": [],
     }],
     "name": "Before Page Render",
     "type": "element",
@@ -685,6 +709,18 @@ const RegisterPage = {
   }, {
     "children": [{
       "children": [{
+        "name": "Define usersData",
+        "prevent_delete": false,
+        "cascades": false,
+        "type": "element",
+        "value": "defineVariable",
+        "collapseStatus": "expand",
+        "values": {
+          "variableName": "usersData",
+          "variableValue": "useSelector((state: IState) => state.users)"
+        },
+        "children": [],
+      },{
         "name": "Register Error",
         "prevent_delete": false,
         "cascades": false,
