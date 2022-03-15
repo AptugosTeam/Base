@@ -16,6 +16,9 @@ options:
   - name: avoidLoad
     display: Do not load data
     type: checkbox
+  - name: placeholderText
+    display: Placeholder Text
+    type: text
 */
 {% set table = element.values.table | tableData %}
 {% set bpr %}
@@ -43,5 +46,5 @@ const searchFor{{ table.name | friendly }} = (event) => {
 {% if not element.values.avoidLoad %}
   {% include includeTemplate('loadFromRedux.tpl') with { 'data': element.values.table, 'element': element} %}
 {% endif %}
-{% set searchFieldParams = { element: { values: { onChange: 'searchFor' ~ table.name|friendly, placeholder: 'Search ' ~ table.singleName|friendly ~ '...', variant: 'outlined', margin: 'normal', className: 'theme.extensibleInput' } } } %}
+{% set searchFieldParams = { element: { values: { onChange: 'searchFor' ~ table.name|friendly, placeholder: {{ element.values.placeholderText | default('Search ' ~ table.singleName|friendly ~ '...') }}, variant: 'outlined', margin: 'normal', className: 'theme.extensibleInput' } } } %}
 {% include includeTemplate('uncontrolledInput.tpl') with searchFieldParams %}
