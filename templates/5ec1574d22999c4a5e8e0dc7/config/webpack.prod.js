@@ -26,6 +26,9 @@ module.exports = merge(commonConfig, {
     new CopyPlugin({
       patterns: [
         {
+          from: 'dist/.htaccess',
+        },
+        {
           from: 'dist/robots.txt',
         },
         {
