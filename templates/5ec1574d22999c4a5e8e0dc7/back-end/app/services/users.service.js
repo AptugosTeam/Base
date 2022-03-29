@@ -69,6 +69,9 @@ async function authenticate({ email, password, model, passwordField }) {
   if (!model) {
     const Users = require('../models/users.model.js')
     model = Users
+  } else if (typeof model === 'string') {
+    const Users = require('../models/' + model + '.model.js')
+    model = Users
   }
 
   if (!passwordField) {

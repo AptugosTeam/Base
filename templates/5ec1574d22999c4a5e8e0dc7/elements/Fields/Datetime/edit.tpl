@@ -14,9 +14,12 @@ import TextField from '@mui/material/TextField'
   label="{{ field.prompt|default(field.column_name) }}"
   type="datetime-local"
   fullWidth
-  value={ {{ tableName }}data.{{ field.column_name | friendly }}?.slice(0,16) || '' }
+  step="900"
+  value={ {{ tableName }}data.{{ field.column_name | friendly }} ? new Date(new Date({{ tableName }}data.{{ field.column_name | friendly }}).setMinutes(new Date({{ tableName }}data.{{ field.column_name | friendly }}).getMinutes() - new Date().getTimezoneOffset())).toISOString().slice(0,16) : '' }
   onChange={handle{{ tableName }}Change("{{ field.column_name | friendly }}")}
   InputLabelProps={ {
     shrink: true,
   } }
 />
+
+
