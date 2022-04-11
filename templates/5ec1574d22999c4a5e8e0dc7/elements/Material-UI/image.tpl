@@ -43,6 +43,10 @@ options:
     options: >-
       return aptugo.assetUtils.grabCssSelectors(
       aptugo.variables.retrievePageVariablesFromElement(arguments[0],'theme') )
+  - name: onError
+    display: On Error
+    type: text
+    advanced: true
 */
 {% set path = element.values.path %}
 {% set webppath = element.values.webppath %}
@@ -75,6 +79,7 @@ options:
     alt={{ element.values.alt|textOrVariable|default(path|textOrVariable) }}
     {% if width %}width={{ width|textOrVariable }}{% endif %}
     {% if height %}height={{ height|textOrVariable }}{% endif %}
+    {% if element.values.onError %}onError={ {{element.values.onError}} }{% endif %}
   />
 </picture>
 

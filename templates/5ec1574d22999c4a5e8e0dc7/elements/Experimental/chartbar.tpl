@@ -59,6 +59,21 @@ options:
     display: Use Code instead
     type: text
     options: ''
+  - name: EnableGridY
+    display: Enable Grid Y
+    type: checkbox
+    settings:
+      default: 'true'
+      active: true
+  - name: DisableMargin
+    display: Disable margin
+    type: checkbox
+  - name: DisableAxisBottom
+    display: Disable Axis Bottom
+    type: checkbox
+  - name: DisableAxisLeft
+    display: Disable Axis Left
+    type: checkbox
 children: []
 */
 {% set bpr %}
@@ -99,28 +114,29 @@ import { {% if element.values.Responsive %}ResponsiveBar{% else %}Bar{% endif %}
   data={ {% if element.values.Index == 'useVar' %}{{ element.values.Variable }}{% else %}chartdata{% endif %} }
   keys={ {{ valuesName }} }
   groupMode='grouped'
-        margin={ { top: 50, right: 50, bottom: 50, left: 60 } }
+  {% if not element.values.DisableMargin %}margin={ { top: 50, right: 50, bottom: 50, left: 60 } }{% endif %}
         padding={0.3}
         borderColor={ { from: 'color', modifiers: [ [ 'darker', 1.6 ] ] } }
         axisTop={null}
         axisRight={null}
-        enableLabel={false} 
-        axisBottom={ {
+        enableGridY={ {% if element.values.enableGridY %}true{% else %}false{% endif %} }
+        enableLabel={false}
+        {% if not element.values.DisableAxisBottom %}axisBottom={ {
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
             legend: 'response',
             legendPosition: 'middle',
             legendOffset: 32
-        } }
-        axisLeft={ {
+        } }{% endif %}
+        {% if not element.values.DisableAxisLeft %}axisLeft={ {
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
             legend: '{{ element.values.LeftAxisLegend }}',
             legendPosition: 'middle',
             legendOffset: -40
-        } }
+        } }{% endif %}
         labelSkipWidth={12}
         labelSkipHeight={12}
         labelTextColor={ { from: 'color', modifiers: [ [ 'darker', 1.6 ] ] } }

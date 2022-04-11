@@ -15,10 +15,18 @@ module.exports = {
 }
 
 async function recoverPassword(req) {
-  const { name, email, message, subject } = req.body
+  let { name, email, message, subject, model } = req.body
+  if (!model) {
+    const Users = require('../models/users.model.js')
+    model = Users
+  } else if (typeof model === 'string') {
+    const Users = require('../models/' + model + '.model.js')
+    model = Users
+  }
+
   return new Promise(function (resolve, reject) {
     if (!email) reject({ message: 'Wrong parameters sent' })
-    const query = Users.findOne({ Email: email })
+    const query = model.findOne({ Email: email })
     const promise = query.exec()
 
     promise.then((user) => {
@@ -35,14 +43,20 @@ async function recoverPassword(req) {
   })
 }
 
-async function checkNonce(req) {
+async function checkNonce(req, model = null) {
   return new Promise(function (resolve, reject) {
+    if (!model) {
+      const Users = require('../models/users.model.js')
+      model = Users
+    } else if (typeof model === 'string') {
+      const Users = require('../models/' + model + '.model.js')
+      model = Users
+    }
     const { nonce, email } = req.body
     const asciiEMail = Buffer.from(email, 'base64').toString('ascii')
     const ascii = Buffer.from(nonce, 'base64').toString('ascii')
-    const query = Users.findOne({ Email: email })
+    const query = model.findOne({ Email: asciiEMail })
     const promise = query.exec()
-
     promise.then((user) => {
       const { Password, ...userWithoutPassword } = user._doc
       bcrypt.compare(JSON.stringify(userWithoutPassword), ascii).then((isMatch) => {
@@ -61,6 +75,9 @@ async function authenticate({ email, password, model, passwordField }) {
   if (!model) {
     const Users = require('../models/users.model.js')
     model = Users
+  } else if (typeof model === 'string') {
+    const Users = require('../models/' + model + '.model.js')
+    model = Users
   }
 
   if (!passwordField) {
@@ -68,19 +85,16 @@ async function authenticate({ email, password, model, passwordField }) {
   }
   return new Promise(function (resolve, reject) {
     if (!email || !password) reject({ message: 'Wrong parameters sent' })
-
-    const query = model.findOne({ Email: email })
+    const query = model.findOne({ Email: new RegExp('^' + email.toLowerCase(), 'i') })
     const promise = query.exec()
 
     promise.then((user) => {
-      console.log(user, 'user')
       if (!user) {
-        reject({ message: 'Email not found' })
+        return reject({ message: 'Email not found' })
       }
 
       bcrypt.compare(password, user[passwordField]).then((isMatch) => {
         if (isMatch) {
-          console.log(user)
           const { Password, ...userWithoutPassword } = user._doc
           const token = jwt.sign(userWithoutPassword, 'thisisthesecretandshouldbeconfigurable', { expiresIn: '7d' })
           resolve({ accessToken: token, data: userWithoutPassword })

@@ -21,7 +21,7 @@ const errors = require('../services/errors.service')
 {% endfor %}
 
 // Create and Save a new {{ table.singleName | friendly }}
-exports.create = (options) => {
+exports.create = async (options) => {
   const data = options.req ? options.req.body : options.data
   const updatedData = {}
 
@@ -54,7 +54,7 @@ exports.create = (options) => {
 }
 
 exports.createAsPromise = (options) => {
-  return new Promise((resolve, reject) => {
+  return new Promise(async (resolve, reject) => {
     const data = options.req ? options.req.body : options.data
     const updatedData = {}
     if (data._id) updatedData._id = data._id
@@ -200,7 +200,7 @@ exports.findOne = ( options ) => {
 
 // Update a {{ table.singleName | friendly | lower }} identified by the ID in the request
 exports.update = (options) => {
-  return new Promise((resolve, reject) => {
+  return new Promise(async (resolve, reject) => {
     const id = options.req ? options.req.params.ID : options.ID
     const data = options.req ? options.req.body : options.data
     const updatedData = {}

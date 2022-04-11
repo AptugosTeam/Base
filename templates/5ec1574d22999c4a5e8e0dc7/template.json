@@ -6493,6 +6493,12 @@
       "initialValue": ""
     },
     {
+      "label": "Computed",
+      "value": "Computed",
+      "dataType": "Number",
+      "initialValue": ""
+    },
+    {
       "label": "Number",
       "value": "Number",
       "dataType": "Number",

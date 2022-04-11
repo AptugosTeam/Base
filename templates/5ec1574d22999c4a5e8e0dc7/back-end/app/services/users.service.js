@@ -14,10 +14,13 @@ module.exports = {
   checkNonce,
 }
 
-async function recoverPassword(req, model = null) {
-  const { name, email, message, subject } = req.body
+async function recoverPassword(req) {
+  let { name, email, message, subject, model } = req.body
   if (!model) {
     const Users = require('../models/users.model.js')
+    model = Users
+  } else if (typeof model === 'string') {
+    const Users = require('../models/' + model + '.model.js')
     model = Users
   }
 
@@ -40,13 +43,17 @@ async function recoverPassword(req, model = null) {
   })
 }
 
-async function checkNonce(req, model = null) {
+async function checkNonce(req) {
   return new Promise(function (resolve, reject) {
+    let { nonce, email, model } = req.body
     if (!model) {
       const Users = require('../models/users.model.js')
       model = Users
+    } else if (typeof model === 'string') {
+      const Users = require('../models/' + model + '.model.js')
+      model = Users
     }
-    const { nonce, email } = req.body
+
     const asciiEMail = Buffer.from(email, 'base64').toString('ascii')
     const ascii = Buffer.from(nonce, 'base64').toString('ascii')
     const query = model.findOne({ Email: asciiEMail })
@@ -79,7 +86,7 @@ async function authenticate({ email, password, model, passwordField }) {
   }
   return new Promise(function (resolve, reject) {
     if (!email || !password) reject({ message: 'Wrong parameters sent' })
-    const query = model.findOne({ Email: new RegExp('^' + email.toLowerCase(), 'i')  })
+    const query = model.findOne({ Email: new RegExp('^' + email.toLowerCase(), 'i') })
     const promise = query.exec()
 
     promise.then((user) => {
