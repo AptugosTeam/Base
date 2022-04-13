@@ -42,7 +42,7 @@ Application.settings = {
       dbconnectstring: `mongodb://127.0.0.1:27017/${username}`
     },
     stagging: {
-      apiURL: `https://${appname}_${aptugo.friendly(localStorage.getItem('license'))}.aptugo.app`,
+      apiURL: `https://${appname}_${aptugo.friendly(aptugo.ls.getItem('license'))}.aptugo.app`,
       type: 'Local',
       folder: `${appname}_stagging`,
       template: defaultTemplate ? defaultTemplate[0]._id : '',
@@ -50,11 +50,11 @@ Application.settings = {
       dbconnectstring: `mongodb://127.0.0.1:27017/${username}`
     },
     production: {
-      apiURL: `https://${appname.toLowerCase()}_${aptugo.friendly(localStorage.getItem('license'))}.backend.aptugo.app`,
+      apiURL: `https://${appname.toLowerCase()}_${aptugo.friendly(aptugo.ls.getItem('license'))}.backend.aptugo.app`,
       type: 'Remote (Aptugo)',
       folder: appname,
       template: defaultTemplate ? defaultTemplate[0]._id : '',
-      url: `https://${appname.toLowerCase()}_${aptugo.friendly(localStorage.getItem('license'))}.aptugo.app`,
+      url: `https://${appname.toLowerCase()}_${aptugo.friendly(aptugo.ls.getItem('license'))}.aptugo.app`,
       dbconnectstring: `mongodb://127.0.0.1:27017/${appname.toLowerCase()}`
     }
 }

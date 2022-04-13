@@ -13,7 +13,7 @@ module.exports = class memCache {
       var stats = fs.statSync(__dirname + '/cache/' + file)
       let minutes = (new Date().getTime() - stats.mtime) / 1000 / 60
       if (minutes > timeout) {
-        return null 
+        return null
       } else {
         return fs.readFileSync(__dirname + '/cache/' + file)
       }
@@ -22,11 +22,15 @@ module.exports = class memCache {
     }
   }
 
-  save(url, contents) {
+  save(url, contents, binary = false) {
     const file = hash.md5(url)
     if (!fs.existsSync(__dirname + '/cache/')) {
       fs.mkdirSync(__dirname + '/cache')
     }
-    fs.writeFileSync(__dirname + '/cache/' + file, JSON.stringify(contents), { flag: 'w' })
+    if (!binary) {
+      fs.writeFileSync(__dirname + '/cache/' + file, JSON.stringify(contents), { flag: 'w' })
+    } else {
+      fs.writeFileSync(__dirname + '/cache/' + file, contents, { flag: 'w' })
+    }
   }
 }

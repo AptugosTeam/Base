@@ -4,6 +4,7 @@ type: file
 unique_id: IUyfyTiR
 icon: ico-table
 sourceType: javascript
+calculatedName: (a) => { console.log(a); return 'something' } 
 options:
   - name: table
     display: Table
@@ -37,6 +38,12 @@ options:
     settings:
       default: true
       condition: ''
+  - name: editionTable
+    display: Table used in Edits (or deletes)
+    type: dropdown
+    options: >-
+      return [...aptugo.store.getState().application.tables.map(({ unique_id,
+      name }) => [unique_id, name])]
   - name: allowDeletion
     display: Allow Deletion
     type: checkbox
@@ -85,6 +92,10 @@ children: []
 {% set allowDeletion = element.values.allowDeletion|default(true) %}
 {% set tableFields = [] %}
 {% if element.values.table == 'var' %}
+  {% set table = element.values.editionTable | tableData %}
+  {% set tableName = table.name | friendly %}
+  {% set tableSingleName = table.singleName | friendly | capitalize %}
+  {% set setEditDataFunctionName = 'set' ~ tableName ~ 'Data' %}
   {% for field in element.children %}
     {% if field.values.Field == 'useVar' %}
       {% set tableFields = tableFields|merge([field.values.columnName]) %}
