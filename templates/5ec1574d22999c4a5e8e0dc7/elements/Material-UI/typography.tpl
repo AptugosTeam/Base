@@ -5,6 +5,14 @@ unique_id: hmTuTaFz
 children: []
 icon: ico-typography
 helpText: Renders different typographic html elements
+calculatedName: >-
+  function (ele) { 
+    try {
+      return ele.values.tag
+    } catch(e) {
+      return 'Typography'
+    }
+  }
 options:
   - name: tag
     display: Tag

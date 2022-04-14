@@ -4,7 +4,16 @@ type: file
 unique_id: IUyfyTiR
 icon: ico-table
 sourceType: javascript
-calculatedName: (a) => { console.log(a); return 'something' } 
+calculatedName: >-
+  function (ele) { 
+    try {
+      const tblname = aptugo.store.getState().application.tables.find(tbl => tbl.unique_id === ele.values.table).name
+      const calc = tblname + ' Table'
+      return calc
+    } catch(e) {
+      return 'Table'
+    }
+  }
 options:
   - name: table
     display: Table

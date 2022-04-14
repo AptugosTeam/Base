@@ -6,6 +6,16 @@ type: file
 unique_id: 2uzdPTtK
 icon: ico-load-redux
 sourceType: javascript
+calculatedName: >-
+  function (ele) { 
+    try {
+      const tblname = aptugo.store.getState().application.tables.find(tbl => tbl.unique_id === ele.values.data).name
+      const calc = 'Load ' + tblname + ' from database'
+      return calc
+    } catch(e) {
+      return ele.name
+    }
+  }
 options:
   - name: data
     display: Data
