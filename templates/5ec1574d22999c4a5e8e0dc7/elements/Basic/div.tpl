@@ -20,7 +20,7 @@ options:
     options: ''
   - name: onclick
     display: On Click
-    type: text
+    type: function
     options: ''
   - name: ref
     display: Use Reference

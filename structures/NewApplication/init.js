@@ -3,7 +3,7 @@
 // Backwards compatibility
 if (State.usersReducer) {
   if (State.usersReducer.apps.find(app => app.settings.name === Parameters.Name)) {
-    const error = 'Application with the same name exists'
+    const error = 'Application with the same name exists (reducer)'
     Store.dispatch({ type: "SET_ERROR", error: error })
     return false
   }
