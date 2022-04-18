@@ -40,7 +40,7 @@ options:
   - name: type
     display: Type
     type: dropdown
-    options: text;password;date;number
+    options: text;password;date;number;textarea
 children: []
 */
 
@@ -53,13 +53,19 @@ import TextField from '@mui/material/TextField'
 <TextField
     variant="{{ element.values.variant|default('standard') }}"
     {% if element.values.Autofocus %}autoFocus{% endif %}
-    {% if element.values.placeholder %}placeholder="{{ element.values.placeholder }}"{% endif %}
+    {% if element.values.placeholder %}placeholder={{ element.values.placeholder | textOrVariable }}{% endif %}
     {% if element.values.DisableVariable %}disabled={ {{ element.values.DisableVariable }} }{% endif %}
     {% if element.values.margin %}margin="{{ element.values.margin }}"{% endif %}
-    {% if element.values.label %}label="{{ element.values.label }}"{% endif %}
+    {% if element.values.label %}label={{ element.values.label | textOrVariable }}{% endif %}
     {% if element.values.className %}className={ {{ element.values.className }} }{% endif %}
     {% if element.values.fieldname %}name={{ element.values.fieldname | textOrVariable}} {% endif %}
-    type="{{ element.values.type|default('text') }}"
+    {% if element.values.type == 'textarea' %}
+      multiline
+      type="text"
+    {% endif %}
+    {% if element.values.type != 'textarea' %}
+      type="{{ element.values.type|default('text') }}"
+    {% endif %}
     fullWidth
     {% if element.values.value %}value={{ element.values.value }}{% endif %}
     {% if element.values.onChange %}onChange={ {{ element.values.onChange }} }{% endif %}

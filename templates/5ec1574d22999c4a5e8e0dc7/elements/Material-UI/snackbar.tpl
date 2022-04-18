@@ -35,7 +35,7 @@ const [{{ element.values.varName }}, set{{ element.values.varName }}] = React.us
 {% set splited = element.values.position|split('-') %}
 <Snackbar
   open={ {{ element.values.varName }} }
-  {% if element.values.message %}message="{{ element.values.message }}"{% endif %}
+  {% if element.values.message %}message={{ element.values.message | textOrVariable }}{% endif %}
   {% if element.values.autohide %}autoHideDuration={ {{ element.values.autohide }} }{% endif %}
   onClose={() => { set{{ element.values.varName }}(false) } }
   anchorOrigin={ { vertical: '{{splited[0]|lower}}', horizontal: '{{splited[1]|lower}}' } }
