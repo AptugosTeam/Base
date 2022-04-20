@@ -36,13 +36,14 @@ options:
       default: '300'
       active: true
 */
-
-
-
 {% set bpr %}
 import { Map, Marker } from 'google-maps-react'
 {% endset %}
 {{ save_delayed('bpr',bpr)}}
+{% set ph %}
+const [mapPosition, setmapPosition] = React.useState({ lat: 47.444, lng: -122.176})
+{% endset %}
+{{ save_delayed('ph',ph) }}
 {% set ph %}
 const [showMap, setshowMap] = React.useState(false)
 React.useEffect(() => {
@@ -57,15 +58,13 @@ React.useEffect(() => {
 },[])
 {% endset %}
 {{ save_delayed('ph',ph)}}
-<div style={ { width: '{{ element.values.Width }}px', height: '300px', position: 'relative' } }>
-  MODIFICO EL TITULO
+<div style={ { width: '{{ element.values.Width }}px', height: '{{ element.values.Height }}px', position: 'relative' } }>
 {showMap && 
     <Map
         google={window.google}
         zoom={ {{ element.values.Zoom|default(2) }} }
-        initialCenter={ { lat: 47.444, lng: -122.176} }
-    >
-        <Marker position={ { lat: 48.00, lng: -122.00} } />
+        initialCenter={ mapPosition }
+    >{{ content | raw }}
     </Map>
 }
 </div>
