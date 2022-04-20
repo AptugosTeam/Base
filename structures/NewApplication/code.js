@@ -117,7 +117,7 @@ const PageHeader = {
 			"helpText": "Organizational unit with no render value",
 			"open": false,
 			"name": "Language",
-			"cascades": true,
+			"cascades": false,
 			"type": "element",
 			"value": "dummyEncloser",
 			"prevent_delete": false
