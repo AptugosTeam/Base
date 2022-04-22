@@ -103,7 +103,7 @@ const PageHeader = {
 						"cascades": false,
 						"value": "code",
 						"values": {
-							"code": "setlang(langStrings[localStorage.getItem('aptugolang') || 'en'])"
+							"code": "if (langStrings) { setlang(langStrings[localStorage.getItem('language') || 'en']) }"
 						},
 						"prevent_delete": false
 					}],

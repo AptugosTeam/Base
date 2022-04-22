@@ -14,7 +14,7 @@ const fileupload = require('express-fileupload')
 const https = require('https')
 {% endif %}
 const app = express()
-app.set('filesFolder', __dirname + '/../dist/img')
+app.set('filesFolder', {{ insert_setting('imagesFolder')|default("__dirname + '/../dist/img'") }} )
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*")
@@ -78,7 +78,7 @@ let tries = 0
 
 function doListen() {
   const port = {{ insert_setting('port')|default('4567') }}
-  {% if settings.apiURL|slice(0,5) == 'https' %}
+  {% if settings.apiURL|slice(0,5) == 'https' and insert_setting('key') %}
   const server = https.createServer({
     key: fs.readFileSync({{ insert_setting('key') }}, 'utf8'),
     cert: fs.readFileSync({{ insert_setting('cert') }}, 'utf8'),
