@@ -63,7 +63,7 @@ React.useEffect(() => {
   onType={ typeInSearch{{ field.column_name | friendly }}{{ referencedTable }} }
   onChange={(newValue) => handle{{ tableName }}Change('{{ columnName }}')(newValue?.length ? newValue.map(item => ({ _id: item.value !== 'new' ? item.value : null, {{ referencedField.column_name | friendly }}: item.label })) : [])}
   loading={ {{ referencedTable | lower }}AutocompleteData.loadingStatus === 'loading' }
-  {% if field.placeholder %}placeholder="{{ field.placeholder }}"{% endif %}
+  {% if field.placeholder %}placeholder={{ field.placeholder | textOrVariable }}{% endif %}
   options={ {{ columnName }}Options }
   label="{{ field.column_name }}"
   fullWidth

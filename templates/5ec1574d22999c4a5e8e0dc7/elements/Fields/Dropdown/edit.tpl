@@ -23,7 +23,7 @@ import MenuItem from '@mui/material/MenuItem'
     {% if element.values.Autofocus %}autoFocus{% endif %}
     {% if element.values.DisableVariable %}disabled={ {{ element.values.DisableVariable }} }{% endif %}
     margin='{{ element.values.margin|default("dense") }}'
-    label="{{ field.prompt|default(field.column_name) }}"
+    label={{ field.prompt|default(field.column_name)  | textOrVariable }}
     type="text"
     fullWidth
     variant="{{ element.values.variant|default('standard') }}"

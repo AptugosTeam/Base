@@ -11,7 +11,7 @@ import { TextInput } from 'react-native-paper'
 <TextInput
   {% if element.values.Autofocus %}autoFocus{% endif %}
   {% if element.values.DisableVariable %}disabled={ {{ element.values.DisableVariable }} }{% endif %}
-  label="{{ field.prompt|default(field.column_name) }}"
+  label={{ field.prompt|default(field.column_name)  | textOrVariable }}
   type="datetime-local"
   fullWidth
   value={ {{ tableName }}data.{{ field.column_name | friendly }}?.slice(0,16) || '' }

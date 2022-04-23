@@ -20,7 +20,7 @@ import ButtonGroup from '@mui/material/ButtonGroup'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 <FormControlLabel
-  label="{{ field.prompt|default(field.column_name) }}"
+  label={{ field.prompt|default(field.column_name)  | textOrVariable }}
   control={<ButtonGroup color="primary" aria-label="outlined primary button group">
     {% for item in field.options|split(';') %}
     <Button

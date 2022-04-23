@@ -17,8 +17,8 @@ import FileUpload from '../components/FileUpload/FileUpload'
 {{ save_delayed('bpr', bpr) }}
 <FileUpload
     accept="{{ field.filetype|default('*') }}"
-    label="{{ field.prompt|default(field.column_name) }}"
-    {% if field.placeholder %}placeholder="{{ field.placeholder }}"{% endif %}
+    label={{ field.prompt|default(field.column_name)  | textOrVariable }}
+    {% if field.placeholder %}placeholder={{ field.placeholder | textOrVariable }}{% endif %}
     value={ {{ tableName }}data.{{ field.column_name | friendly }}}
     onChange={handle{{ tableName }}Change("{{ field.column_name | friendly }}")}
 />

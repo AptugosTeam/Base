@@ -18,9 +18,9 @@ import TextField from '@mui/material/TextField'
     {% endif %}
     {% if element.values.Autofocus %}autoFocus{% endif %}
     {% if element.values.DisableVariable %}disabled={ {{ element.values.DisableVariable }} }{% endif %}
-    {% if field.placeholder %}placeholder="{{ field.placeholder }}"{% endif %}
+    {% if field.placeholder %}placeholder={{ field.placeholder | textOrVariable }}{% endif %}
     margin='{{ element.values.margin|default("dense") }}'
-    label="{{ field.prompt|default(field.column_name) }}"
+    label={{ field.prompt|default(field.column_name)  | textOrVariable }}
     type="text"
     fullWidth
     className={ {% if element.values.classname %}{{ element.values.classname }}{% else %}'field_{{ field.column_name | friendly }}'{% endif %}}

@@ -11,7 +11,7 @@ import TextField from '@mui/material/TextField'
 <TextField
   {% if element.values.Autofocus %}autoFocus{% endif %}
   {% if element.values.DisableVariable %}disabled={ {{ element.values.DisableVariable }} }{% endif %}
-  label="{{ field.prompt|default(field.column_name) }}"
+  label={{ field.prompt|default(field.column_name)  | textOrVariable }}
   type="datetime-local"
   fullWidth
   step="900"

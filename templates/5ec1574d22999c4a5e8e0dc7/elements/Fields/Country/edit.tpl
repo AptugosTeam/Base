@@ -24,7 +24,7 @@ import MenuItem from '@mui/material/MenuItem'
     {% if element.values.DisableVariable %}disabled={ {{ element.values.DisableVariable }} }{% endif %}
 >
   <Select
-    label="{{ field.prompt|default(field.column_name) }}"
+    label={{ field.prompt|default(field.column_name)  | textOrVariable }}
     value={ {{ tableName }}data.{{ field.column_name | friendly }}}
     onChange={handle{{ tableName }}Change("{{ field.column_name | friendly }}")}
     displayEmpty
