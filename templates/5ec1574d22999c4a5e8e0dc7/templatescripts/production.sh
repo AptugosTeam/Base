@@ -2,7 +2,7 @@
 if [ "$USE_PNPM" == "false" ]
 then
   echo 'Starting NPM Install'
-  npm install
+  npm install --legacy-peer-deps
   echo 'Finished NPM Install, starting Build'
   echo y | npm run build
   echo 'Finished Build'
