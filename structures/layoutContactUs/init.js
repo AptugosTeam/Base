@@ -2072,7 +2072,7 @@ const emptyAPR = {
 const newPage = {
   unique_id: Parameters.unique_id || aptugo.generateID(),
   name: Parameters.name || 'ContactUS',
-  path: Parameters.path || '',
+  path: Parameters.path || '/contactus',
   filename: Parameters.filename || 'contactus.tsx',
   type: 'page',
   children: [emptyBPR, PH, B, emptyPF, emptyAPR]

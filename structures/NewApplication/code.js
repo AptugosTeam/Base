@@ -86,26 +86,51 @@ const PageHeader = {
 					"helpText": "Executes commands when DOM has been loaded and renderized",
 					"open": false,
 					"children": [{
-						"path": "code.tpl",
-						"completePath": "elements/Programming/code.tpl",
+						"path": "condition.tpl",
+						"completePath": "elements/Programming/condition.tpl",
 						"type": "element",
-						"icon": "ico-code",
+						"icon": "ico-condition",
 						"sourceType": "javascript",
 						"options": [{
-							"name": "code",
-							"display": "Code",
-							"type": "text",
-							"options": ""
+								"name": "condition",
+								"display": "Condition",
+								"type": "text",
+								"options": ""
+							},
+							{
+								"name": "usefragment",
+								"display": "Do Not Use Fragment",
+								"type": "checkbox",
+								"options": ""
+							},
+							{
+								"name": "useInCode",
+								"display": "This condition is part of code",
+								"type": "checkbox"
+							}
+						],
+						"helpText": "Make a decision based on a value",
+						"children": [{
+							"name": "updateStateVariable",
+							"value": "updateStateVariable",
+							"values": {
+								"variable": "lang",
+								"newvalue": "langStrings[localStorage.getItem('aptugolang') || 'en']"
+							},
+							"type": "element",
+							"children": [],
+							"prevent_delete": false,
+							"cascades": false
 						}],
-						"children": [],
 						"open": false,
-						"name": "code",
+						"name": "Lang Strings Exist?",
+						"prevent_delete": false,
 						"cascades": false,
-						"value": "code",
+						"value": "condition",
 						"values": {
-							"code": "setlang(langStrings[localStorage.getItem('aptugolang') || 'en'])"
-						},
-						"prevent_delete": false
+							"condition": "typeof langStrings !== 'undefined'",
+							"useInCode": true
+						}
 					}],
 					"name": "onPageLoad",
 					"cascades": false,
@@ -117,7 +142,7 @@ const PageHeader = {
 			"helpText": "Organizational unit with no render value",
 			"open": false,
 			"name": "Language",
-			"cascades": false,
+			"cascades": true,
 			"type": "element",
 			"value": "dummyEncloser",
 			"prevent_delete": false
