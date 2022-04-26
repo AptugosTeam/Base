@@ -1,0 +1,16 @@
+{
+  "_id": "layoutHeroImage",
+  "name": "Layout: Hero Image",
+  "desc": "",
+  "icon": "icon.png",
+  "type": "layout",
+  "afterRun": "",
+  "parameters": [
+    {
+      "name": "parentPage",
+      "display": "Container Page",
+      "type": "text",
+      "helpText": "Unique ID for the container page"
+    }
+  ]
+}

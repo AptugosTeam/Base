@@ -19,6 +19,9 @@ options:
     type: dropdown
     options: >-
       red;pink;purple;deepPurple;indigo;blue;lightBlue;cyan;teal;green;lightGreen;lime;yellow;amber;orange;deepOrange;brown;grey;blueGrey
+  - name: extraThemeOptions
+    display: Extra Theming options
+    type: text    
 */
 
 
@@ -27,13 +30,18 @@ options:
 import {{ element.values.primaryColor }} from '@mui/material/colors/{{ element.values.primaryColor }}'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
+{% endif %}
+{% if element.values.primaryColor or element.values.extraThemeOptions %}
 {% set bpr %}
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 
 const aptugotheme = createTheme({
+  {% if element.values.primaryColor %}
   palette: {
     primary: {{ element.values.primaryColor }},
   },
+  {% endif %}
+  {{ element.values.extraThemeOptions }}
 })
 
 {% endset %}

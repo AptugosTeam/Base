@@ -17,6 +17,9 @@ options:
     display: Data Variable
     type: text
     options: ''
+  - name: extraOptions
+    display: Extra options
+    type: text
 sourceType: javascript
 children: []
 */
@@ -25,6 +28,6 @@ children: []
 import axios from 'axios'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
-axios.{{ element.values.method|default('get') }}({{ element.values.url }}{% if element.values.dataVariable %}, {{ element.values.dataVariable }}{% endif %}).then(result => {
+axios.{{ element.values.method|default('get') }}({{ element.values.url }}{% if element.values.dataVariable %}, {{ element.values.dataVariable }}{% endif %}, {% if element.values.extraOptions %}{{ element.values.extraOptions | raw }}{% endif %}).then(result => {
  {{ content | raw }}
 })

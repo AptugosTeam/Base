@@ -1871,7 +1871,7 @@ const B = {
                     "cascades": false,
                     "value": "Marker",
                     "values": {
-                      "Position": "[50,50]"
+                      "Position": "{mapCoordinates}"
                     },
                     "prevent_delete": false
                   }],

@@ -1,0 +1,106 @@
+/*
+path: lite.module.scss
+completePath: front-end/components/Themes/lite.module.scss
+unique_id: NoZJUTn1
+*/
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;400;700&display=swap');
+
+$darkColor: #0d1d2a;
+$clearColor: #e1ad62;
+$gray: #a6acbe;
+$white: #ffffff;
+
+:global(#app) {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-x: hidden;
+  justify-content: space-between;
+}
+
+.navBarContainer {
+  display: flex;
+  justify-content: space-between;
+
+  & .navBarText {
+    display: flex;
+    align-items: center;
+    margin-left: 2.25rem;
+  }
+
+  & .navButton {
+    color: $darkColor;
+    align-self: center;
+    margin-left: 2rem;
+
+    &.selected {
+      color: $clearColor;
+    }
+  }
+
+  & .languageButtons {
+    margin-left: 3rem;
+    display: flex;
+
+    & .languageButton {
+      font-size: 12px;
+      font-weight: 400;
+      text-transform: none;
+      min-width: unset;
+      color: $gray;
+
+      &.selected {
+        font-weight: 700;
+        color: $darkColor;
+      }
+    }
+  }
+}
+
+.pageFooter {
+  color: $white;
+  background-color: $clearColor;
+  padding: 1.5rem;
+  & :global(.MuiContainer-root) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  & img {
+    max-height: 2rem;
+  }
+}
+
+.heroImage {
+  width: 100%;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  max-height: 38rem;
+
+  & .heroDarkArea {
+    padding: 4.5rem;
+    background-color: $darkColor;
+
+    & h1 {
+      color: $clearColor;
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 700;
+      font-size: 4rem;
+      line-height: 114.8%;
+      margin: 0;
+    }
+
+    & h2 {
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 700;
+      font-size: 1.875rem;
+      line-height: 132.8%;
+      color: $white;
+      margin-top: 2rem;
+    }
+  }
+}

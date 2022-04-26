@@ -1,7 +1,7 @@
 /*
 path: minimum.module.scss
 completePath: front-end/components/Themes/minimum.module.scss
-unique_id: 5BZJoVhT
+unique_id: E3v9GDNm
 */
 body {
   background-color: white !important;
@@ -561,4 +561,43 @@ body {
 
 .padded {
   padding: 1rem;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;400;700&display=swap');
+
+$darkColor: #0d1d2a;
+$clearColor: #e1ad62;
+$white: #FFFFFF;
+
+.heroImage {
+  width: 100%;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  max-height: 38rem;
+
+  & .heroDarkArea {
+    padding: 4.5rem;
+    background-color: $darkColor;
+
+    & h1 {
+      color: $clearColor;
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 700;
+      font-size: 4rem;
+      line-height: 114.8%;
+      margin: 0;
+    }
+
+    & h2 {
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 700;
+      font-size: 1.875rem;
+      line-height: 132.8%;
+      color: $white;
+      margin-top: 2rem;
+    }
+  }
 }

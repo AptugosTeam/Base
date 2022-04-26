@@ -8,6 +8,12 @@ options:
     display: Action
     type: text
     options: ''
+  - name: Color
+    display: Color
+    type: dropdown
+    options: default;inherit;primary;secondary;error;info;success;warning
+    settings:
+      default: primary
   - name: className
     display: ClassName
     type: text
@@ -38,6 +44,7 @@ import {{element.values.icon}}{{ addenum }}Icon from '@mui/icons-material/{{elem
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 <IconButton
+  {% if element.values.Color %}color='{{ element.values.Color }}'{% endif %}
   {% if element.values.Action %}onClickCapture={ {{ element.values.Action | functionOrCall }} }{% endif %}
   {% if element.values.className %}className={ {{ element.values.className }} }{% endif %}
 >

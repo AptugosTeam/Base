@@ -22,7 +22,7 @@ app.use(function(req, res, next) {
 })
 
 app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
+app.use(bodyParser.json({ limit: '10mb' }))
 app.use( fileupload() )
 
 {{ insert_setting('ServerAddenum') | raw }}
