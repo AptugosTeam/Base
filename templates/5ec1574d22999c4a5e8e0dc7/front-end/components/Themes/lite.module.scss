@@ -104,3 +104,45 @@ $white: #ffffff;
     }
   }
 }
+
+.contactUs {
+  margin-top: 7.5rem;
+  margin-bottom: 7.5rem;
+
+  & h3 {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 38px;
+    line-height: 132.8%;
+    color: #0D1D2A;
+    margin-bottom: 2.5rem;
+  }
+
+  & h4 {
+    margin-bottom: 3rem;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 132.8%;
+    color: #0D1D2A;
+  }
+
+  & .address {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 21px;
+    color: #0D1D2A;
+    margin-bottom: 2rem;
+  }
+
+  & .mapContainer {
+    max-height: 315px;
+    border-radius: 5px;
+    overflow: hidden;
+    border: 1px solid #0D1D2A;
+  }
+}
