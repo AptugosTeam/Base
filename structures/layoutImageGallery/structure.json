@@ -1,6 +1,6 @@
 {
-  "_id": "layoutHeroImage",
-  "name": "Layout: Hero Image",
+  "_id": "layoutImageGallery",
+  "name": "Layout: Image Gallery",
   "desc": "",
   "icon": "icon.png",
   "type": "layout",
