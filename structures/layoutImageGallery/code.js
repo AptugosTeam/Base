@@ -1,175 +1,224 @@
 const PH = [{
-  "path": "dummyEncloser.tpl",
-  "completePath": "elements/Basic/dummyEncloser.tpl",
-  "children": [
-      {
-          "path": "useState.tpl",
-          "completePath": "elements/Programming/useState.tpl",
-          "type": "element",
-          "icon": "ico-use-state",
-          "options": [
-              {
-                  "name": "variableName",
-                  "display": "Variable Name",
-                  "type": "text",
-                  "options": "",
-                  "settings": {
-                      "aptugoOnLoad": "const element = arguments[0]; const page = aptugo.pageUtils.findContainerPage(element.unique_id).unique_id; if (element.values.variableName) {\n  aptugo.variables.setPageVariable(page, element.unique_id, { [element.values.variableName]: element.values ? element.values.defaultValue : null });\n  aptugo.variables.setPageFunction(page, 'f' + element.unique_id, `set${element.values.variableName}` );\n}",
-                      "aptugoOnChange": "const value = arguments[0]; const element = arguments[1]; const page = arguments[2]; if (element.values?.variableName) {\n  aptugo.variables.setPageVariable(page, element.unique_id, { [value]: element.values ? element.values.defaultValue : null });\n  aptugo.variables.setPageFunction(page, 'f' + element.unique_id, `set${element.values.variableName}` );\n}",
-                      "active": true
-                  }
-              },
-              {
-                  "name": "defaultValue",
-                  "display": "Default Value",
-                  "type": "text",
-                  "options": "",
-                  "settings": {
-                      "aptugoOnChange": "const value = arguments[0]; const element = arguments[1]; const page = arguments[2]; if ( element.values.variableName ) aptugo.variables.setPageVariable(page, element.unique_id, { [element.values.variableName]: value });",
-                      "active": true
-                  }
-              }
-          ],
-          "children": [],
-          "open": false,
-          "name": "Images Per Row",
-          "cascades": false,
-          "value": "useState",
-          "values": {
-              "variableName": "imagesPerRow",
-              "defaultValue": "4"
-          },
-          "prevent_delete": false
-      }
-  ],
-  "icon": "ico-dummy-enclosure",
-  "helpText": "Organizational unit with no render value",
-  "options": [
-      {
-          "name": "titleAsComment",
-          "display": "Use Name as Comment",
-          "type": "checkbox",
-          "options": ""
-      }
-  ],
-  "open": false,
-  "name": "Config: Image Gallery",
-  "prevent_delete": false,
-  "cascades": false,
-  "type": "element",
-  "value": "dummyEncloser"
+    "path": "dummyEncloser.tpl",
+    "completePath": "elements/Basic/dummyEncloser.tpl",
+    "children": [
+        {
+            "path": "useState.tpl",
+            "completePath": "elements/Programming/useState.tpl",
+            "type": "element",
+            "icon": "ico-use-state",
+            "options": [
+                {
+                    "name": "variableName",
+                    "display": "Variable Name",
+                    "type": "text",
+                    "options": "",
+                    "settings": {
+                        "aptugoOnLoad": "const element = arguments[0]; const page = aptugo.pageUtils.findContainerPage(element.unique_id).unique_id; if (element.values.variableName) {\n  aptugo.variables.setPageVariable(page, element.unique_id, { [element.values.variableName]: element.values ? element.values.defaultValue : null });\n  aptugo.variables.setPageFunction(page, 'f' + element.unique_id, `set${element.values.variableName}` );\n}",
+                        "aptugoOnChange": "const value = arguments[0]; const element = arguments[1]; const page = arguments[2]; if (element.values?.variableName) {\n  aptugo.variables.setPageVariable(page, element.unique_id, { [value]: element.values ? element.values.defaultValue : null });\n  aptugo.variables.setPageFunction(page, 'f' + element.unique_id, `set${element.values.variableName}` );\n}",
+                        "active": true
+                    }
+                },
+                {
+                    "name": "defaultValue",
+                    "display": "Default Value",
+                    "type": "text",
+                    "options": "",
+                    "settings": {
+                        "aptugoOnChange": "const value = arguments[0]; const element = arguments[1]; const page = arguments[2]; if ( element.values.variableName ) aptugo.variables.setPageVariable(page, element.unique_id, { [element.values.variableName]: value });",
+                        "active": true
+                    }
+                }
+            ],
+            "children": [],
+            "open": false,
+            "name": "Images Per Row",
+            "cascades": false,
+            "value": "useState",
+            "values": {
+                "variableName": "imagesPerRow",
+                "defaultValue": "4"
+            },
+            "prevent_delete": false
+        },
+        {
+            "path": "defineVariable.tpl",
+            "completePath": "elements/Programming/defineVariable.tpl",
+            "type": "element",
+            "icon": "ico-define-variable",
+            "helpText": "Allows you to define a variable that will be used later",
+            "options": [
+                {
+                    "name": "variableName",
+                    "display": "Name",
+                    "type": "text",
+                    "options": ""
+                },
+                {
+                    "name": "variableValue",
+                    "display": "Value",
+                    "type": "text",
+                    "options": ""
+                },
+                {
+                    "name": "willbeModified",
+                    "display": "Will it be modified?",
+                    "type": "checkbox",
+                    "options": ""
+                },
+                {
+                    "name": "serverSide",
+                    "display": "Back-End Variable",
+                    "type": "checkbox"
+                }
+            ],
+            "settings": [
+                {
+                    "name": "ServerAddenum",
+                    "value": "{% if element.values.serverSide %}\n  {% if element.values.willbeModified %}let{% else %}const{% endif %} {{ element.values.variableName }} = {{ element.values.variableValue|default(content | raw)}}\n{% endif %}"
+                }
+            ],
+            "sourceType": "javascript",
+            "children": [],
+            "open": false,
+            "name": "Language",
+            "value": "defineVariable",
+            "values": {
+                "variableName": "langStrings",
+                "variableValue": "{\n    en: {\n      ImageGalleryTitle: \"Image Gallery\"\n    },\n    sp: {\n      ImageGalleryTitle: \"Galería de Imágenes\"\n    },\n  }"
+            },
+            "prevent_delete": false,
+            "cascades": false
+        }
+    ],
+    "icon": "ico-dummy-enclosure",
+    "helpText": "Organizational unit with no render value",
+    "options": [
+        {
+            "name": "titleAsComment",
+            "display": "Use Name as Comment",
+            "type": "checkbox",
+            "options": ""
+        }
+    ],
+    "open": false,
+    "name": "Config: Image Gallery",
+    "prevent_delete": false,
+    "cascades": false,
+    "type": "element",
+    "value": "dummyEncloser"
 },{
-  "path": "dummyEncloser.tpl",
-  "completePath": "elements/Basic/dummyEncloser.tpl",
-  "children": [
-      {
-          "path": "loadFromRedux.tpl",
-          "completePath": "elements/Programming/loadFromRedux.tpl",
-          "display": "Load from Database",
-          "type": "element",
-          "icon": "ico-load-redux",
-          "sourceType": "javascript",
-          "calculatedName": "function (ele) { \n  try {\n    const tblname = aptugo.store.getState().application.tables.find(tbl => tbl.unique_id === ele.values.data).name\n    const calc = 'Load ' + tblname + ' from database'\n    return calc\n  } catch(e) {\n    return ele.name\n  }\n}",
-          "options": [
-              {
-                  "name": "data",
-                  "display": "Data",
-                  "type": "dropdown",
-                  "options": "return aptugo.store.getState().application.tables.map(({ unique_id, name }) => [unique_id, name])",
-                  "settings": {
-                      "aptugoOnLoad": "const element = arguments[0];\nif ( element.values.data ) {\n  const varsToAdd = {};\n  const page = aptugo.pageUtils.findContainerPage(element.unique_id).unique_id;\n  const tableInfo = aptugo.store.getState().application.tables.find(table => table.unique_id === element.values.data )\n  const tableFields = tableInfo.fields;\n  tableFields.forEach(tableField => { varsToAdd[tableField.column_name] = 'String' });\n  const finalVarsToAdd = {\n    [aptugo.friendly(tableInfo.name).toLowerCase() + 'Data']: {\n      loadingStatus: 'String',\n      addingStatus: 'String',\n      searchingStatus: 'String',\n      searchString: 'String',\n      totalDocs: 'String',\n      [aptugo.friendly(tableInfo.name).toLowerCase()]: { ...varsToAdd },\n      ['found' + aptugo.friendly(tableInfo.name).toLowerCase()]: { ...varsToAdd },\n      errField: 'String',\n      errStatus: 'String',\n      errMessage: 'String'\n    }\n  };\n  aptugo.variables.setPageVariable(page, element.unique_id, finalVarsToAdd);\n  if (element.values.variableName) {\n    aptugo.variables.setPageVariable(page, element.unique_id + '_2', { [element.values.variableName]: { ...varsToAdd } });\n  }\n}",
-                      "active": true
-                  }
-              },
-              {
-                  "name": "variableName",
-                  "display": "Variable Name",
-                  "type": "text",
-                  "options": ""
-              },
-              {
-                  "name": "singleResult",
-                  "display": "Obtain a single (or first) result",
-                  "type": "checkbox"
-              },
-              {
-                  "name": "onload",
-                  "display": "Run code upon loading",
-                  "type": "function",
-                  "options": ""
-              },
-              {
-                  "name": "searchString",
-                  "display": "Search String",
-                  "type": "text",
-                  "options": ""
-              },
-              {
-                  "name": "useExactMatch",
-                  "display": "Should use an exact match?",
-                  "type": "checkbox",
-                  "options": ""
-              },
-              {
-                  "name": "fieldToSearch",
-                  "display": "Field To Search",
-                  "type": "text",
-                  "options": ""
-              },
-              {
-                  "name": "sortColumn",
-                  "display": "Sort Column",
-                  "type": "text",
-                  "options": ""
-              },
-              {
-                  "name": "sortMethod",
-                  "display": "Sort Method",
-                  "type": "dropdown",
-                  "options": "desc;asc"
-              },
-              {
-                  "name": "elementsLimit",
-                  "display": "Limit of Elements",
-                  "type": "text",
-                  "options": ""
-              },
-              {
-                  "name": "donotpopulate",
-                  "display": "Do NOT populate related tables",
-                  "type": "checkbox",
-                  "options": ""
-              }
-          ],
-          "children": [],
-          "open": false,
-          "name": "Load Images",
-          "originalName": "Load from Database",
-          "cascades": false,
-          "value": "loadFromRedux",
-          "values": {
-              "data": Parameters.table_unique_id,
-              "variableName": "galleryImages"
-          },
-          "prevent_delete": false
-      }
-  ],
-  "icon": "ico-dummy-enclosure",
-  "helpText": "Organizational unit with no render value",
-  "options": [
-      {
-          "name": "titleAsComment",
-          "display": "Use Name as Comment",
-          "type": "checkbox",
-          "options": ""
-      }
-  ],
-  "open": false,
-  "name": "Setup: Image Gallery",
-  "prevent_delete": false,
-  "cascades": false,
-  "type": "element",
-  "value": "dummyEncloser"
+    "path": "dummyEncloser.tpl",
+    "completePath": "elements/Basic/dummyEncloser.tpl",
+    "children": [
+        {
+            "path": "loadFromRedux.tpl",
+            "completePath": "elements/Programming/loadFromRedux.tpl",
+            "display": "Load from Database",
+            "type": "element",
+            "icon": "ico-load-redux",
+            "sourceType": "javascript",
+            "calculatedName": "function (ele) { \n  try {\n    const tblname = aptugo.store.getState().application.tables.find(tbl => tbl.unique_id === ele.values.data).name\n    const calc = 'Load ' + tblname + ' from database'\n    return calc\n  } catch(e) {\n    return ele.name\n  }\n}",
+            "options": [
+                {
+                    "name": "data",
+                    "display": "Data",
+                    "type": "dropdown",
+                    "options": "return aptugo.store.getState().application.tables.map(({ unique_id, name }) => [unique_id, name])",
+                    "settings": {
+                        "aptugoOnLoad": "const element = arguments[0];\nif ( element.values.data ) {\n  const varsToAdd = {};\n  const page = aptugo.pageUtils.findContainerPage(element.unique_id).unique_id;\n  const tableInfo = aptugo.store.getState().application.tables.find(table => table.unique_id === element.values.data )\n  const tableFields = tableInfo.fields;\n  tableFields.forEach(tableField => { varsToAdd[tableField.column_name] = 'String' });\n  const finalVarsToAdd = {\n    [aptugo.friendly(tableInfo.name).toLowerCase() + 'Data']: {\n      loadingStatus: 'String',\n      addingStatus: 'String',\n      searchingStatus: 'String',\n      searchString: 'String',\n      totalDocs: 'String',\n      [aptugo.friendly(tableInfo.name).toLowerCase()]: { ...varsToAdd },\n      ['found' + aptugo.friendly(tableInfo.name).toLowerCase()]: { ...varsToAdd },\n      errField: 'String',\n      errStatus: 'String',\n      errMessage: 'String'\n    }\n  };\n  aptugo.variables.setPageVariable(page, element.unique_id, finalVarsToAdd);\n  if (element.values.variableName) {\n    aptugo.variables.setPageVariable(page, element.unique_id + '_2', { [element.values.variableName]: { ...varsToAdd } });\n  }\n}",
+                        "active": true
+                    }
+                },
+                {
+                    "name": "variableName",
+                    "display": "Variable Name",
+                    "type": "text",
+                    "options": ""
+                },
+                {
+                    "name": "singleResult",
+                    "display": "Obtain a single (or first) result",
+                    "type": "checkbox"
+                },
+                {
+                    "name": "onload",
+                    "display": "Run code upon loading",
+                    "type": "function",
+                    "options": ""
+                },
+                {
+                    "name": "searchString",
+                    "display": "Search String",
+                    "type": "text",
+                    "options": ""
+                },
+                {
+                    "name": "useExactMatch",
+                    "display": "Should use an exact match?",
+                    "type": "checkbox",
+                    "options": ""
+                },
+                {
+                    "name": "fieldToSearch",
+                    "display": "Field To Search",
+                    "type": "text",
+                    "options": ""
+                },
+                {
+                    "name": "sortColumn",
+                    "display": "Sort Column",
+                    "type": "text",
+                    "options": ""
+                },
+                {
+                    "name": "sortMethod",
+                    "display": "Sort Method",
+                    "type": "dropdown",
+                    "options": "desc;asc"
+                },
+                {
+                    "name": "elementsLimit",
+                    "display": "Limit of Elements",
+                    "type": "text",
+                    "options": ""
+                },
+                {
+                    "name": "donotpopulate",
+                    "display": "Do NOT populate related tables",
+                    "type": "checkbox",
+                    "options": ""
+                }
+            ],
+            "children": [],
+            "open": false,
+            "name": "Load Images",
+            "originalName": "Load from Database",
+            "cascades": false,
+            "value": "loadFromRedux",
+            "values": {
+                "data": "R89I0aqU",
+                "variableName": "galleryImages"
+            },
+            "prevent_delete": false
+        }
+    ],
+    "icon": "ico-dummy-enclosure",
+    "helpText": "Organizational unit with no render value",
+    "options": [
+        {
+            "name": "titleAsComment",
+            "display": "Use Name as Comment",
+            "type": "checkbox",
+            "options": ""
+        }
+    ],
+    "open": false,
+    "name": "Definitions: Image Gallery",
+    "prevent_delete": false,
+    "cascades": false,
+    "type": "element",
+    "value": "dummyEncloser"
 }]
 
 const B = [{
@@ -283,7 +332,7 @@ const B = [{
                           "prevent_delete": false,
                           "cascades": false,
                           "values": {
-                              "Content": "Image Gallery"
+                              "Content": "{lang?.ImageGalleryTitle}"
                           }
                       }
                   ],
