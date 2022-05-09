@@ -1,6 +1,6 @@
 {
-  "_id": "layoutContactUs",
-  "name": "Layout: Contact US",
+  "_id": "layoutHeroImage",
+  "name": "Layout: Hero Image",
   "desc": "",
   "icon": "icon.png",
   "type": "layout",
