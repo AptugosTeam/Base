@@ -47,6 +47,10 @@ options:
     display: On Error
     type: text
     advanced: true
+  - name: onclick
+    display: On Click
+    type: function
+    options: ''
 */
 {% set path = element.values.path %}
 {% set webppath = element.values.webppath %}
@@ -80,6 +84,7 @@ options:
     {% if width %}width={{ width|textOrVariable }}{% endif %}
     {% if height %}height={{ height|textOrVariable }}{% endif %}
     {% if element.values.onError %}onError={ {{element.values.onError}} }{% endif %}
+    {% if element.values.onclick %}onClickCapture={(e) => {{element.values.onclick}} }{% endif %}
   />
 </picture>
 
