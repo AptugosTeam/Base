@@ -5,21 +5,26 @@ unique_id: dDixye51
 */
 import axios from 'axios'
 
-const API_URL = '{{ settings.apiURL }}/api/users/'
+const API_URL = 'https://licensing2.aptugo.com:3456/v2/accounts'
 
 class AuthService {
   login(email, password) {
     return axios
-      .post(API_URL + 'authenticate', {
+      .post(API_URL, {
         email,
         password,
       })
       .then((response) => {
-        if (response.data.accessToken) {
-          localStorage.setItem('token', response.data.accessToken)
-          localStorage.setItem('user', JSON.stringify(response.data.data))
+        if (response.data.user?.accessToken) {
+          localStorage.setItem('token', response.data.user.accessToken)
+          if (response.data.user.data.Email.slice(-11) === "@aptugo.com") {
+            localStorage.setItem('user', JSON.stringify({...response.data.user.data, Role: "Admin"}))
+          }
+          else {
+            localStorage.setItem('user', JSON.stringify(response.data.user.data))
+          }
         }
-        return response.data
+          return response.data
       })
   }
 
